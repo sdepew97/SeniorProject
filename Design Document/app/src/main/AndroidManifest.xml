@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.uiideasfinalproject">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MinEditDistance"></activity>
+        <activity android:name=".NQueensProblem" />
+        <activity android:name=".DynamicProgramming" />
+        <activity android:name=".DijkstrasAlgorithm" />
+        <activity android:name=".IntervalScheduling" />
+        <activity android:name=".GreedyAlgorithms" />
+        <activity android:name=".TopologicalOrdering" />
+        <activity android:name=".BreadthFirstSearch" />
+        <activity android:name=".DepthFirstSearch" />
+        <activity android:name=".GraphAlgorithms" />
+        <activity android:name=".Quicksort" />
+        <activity android:name=".MergeSort" />
+        <activity android:name=".SelectionSort" />
+        <activity android:name=".InsertionSort" />
+        <activity android:name=".BubbleSort" />
+        <activity android:name=".LinearSearch" />
+        <activity android:name=".BinarySearch" />
+        <activity android:name=".SortPage" />
+        <activity android:name=".SearchPage" />
+        <activity android:name=".SearchingandSortingAlgorithms" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,57 @@
+package com.example.apphomepages;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+
+//The FragmentAdapter controls all the fragments for the main page that we swipe through
+public class FragmentAdapterSearchingPage extends FragmentPagerAdapter {
+
+    public FragmentAdapterSearchingPage(FragmentManager manager) {
+        super(manager);
+    }
+
+    @Override
+    public int getCount() {
+        return 2; //the number of pages there are on the main page
+    }
+
+    @Override
+    public Fragment getItem(int i) {
+        Fragment page = null;
+        switch (i) {
+            case 0:
+                page = LinearSearchFragment.newInstance("One", "Two");
+                break;
+            case 1:
+                page = BinarySearchFragment.newInstance("One", "Two");
+                break; //input is number of columns of data
+            default:
+                page = SearchAndSortFragment.newInstance("One", "Two"); //default fragment to return
+                break;
+        }
+
+        return page;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int i) {
+        CharSequence result;
+
+        switch (i) {
+            case 0:
+                result = "Linear Search";
+                break;
+            case 1:
+                result = "Binary Search";
+                break;
+            default:
+                result = "Linear Search";
+        }
+
+        return result;
+    }
+}
+
+
+
