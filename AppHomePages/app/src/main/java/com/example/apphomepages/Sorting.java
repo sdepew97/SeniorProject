@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class Sorting extends AppCompatActivity implements LinearSearchFragment.OnFragmentInteractionListener, BinarySearchFragment.OnFragmentInteractionListener {
+public class Sorting extends AppCompatActivity implements BubbleSortFragment.OnFragmentInteractionListener, InsertionSortFragment.OnFragmentInteractionListener, SelectionSortFragment.OnFragmentInteractionListener, MergeSortFragment.OnFragmentInteractionListener, QuicksortFragment.OnFragmentInteractionListener {
     //LOG messages
     private static String TAG = "Sorting";
 
