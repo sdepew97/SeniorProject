@@ -8,17 +8,36 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 public class MyDrawable extends Drawable {
-    private final Paint mRedPaint;
-    private final Paint mLinePaint;
+    private final Paint mMainPaint;
+    private final Paint mSecondPaint;
+    private final Paint mFoundPaint;
+    private final Paint mTextPaint;
 
-    public MyDrawable(int red, int green, int blue) {
+    private String[] numbers;
+    private int squareToHighlight;
+
+    private boolean target;
+
+    public MyDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, String[] numbers) {
         // Set up color and text size
-        mRedPaint = new Paint();
-        mRedPaint.setARGB(255, red, green, blue);
-        mLinePaint = new Paint();
-        mLinePaint.setARGB(255, 0, 0, 0);
-        mLinePaint.setTextSize(60);
-        mLinePaint.setTextAlign(Paint.Align.CENTER);
+        mMainPaint = new Paint();
+        mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
+
+        mSecondPaint = new Paint();
+        mSecondPaint.setARGB(255, secondary.getRed(), secondary.getGreen(), secondary.getBlue());
+
+        mTextPaint = new Paint();
+        mTextPaint.setARGB(255, 0, 0, 0);
+        mTextPaint.setTextSize(60);
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        mFoundPaint = new Paint();
+        mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
+
+
+        this.numbers = numbers;
+        this.squareToHighlight = squareToHighlight;
+        this.target = target;
     }
 
     @Override
@@ -26,16 +45,34 @@ public class MyDrawable extends Drawable {
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int sidelength = 100;
+        int numSquares = numbers.length;
+        int sidelength = width / numSquares;
 
+        int left = 0;
+        int top = width / numSquares;
 
-        Rect[] rectangles = new Rect[6];
-        rectangles[0] = new Rect(height/8, width/8, height/8+sidelength, width/8+sidelength);
+        Rect[] rectangles = new Rect[numSquares];
+
+        for (int i = 0; i < numSquares; i++) {
+            rectangles[i] = new Rect(left, top, left + sidelength, top + sidelength);
+
+            left += sidelength;
+
+            if(squareToHighlight == i && !target) {
+                canvas.drawRect(rectangles[i], mSecondPaint);
+            } else if (squareToHighlight == i && target) {
+                canvas.drawRect(rectangles[i], mFoundPaint);
+            } else {
+                canvas.drawRect(rectangles[i], mMainPaint);
+            }
+
+            canvas.drawText(numbers[i], rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+        }
 
         // Draw a red circle in the center
-        canvas.drawRect(rectangles[0], mRedPaint);
-        canvas.drawLine(height/8, width/8, height/8+sidelength, width/8, mLinePaint);
-        canvas.drawText("12", rectangles[0].centerX(), rectangles[0].centerY(), mLinePaint);
+        //canvas.drawRect(rectangles[0], mRedPaint);
+        //canvas.drawLine(height/8, width/8, height/8+sidelength, width/8, mLinePaint);
+
     }
 
     @Override
