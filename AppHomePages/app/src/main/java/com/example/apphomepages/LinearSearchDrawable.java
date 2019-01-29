@@ -49,7 +49,7 @@ public class LinearSearchDrawable extends Drawable {
         int sidelength = width / numSquares;
 
         int left = 0;
-        int top = width / numSquares;
+        int top = width / 6;
 
         Rect[] rectangles = new Rect[numSquares];
 

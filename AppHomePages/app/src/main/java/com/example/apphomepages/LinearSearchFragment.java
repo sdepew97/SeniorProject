@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
@@ -30,9 +31,8 @@ public class LinearSearchFragment extends Fragment {
     private String mParam2;
 
     private int currentCount = 0;
-    private LinearSearchDrawable[] stopMotionAnimation = new LinearSearchDrawable[6];
-
-    private OnFragmentInteractionListener mListener;
+    private LinearSearchDrawable[] stopMotionAnimation = null;
+    private OnFragmentInteractionListener mListener = null;
 
     public LinearSearchFragment() {
         // Required empty public constructor
@@ -70,50 +70,78 @@ public class LinearSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_search_and_sort, container, false);
+        final View view = inflater.inflate(R.layout.fragment_linear_search, container, false);
 
-        /*
         //Set up the buttons on the fragment
-        Button nextFrameButton = view.findViewById(R.id.button);
+        Button nextFrameButton = view.findViewById(R.id.frameButton);
+        Button generateButton = view.findViewById(R.id.generateButton);
 
-        String[] numbers = new String[stopMotionAnimation.length-1];
-        //TODO: get this info from the user screen and parse to make array...
-        numbers[0] = "5";
-        numbers[1] = "10";
-        numbers[2] = "15";
-        numbers[3] = "20";
-        numbers[4] = "25";
+        generateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get the numbers input by the user
+                EditText numbersEditText = view.findViewById(R.id.editTextArray);
+                EditText targetEditText = view.findViewById(R.id.editTextNumber);
 
-        //TODO: get this info from the user and parse into array of "animation frames"
-        Color main = new Color(255, 0, 255);
-        Color secondary = new Color(255, 255, 0);
-        Color found = new Color(255, 0, 0);
+                if (numbersEditText != null && numbersEditText.getText().toString() != "") {
+                    currentCount = 0;
 
-        int locationInArray = SearchingAlgorithms.linearSearch(numbers, numbers[0]);
-        int square = -1;
+                    String[] numbers = numbersEditText.getText().toString().split(",");
+                    int numbersLength = numbers.length;
 
-        //setup main frame git
-        stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
-        square++;
+                    if (numbersLength > 0 && numbers[0] != "") {
 
-        for(int i=1; i<stopMotionAnimation.length; i++) {
-            stopMotionAnimation[i] = locationInArray == (i-1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
-            square++;
-        }
+                        for (int i = 0; i < numbersLength; i++) {
+                            numbers[i] = numbers[i].trim();
+                        }
+
+                        //TODO: update with user's sought after value!
+                        int locationInArray = SearchingAlgorithms.linearSearch(numbers, targetEditText.getText().toString().trim());
+                        int square = -1;
+
+                        numbersEditText.setText(""); //reset the text box with an empty string
+                        targetEditText.setText(""); //reset the text box with an empty string
+
+                        stopMotionAnimation = new LinearSearchDrawable[numbersLength + 1];
+
+                        //TODO: get this info from the user and parse into array of "animation frames"
+                        Color main = new Color(255, 0, 255);
+                        Color secondary = new Color(255, 255, 0);
+                        Color found = new Color(255, 0, 0);
+
+
+                        //setup main frame git
+                        stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                        square++;
+
+                        for (int i = 1; i < stopMotionAnimation.length; i++) {
+                            stopMotionAnimation[i] = locationInArray == (i - 1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                            square++;
+                        }
+
+                        ImageView image = view.findViewById(R.id.imageView);
+                        image.setImageDrawable(stopMotionAnimation[currentCount]);
+                        currentCount = 1;
+
+                    }
+                }
+            }
+        });
 
         nextFrameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentCount >= stopMotionAnimation.length) {
-                    currentCount = 0;
-                }
+                if (stopMotionAnimation != null) {
+                    if (currentCount >= stopMotionAnimation.length) {
+                        currentCount = 0;
+                    }
 
-                ImageView image = view.findViewById(R.id.imageView);
-                image.setImageDrawable(stopMotionAnimation[currentCount]);
-                currentCount++;
+                    ImageView image = view.findViewById(R.id.imageView);
+                    image.setImageDrawable(stopMotionAnimation[currentCount]);
+                    currentCount++;
+                }
             }
         });
-        */
 
         return view;
     }

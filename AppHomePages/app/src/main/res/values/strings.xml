@@ -6,4 +6,9 @@
 
     <string name="sorting_button">Sorting Algorithms</string>
     <string name="searching_button">Searching Algorithms</string>
+
+    <string name="generate_button">Generate</string>
+    <string name="frame_button">Next Frame</string>
+    <string name="input_text_array">Number Array</string>
+    <string name="input_text_sought">Target</string>
 </resources>
