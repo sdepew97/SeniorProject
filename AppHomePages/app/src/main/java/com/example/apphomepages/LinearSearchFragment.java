@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 
 /**
@@ -26,6 +28,9 @@ public class LinearSearchFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private int currentCount = 0;
+    private LinearSearchDrawable[] stopMotionAnimation = new LinearSearchDrawable[6];
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +68,54 @@ public class LinearSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_linear_search2, container, false);
+        final View view = inflater.inflate(R.layout.fragment_search_and_sort, container, false);
+
+        /*
+        //Set up the buttons on the fragment
+        Button nextFrameButton = view.findViewById(R.id.button);
+
+        String[] numbers = new String[stopMotionAnimation.length-1];
+        //TODO: get this info from the user screen and parse to make array...
+        numbers[0] = "5";
+        numbers[1] = "10";
+        numbers[2] = "15";
+        numbers[3] = "20";
+        numbers[4] = "25";
+
+        //TODO: get this info from the user and parse into array of "animation frames"
+        Color main = new Color(255, 0, 255);
+        Color secondary = new Color(255, 255, 0);
+        Color found = new Color(255, 0, 0);
+
+        int locationInArray = SearchingAlgorithms.linearSearch(numbers, numbers[0]);
+        int square = -1;
+
+        //setup main frame git
+        stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+        square++;
+
+        for(int i=1; i<stopMotionAnimation.length; i++) {
+            stopMotionAnimation[i] = locationInArray == (i-1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+            square++;
+        }
+
+        nextFrameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentCount >= stopMotionAnimation.length) {
+                    currentCount = 0;
+                }
+
+                ImageView image = view.findViewById(R.id.imageView);
+                image.setImageDrawable(stopMotionAnimation[currentCount]);
+                currentCount++;
+            }
+        });
+        */
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
