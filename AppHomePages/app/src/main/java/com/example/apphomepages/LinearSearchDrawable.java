@@ -13,12 +13,12 @@ public class LinearSearchDrawable extends Drawable {
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
-    private String[] numbers;
+    private int[] numbers;
     private int squareToHighlight;
 
     private boolean target;
 
-    public LinearSearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, String[] numbers) {
+    public LinearSearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, int[] numbers) {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -66,7 +66,7 @@ public class LinearSearchDrawable extends Drawable {
                 canvas.drawRect(rectangles[i], mMainPaint);
             }
 
-            canvas.drawText(numbers[i], rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+            canvas.drawText(Integer.toString(numbers[i]), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
 
         // Draw a red circle in the center

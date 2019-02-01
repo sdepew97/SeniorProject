@@ -6,9 +6,9 @@ public class SearchingAlgorithms {
         //Default constructor
     }
 
-    public static int linearSearch(String[] numbers, String target) {
+    public static int linearSearch(int[] numbers, int target) {
         for(int i=0; i<numbers.length; i++) {
-            if(numbers[i].equals(target)) {
+            if(numbers[i] == target) {
                 return i;
             }
         }
