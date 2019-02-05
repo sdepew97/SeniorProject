@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -44,7 +43,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
     private int[] numbers = null;
     private int soughtAfter = -1;
     private Random r = new Random();
-    private LinearSearchDrawable[] stopMotionAnimation = null;
+    private ArraySearchDrawable[] stopMotionAnimation = null;
     private OnFragmentInteractionListener mListener = null;
 
     public BinarySearchFragment() {
@@ -120,8 +119,45 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
 
-                boolean targetFound = r.nextBoolean();
-                soughtAfter = targetFound ? numbers[r.nextInt(numbers.length)] : -1;
+                //boolean targetFound = r.nextBoolean();
+                //soughtAfter = targetFound ? numbers[r.nextInt(numbers.length)] : -1;
+                soughtAfter = numbers[r.nextInt(numbers.length)];
+                ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
+                int locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+
+                //if (locationInArray != -1) {
+                    spinner.setSelection(locationInArray); //choose the element in the array to select automatically from the dropdown menu (a.k.a. spinner menu)
+                //} else {
+                    //TODO: setting when not found!
+                //}
+
+                stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
+
+                //TODO: get this info from the user and parse into array of "animation frames"
+                Color main = new Color(255, 0, 255);
+                Color secondary = new Color(255, 255, 0);
+                Color found = new Color(255, 0, 0);
+
+                //setup main frame
+                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, -1, false, numbers);
+
+                int index = 1;
+                for(Integer i : squaresToHighlight) {
+                    stopMotionAnimation[index] = ((locationInArray == i) && (index == squaresToHighlight.size())) ? new ArraySearchDrawable(main, secondary, found, i, true, numbers) : new ArraySearchDrawable(main, secondary, found, i, false, numbers);
+                    index++;
+                }
+
+                ImageView image = viewGlobal.findViewById(R.id.imageView);
+                image.setImageDrawable(stopMotionAnimation[currentCount]);
+                currentCount = 1;
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                soughtAfter = Integer.valueOf((String) spinner.getSelectedItem());
+                currentCount = 0;
                 ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
                 int locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
 
@@ -133,7 +169,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
 
                 int square = -1;
 
-                stopMotionAnimation = new LinearSearchDrawable[squaresToHighlight.size() + 1];
+                stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
                 //TODO: get this info from the user and parse into array of "animation frames"
                 Color main = new Color(255, 0, 255);
@@ -141,46 +177,11 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
                 Color found = new Color(255, 0, 0);
 
                 //setup main frame
-                stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
                 square++;
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new LinearSearchDrawable(main, secondary, found, squaresToHighlight.get(i - 1), true, numbers) : new LinearSearchDrawable(main, secondary, found, squaresToHighlight.get(i - 1), false, numbers);
-                    square++;
-                }
-
-                ImageView image = viewGlobal.findViewById(R.id.imageView);
-                image.setImageDrawable(stopMotionAnimation[currentCount]);
-                currentCount = 1;
-            }
-        });
-
-        /*
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                soughtAfter = Integer.valueOf((String) spinner.getSelectedItem());
-                currentCount = 0;
-                int locationInArray = SearchingAlgorithms.linearSearch(numbers, soughtAfter);
-                int square = -1;
-
-                //depending if the element is found or not...
-                if (locationInArray == -1) {
-                    stopMotionAnimation = new LinearSearchDrawable[numbers.length + 1];
-                } else {
-                    stopMotionAnimation = new LinearSearchDrawable[locationInArray + 1 + 1];
-                }
-
-                Color main = new Color(255, 0, 255);
-                Color secondary = new Color(255, 255, 0);
-                Color found = new Color(255, 0, 0);
-
-                //setup main frame
-                stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
-                square++;
-
-                for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(main, secondary, found, squaresToHighlight.get(i - 1), true, numbers) : new ArraySearchDrawable(main, secondary, found, squaresToHighlight.get(i - 1), false, numbers);
                     square++;
                 }
 
@@ -194,7 +195,6 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
                 //do nothing
             }
         });
-        */
 
         nextFrameButton.setOnClickListener(new View.OnClickListener() {
             @Override

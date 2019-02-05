@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 
@@ -44,7 +42,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
     private int[] numbers = null;
     private int soughtAfter = -1;
     private Random r = new Random();
-    private LinearSearchDrawable[] stopMotionAnimation = null;
+    private ArraySearchDrawable[] stopMotionAnimation = null;
     private OnFragmentInteractionListener mListener = null;
 
     public LinearSearchFragment() {
@@ -132,9 +130,9 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
 
                 //depending if the element is found or not...
                 if (locationInArray == -1) {
-                    stopMotionAnimation = new LinearSearchDrawable[numbers.length + 1];
+                    stopMotionAnimation = new ArraySearchDrawable[numbers.length + 1];
                 } else {
-                    stopMotionAnimation = new LinearSearchDrawable[locationInArray + 1 + 1];
+                    stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
                 //TODO: get this info from the user and parse into array of "animation frames"
@@ -143,11 +141,11 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                 Color found = new Color(255, 0, 0);
 
                 //setup main frame
-                stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
                 square++;
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(main, secondary, found, square, true, numbers) : new ArraySearchDrawable(main, secondary, found, square, false, numbers);
                     square++;
                 }
 
@@ -167,9 +165,9 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
 
                 //depending if the element is found or not...
                 if (locationInArray == -1) {
-                    stopMotionAnimation = new LinearSearchDrawable[numbers.length + 1];
+                    stopMotionAnimation = new ArraySearchDrawable[numbers.length + 1];
                 } else {
-                    stopMotionAnimation = new LinearSearchDrawable[locationInArray + 1 + 1];
+                    stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
                 Color main = new Color(255, 0, 255);
@@ -177,11 +175,11 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                 Color found = new Color(255, 0, 0);
 
                 //setup main frame
-                stopMotionAnimation[0] = new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
                 square++;
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new LinearSearchDrawable(main, secondary, found, square, true, numbers) : new LinearSearchDrawable(main, secondary, found, square, false, numbers);
+                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(main, secondary, found, square, true, numbers) : new ArraySearchDrawable(main, secondary, found, square, false, numbers);
                     square++;
                 }
 

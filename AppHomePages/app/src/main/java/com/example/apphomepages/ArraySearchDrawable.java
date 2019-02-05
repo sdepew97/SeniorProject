@@ -7,18 +7,19 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-public class LinearSearchDrawable extends Drawable {
+public class ArraySearchDrawable extends Drawable {
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
     private int[] numbers;
-    private int squareToHighlight;
+    private int squareToHighlight = -1;
 
     private boolean target;
 
-    public LinearSearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, int[] numbers) {
+    //An ArraySearchDrawable constructor for searching
+    public ArraySearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, int[] numbers) {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -68,11 +69,6 @@ public class LinearSearchDrawable extends Drawable {
 
             canvas.drawText(Integer.toString(numbers[i]), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
-
-        // Draw a red circle in the center
-        //canvas.drawRect(rectangles[0], mRedPaint);
-        //canvas.drawLine(height/8, width/8, height/8+sidelength, width/8, mLinePaint);
-
     }
 
     @Override

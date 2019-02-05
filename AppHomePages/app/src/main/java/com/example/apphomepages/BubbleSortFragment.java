@@ -7,6 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 
 /**
@@ -27,7 +36,12 @@ public class BubbleSortFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private int currentCount = 0;
+    private int bound = 10; //the max number of elements in the array
+    private ArrayList<Integer> numbers = null;
+    private Random r = new Random();
+    private ArraySortDrawable[] stopMotionAnimation = null;
+    private BubbleSortFragment.OnFragmentInteractionListener mListener = null;
 
     public BubbleSortFragment() {
         // Required empty public constructor
@@ -63,8 +77,66 @@ public class BubbleSortFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bubble_sort, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_bubble_sort, container, false);
+
+        //Set up the buttons and clickable elements on the fragment
+        Button nextFrameButton = viewGlobal.findViewById(R.id.frameButton);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
+
+        generateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentCount = 0; //make sure we are starting at 0 in the array
+
+                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+                numbers = new ArrayList<Integer>(numElements); //random numbers
+
+                for (int j = 0; j < numElements; j++) {
+                    int randomInt = r.nextInt(bound * 10);
+                    if (r.nextBoolean()) {
+                        numbers.add(j, (-randomInt));
+                    } else {
+                        numbers.add(j, randomInt);
+                    }
+                }
+
+                ArrayList<ArrayList<Integer>> iterations = SortingAlgorithms.bubbleSort(numbers);
+
+                stopMotionAnimation = new ArraySortDrawable[iterations.size()];
+
+                Color main = new Color(255, 0, 255);
+
+                //setup main frame
+                stopMotionAnimation[0] = new ArraySortDrawable(main, numbers);
+
+                for (int i = 1; i < stopMotionAnimation.length; i++) {
+                    stopMotionAnimation[i] = new ArraySortDrawable(main, iterations.get(i - 1));
+                }
+
+                ImageView image = viewGlobal.findViewById(R.id.imageView);
+                image.setImageDrawable(stopMotionAnimation[currentCount]);
+                currentCount = 1;
+            }
+        });
+
+        nextFrameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (stopMotionAnimation != null) {
+                    if (currentCount >= stopMotionAnimation.length) {
+                        currentCount = 0;
+                    }
+
+                    ImageView image = viewGlobal.findViewById(R.id.imageView);
+                    image.setImageDrawable(stopMotionAnimation[currentCount]);
+                    currentCount++;
+                }
+            }
+        });
+
+        return viewGlobal;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
