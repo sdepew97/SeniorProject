@@ -82,7 +82,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_linear_search, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_binary_search, container, false);
 
         //Set up the buttons and clickable elements on the fragment
         Button nextFrameButton = viewGlobal.findViewById(R.id.frameButton);

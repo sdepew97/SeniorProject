@@ -5,9 +5,10 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
-public class ArraySearchDrawable extends Drawable {
+public class ArraySearchDrawable extends Drawable implements Animatable {
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
@@ -85,5 +86,20 @@ public class ArraySearchDrawable extends Drawable {
     public int getOpacity() {
         // Must be PixelFormat.UNKNOWN, TRANSLUCENT, TRANSPARENT, or OPAQUE
         return PixelFormat.OPAQUE;
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public boolean isRunning() {
+        return false;
     }
 }

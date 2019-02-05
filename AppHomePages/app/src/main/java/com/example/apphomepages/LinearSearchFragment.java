@@ -2,6 +2,8 @@ package com.example.apphomepages;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,7 +44,11 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
     private int[] numbers = null;
     private int soughtAfter = -1;
     private Random r = new Random();
+    private int durration = 800;
+    private ImageView image;
     private ArraySearchDrawable[] stopMotionAnimation = null;
+    //The animation that will be played when the "next frame" button is clicked
+    private AnimationDrawable animationDrawable = new AnimationDrawable();
     private OnFragmentInteractionListener mListener = null;
 
     public LinearSearchFragment() {
@@ -84,13 +90,16 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
         final View viewGlobal = inflater.inflate(R.layout.fragment_linear_search, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button nextFrameButton = viewGlobal.findViewById(R.id.frameButton);
         Button generateButton = viewGlobal.findViewById(R.id.generateButton);
+        Button startButton = viewGlobal.findViewById(R.id.startButton);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
 
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animationDrawable = new AnimationDrawable();
                 currentCount = 0; //make sure we are starting at 0 in the array
 
                 int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
@@ -120,7 +129,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                 soughtAfter = targetFound ? numbers[r.nextInt(numbers.length)] : -1;
                 int locationInArray = SearchingAlgorithms.linearSearch(numbers, soughtAfter);
 
-                if(locationInArray!=-1) {
+                if (locationInArray != -1) {
                     spinner.setSelection(locationInArray); //choose the element in the array to select automatically from the dropdown menu (a.k.a. spinner menu)
                 } else {
                     //TODO: setting when not found!
@@ -135,10 +144,10 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
-                //TODO: get this info from the user and parse into array of "animation frames"
-                Color main = new Color(255, 0, 255);
-                Color secondary = new Color(255, 255, 0);
-                Color found = new Color(255, 0, 0);
+                //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
+                Color main = new Color(102, 102, 255);
+                Color secondary = new Color(153, 255, 255);
+                Color found = new Color(255, 102, 178);
 
                 //setup main frame
                 stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
@@ -149,9 +158,14 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     square++;
                 }
 
-                ImageView image = viewGlobal.findViewById(R.id.imageView);
-                image.setImageDrawable(stopMotionAnimation[currentCount]);
-                currentCount = 1;
+                image = viewGlobal.findViewById(R.id.imageView);
+
+                for (Drawable d : stopMotionAnimation) {
+                    animationDrawable.addFrame(d, durration);
+                }
+
+                animationDrawable.setOneShot(false);
+                image.setBackgroundDrawable(animationDrawable);
             }
         });
 
@@ -170,9 +184,10 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
-                Color main = new Color(255, 0, 255);
-                Color secondary = new Color(255, 255, 0);
-                Color found = new Color(255, 0, 0);
+                //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
+                Color main = new Color(102, 102, 255);
+                Color secondary = new Color(153, 255, 255);
+                Color found = new Color(255, 102, 178);
 
                 //setup main frame
                 stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
@@ -183,9 +198,13 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     square++;
                 }
 
-                ImageView image = viewGlobal.findViewById(R.id.imageView);
-                image.setImageDrawable(stopMotionAnimation[currentCount]);
-                currentCount = 1;
+                animationDrawable = new AnimationDrawable(); //wipe the drawable and put in new frames
+                for (Drawable d : stopMotionAnimation) {
+                    animationDrawable.addFrame(d, durration);
+                }
+
+                animationDrawable.setOneShot(false);
+                image.setBackgroundDrawable(animationDrawable);
             }
 
             @Override
@@ -194,18 +213,25 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
             }
         });
 
-        nextFrameButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stopMotionAnimation != null) {
-                    if (currentCount >= stopMotionAnimation.length) {
-                        currentCount = 0;
-                    }
+                animationDrawable.start();
+            }
+        });
 
-                    ImageView image = viewGlobal.findViewById(R.id.imageView);
-                    image.setImageDrawable(stopMotionAnimation[currentCount]);
-                    currentCount++;
-                }
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.stop();
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
             }
         });
 

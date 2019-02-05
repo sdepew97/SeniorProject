@@ -30,17 +30,38 @@
 
         app:layout_constraintLeft_toRightOf="@id/generateButton"
         app:layout_constraintTop_toTopOf="@id/generateButton"
-        app:layout_constraintRight_toLeftOf="@id/frameButton"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
-        android:id="@+id/frameButton"
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/frame_button"
+        android:layout_marginTop="16dp"
 
-        app:layout_constraintLeft_toRightOf="@id/spinner"
+        android:text="@string/start_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/stopButton"
+        app:layout_constraintTop_toBottomOf="@id/generateButton" />
+
+    <Button
+        android:id="@+id/stopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_button"
+
+        app:layout_constraintLeft_toRightOf="@id/startButton"
+        app:layout_constraintRight_toLeftOf="@id/rewindButton"
+        app:layout_constraintTop_toTopOf="@id/startButton"/>
+
+    <Button
+        android:id="@+id/rewindButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rewind_button"
+
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/spinner"/>
+        app:layout_constraintLeft_toRightOf="@id/stopButton"
+        app:layout_constraintTop_toTopOf="@id/startButton"/>
 
 
 </android.support.constraint.ConstraintLayout>
