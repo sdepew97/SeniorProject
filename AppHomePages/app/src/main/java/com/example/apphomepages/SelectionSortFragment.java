@@ -1,12 +1,21 @@
 package com.example.apphomepages;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import static com.example.apphomepages.SortingAlgorithms.copyArray;
 
 
 /**
@@ -27,7 +36,15 @@ public class SelectionSortFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private int currentCount = 0;
+    private int bound = 10; //the max number of elements in the array
+    private ArrayList<Integer> numbers = null;
+    private Random r = new Random();
+    private int durration = 800;
+    private ImageView image;
+    private ArraySortDrawable[] stopMotionAnimation = null;
+    private AnimationDrawable animationDrawable = new AnimationDrawable();
+    private SelectionSortFragment.OnFragmentInteractionListener mListener = null;
 
     public SelectionSortFragment() {
         // Required empty public constructor
@@ -60,11 +77,93 @@ public class SelectionSortFragment extends Fragment {
         }
     }
 
+    /*
+     * The visualization, below, is adapted from the visualization of selection sort found on Wikipedia (https://en.m.wikipedia.org/wiki/Selection_sort) in the "Example" section
+     * I changed the orientation, colors, and visualization key, but not the overall idea of using colors to distinguish steps of the algorithm
+     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selection_sort, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_selection_sort, container, false);
+
+        //Set up the buttons and clickable elements on the fragment
+        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
+        Button startButton = viewGlobal.findViewById(R.id.startButton);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
+
+        generateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable = new AnimationDrawable();
+                currentCount = 0; //make sure we are starting at 0 in the array
+
+                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+                numbers = new ArrayList<Integer>(numElements); //random numbers
+
+                for (int j = 0; j < numElements; j++) {
+                    int randomInt = r.nextInt(bound * 10);
+                    if (r.nextBoolean()) {
+                        numbers.add(j, (-randomInt));
+                    } else {
+                        numbers.add(j, randomInt);
+                    }
+                }
+
+                ArrayList<Integer> originalNumbers = copyArray(numbers);
+                ArrayList<Pair> iterations = SortingAlgorithms.selectionSort(numbers);
+                int i = 0;
+
+                stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
+
+                //setup main frame
+                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, originalNumbers);
+                i++;
+
+                for (Pair pair : iterations) {
+                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.getMinimum(), i - 1, pair.getList());
+                    i++;
+                }
+
+                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).getMinimum(), i - 1, iterations.get(iterations.size() - 1).getList());
+
+                image = viewGlobal.findViewById(R.id.imageView);
+
+                for (Drawable d : stopMotionAnimation) {
+                    animationDrawable.addFrame(d, durration);
+                }
+
+                animationDrawable.setOneShot(false);
+                image.setBackgroundDrawable(animationDrawable);
+            }
+        });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.start();
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.stop();
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
+            }
+        });
+
+        return viewGlobal;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

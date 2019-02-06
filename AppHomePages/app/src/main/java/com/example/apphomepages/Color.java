@@ -34,4 +34,18 @@ public class Color {
     public void setGreen(int green) {
         this.green = green;
     }
+
+    //These colors are ones that are used the most in the program, so they are able to be easily referenced in the code
+    public static Color  getMain() {
+        //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
+        return new Color(102, 102, 255);
+    }
+
+    public static Color getSecondary() {
+        return new Color(153, 255, 255);
+    }
+
+    public static Color getFound() {
+        return new Color(255, 102, 178);
+    }
 }

@@ -20,17 +20,9 @@
         android:text="@string/generate_button"
 
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/spinner"
-        app:layout_constraintTop_toBottomOf="@id/imageView"/>
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="90dp"
-        android:layout_height="34dp"
-
-        app:layout_constraintLeft_toRightOf="@id/generateButton"
-        app:layout_constraintTop_toTopOf="@id/generateButton"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintBottom_toTopOf="@id/startButton" />
 
     <Button
         android:id="@+id/startButton"

@@ -49,7 +49,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
     private ArraySearchDrawable[] stopMotionAnimation = null;
     //The animation that will be played when the "next frame" button is clicked
     private AnimationDrawable animationDrawable = new AnimationDrawable();
-    private OnFragmentInteractionListener mListener = null;
+    private LinearSearchFragment.OnFragmentInteractionListener mListener = null;
 
     public LinearSearchFragment() {
         // Required empty public constructor

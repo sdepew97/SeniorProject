@@ -1,6 +1,8 @@
 package com.example.apphomepages;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,8 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+import static com.example.apphomepages.SortingAlgorithms.copyArray;
 
 
 /**
@@ -40,7 +44,10 @@ public class BubbleSortFragment extends Fragment {
     private int bound = 10; //the max number of elements in the array
     private ArrayList<Integer> numbers = null;
     private Random r = new Random();
+    private int durration = 800;
+    private ImageView image;
     private ArraySortDrawable[] stopMotionAnimation = null;
+    private AnimationDrawable animationDrawable = new AnimationDrawable();
     private BubbleSortFragment.OnFragmentInteractionListener mListener = null;
 
     public BubbleSortFragment() {
@@ -74,6 +81,9 @@ public class BubbleSortFragment extends Fragment {
         }
     }
 
+    /*
+     * The visualization, below, is inspired by the visualization of bubble sort found on Wikipedia (https://en.wikipedia.org/wiki/Bubble_sort) in the "Example" section
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,12 +92,15 @@ public class BubbleSortFragment extends Fragment {
         final View viewGlobal = inflater.inflate(R.layout.fragment_bubble_sort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button nextFrameButton = viewGlobal.findViewById(R.id.frameButton);
         Button generateButton = viewGlobal.findViewById(R.id.generateButton);
+        Button startButton = viewGlobal.findViewById(R.id.startButton);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
 
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animationDrawable = new AnimationDrawable();
                 currentCount = 0; //make sure we are starting at 0 in the array
 
                 int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
@@ -102,6 +115,7 @@ public class BubbleSortFragment extends Fragment {
                     }
                 }
 
+                ArrayList<Integer> originalNumbers = copyArray(numbers);
                 ArrayList<ArrayList<Integer>> iterations = SortingAlgorithms.bubbleSort(numbers);
 
                 stopMotionAnimation = new ArraySortDrawable[iterations.size()];
@@ -109,30 +123,42 @@ public class BubbleSortFragment extends Fragment {
                 Color main = new Color(255, 0, 255);
 
                 //setup main frame
-                stopMotionAnimation[0] = new ArraySortDrawable(main, numbers);
+                stopMotionAnimation[0] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, originalNumbers);
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = new ArraySortDrawable(main, iterations.get(i - 1));
+                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, iterations.get(i - 1));
                 }
 
-                ImageView image = viewGlobal.findViewById(R.id.imageView);
-                image.setImageDrawable(stopMotionAnimation[currentCount]);
-                currentCount = 1;
+                image = viewGlobal.findViewById(R.id.imageView);
+
+                for (Drawable d : stopMotionAnimation) {
+                    animationDrawable.addFrame(d, durration);
+                }
+
+                animationDrawable.setOneShot(false);
+                image.setBackgroundDrawable(animationDrawable);
             }
         });
 
-        nextFrameButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (stopMotionAnimation != null) {
-                    if (currentCount >= stopMotionAnimation.length) {
-                        currentCount = 0;
-                    }
+                animationDrawable.start();
+            }
+        });
 
-                    ImageView image = viewGlobal.findViewById(R.id.imageView);
-                    image.setImageDrawable(stopMotionAnimation[currentCount]);
-                    currentCount++;
-                }
+        stopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.stop();
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
             }
         });
 

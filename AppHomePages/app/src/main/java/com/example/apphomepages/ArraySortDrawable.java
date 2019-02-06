@@ -5,35 +5,48 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 
-public class ArraySortDrawable extends Drawable {
-    private final Paint mPaint;
+public class ArraySortDrawable extends Drawable implements Animatable {
+    private final Paint mMainPaint;
+    private final Paint mSecondPaint;
+    private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
     private ArrayList<Integer> numbers;
+    private int squareToHighlight;
+    private int currentSquare;
 
     //An ArraySearchDrawable constructor for searching
-    public ArraySortDrawable(Color main, ArrayList<Integer> numbers) {
+    public ArraySortDrawable(Color main, Color secondary, Color found, int squareToHighlight, int currentSquare, ArrayList<Integer> numbers) {
         // Set up color and text size
-        mPaint = new Paint();
-        mPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
+        mMainPaint = new Paint();
+        mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
+
+        mSecondPaint = new Paint();
+        mSecondPaint.setARGB(255, secondary.getRed(), secondary.getGreen(), secondary.getBlue());
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);
         mTextPaint.setTextSize(60);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
+        mFoundPaint = new Paint();
+        mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
+
+
         this.numbers = numbers;
+        this.squareToHighlight = squareToHighlight;
+        this.currentSquare = currentSquare;
     }
 
     @Override
     public void draw(Canvas canvas) {
         // Get the drawable's bounds
         int width = getBounds().width();
-        int height = getBounds().height();
         int numSquares = numbers.size();
         int sidelength = width / numSquares;
 
@@ -44,9 +57,17 @@ public class ArraySortDrawable extends Drawable {
 
         for (int i = 0; i < numSquares; i++) {
             rectangles[i] = new Rect(left, top, left + sidelength, top + sidelength);
+
             left += sidelength;
 
-            canvas.drawRect(rectangles[i], mPaint);
+            if(squareToHighlight == i) {
+                canvas.drawRect(rectangles[i], mFoundPaint);
+            } else if (currentSquare > i) {
+                canvas.drawRect(rectangles[i], mSecondPaint);
+            } else {
+                canvas.drawRect(rectangles[i], mMainPaint);
+            }
+
             canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
     }
@@ -65,5 +86,20 @@ public class ArraySortDrawable extends Drawable {
     public int getOpacity() {
         // Must be PixelFormat.UNKNOWN, TRANSLUCENT, TRANSPARENT, or OPAQUE
         return PixelFormat.OPAQUE;
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public boolean isRunning() {
+        return false;
     }
 }
