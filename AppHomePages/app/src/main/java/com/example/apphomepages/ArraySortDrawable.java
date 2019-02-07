@@ -17,11 +17,11 @@ public class ArraySortDrawable extends Drawable implements Animatable {
     private final Paint mTextPaint;
 
     private ArrayList<Integer> numbers;
-    private int squareToHighlight;
+    private ArrayList<Integer> squaresToHighlight;
     private int currentSquare;
 
     //An ArraySearchDrawable constructor for searching
-    public ArraySortDrawable(Color main, Color secondary, Color found, int squareToHighlight, int currentSquare, ArrayList<Integer> numbers) {
+    public ArraySortDrawable(Color main, Color secondary, Color found, ArrayList<Integer> squaresToHighlight, int currentSquare, ArrayList<Integer> numbers) {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -39,7 +39,7 @@ public class ArraySortDrawable extends Drawable implements Animatable {
 
 
         this.numbers = numbers;
-        this.squareToHighlight = squareToHighlight;
+        this.squaresToHighlight = squaresToHighlight;
         this.currentSquare = currentSquare;
     }
 
@@ -47,20 +47,24 @@ public class ArraySortDrawable extends Drawable implements Animatable {
     public void draw(Canvas canvas) {
         // Get the drawable's bounds
         int width = getBounds().width();
+        int height = getBounds().height();
         int numSquares = numbers.size();
-        int sidelength = width / numSquares;
+        int widthSideLength = width / numSquares;
+        int heightSideLength = height;
+
+        mTextPaint.setTextSize(widthSideLength/3);
 
         int left = 0;
-        int top = width / 6;
+        int top = 0;
 
         Rect[] rectangles = new Rect[numSquares];
 
         for (int i = 0; i < numSquares; i++) {
-            rectangles[i] = new Rect(left, top, left + sidelength, top + sidelength);
+            rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
 
-            left += sidelength;
+            left += widthSideLength;
 
-            if(squareToHighlight == i) {
+            if (squaresToHighlight.get(0) != -1 && ((squaresToHighlight.size() == 1 && squaresToHighlight.get(0) == i) || (squaresToHighlight.size() == 2 && squaresToHighlight.get(0) == i || squaresToHighlight.get(1) == i))) {
                 canvas.drawRect(rectangles[i], mFoundPaint);
             } else if (currentSquare > i) {
                 canvas.drawRect(rectangles[i], mSecondPaint);

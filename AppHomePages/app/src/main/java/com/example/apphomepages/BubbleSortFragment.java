@@ -44,7 +44,7 @@ public class BubbleSortFragment extends Fragment {
     private int bound = 10; //the max number of elements in the array
     private ArrayList<Integer> numbers = null;
     private Random r = new Random();
-    private int durration = 800;
+    private int durration = 1000;
     private ImageView image;
     private ArraySortDrawable[] stopMotionAnimation = null;
     private AnimationDrawable animationDrawable = new AnimationDrawable();
@@ -116,18 +116,20 @@ public class BubbleSortFragment extends Fragment {
                 }
 
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<ArrayList<Integer>> iterations = SortingAlgorithms.bubbleSort(numbers);
+                ArrayList<Tuple> iterations = SortingAlgorithms.bubbleSort(numbers);
+                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+                squaresToHighlight.add(-1);
 
                 stopMotionAnimation = new ArraySortDrawable[iterations.size()];
 
-                Color main = new Color(255, 0, 255);
-
                 //setup main frame
-                stopMotionAnimation[0] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, originalNumbers);
+                stopMotionAnimation[0] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
 
-                for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, iterations.get(i - 1));
+                for (int i = 1; i <= stopMotionAnimation.length-2; i++) {
+                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(i-1).constructPair(), -1, iterations.get(i - 1).getList());
                 }
+
+                stopMotionAnimation[stopMotionAnimation.length-1] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, iterations.size()-1, iterations.get(stopMotionAnimation.length - 2).getList());
 
                 image = viewGlobal.findViewById(R.id.imageView);
 

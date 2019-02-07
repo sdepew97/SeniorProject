@@ -26,4 +26,12 @@ public class Pair {
     public void setList(ArrayList<Integer> list) {
         this.list = list;
     }
+
+    public ArrayList<Integer> constructList() {
+        ArrayList<Integer> returnVal = new ArrayList<>();
+
+        returnVal.add(minimum);
+
+        return returnVal;
+    }
 }

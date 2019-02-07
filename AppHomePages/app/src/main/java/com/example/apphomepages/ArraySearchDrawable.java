@@ -30,7 +30,6 @@ public class ArraySearchDrawable extends Drawable implements Animatable {
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);
-        mTextPaint.setTextSize(60);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
         mFoundPaint = new Paint();
@@ -48,17 +47,20 @@ public class ArraySearchDrawable extends Drawable implements Animatable {
         int width = getBounds().width();
         int height = getBounds().height();
         int numSquares = numbers.length;
-        int sidelength = width / numSquares;
+        int widthSideLength = width / numSquares;
+        int heightSideLength = height;
+
+        mTextPaint.setTextSize(widthSideLength/3);
 
         int left = 0;
-        int top = width / 6;
+        int top = 0;
 
         Rect[] rectangles = new Rect[numSquares];
 
         for (int i = 0; i < numSquares; i++) {
-            rectangles[i] = new Rect(left, top, left + sidelength, top + sidelength);
+            rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
 
-            left += sidelength;
+            left += widthSideLength;
 
             if(squareToHighlight == i && !target) {
                 canvas.drawRect(rectangles[i], mSecondPaint);

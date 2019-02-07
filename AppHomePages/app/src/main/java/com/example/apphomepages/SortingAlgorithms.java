@@ -20,23 +20,33 @@ class SortingAlgorithms {
     }
 
     //Bubble sort adapted from https://www.geeksforgeeks.org/bubble-sort/
-    public static ArrayList<ArrayList<Integer>> bubbleSort(ArrayList<Integer> arr) {
-        ArrayList<ArrayList<Integer>> resultsOfSteps = new ArrayList<>();
+    public static ArrayList<Tuple> bubbleSort(ArrayList<Integer> arr) {
+        ArrayList<Tuple> resultsOfSteps = new ArrayList<>();
 
         int n = arr.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
                 if (arr.get(j) > arr.get(j + 1)) {
-                    // swap arr[j+1] and arr[i]
+                    Tuple t1 = new Tuple();
+                    Tuple t2 = new Tuple();
+                    // swap arr[j+1] and arr[j]
+                    t1.setSwap1(j+1);
+                    t2.setSwap1(j+1);
+                    t1.setSwap2(j);
+                    t2.setSwap2(j);
+                    t1.setList(copyArray(arr));
                     int temp = arr.get(j);
                     arr.set(j, arr.get(j + 1));
                     arr.set(j + 1, temp);
-                    resultsOfSteps.add(copyArray(arr));
+                    t2.setList(copyArray(arr));
+                    resultsOfSteps.add(t1);
+                    resultsOfSteps.add(t2);
                 }
             }
         }
 
-        resultsOfSteps.add(arr);
+        resultsOfSteps.add(new Tuple(arr));
+        resultsOfSteps.add(new Tuple(arr));
         return resultsOfSteps;
     }
 

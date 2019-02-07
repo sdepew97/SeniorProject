@@ -39,7 +39,6 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
     private String mParam1;
     private String mParam2;
 
-    private int currentCount = 0;
     private int bound = 10; //the max number of elements in the array
     private int[] numbers = null;
     private int soughtAfter = -1;
@@ -100,7 +99,6 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
             @Override
             public void onClick(View v) {
                 animationDrawable = new AnimationDrawable();
-                currentCount = 0; //make sure we are starting at 0 in the array
 
                 int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
                 numbers = new int[numElements]; //random numbers
@@ -144,17 +142,12 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
-                //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
-                Color main = new Color(102, 102, 255);
-                Color secondary = new Color(153, 255, 255);
-                Color found = new Color(255, 102, 178);
-
                 //setup main frame
-                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
+                stopMotionAnimation[0] = new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, false, numbers);
                 square++;
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(main, secondary, found, square, true, numbers) : new ArraySearchDrawable(main, secondary, found, square, false, numbers);
+                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, true, numbers) : new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, false, numbers);
                     square++;
                 }
 
@@ -173,7 +166,6 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 soughtAfter = Integer.valueOf((String) spinner.getSelectedItem());
-                currentCount = 0;
                 int locationInArray = SearchingAlgorithms.linearSearch(numbers, soughtAfter);
                 int square = -1;
 
@@ -184,17 +176,12 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter {
                     stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
-                //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
-                Color main = new Color(102, 102, 255);
-                Color secondary = new Color(153, 255, 255);
-                Color found = new Color(255, 102, 178);
-
                 //setup main frame
-                stopMotionAnimation[0] = new ArraySearchDrawable(main, secondary, found, square, false, numbers);
+                stopMotionAnimation[0] = new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, false, numbers);
                 square++;
 
                 for (int i = 1; i < stopMotionAnimation.length; i++) {
-                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(main, secondary, found, square, true, numbers) : new ArraySearchDrawable(main, secondary, found, square, false, numbers);
+                    stopMotionAnimation[i] = locationInArray == (i - 1) ? new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, true, numbers) : new ArraySearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), square, false, numbers);
                     square++;
                 }
 

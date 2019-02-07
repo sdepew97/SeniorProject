@@ -120,15 +120,17 @@ public class SelectionSortFragment extends Fragment {
                 stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
 
                 //setup main frame
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, -1, originalNumbers);
+                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+                squaresToHighlight.add(-1);
+                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
                 i++;
 
                 for (Pair pair : iterations) {
-                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.getMinimum(), i - 1, pair.getList());
+                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.constructList(), i - 1, pair.getList());
                     i++;
                 }
 
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).getMinimum(), i - 1, iterations.get(iterations.size() - 1).getList());
+                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), i - 1, iterations.get(iterations.size() - 1).getList());
 
                 image = viewGlobal.findViewById(R.id.imageView);
 
