@@ -15,6 +15,7 @@ import com.example.apphomepages.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.Animations.SortAnimations;
 import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
+import com.example.apphomepages.General.HelperMethods;
 import com.example.apphomepages.R;
 
 import java.util.ArrayList;
@@ -101,36 +102,11 @@ public class InsertionSortFragment extends Fragment
             {
                 //Set up variables for the method
                 ArraySortDrawable[] stopMotionAnimation;
-                //TODO: remove this comment
-                // int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                //TODO: remove this comment
-                // numbers = HelperMethods.generateRandomArray(r, numElements, bound);
-
-                //int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                int numElements = 8;
-                numbers = new ArrayList<Integer>(numElements); //random numbers
-                /*
-                for (int j = 0; j < numElements; j++) {
-                    int randomInt = r.nextInt(bound * 10);
-                    if (r.nextBoolean()) {
-                        numbers.add(j, (-randomInt));
-                    } else {
-                        numbers.add(j, randomInt);
-                    }
-                }
-                */
-
-                numbers.add(6);
-                numbers.add(5);
-                numbers.add(3);
-                numbers.add(1);
-                numbers.add(8);
-                numbers.add(7);
-                numbers.add(2);
-                numbers.add(4);
+                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);

@@ -2,7 +2,6 @@ package com.example.apphomepages.Fragments;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,9 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.apphomepages.Algorithms.SortingAlgorithms;
-import com.example.apphomepages.Datatypes.Color;
+import com.example.apphomepages.Animations.SortAnimations;
 import com.example.apphomepages.Datatypes.Pair;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
+import com.example.apphomepages.General.HelperMethods;
 import com.example.apphomepages.R;
 
 import java.util.ArrayList;
@@ -32,27 +32,21 @@ import static com.example.apphomepages.Algorithms.SortingAlgorithms.copyArray;
  * Use the {@link SelectionSortFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectionSortFragment extends Fragment {
+public class SelectionSortFragment extends Fragment
+{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private int currentCount = 0;
-    private int bound = 10; //the max number of elements in the array
+    //Global variables
     private ArrayList<Integer> numbers = null;
-    private Random r = new Random();
-    private int duration = 1000;
-    private ImageView image;
-    private ArraySortDrawable[] stopMotionAnimation = null;
+    private ImageView image = null;
     private AnimationDrawable animationDrawable = new AnimationDrawable();
     private SelectionSortFragment.OnFragmentInteractionListener mListener = null;
 
-    public SelectionSortFragment() {
+    public SelectionSortFragment()
+    {
         // Required empty public constructor
     }
 
@@ -65,7 +59,8 @@ public class SelectionSortFragment extends Fragment {
      * @return A new instance of fragment SelectionSortFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectionSortFragment newInstance(String param1, String param2) {
+    public static SelectionSortFragment newInstance(String param1, String param2)
+    {
         SelectionSortFragment fragment = new SelectionSortFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -75,11 +70,11 @@ public class SelectionSortFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if (getArguments() != null)
+        {
         }
     }
 
@@ -90,7 +85,11 @@ public class SelectionSortFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
+//Set up variables
+        final int bound = 10; //the max number of elements in the array
+        final Random r = new Random();
 
         // Inflate the layout for this fragment
         final View viewGlobal = inflater.inflate(R.layout.fragment_selection_sort, container, false);
@@ -101,71 +100,56 @@ public class SelectionSortFragment extends Fragment {
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
 
-        generateButton.setOnClickListener(new View.OnClickListener() {
+        generateButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                animationDrawable = new AnimationDrawable();
-                currentCount = 0; //make sure we are starting at 0 in the array
-
+            public void onClick(View v)
+            {
+                //Set up variables for the method
+                ArraySortDrawable[] stopMotionAnimation;
                 int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                numbers = new ArrayList<Integer>(numElements); //random numbers
+                animationDrawable = new AnimationDrawable();
 
-                for (int j = 0; j < numElements; j++) {
-                    int randomInt = r.nextInt(bound * 10);
-                    if (r.nextBoolean()) {
-                        numbers.add(j, (-randomInt));
-                    } else {
-                        numbers.add(j, randomInt);
-                    }
-                }
+                //Get random numbers
+                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
 
+                //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
                 ArrayList<Pair> iterations = SortingAlgorithms.selectionSort(numbers);
-                int i = 0;
+                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+                squaresToHighlight.add(-1);
 
                 stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
 
-                //setup main frame
-                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
-                squaresToHighlight.add(-1);
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
-                i++;
-
-                for (Pair pair : iterations) {
-                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.constructList(), i - 1, pair.getList());
-                    i++;
-                }
-
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), i - 1, iterations.get(iterations.size() - 1).getList());
-
                 image = viewGlobal.findViewById(R.id.imageView);
 
-                for (Drawable d : stopMotionAnimation) {
-                    animationDrawable.addFrame(d, duration);
-                }
-
-                animationDrawable.setOneShot(false);
-                image.setBackgroundDrawable(animationDrawable);
+                SortAnimations.generateSelectionSort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
             }
         });
 
-        startButton.setOnClickListener(new View.OnClickListener() {
+        startButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 animationDrawable.start();
             }
         });
 
-        stopButton.setOnClickListener(new View.OnClickListener() {
+        stopButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 animationDrawable.stop();
             }
         });
 
-        rewindButton.setOnClickListener(new View.OnClickListener() {
+        rewindButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 animationDrawable.setVisible(true, true);
                 animationDrawable.stop();
             }
@@ -175,25 +159,31 @@ public class SelectionSortFragment extends Fragment {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
+    public void onButtonPressed(Uri uri)
+    {
+        if (mListener != null)
+        {
             mListener.onFragmentInteraction(uri);
         }
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener)
+        {
             mListener = (OnFragmentInteractionListener) context;
-        } else {
+        } else
+        {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
 
     @Override
-    public void onDetach() {
+    public void onDetach()
+    {
         super.onDetach();
         mListener = null;
     }
@@ -208,7 +198,8 @@ public class SelectionSortFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListener
+    {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }

@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.apphomepages.Datatypes.Color;
+import com.example.apphomepages.Datatypes.Pair;
 import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
 
@@ -63,4 +64,30 @@ public class SortAnimations
         image.setBackgroundDrawable(animationDrawable);
     }
 
+    public static void generateSelectionSort(ArrayList<Integer> originalNumbers, ArrayList<Integer> squaresToHighlight, ArrayList<Pair> iterations, ArrayList<Integer> numbers, ArraySortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    {
+        //Duration
+        int duration = 1000;
+
+        int i = 0;
+        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
+        i++;
+
+        for (Pair pair : iterations)
+        {
+            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.constructList(), i - 1, pair.getList());
+            i++;
+        }
+
+        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), i - 1, iterations.get(iterations.size() - 1).getList());
+
+        for (Drawable d : stopMotionAnimation)
+        {
+            animationDrawable.addFrame(d, duration);
+        }
+
+        animationDrawable.setOneShot(false);
+        image.setBackgroundDrawable(animationDrawable);
+
+    }
 }
