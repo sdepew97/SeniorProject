@@ -129,7 +129,13 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 boolean targetFound = r.nextBoolean();
                 soughtAfter = targetFound ? numbers.get(r.nextInt(numbers.size())) : -1;
                 ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
-                int locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+                int locationInArray;
+
+                if(soughtAfter != -1) {
+                    locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+                } else {
+                    locationInArray = -1;
+                }
 
                 //Populate the spinner and set initial random selection
                 SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
@@ -157,7 +163,13 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 }
 
                 ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
-                int locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+                int locationInArray;
+
+                if(soughtAfter != null) {
+                    locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+                } else {
+                    locationInArray = -1;
+                }
 
                 stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
