@@ -1,8 +1,15 @@
-package com.example.apphomepages;
+package com.example.apphomepages.FragmentAdapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.apphomepages.Fragments.BubbleSortFragment;
+import com.example.apphomepages.Fragments.InsertionSortFragment;
+import com.example.apphomepages.Fragments.MergeSortFragment;
+import com.example.apphomepages.Fragments.QuicksortFragment;
+import com.example.apphomepages.Fragments.SearchAndSortFragment;
+import com.example.apphomepages.Fragments.SelectionSortFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
 public class FragmentAdapterSortingPage extends FragmentPagerAdapter {

@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Fragments;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
@@ -12,21 +12,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.apphomepages.Algorithms.SortingAlgorithms;
+import com.example.apphomepages.Datatypes.Color;
+import com.example.apphomepages.Datatypes.Tuple;
+import com.example.apphomepages.Drawable.ArraySortDrawable;
+import com.example.apphomepages.R;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.example.apphomepages.SortingAlgorithms.copyArray;
+import static com.example.apphomepages.Algorithms.SortingAlgorithms.copyArray;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SelectionSortFragment.OnFragmentInteractionListener} interface
+ * {@link BubbleSortFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SelectionSortFragment#newInstance} factory method to
+ * Use the {@link BubbleSortFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SelectionSortFragment extends Fragment {
+public class BubbleSortFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,17 +42,16 @@ public class SelectionSortFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private int currentCount = 0;
     private int bound = 10; //the max number of elements in the array
     private ArrayList<Integer> numbers = null;
     private Random r = new Random();
-    private int durration = 800;
+    private int durration = 1000;
     private ImageView image;
     private ArraySortDrawable[] stopMotionAnimation = null;
     private AnimationDrawable animationDrawable = new AnimationDrawable();
-    private SelectionSortFragment.OnFragmentInteractionListener mListener = null;
+    private BubbleSortFragment.OnFragmentInteractionListener mListener = null;
 
-    public SelectionSortFragment() {
+    public BubbleSortFragment() {
         // Required empty public constructor
     }
 
@@ -56,11 +61,11 @@ public class SelectionSortFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SelectionSortFragment.
+     * @return A new instance of fragment BubbleSortFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SelectionSortFragment newInstance(String param1, String param2) {
-        SelectionSortFragment fragment = new SelectionSortFragment();
+    public static BubbleSortFragment newInstance(String param1, String param2) {
+        BubbleSortFragment fragment = new BubbleSortFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,16 +83,14 @@ public class SelectionSortFragment extends Fragment {
     }
 
     /*
-     * The visualization, below, is adapted from the visualization of selection sort found on Wikipedia (https://en.m.wikipedia.org/wiki/Selection_sort) in the "Example" section
-     * I changed the orientation, colors, and visualization key, but not the overall idea of using colors to distinguish steps of the algorithm
+     * The visualization, below, is inspired by the visualization of bubble sort found on Wikipedia (https://en.wikipedia.org/wiki/Bubble_sort) in the "Example" section
      */
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_selection_sort, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_bubble_sort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
         Button generateButton = viewGlobal.findViewById(R.id.generateButton);
@@ -99,7 +102,6 @@ public class SelectionSortFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 animationDrawable = new AnimationDrawable();
-                currentCount = 0; //make sure we are starting at 0 in the array
 
                 int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
                 numbers = new ArrayList<Integer>(numElements); //random numbers
@@ -114,23 +116,20 @@ public class SelectionSortFragment extends Fragment {
                 }
 
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Pair> iterations = SortingAlgorithms.selectionSort(numbers);
-                int i = 0;
-
-                stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
-
-                //setup main frame
+                ArrayList<Tuple> iterations = SortingAlgorithms.bubbleSort(numbers);
                 ArrayList<Integer> squaresToHighlight = new ArrayList<>();
                 squaresToHighlight.add(-1);
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
-                i++;
 
-                for (Pair pair : iterations) {
-                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.constructList(), i - 1, pair.getList());
-                    i++;
+                stopMotionAnimation = new ArraySortDrawable[iterations.size()];
+
+                //setup main frame
+                stopMotionAnimation[0] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
+
+                for (int i = 1; i <= stopMotionAnimation.length - 2; i++) {
+                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(i - 1).constructPair(), -1, iterations.get(i - 1).getList());
                 }
 
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), i - 1, iterations.get(iterations.size() - 1).getList());
+                stopMotionAnimation[stopMotionAnimation.length - 1] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, iterations.size() - 1, iterations.get(stopMotionAnimation.length - 2).getList());
 
                 image = viewGlobal.findViewById(R.id.imageView);
 

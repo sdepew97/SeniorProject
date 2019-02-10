@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Drawable;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -8,19 +8,25 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
-public class ArraySearchDrawable extends Drawable implements Animatable {
+import com.example.apphomepages.Datatypes.Color;
+
+import java.util.ArrayList;
+
+public class ArraySearchDrawable extends Drawable implements Animatable
+{
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
-    private int[] numbers;
+    private ArrayList<Integer> numbers;
     private int squareToHighlight = -1;
 
     private boolean target;
 
     //An ArraySearchDrawable constructor for searching
-    public ArraySearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, int[] numbers) {
+    public ArraySearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, ArrayList<Integer> numbers)
+    {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -42,66 +48,77 @@ public class ArraySearchDrawable extends Drawable implements Animatable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas)
+    {
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numSquares = numbers.length;
+        int numSquares = numbers.size();
         int widthSideLength = width / numSquares;
         int heightSideLength = height;
 
-        mTextPaint.setTextSize(widthSideLength/3);
+        mTextPaint.setTextSize(widthSideLength / 3);
 
         int left = 0;
         int top = 0;
 
         Rect[] rectangles = new Rect[numSquares];
 
-        for (int i = 0; i < numSquares; i++) {
+        for (int i = 0; i < numSquares; i++)
+        {
             rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
 
             left += widthSideLength;
 
-            if(squareToHighlight == i && !target) {
+            if (squareToHighlight == i && !target)
+            {
                 canvas.drawRect(rectangles[i], mSecondPaint);
-            } else if (squareToHighlight == i && target) {
+            } else if (squareToHighlight == i && target)
+            {
                 canvas.drawRect(rectangles[i], mFoundPaint);
-            } else {
+            } else
+            {
                 canvas.drawRect(rectangles[i], mMainPaint);
             }
 
-            canvas.drawText(Integer.toString(numbers[i]), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+            canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
     }
 
     @Override
-    public void setAlpha(int alpha) {
+    public void setAlpha(int alpha)
+    {
         // This method is required
     }
 
     @Override
-    public void setColorFilter(ColorFilter colorFilter) {
+    public void setColorFilter(ColorFilter colorFilter)
+    {
         // This method is required
     }
 
     @Override
-    public int getOpacity() {
+    public int getOpacity()
+    {
         // Must be PixelFormat.UNKNOWN, TRANSLUCENT, TRANSPARENT, or OPAQUE
         return PixelFormat.OPAQUE;
     }
 
     @Override
-    public void start() {
+    public void start()
+    {
 
     }
 
     @Override
-    public void stop() {
+    public void stop()
+    {
 
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean isRunning()
+    {
         return false;
     }
 }

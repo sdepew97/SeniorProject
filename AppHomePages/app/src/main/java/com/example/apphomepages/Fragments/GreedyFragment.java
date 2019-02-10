@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.apphomepages.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MergeSortFragment.OnFragmentInteractionListener} interface
+ * {@link GreedyFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MergeSortFragment#newInstance} factory method to
+ * Use the {@link GreedyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MergeSortFragment extends Fragment {
+public class GreedyFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class MergeSortFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public MergeSortFragment() {
+    public GreedyFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +41,11 @@ public class MergeSortFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MergeSortFragment.
+     * @return A new instance of fragment GreedyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MergeSortFragment newInstance(String param1, String param2) {
-        MergeSortFragment fragment = new MergeSortFragment();
+    public static GreedyFragment newInstance(String param1, String param2) {
+        GreedyFragment fragment = new GreedyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +66,7 @@ public class MergeSortFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_merge_sort, container, false);
+        return inflater.inflate(R.layout.fragment_greedy, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

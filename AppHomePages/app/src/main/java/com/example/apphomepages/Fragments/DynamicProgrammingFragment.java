@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.apphomepages.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GraphFragment.OnFragmentInteractionListener} interface
+ * {@link DynamicProgrammingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GraphFragment#newInstance} factory method to
+ * Use the {@link DynamicProgrammingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GraphFragment extends Fragment {
+public class DynamicProgrammingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +31,7 @@ public class GraphFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public GraphFragment() {
+    public DynamicProgrammingFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +41,11 @@ public class GraphFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GraphFragment.
+     * @return A new instance of fragment DynamicProgrammingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GraphFragment newInstance(String param1, String param2) {
-        GraphFragment fragment = new GraphFragment();
+    public static DynamicProgrammingFragment newInstance(String param1, String param2) {
+        DynamicProgrammingFragment fragment = new DynamicProgrammingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +66,7 @@ public class GraphFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_graph, container, false);
+        return inflater.inflate(R.layout.fragment_dynamic_programming, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,25 +1,35 @@
-package com.example.apphomepages;
+package com.example.apphomepages.FragmentAdapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-//The FragmentAdapter controls all the fragments for the main page that we swipe through
-public class FragmentAdapterMainPage extends FragmentPagerAdapter {
+import com.example.apphomepages.Fragments.DynamicProgrammingFragment;
+import com.example.apphomepages.Fragments.GraphFragment;
+import com.example.apphomepages.Fragments.GreedyFragment;
+import com.example.apphomepages.Fragments.SearchAndSortFragment;
 
-    public FragmentAdapterMainPage(FragmentManager manager) {
+//The FragmentAdapter controls all the fragments for the main page that we swipe through
+public class FragmentAdapterMainPage extends FragmentPagerAdapter
+{
+
+    public FragmentAdapterMainPage(FragmentManager manager)
+    {
         super(manager);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return 4; //the number of pages there are on the main page
     }
 
     @Override
-    public Fragment getItem(int i) {
+    public Fragment getItem(int i)
+    {
         Fragment page = null;
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 page = SearchAndSortFragment.newInstance("One", "Two");
                 break;
@@ -41,10 +51,12 @@ public class FragmentAdapterMainPage extends FragmentPagerAdapter {
     }
 
     @Override
-    public CharSequence getPageTitle(int i) {
+    public CharSequence getPageTitle(int i)
+    {
         CharSequence result;
 
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 result = "Searching & Sorting";
                 break;

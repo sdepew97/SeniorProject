@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Datatypes;
 
 import java.util.ArrayList;
 
@@ -15,16 +15,16 @@ public class Pair {
         return list;
     }
 
+    public void setList(ArrayList<Integer> list) {
+        this.list = list;
+    }
+
     public Integer getMinimum() {
         return minimum;
     }
 
     public void setMinimum(Integer minimum) {
         this.minimum = minimum;
-    }
-
-    public void setList(ArrayList<Integer> list) {
-        this.list = list;
     }
 
     public ArrayList<Integer> constructList() {

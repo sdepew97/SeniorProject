@@ -1,8 +1,12 @@
-package com.example.apphomepages;
+package com.example.apphomepages.FragmentAdapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.apphomepages.Fragments.BinarySearchFragment;
+import com.example.apphomepages.Fragments.LinearSearchFragment;
+import com.example.apphomepages.Fragments.SearchAndSortFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
 public class FragmentAdapterSearchingPage extends FragmentPagerAdapter {

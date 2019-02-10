@@ -1,30 +1,25 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import com.example.apphomepages.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SearchAndSortFragment.OnFragmentInteractionListener} interface
+ * {@link GraphFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SearchAndSortFragment#newInstance} factory method to
+ * Use the {@link GraphFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchAndSortFragment extends Fragment {
-    //LOG messages
-    private static String TAG = "SearchAndSortFragment";
-
+public class GraphFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +31,7 @@ public class SearchAndSortFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SearchAndSortFragment() {
+    public GraphFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +41,11 @@ public class SearchAndSortFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchAndSortFragment.
+     * @return A new instance of fragment GraphFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchAndSortFragment newInstance(String param1, String param2) {
-        SearchAndSortFragment fragment = new SearchAndSortFragment();
+    public static GraphFragment newInstance(String param1, String param2) {
+        GraphFragment fragment = new GraphFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,35 +66,7 @@ public class SearchAndSortFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_search_and_sort, container, false);
-
-        //Set up the buttons on the fragment
-        Button searchButton = view.findViewById(R.id.searchingButton);
-        Button sortButton = view.findViewById(R.id.sortingButton);
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Search Button Clicked Main Screen Fragment");
-
-                //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), Searching.class);
-                startActivity(i);
-            }
-        });
-
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG, "Sort Button Clicked Main Screen Fragment");
-
-                //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), Sorting.class);
-                startActivity(i);
-            }
-        });
-
-        return view;
+        return inflater.inflate(R.layout.fragment_graph, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
