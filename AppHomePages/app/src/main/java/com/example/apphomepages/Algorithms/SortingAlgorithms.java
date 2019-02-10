@@ -68,6 +68,64 @@ public class SortingAlgorithms
         return resultsOfSteps;
     }
 
+    //Insertion sort adapted from https://www.geeksforgeeks.org/insertion-sort/
+    public static ArrayList<Tuple> insertionSort(ArrayList<Integer> arr)
+    {
+        ArrayList<Tuple> resultOfSteps = new ArrayList<>();
+
+        int n = arr.size();
+
+        //Initial array
+        Tuple t = new Tuple();
+        t.setList(copyArray(arr));
+        t.setA(-1);
+        t.setB(1);
+        resultOfSteps.add(t);
+
+        for (int i = 1; i < n; ++i)
+        {
+            int key = arr.get(i);
+            int j = i - 1;
+
+            Tuple t1 = new Tuple();
+            t1.setA(j + 1);
+            t1.setList(copyArray(arr));
+            t1.setB(i + 1);
+            resultOfSteps.add(t1);
+
+            /*
+             * Move elements of arr[0..i-1], that are
+             * greater than key, to one position ahead
+             * of their current position
+             */
+            while (j >= 0 && arr.get(j) > key)
+            {
+                arr.set(j + 1, arr.get(j));
+                j = j - 1;
+                Tuple tuple = new Tuple();
+                tuple.setList(copyArray(arr));
+                tuple.setA(-1);
+                tuple.setB(i + 1);
+                resultOfSteps.add(tuple);
+            }
+            Tuple t2 = new Tuple();
+            t2.setA(j + 1);
+            arr.set(j + 1, key);
+
+            t2.setB(i + 1);
+            t2.setList(copyArray(arr));
+            resultOfSteps.add(t2);
+        }
+
+        Tuple finalTuple = new Tuple();
+        finalTuple.setList(copyArray(arr));
+        finalTuple.setB(n);
+        resultOfSteps.add(finalTuple); //This is the sorted array...
+
+        return resultOfSteps;
+
+    }
+
     //Selection sort adapted from
     public static ArrayList<Pair> selectionSort(ArrayList<Integer> arr)
     {
@@ -108,56 +166,4 @@ public class SortingAlgorithms
         return resultOfSteps;
     }
 
-    //Insertion sort adapted from https://www.geeksforgeeks.org/insertion-sort/
-    public static ArrayList<Tuple> insertionSort(ArrayList<Integer> arr)
-    {
-        ArrayList<Tuple> resultOfSteps = new ArrayList<>();
-
-        int n = arr.size();
-
-        //Initial array
-        Tuple t = new Tuple();
-        t.setList(copyArray(arr));
-        t.setA(-1);
-        t.setB(1);
-        resultOfSteps.add(t);
-
-        for (int i = 1; i < n; ++i)
-        {
-            int key = arr.get(i);
-            int j = i - 1;
-
-            Tuple t1 = new Tuple();
-            t1.setA(j + 1);
-            t1.setList(copyArray(arr));
-            t1.setB(i + 1);
-            resultOfSteps.add(t1);
-
-            /*
-             * Move elements of arr[0..i-1], that are
-             * greater than key, to one position ahead
-             * of their current position
-             */
-            while (j >= 0 && arr.get(j) > key)
-            {
-                arr.set(j + 1, arr.get(j));
-                j = j - 1;
-            }
-            Tuple t2 = new Tuple();
-            t2.setA(j + 1);
-            arr.set(j + 1, key);
-
-            t2.setB(i + 1);
-            t2.setList(copyArray(arr));
-            resultOfSteps.add(t2);
-        }
-
-        Tuple finalTuple = new Tuple();
-        finalTuple.setList(copyArray(arr));
-        finalTuple.setB(n);
-        resultOfSteps.add(finalTuple); //This is the sorted array...
-
-        return resultOfSteps;
-
-    }
 }

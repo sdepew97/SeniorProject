@@ -2,7 +2,6 @@ package com.example.apphomepages.Fragments;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.apphomepages.Algorithms.SortingAlgorithms;
-import com.example.apphomepages.Datatypes.Color;
+import com.example.apphomepages.Animations.SortAnimations;
 import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
 import com.example.apphomepages.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import static com.example.apphomepages.Algorithms.SortingAlgorithms.copyArray;
@@ -40,15 +38,9 @@ public class InsertionSortFragment extends Fragment
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private int bound = 10; //the max number of elements in the array
+    //Global variables
     private ArrayList<Integer> numbers = null;
-    private Random r = new Random();
-    private int duration = 1000;
-    private ImageView image;
-    private ArraySortDrawable[] stopMotionAnimation = null;
+    private ImageView image = null;
     private AnimationDrawable animationDrawable = new AnimationDrawable();
     private InsertionSortFragment.OnFragmentInteractionListener mListener = null;
 
@@ -80,11 +72,6 @@ public class InsertionSortFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     /*
@@ -94,9 +81,12 @@ public class InsertionSortFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        //Set up variables
+        final int bound = 10; //the max number of elements in the array
+        final Random r = new Random();
 
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_selection_sort, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_insertion_sort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
         Button generateButton = viewGlobal.findViewById(R.id.generateButton);
@@ -109,7 +99,15 @@ public class InsertionSortFragment extends Fragment
             @Override
             public void onClick(View v)
             {
+                //Set up variables for the method
+                ArraySortDrawable[] stopMotionAnimation;
+                //TODO: remove this comment
+                // int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
                 animationDrawable = new AnimationDrawable();
+
+                //Get random numbers
+                //TODO: remove this comment
+                // numbers = HelperMethods.generateRandomArray(r, numElements, bound);
 
                 //int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
                 int numElements = 8;
@@ -134,35 +132,17 @@ public class InsertionSortFragment extends Fragment
                 numbers.add(2);
                 numbers.add(4);
 
+                //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
                 ArrayList<Tuple> iterations = SortingAlgorithms.insertionSort(numbers);
-                int i = 0;
+                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+                squaresToHighlight.add(-1);
 
                 stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
 
-                //setup main frame
-                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
-                squaresToHighlight.add(-1);
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
-                i++;
-
-                for (Tuple tuple : iterations)
-                {
-                    stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(tuple.getA()), tuple.getB(), tuple.getList());
-                    i++;
-                }
-
-                stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(iterations.get(iterations.size() - 1).getA()), iterations.get(iterations.size() - 1).getB(), iterations.get(iterations.size() - 1).getList());
-
                 image = viewGlobal.findViewById(R.id.imageView);
 
-                for (Drawable d : stopMotionAnimation)
-                {
-                    animationDrawable.addFrame(d, duration);
-                }
-
-                animationDrawable.setOneShot(false);
-                image.setBackgroundDrawable(animationDrawable);
+                SortAnimations.generateInsertionSort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
             }
         });
 

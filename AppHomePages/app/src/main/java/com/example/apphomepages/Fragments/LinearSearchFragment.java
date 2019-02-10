@@ -45,8 +45,6 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
     private ArrayList<Integer> numbers = null;
     private Integer soughtAfter = -1;
     private ImageView image = null;
-
-    //The animation that will be played when the "next frame" button is clicked
     private AnimationDrawable animationDrawable = new AnimationDrawable();
     private LinearSearchFragment.OnFragmentInteractionListener mListener = null;
 

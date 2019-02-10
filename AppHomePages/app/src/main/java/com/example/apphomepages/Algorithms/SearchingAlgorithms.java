@@ -34,7 +34,7 @@ public class SearchingAlgorithms
     public static ArrayList<Integer> binarySearchWithLocations(ArrayList<Integer> array, Integer search)
     {
         Random r = new Random();
-        boolean set = false;
+        boolean set;
         int randomInt;
 
         if (search == null)

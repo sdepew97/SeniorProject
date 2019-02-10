@@ -131,9 +131,11 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
                 int locationInArray;
 
-                if(soughtAfter != -1) {
+                if (soughtAfter != -1)
+                {
                     locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
-                } else {
+                } else
+                {
                     locationInArray = -1;
                 }
 
@@ -165,9 +167,11 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
                 int locationInArray;
 
-                if(soughtAfter != null) {
+                if (soughtAfter != null)
+                {
                     locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
-                } else {
+                } else
+                {
                     locationInArray = -1;
                 }
 
