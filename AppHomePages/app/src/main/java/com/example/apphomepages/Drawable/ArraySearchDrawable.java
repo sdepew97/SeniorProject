@@ -1,24 +1,32 @@
-package com.example.uiideasfinalproject;
+package com.example.apphomepages.Drawable;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
-public class MyDrawable extends Drawable {
+import com.example.apphomepages.Datatypes.Color;
+
+import java.util.ArrayList;
+
+public class ArraySearchDrawable extends Drawable implements Animatable
+{
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
-    private String[] numbers;
-    private int squareToHighlight;
+    private ArrayList<Integer> numbers;
+    private int squareToHighlight = -1;
 
     private boolean target;
 
-    public MyDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, String[] numbers) {
+    //An ArraySearchDrawable constructor for searching
+    public ArraySearchDrawable(Color main, Color secondary, Color found, int squareToHighlight, boolean target, ArrayList<Integer> numbers)
+    {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -28,7 +36,6 @@ public class MyDrawable extends Drawable {
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);
-        mTextPaint.setTextSize(60);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
         mFoundPaint = new Paint();
@@ -41,53 +48,77 @@ public class MyDrawable extends Drawable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas)
+    {
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numSquares = numbers.length;
-        int sidelength = width / numSquares;
+        int numSquares = numbers.size();
+        int widthSideLength = width / numSquares;
+        int heightSideLength = height;
+
+        mTextPaint.setTextSize(widthSideLength / 3);
 
         int left = 0;
-        int top = width / numSquares;
+        int top = 0;
 
         Rect[] rectangles = new Rect[numSquares];
 
-        for (int i = 0; i < numSquares; i++) {
-            rectangles[i] = new Rect(left, top, left + sidelength, top + sidelength);
+        for (int i = 0; i < numSquares; i++)
+        {
+            rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
 
-            left += sidelength;
+            left += widthSideLength;
 
-            if(squareToHighlight == i && !target) {
+            if (squareToHighlight == i && !target)
+            {
                 canvas.drawRect(rectangles[i], mSecondPaint);
-            } else if (squareToHighlight == i && target) {
+            } else if (squareToHighlight == i && target)
+            {
                 canvas.drawRect(rectangles[i], mFoundPaint);
-            } else {
+            } else
+            {
                 canvas.drawRect(rectangles[i], mMainPaint);
             }
 
-            canvas.drawText(numbers[i], rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+            canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
-
-        // Draw a red circle in the center
-        //canvas.drawRect(rectangles[0], mRedPaint);
-        //canvas.drawLine(height/8, width/8, height/8+sidelength, width/8, mLinePaint);
-
     }
 
     @Override
-    public void setAlpha(int alpha) {
+    public void setAlpha(int alpha)
+    {
         // This method is required
     }
 
     @Override
-    public void setColorFilter(ColorFilter colorFilter) {
+    public void setColorFilter(ColorFilter colorFilter)
+    {
         // This method is required
     }
 
     @Override
-    public int getOpacity() {
+    public int getOpacity()
+    {
         // Must be PixelFormat.UNKNOWN, TRANSLUCENT, TRANSPARENT, or OPAQUE
         return PixelFormat.OPAQUE;
+    }
+
+    @Override
+    public void start()
+    {
+
+    }
+
+    @Override
+    public void stop()
+    {
+
+    }
+
+    @Override
+    public boolean isRunning()
+    {
+        return false;
     }
 }
