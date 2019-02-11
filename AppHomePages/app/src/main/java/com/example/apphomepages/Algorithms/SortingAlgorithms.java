@@ -1,6 +1,5 @@
 package com.example.apphomepages.Algorithms;
 
-import com.example.apphomepages.Datatypes.Pair;
 import com.example.apphomepages.Datatypes.Tuple;
 
 import java.util.ArrayList;
@@ -127,26 +126,42 @@ public class SortingAlgorithms
     }
 
     //Selection sort adapted from
-    public static ArrayList<Pair> selectionSort(ArrayList<Integer> arr)
+    public static ArrayList<Tuple> selectionSort(ArrayList<Integer> arr)
     {
-        ArrayList<Pair> resultOfSteps = new ArrayList<>();
+        ArrayList<Tuple> resultOfSteps = new ArrayList<>();
 
         int n = arr.size();
 
         // One by one move boundary of unsorted sub-array
-        for (int i = 0; i < n - 1; i++)
+        for (int i = 0; i < n; i++)
         {
-            Pair p = new Pair();
-            p.setList(copyArray(arr));
+            // Frame with the minimum
+            Tuple t = new Tuple();
+            t.setList(copyArray(arr));
+            t.setB(i);
+
             // Find the minimum element in unsorted array
+            // Frame with the first search value
             int min_idx = i;
+            Tuple t2 = new Tuple();
+            t2.setList(copyArray(arr));
+            t2.setA(min_idx);
+            t2.setB(i);
+            resultOfSteps.add(t2);
+
             for (int j = i + 1; j < n; j++)
             {
+                //Frame with all search values
+                Tuple t3 = new Tuple();
+                t3.setList(copyArray(arr));
+                t3.setA(j);
+                t3.setB(i);
                 if (arr.get(j) < arr.get(min_idx))
                 {
                     min_idx = j;
-                    p.setMinimum(min_idx);
+                    t.setA(min_idx);
                 }
+                resultOfSteps.add(t3);
             }
 
 
@@ -155,13 +170,14 @@ public class SortingAlgorithms
             int temp = arr.get(min_idx);
             arr.set(min_idx, arr.get(i));
             arr.set(i, temp);
-            resultOfSteps.add(p);
+            resultOfSteps.add(t);
         }
 
-        Pair finalPair = new Pair();
-        finalPair.setList(copyArray(arr));
-        finalPair.setMinimum(n);
-        resultOfSteps.add(finalPair); //This is the sorted array...
+        Tuple finalTuple = new Tuple();
+        finalTuple.setList(copyArray(arr));
+        finalTuple.setA(n);
+        finalTuple.setB(n);
+        resultOfSteps.add(finalTuple); //This is the sorted array...
 
         return resultOfSteps;
     }

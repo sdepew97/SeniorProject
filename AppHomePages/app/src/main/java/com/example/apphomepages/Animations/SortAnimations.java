@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.apphomepages.Datatypes.Color;
-import com.example.apphomepages.Datatypes.Pair;
 import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
 
@@ -64,7 +63,7 @@ public class SortAnimations
         image.setBackgroundDrawable(animationDrawable);
     }
 
-    public static void generateSelectionSort(ArrayList<Integer> originalNumbers, ArrayList<Integer> squaresToHighlight, ArrayList<Pair> iterations, ArrayList<Integer> numbers, ArraySortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateSelectionSort(ArrayList<Integer> originalNumbers, ArrayList<Integer> squaresToHighlight, ArrayList<Tuple> iterations, ArrayList<Integer> numbers, ArraySortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 1000;
@@ -73,13 +72,13 @@ public class SortAnimations
         stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
         i++;
 
-        for (Pair pair : iterations)
+        for (Tuple tuple : iterations)
         {
-            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.constructList(), i - 1, pair.getList());
+            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(tuple.getA()), tuple.getB(), tuple.getList());
             i++;
         }
 
-        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), i - 1, iterations.get(iterations.size() - 1).getList());
+        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(iterations.get(iterations.size() - 1).getA()), i - 1, iterations.get(iterations.size() - 1).getList());
 
         for (Drawable d : stopMotionAnimation)
         {

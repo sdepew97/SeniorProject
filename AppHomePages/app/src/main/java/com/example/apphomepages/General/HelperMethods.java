@@ -30,6 +30,22 @@ public class HelperMethods
         return numbers;
     }
 
+    //Method for testing against Wikipedia visualizations
+    public static ArrayList<Integer> generateSetArray() {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(8);
+        numbers.add(5);
+        numbers.add(2);
+        numbers.add(6);
+        numbers.add(9);
+        numbers.add(3);
+        numbers.add(1);
+        numbers.add(4);
+        numbers.add(0);
+        numbers.add(7);
+        return numbers;
+    }
+
     //Convert an array list of type A to an array list of strings
     public static <A> ArrayList<String> convertToStrings(ArrayList<A> arrayList)
     {

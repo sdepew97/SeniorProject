@@ -13,7 +13,7 @@ import android.widget.ImageView;
 
 import com.example.apphomepages.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.Animations.SortAnimations;
-import com.example.apphomepages.Datatypes.Pair;
+import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
 import com.example.apphomepages.General.HelperMethods;
 import com.example.apphomepages.R;
@@ -111,11 +111,12 @@ public class SelectionSortFragment extends Fragment
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+                //numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+                numbers = HelperMethods.generateSetArray();
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Pair> iterations = SortingAlgorithms.selectionSort(numbers);
+                ArrayList<Tuple> iterations = SortingAlgorithms.selectionSort(numbers);
                 ArrayList<Integer> squaresToHighlight = new ArrayList<>();
                 squaresToHighlight.add(-1);
 
