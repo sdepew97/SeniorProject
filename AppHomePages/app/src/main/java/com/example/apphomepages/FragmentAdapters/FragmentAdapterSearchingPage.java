@@ -9,21 +9,26 @@ import com.example.apphomepages.Fragments.LinearSearchFragment;
 import com.example.apphomepages.Fragments.SearchAndSortFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
-public class FragmentAdapterSearchingPage extends FragmentPagerAdapter {
+public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
+{
 
-    public FragmentAdapterSearchingPage(FragmentManager manager) {
+    public FragmentAdapterSearchingPage(FragmentManager manager)
+    {
         super(manager);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return 2; //the number of pages there are on the main page
     }
 
     @Override
-    public Fragment getItem(int i) {
+    public Fragment getItem(int i)
+    {
         Fragment page = null;
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 page = LinearSearchFragment.newInstance("One", "Two");
                 break;
@@ -39,10 +44,12 @@ public class FragmentAdapterSearchingPage extends FragmentPagerAdapter {
     }
 
     @Override
-    public CharSequence getPageTitle(int i) {
+    public CharSequence getPageTitle(int i)
+    {
         CharSequence result;
 
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 result = "Linear Search";
                 break;

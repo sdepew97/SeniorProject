@@ -2,32 +2,39 @@ package com.example.apphomepages.Datatypes;
 
 import java.util.ArrayList;
 
-public class Pair {
+public class Pair
+{
     private ArrayList<Integer> list;
     private Integer minimum;
 
-    public Pair() {
+    public Pair()
+    {
         this.list = new ArrayList<>();
         minimum = -1; //Default minimum is NOT an entry into the array
     }
 
-    public ArrayList<Integer> getList() {
+    public ArrayList<Integer> getList()
+    {
         return list;
     }
 
-    public void setList(ArrayList<Integer> list) {
+    public void setList(ArrayList<Integer> list)
+    {
         this.list = list;
     }
 
-    public Integer getMinimum() {
+    public Integer getMinimum()
+    {
         return minimum;
     }
 
-    public void setMinimum(Integer minimum) {
+    public void setMinimum(Integer minimum)
+    {
         this.minimum = minimum;
     }
 
-    public ArrayList<Integer> constructList() {
+    public ArrayList<Integer> constructList()
+    {
         ArrayList<Integer> returnVal = new ArrayList<>();
 
         returnVal.add(minimum);

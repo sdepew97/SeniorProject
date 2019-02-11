@@ -111,8 +111,10 @@ public class SelectionSortFragment extends Fragment
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                //numbers = HelperMethods.generateRandomArray(r, numElements, bound);
-                numbers = HelperMethods.generateSetArray();
+                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+
+                //TODO (Sarah): remove below once tested
+                // numbers = HelperMethods.generateSetArray();
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);

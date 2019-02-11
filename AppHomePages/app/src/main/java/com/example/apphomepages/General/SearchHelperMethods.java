@@ -5,7 +5,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SearchHelperMethods
 {

@@ -13,7 +13,8 @@ import com.example.apphomepages.Datatypes.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArraySortDrawable extends Drawable implements Animatable {
+public class ArraySortDrawable extends Drawable implements Animatable
+{
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
@@ -24,7 +25,8 @@ public class ArraySortDrawable extends Drawable implements Animatable {
     private int currentSquare;
 
     //An ArraySearchDrawable constructor for searching
-    public ArraySortDrawable(Color main, Color secondary, Color found, List<Integer> squaresToHighlight, int currentSquare, ArrayList<Integer> numbers) {
+    public ArraySortDrawable(Color main, Color secondary, Color found, List<Integer> squaresToHighlight, int currentSquare, ArrayList<Integer> numbers)
+    {
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -47,7 +49,8 @@ public class ArraySortDrawable extends Drawable implements Animatable {
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void draw(Canvas canvas)
+    {
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
@@ -62,16 +65,20 @@ public class ArraySortDrawable extends Drawable implements Animatable {
 
         Rect[] rectangles = new Rect[numSquares];
 
-        for (int i = 0; i < numSquares; i++) {
+        for (int i = 0; i < numSquares; i++)
+        {
             rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
 
             left += widthSideLength;
 
-            if (squaresToHighlight.get(0) != -1 && ((squaresToHighlight.size() == 1 && squaresToHighlight.get(0) == i) || (squaresToHighlight.size() == 2 && (squaresToHighlight.get(0) == i || squaresToHighlight.get(1) == i)))) {
+            if (squaresToHighlight.get(0) != -1 && ((squaresToHighlight.size() == 1 && squaresToHighlight.get(0) == i) || (squaresToHighlight.size() == 2 && (squaresToHighlight.get(0) == i || squaresToHighlight.get(1) == i))))
+            {
                 canvas.drawRect(rectangles[i], mFoundPaint);
-            } else if (currentSquare > i) {
+            } else if (currentSquare > i)
+            {
                 canvas.drawRect(rectangles[i], mSecondPaint);
-            } else {
+            } else
+            {
                 canvas.drawRect(rectangles[i], mMainPaint);
             }
 
@@ -80,33 +87,39 @@ public class ArraySortDrawable extends Drawable implements Animatable {
     }
 
     @Override
-    public void setAlpha(int alpha) {
+    public void setAlpha(int alpha)
+    {
         // This method is required
     }
 
     @Override
-    public void setColorFilter(ColorFilter colorFilter) {
+    public void setColorFilter(ColorFilter colorFilter)
+    {
         // This method is required
     }
 
     @Override
-    public int getOpacity() {
+    public int getOpacity()
+    {
         // Must be PixelFormat.UNKNOWN, TRANSLUCENT, TRANSPARENT, or OPAQUE
         return PixelFormat.OPAQUE;
     }
 
     @Override
-    public void start() {
+    public void start()
+    {
 
     }
 
     @Override
-    public void stop() {
+    public void stop()
+    {
 
     }
 
     @Override
-    public boolean isRunning() {
+    public boolean isRunning()
+    {
         return false;
     }
 }

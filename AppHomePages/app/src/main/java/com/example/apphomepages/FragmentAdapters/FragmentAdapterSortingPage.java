@@ -12,21 +12,26 @@ import com.example.apphomepages.Fragments.SearchAndSortFragment;
 import com.example.apphomepages.Fragments.SelectionSortFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
-public class FragmentAdapterSortingPage extends FragmentPagerAdapter {
+public class FragmentAdapterSortingPage extends FragmentPagerAdapter
+{
 
-    public FragmentAdapterSortingPage(FragmentManager manager) {
+    public FragmentAdapterSortingPage(FragmentManager manager)
+    {
         super(manager);
     }
 
     @Override
-    public int getCount() {
+    public int getCount()
+    {
         return 5; //the number of pages there are on the main page
     }
 
     @Override
-    public Fragment getItem(int i) {
+    public Fragment getItem(int i)
+    {
         Fragment page = null;
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 page = BubbleSortFragment.newInstance("One", "Two");
                 break;
@@ -51,10 +56,12 @@ public class FragmentAdapterSortingPage extends FragmentPagerAdapter {
     }
 
     @Override
-    public CharSequence getPageTitle(int i) {
+    public CharSequence getPageTitle(int i)
+    {
         CharSequence result;
 
-        switch (i) {
+        switch (i)
+        {
             case 0:
                 result = "Bubble Sort";
                 break;

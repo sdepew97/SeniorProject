@@ -31,7 +31,8 @@ public class HelperMethods
     }
 
     //Method for testing against Wikipedia visualizations
-    public static ArrayList<Integer> generateSetArray() {
+    public static ArrayList<Integer> generateSetArray()
+    {
         ArrayList<Integer> numbers = new ArrayList<>();
         numbers.add(8);
         numbers.add(5);
