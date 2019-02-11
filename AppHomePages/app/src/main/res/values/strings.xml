@@ -16,6 +16,9 @@
     <string name="target_button">Target</string>
     <string name="select_switch_off">Target</string>
     <string name="select_switch_on">Target</string>
+    <string name="button_depth_first">Depth First Search</string>
+    <string name="button_breadth_first">Breadth First Search</string>
+    <string name="button_topological_ordering">Topological Ordering</string>
     
     <string name="text_linear_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque eu mauris non facilisis. Nam at varius neque. Duis tempus ut ex eu auctor. Aenean molestie rutrum hendrerit. Morbi sagittis elementum nibh luctus vulputate. Quisque commodo consectetur arcu, a laoreet risus semper ac. Vestibulum in quam dignissim, ornare leo at, venenatis elit.
 
