@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Activities;
 
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -17,11 +17,12 @@ import com.example.apphomepages.Fragments.InsertionSortFragment;
 import com.example.apphomepages.Fragments.MergeSortFragment;
 import com.example.apphomepages.Fragments.QuicksortFragment;
 import com.example.apphomepages.Fragments.SelectionSortFragment;
+import com.example.apphomepages.R;
 
-public class Sorting extends AppCompatActivity implements BubbleSortFragment.OnFragmentInteractionListener, InsertionSortFragment.OnFragmentInteractionListener, SelectionSortFragment.OnFragmentInteractionListener, MergeSortFragment.OnFragmentInteractionListener, QuicksortFragment.OnFragmentInteractionListener
+public class SortingActivity extends AppCompatActivity implements BubbleSortFragment.OnFragmentInteractionListener, InsertionSortFragment.OnFragmentInteractionListener, SelectionSortFragment.OnFragmentInteractionListener, MergeSortFragment.OnFragmentInteractionListener, QuicksortFragment.OnFragmentInteractionListener
 {
     //LOG messages
-    private static String TAG = "Sorting";
+    private static String TAG = "SortingActivity";
 
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
@@ -33,7 +34,7 @@ public class Sorting extends AppCompatActivity implements BubbleSortFragment.OnF
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_searching);
+        setContentView(R.layout.activity_sorting);
 
         initViewPagerSorting();
     }

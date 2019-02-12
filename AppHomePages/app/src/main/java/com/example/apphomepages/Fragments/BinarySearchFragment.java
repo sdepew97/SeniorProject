@@ -99,14 +99,14 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
         final Random r = new Random();
 
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_linear_search, container, false);
+        final View view = inflater.inflate(R.layout.fragment_binary_search, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-        Button startButton = viewGlobal.findViewById(R.id.startButton);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-        final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
+        Button generateButton = view.findViewById(R.id.generateButton);
+        Button startButton = view.findViewById(R.id.startButton);
+        Button stopButton = view.findViewById(R.id.stopButton);
+        Button rewindButton = view.findViewById(R.id.rewindButton);
+        final Spinner spinner = view.findViewById(R.id.spinner);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -119,7 +119,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+                numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Used https://beginnersbook.com/2013/12/how-to-sort-arraylist-in-java/ as a resource
                 //Binary search requires a sorted array
@@ -140,11 +140,11 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 }
 
                 //Populate the spinner and set initial random selection
-                SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
+                SearchHelperMethods.populateSpinner(numbers, view, spinner, locationInArray);
 
                 stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = view.findViewById(R.id.imageView);
                 SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
             }
         });
@@ -178,7 +178,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
                 animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = view.findViewById(R.id.imageView);
                 SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
             }
 
@@ -217,7 +217,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
             }
         });
 
-        return viewGlobal;
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

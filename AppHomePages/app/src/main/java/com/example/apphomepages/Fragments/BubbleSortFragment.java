@@ -114,7 +114,7 @@ public class BubbleSortFragment extends Fragment
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+                numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);

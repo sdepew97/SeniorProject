@@ -70,7 +70,7 @@ public class FragmentAdapterMainPage extends FragmentPagerAdapter
                 result = "Dynamic Programming";
                 break;
             default:
-                result = "Searching & Sorting";
+                result = "SearchingActivity & SortingActivity";
         }
 
         return result;

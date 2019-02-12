@@ -1,14 +1,29 @@
 package com.example.apphomepages.Fragments;
 
 import android.content.Context;
+import android.database.DataSetObserver;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
+import com.example.apphomepages.Drawable.ArraySearchDrawable;
+import com.example.apphomepages.General.HelperMethods;
+import com.example.apphomepages.General.SortHelperMethods;
 import com.example.apphomepages.R;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import static com.example.apphomepages.Algorithms.SortingAlgorithms.copyArray;
 
 
 /**
@@ -19,18 +34,21 @@ import com.example.apphomepages.R;
  * Use the {@link MergeSortFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MergeSortFragment extends Fragment
+public class MergeSortFragment extends Fragment implements SpinnerAdapter
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //Global variables
+    private ArrayList<Integer> numbers = null;
+    private int index = 0;
+    private ImageView image = null;
 
-    private OnFragmentInteractionListener mListener;
+    //The animation that will be played when the "next frame" button is clicked
+    private AnimationDrawable animationDrawable = new AnimationDrawable();
+    private MergeSortFragment.OnFragmentInteractionListener mListener = null;
 
     public MergeSortFragment()
     {
@@ -60,19 +78,77 @@ public class MergeSortFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_merge_sort, container, false);
+        final View view = inflater.inflate(R.layout.fragment_merge_sort, container, false);
+
+        //Set up the buttons and clickable elements on the fragment
+        Button generateButton = view.findViewById(R.id.generateButton);
+        Button startButton = view.findViewById(R.id.startButton);
+        Button stopButton = view.findViewById(R.id.stopButton);
+        Button rewindButton = view.findViewById(R.id.rewindButton);
+        final Spinner spinner = view.findViewById(R.id.spinner);
+
+        //Create an ArrayList of integers as the possible initial values
+        ArrayList<Integer> lengths = new ArrayList<>();
+        lengths.add(1); //Trivial Case
+        lengths.add(5); //Odd Case
+        lengths.add(6); //Even Case
+
+        //Get random initial index
+        final Random r = new Random();
+        index = r.nextInt(lengths.size());
+
+        //set spinner selection (length of array) randomly with initial length
+        SortHelperMethods.populateSpinner(lengths, view, spinner, index);
+
+        generateButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Set up variables for the method
+                ArraySearchDrawable[] stopMotionAnimation;
+                int numElements = index; //we want one of the length options in the dropdown spinner
+                animationDrawable = new AnimationDrawable();
+
+                //Get random numbers
+                numbers = HelperMethods.generateRandomArray(r, numElements);
+
+                //Run algorithm
+                ArrayList<Integer> originalNumbers = copyArray(numbers);
+                //TODO: finish body
+
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                index = spinner.getSelectedItemPosition();
+
+                //check that the user has something selected and, if not, make sure a default size of 1 is selected
+                if (index == -1)
+                {
+                    index = 0;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+                //Do nothing
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -103,6 +179,72 @@ public class MergeSortFragment extends Fragment
     {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent)
+    {
+        return null;
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer)
+    {
+
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer)
+    {
+
+    }
+
+    @Override
+    public int getCount()
+    {
+        return 0;
+    }
+
+    @Override
+    public Object getItem(int position)
+    {
+        return null;
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        return 0;
+    }
+
+    @Override
+    public boolean hasStableIds()
+    {
+        return false;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        return null;
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        return 0;
+    }
+
+    @Override
+    public int getViewTypeCount()
+    {
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        return false;
     }
 
     /**

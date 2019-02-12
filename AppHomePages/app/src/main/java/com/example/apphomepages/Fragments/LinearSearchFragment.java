@@ -107,7 +107,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements, bound);
+                numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
                 boolean targetFound = r.nextBoolean();

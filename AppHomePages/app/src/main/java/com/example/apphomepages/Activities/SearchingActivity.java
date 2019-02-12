@@ -1,4 +1,4 @@
-package com.example.apphomepages;
+package com.example.apphomepages.Activities;
 
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -14,11 +14,12 @@ import android.util.Log;
 import com.example.apphomepages.FragmentAdapters.FragmentAdapterSearchingPage;
 import com.example.apphomepages.Fragments.BinarySearchFragment;
 import com.example.apphomepages.Fragments.LinearSearchFragment;
+import com.example.apphomepages.R;
 
-public class Searching extends AppCompatActivity implements LinearSearchFragment.OnFragmentInteractionListener, BinarySearchFragment.OnFragmentInteractionListener
+public class SearchingActivity extends AppCompatActivity implements LinearSearchFragment.OnFragmentInteractionListener, BinarySearchFragment.OnFragmentInteractionListener
 {
     //LOG messages
-    private static String TAG = "Searching";
+    private static String TAG = "SearchingActivity";
 
     //These are the various portions of the main page for the application
     private ViewPager viewPager;

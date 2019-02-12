@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.apphomepages.R;
-import com.example.apphomepages.Searching;
-import com.example.apphomepages.Sorting;
+import com.example.apphomepages.Activities.SearchingActivity;
+import com.example.apphomepages.Activities.SortingActivity;
 
 
 /**
@@ -92,7 +92,7 @@ public class SearchAndSortFragment extends Fragment
                 Log.e(TAG, "Search Button Clicked Main Screen Fragment");
 
                 //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), Searching.class);
+                Intent i = new Intent(getActivity(), SearchingActivity.class);
                 startActivity(i);
             }
         });
@@ -105,7 +105,7 @@ public class SearchAndSortFragment extends Fragment
                 Log.e(TAG, "Sort Button Clicked Main Screen Fragment");
 
                 //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), Sorting.class);
+                Intent i = new Intent(getActivity(), SortingActivity.class);
                 startActivity(i);
             }
         });

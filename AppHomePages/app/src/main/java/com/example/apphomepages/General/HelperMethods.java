@@ -10,14 +10,14 @@ public class HelperMethods
     }
 
     //Method that allows you to generate an array using the random input, the bound on elements, and the size of the size input
-    public static ArrayList<Integer> generateRandomArray(Random r, int size, int bound)
+    public static ArrayList<Integer> generateRandomArray(Random r, int size)
     {
         ArrayList<Integer> numbers = new ArrayList<>(size);
         int numElements = size;
 
         for (int j = 0; j < numElements; j++)
         {
-            int randomInt = r.nextInt(bound * 10);
+            int randomInt = r.nextInt(100);
             if (r.nextBoolean())
             {
                 numbers.add(j, -randomInt);
