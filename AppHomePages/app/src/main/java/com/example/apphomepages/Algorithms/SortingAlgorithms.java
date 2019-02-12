@@ -1,5 +1,7 @@
 package com.example.apphomepages.Algorithms;
 
+import com.example.apphomepages.Datatypes.Pair;
+import com.example.apphomepages.Datatypes.PairOfPair;
 import com.example.apphomepages.Datatypes.Tuple;
 
 import java.util.ArrayList;
@@ -257,5 +259,71 @@ public class SortingAlgorithms
             // Merge the sorted halves
             mergeSort(arr, l, m, r);
         }
+    }
+
+    //Quicksort algorithm adapted from https://www.geeksforgeeks.org/quick-sort/
+    /* This function takes last element as pivot,
+      places the pivot element at its correct
+      position in sorted array, and places all
+      smaller (smaller than pivot) to left of
+      pivot and all greater elements to right
+      of pivot */
+    private static PairOfPair partition(ArrayList<Integer> arr, int low, int high)
+    {
+        PairOfPair pairOfPair = new PairOfPair();
+
+        int pivot = arr.get(high);
+        int i = (low - 1); // index of smaller element
+        for (int j = low; j < high; j++)
+        {
+            pairOfPair.addPair(new Pair(copyArray(arr), high));
+            // If current element is smaller than or
+            // equal to pivot
+            if (arr.get(j) <= pivot)
+            {
+                i++;
+
+                // swap arr[i] and arr[j]
+                int temp = arr.get(i);
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (or pivot)
+        int temp = arr.get(i + 1);
+        arr.set(i + 1, arr.get(high));
+        arr.set(high, temp);
+
+        pairOfPair.addPair(new Pair(copyArray(arr), high));
+        pairOfPair.setPi(i + 1);
+        return pairOfPair;
+    }
+
+
+    /* The main function that implements QuickSort()
+      arr[] --> Array to be sorted,
+      low  --> Starting index,
+      high  --> Ending index */
+    public static ArrayList<Pair> quicksort(ArrayList<Integer> arr, int low, int high)
+    {
+        ArrayList<Pair> pairs = new ArrayList<>();
+
+        if (low < high)
+        {
+            /* pi is partitioning index, arr[pi] is
+              now at right place */
+            PairOfPair pairOfPairPartition = partition(arr, low, high);
+            pairs.addAll(pairOfPairPartition.getPairs());
+
+            int pi = pairOfPairPartition.getPi();
+
+            // Recursively sort elements before
+            // partition and after partition
+            pairs.addAll(quicksort(arr, low, pi - 1));
+            pairs.addAll(quicksort(arr, pi + 1, high));
+        }
+
+        return pairs;
     }
 }

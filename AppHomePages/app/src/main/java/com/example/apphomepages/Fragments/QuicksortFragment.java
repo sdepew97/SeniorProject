@@ -1,14 +1,27 @@
 package com.example.apphomepages.Fragments;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import com.example.apphomepages.Algorithms.SortingAlgorithms;
+import com.example.apphomepages.Animations.SortAnimations;
+import com.example.apphomepages.Datatypes.Pair;
+import com.example.apphomepages.Drawable.ArrayQuicksortDrawable;
+import com.example.apphomepages.General.HelperMethods;
 import com.example.apphomepages.R;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import static com.example.apphomepages.Algorithms.SortingAlgorithms.copyArray;
 
 
 /**
@@ -30,7 +43,14 @@ public class QuicksortFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    //Global variables
+    private ArrayList<Integer> numbers = null;
+    private int index = 0;
+    private ImageView image = null;
+
+    //The animation that will be played when the "next frame" button is clicked
+    private AnimationDrawable animationDrawable = new AnimationDrawable();
+    private QuicksortFragment.OnFragmentInteractionListener mListener;
 
     public QuicksortFragment()
     {
@@ -71,8 +91,75 @@ public class QuicksortFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        //Set up variables
+        final int bound = 10; //the max number of elements in the array
+        final Random r = new Random();
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quicksort, container, false);
+        final View view = inflater.inflate(R.layout.fragment_quicksort, container, false);
+
+        //Set up the buttons and clickable elements on the fragment
+        Button generateButton = view.findViewById(R.id.generateButton);
+        Button startButton = view.findViewById(R.id.startButton);
+        Button stopButton = view.findViewById(R.id.stopButton);
+        Button rewindButton = view.findViewById(R.id.rewindButton);
+
+        generateButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Set up variables for the method
+                ArrayQuicksortDrawable[] stopMotionAnimation;
+                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+                animationDrawable = new AnimationDrawable();
+
+                //Get random numbers
+                numbers = HelperMethods.generateRandomArray(r, numElements);
+
+                //Run algorithm
+                ArrayList<Integer> originalNumbers = copyArray(numbers);
+                ArrayList<Pair> iterations = SortingAlgorithms.quicksort(numbers, 0, numbers.size() - 1);
+                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+                squaresToHighlight.add(-1);
+
+                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size() + 1]; //TODO: change back to 2
+
+                image = view.findViewById(R.id.imageView);
+                SortAnimations.generateQuicksort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
+            }
+        });
+
+
+        startButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.start();
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.stop();
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

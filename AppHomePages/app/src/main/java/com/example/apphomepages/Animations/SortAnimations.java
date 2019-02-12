@@ -5,7 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.apphomepages.Datatypes.Color;
+import com.example.apphomepages.Datatypes.Pair;
 import com.example.apphomepages.Datatypes.Tuple;
+import com.example.apphomepages.Drawable.ArrayQuicksortDrawable;
 import com.example.apphomepages.Drawable.ArraySortDrawable;
 
 import java.util.ArrayList;
@@ -79,6 +81,33 @@ public class SortAnimations
         }
 
         stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(iterations.get(iterations.size() - 1).getA()), i - 1, iterations.get(iterations.size() - 1).getList());
+
+        for (Drawable d : stopMotionAnimation)
+        {
+            animationDrawable.addFrame(d, duration);
+        }
+
+        animationDrawable.setOneShot(false);
+        image.setBackgroundDrawable(animationDrawable);
+
+    }
+
+    public static void generateQuicksort(ArrayList<Integer> originalNumbers, Integer pivot, ArrayList<Pair> iterations, ArrayList<Integer> valuesBeingArranged, ArrayQuicksortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    {
+        //Duration
+        int duration = 1000;
+
+        int i = 0;
+        stopMotionAnimation[i] = new ArrayQuicksortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pivot, Arrays.asList(-1), originalNumbers);
+        i++;
+
+        for (Pair pair : iterations)
+        {
+            stopMotionAnimation[i] = new ArrayQuicksortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), pair.getMinimum(), valuesBeingArranged, pair.getList());
+            i++;
+        }
+
+        //stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(iterations.size() - 1).constructList(), -1, iterations.get(iterations.size() - 1).getList());
 
         for (Drawable d : stopMotionAnimation)
         {

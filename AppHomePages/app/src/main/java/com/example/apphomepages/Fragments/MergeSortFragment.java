@@ -148,6 +148,34 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             }
         });
 
+        startButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.start();
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.stop();
+            }
+        });
+
+        rewindButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
+            }
+        });
+
         return view;
     }
 

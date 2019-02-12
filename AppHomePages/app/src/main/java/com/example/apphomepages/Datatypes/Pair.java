@@ -13,6 +13,12 @@ public class Pair
         minimum = -1; //Default minimum is NOT an entry into the array
     }
 
+    public Pair(ArrayList<Integer> list, Integer minimum)
+    {
+        this.list = list;
+        this.minimum = minimum;
+    }
+
     public ArrayList<Integer> getList()
     {
         return list;
