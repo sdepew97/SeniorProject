@@ -1,6 +1,7 @@
 package com.example.apphomepages.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -94,6 +95,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
         Button startButton = viewGlobal.findViewById(R.id.startButton);
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
 
         generateButton.setOnClickListener(new View.OnClickListener()
@@ -196,6 +198,18 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
             {
                 animationDrawable.setVisible(true, true);
                 animationDrawable.stop();
+            }
+        });
+
+        proofButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
+                Uri uri = Uri.parse("http://www.csd.uwo.ca/courses/CS2210a/slides/correctness.pdf");
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+
             }
         });
 

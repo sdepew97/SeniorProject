@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import com.example.apphomepages.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.Animations.SortAnimations;
 import com.example.apphomepages.Datatypes.Pair;
+import com.example.apphomepages.Datatypes.Tuple;
 import com.example.apphomepages.Drawable.ArrayQuicksortDrawable;
 import com.example.apphomepages.General.HelperMethods;
 import com.example.apphomepages.R;
@@ -119,14 +120,12 @@ public class QuicksortFragment extends Fragment
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Pair> iterations = SortingAlgorithms.quicksort(numbers, 0, numbers.size() - 1);
-                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
-                squaresToHighlight.add(-1);
+                ArrayList<Tuple> iterations = SortingAlgorithms.quicksort(numbers, 0, numbers.size() - 1);
 
-                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size() + 1]; //TODO: change back to 2
+                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size() + 2];
 
                 image = view.findViewById(R.id.imageView);
-                SortAnimations.generateQuicksort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
+                SortAnimations.generateQuicksort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
             }
         });
 

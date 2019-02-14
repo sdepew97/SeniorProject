@@ -1,7 +1,7 @@
 package com.example.apphomepages.Algorithms;
 
 import com.example.apphomepages.Datatypes.Pair;
-import com.example.apphomepages.Datatypes.PairOfPair;
+import com.example.apphomepages.Datatypes.PairOfTuple;
 import com.example.apphomepages.Datatypes.Tuple;
 
 import java.util.ArrayList;
@@ -268,15 +268,16 @@ public class SortingAlgorithms
       smaller (smaller than pivot) to left of
       pivot and all greater elements to right
       of pivot */
-    private static PairOfPair partition(ArrayList<Integer> arr, int low, int high)
+    private static PairOfTuple partition(ArrayList<Integer> arr, int low, int high)
     {
-        PairOfPair pairOfPair = new PairOfPair();
+        PairOfTuple pairOfTuple = new PairOfTuple();
+        pairOfTuple.addTuple(new Tuple(copyArray(arr), low, high, high));
 
         int pivot = arr.get(high);
         int i = (low - 1); // index of smaller element
         for (int j = low; j < high; j++)
         {
-            pairOfPair.addPair(new Pair(copyArray(arr), high));
+            pairOfTuple.addTuple(new Tuple(copyArray(arr), low, high, high));
             // If current element is smaller than or
             // equal to pivot
             if (arr.get(j) <= pivot)
@@ -287,17 +288,22 @@ public class SortingAlgorithms
                 int temp = arr.get(i);
                 arr.set(i, arr.get(j));
                 arr.set(j, temp);
+
+                pairOfTuple.addTuple(new Tuple(copyArray(arr), low, high, high));
             }
         }
+
+        pairOfTuple.addTuple(new Tuple(copyArray(arr), low, high, high));
+        pairOfTuple.setPi(i + 1);
 
         // swap arr[i+1] and arr[high] (or pivot)
         int temp = arr.get(i + 1);
         arr.set(i + 1, arr.get(high));
         arr.set(high, temp);
 
-        pairOfPair.addPair(new Pair(copyArray(arr), high));
-        pairOfPair.setPi(i + 1);
-        return pairOfPair;
+        pairOfTuple.addTuple(new Tuple(copyArray(arr), low, high, high));
+
+        return pairOfTuple;
     }
 
 
@@ -305,25 +311,28 @@ public class SortingAlgorithms
       arr[] --> Array to be sorted,
       low  --> Starting index,
       high  --> Ending index */
-    public static ArrayList<Pair> quicksort(ArrayList<Integer> arr, int low, int high)
+    public static ArrayList<Tuple> quicksort(ArrayList<Integer> arr, int low, int high)
     {
-        ArrayList<Pair> pairs = new ArrayList<>();
+        ArrayList<Tuple> tuples = new ArrayList<>();
 
         if (low < high)
         {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-            PairOfPair pairOfPairPartition = partition(arr, low, high);
-            pairs.addAll(pairOfPairPartition.getPairs());
+            PairOfTuple pairOfTuplePartition = partition(arr, low, high);
+            tuples.addAll(pairOfTuplePartition.getTuples());
 
-            int pi = pairOfPairPartition.getPi();
+            int pi = pairOfTuplePartition.getPi();
 
             // Recursively sort elements before
             // partition and after partition
-            pairs.addAll(quicksort(arr, low, pi - 1));
-            pairs.addAll(quicksort(arr, pi + 1, high));
+            tuples.addAll(quicksort(arr, low, pi - 1));
+            tuples.addAll(quicksort(arr, pi + 1, high));
         }
 
-        return pairs;
+        Tuple tuple = new Tuple(copyArray(arr), low, high, -1); //the array is sorted, now and so all squares should light up!
+        tuples.add(tuple);
+
+        return tuples;
     }
 }

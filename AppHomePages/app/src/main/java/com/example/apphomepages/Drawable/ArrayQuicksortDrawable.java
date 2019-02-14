@@ -23,7 +23,6 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
     private ArrayList<Integer> numbers;
     private List<Integer> valuesBeingArranged;
     private Integer pivot;
-    private int currentSquare;
 
     //An ArraySearchDrawable constructor for searching
     public ArrayQuicksortDrawable(Color main, Color secondary, Color found, Integer pivot, List<Integer> valuesBeingArranged, ArrayList<Integer> numbers)
@@ -72,15 +71,17 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
 
             left += widthSideLength;
 
-            if (squaresToHighlight.get(0) != -1 && ((squaresToHighlight.size() == 1 && squaresToHighlight.get(0) == i) || (squaresToHighlight.size() == 2 && (squaresToHighlight.get(0) == i || squaresToHighlight.get(1) == i))))
-            {
-                canvas.drawRect(rectangles[i], mFoundPaint);
-            } else if (currentSquare > i)
+            if (valuesBeingArranged.size() > 1 && valuesBeingArranged.get(0) <= i && i <= valuesBeingArranged.get(1))
             {
                 canvas.drawRect(rectangles[i], mSecondPaint);
             } else
             {
                 canvas.drawRect(rectangles[i], mMainPaint);
+            }
+
+            if (pivot == i)
+            {
+                canvas.drawRect(rectangles[i], mFoundPaint);
             }
 
             canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);

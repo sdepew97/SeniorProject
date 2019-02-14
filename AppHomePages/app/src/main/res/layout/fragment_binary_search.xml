@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".10" />
+        app:layout_constraintGuide_percent=".15" />
 
     <android.support.constraint.Guideline
         android:id="@+id/bottom_guideline"
@@ -108,7 +108,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/text_linear_description"
+                android:text="@string/BinarySearchInstructions"
+                android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/top_guideline2"
                 app:layout_constraintLeft_toLeftOf="@id/left_guideline"
@@ -208,12 +209,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/text_linear_description"
+                android:text="@string/BinarySearchDescription"
+                android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
                 app:layout_constraintLeft_toLeftOf="@id/left_guideline"
                 app:layout_constraintRight_toRightOf="@id/right_guideline"
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
+
+            <Button
+                android:id="@+id/proofButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/correctness_button" />
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,8 @@
 package com.example.apphomepages.General;
 
+import android.content.Intent;
+import android.net.Uri;
+
 import java.util.ArrayList;
 import java.util.Random;
 

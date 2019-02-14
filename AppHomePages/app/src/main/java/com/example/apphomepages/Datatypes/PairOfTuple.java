@@ -2,20 +2,21 @@ package com.example.apphomepages.Datatypes;
 
 import java.util.ArrayList;
 
-public class PairOfPair
+public class PairOfTuple
 {
-    private ArrayList<Pair> pairs;
+    private ArrayList<Tuple> tuples;
     private int pi;
 
-    public PairOfPair()
+
+    public PairOfTuple()
     {
-        this.pairs = new ArrayList<>();
+        this.tuples = new ArrayList<>();
         this.pi = -1;
     }
 
-    public void addPair(Pair pair)
+    public void addTuple(Tuple tuple)
     {
-        this.pairs.add(pair);
+        this.tuples.add(tuple);
     }
 
     public void setPi(int pi)
@@ -23,9 +24,9 @@ public class PairOfPair
         this.pi = pi;
     }
 
-    public ArrayList<Pair> getPairs()
+    public ArrayList<Tuple> getTuples()
     {
-        return pairs;
+        return tuples;
     }
 
     public int getPi()
