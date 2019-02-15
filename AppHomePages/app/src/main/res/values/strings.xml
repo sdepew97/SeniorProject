@@ -4,6 +4,11 @@
     <string name="breadth_name">Breadth First Search</string>
     <string name="topological_name">Topological Ordering</string>
 
+    <string name="title_activity_depth_first_search">Depth First Search</string>
+    <string name="title_activity_breadth_first_search">Breadth First Search</string>
+    <string name="title_activity_topological_ordering">Topological Ordering</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -93,6 +98,12 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
     <string name="QuickSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
         The array will start as a dark blue color. The pivot value will be selected in pink. The portion of the array being ordered will be highlighted in light-blue. Finally, the sorted array will turn light-blue. </string>
 
+    <string name="DepthFirstSearchInstructions"> ... </string>
+
+    <string name="BreadthFirstSearchInstructions"> ... </string>
+
+    <string name="TopologicalOrderingInstructions"> ... </string>
+
 
     <!-- Description Strings -->
     <string name="LinearSearchDescription">Linear search is an O(n) algorithm that looks through all the elements in an unsorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. </string>
@@ -108,8 +119,12 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
     <string name="MergeSortDescription">Merge sort is a O(n logn) algorithm where the array is broken into pieces recursively with a base case of 1 element, which is automatically sorted and an alternate case of merging sorted halves, until the whole array is built up again, but this time sorted. </string>
 
     <string name="QuickSortDescription">Quicksort is a O(n logn) algorithm where a pivot is selected and sections are recursively sorted by having all elements smaller and larger than the pivot organized on the proper side of the pivot. </string>
-    <string name="title_activity_depth_first_search">DepthFirstSearch</string>
-    <string name="title_activity_breadth_first_search">BreadthFirstSearchActivity</string>
-    <string name="title_activity_topological_ordering">TopologicalOrderingActivity</string>
+
+    <string name="DepthFirstSearchDescription">Depth first search is an O(...) algorithm where ... </string>
+
+    <string name="BreadthFirstSearchDescription">Breadth first search is an O(...) algorithm where ... </string>
+
+    <string name="TopologicalOrderingDescription">Topological ordering is an O(...) algorithm where ... </string>
+
 
 </resources>
