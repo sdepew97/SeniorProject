@@ -1,6 +1,7 @@
 package com.example.apphomepages.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -99,6 +100,7 @@ public class SelectionSortFragment extends Fragment
         Button startButton = viewGlobal.findViewById(R.id.startButton);
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -157,6 +159,18 @@ public class SelectionSortFragment extends Fragment
                 animationDrawable.stop();
             }
         });
+
+        proofButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
+                Uri uri = Uri.parse("http://personal.denison.edu/~kretchmar/271/LoopCorrectnessSelectionSort.pdf");
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
+
 
         return viewGlobal;
     }

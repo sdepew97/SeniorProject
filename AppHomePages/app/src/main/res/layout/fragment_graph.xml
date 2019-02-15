@@ -57,7 +57,7 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/depthFirstButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/breadthFirstButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/topologicalOrderingButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="2dp"

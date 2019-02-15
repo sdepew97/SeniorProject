@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Algorithm Visualizer</string>
+    <string name="depth_name">Depth First Search</string>
+    <string name="breadth_name">Breadth First Search</string>
+    <string name="topological_name">Topological Ordering</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -81,10 +84,32 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
     <string name="InsertionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
         The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. Selected elements to insert into the array will be selected in pink, then inserted in pink to their correct location in the array. Finally, the sorted array will be displayed in light-blue. </string>
 
+    <string name="SelectionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. The elements unsorted will be highlighted pink, then the minimum will be highlighted pink and turn light-blue when it is placed into its proper location in the sorted array. </string>
+
+    <string name="MergeSortInstructions">First, select the size of array you would like to generate, then select the \"Generate\" button. Alternately, if you would like a randomly-sized array, then simply select the \"Generate\" button. This will cause an array of a size either one, five, or six filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. As elements are being swapped and merged, they will turn pink. </string>
+
+    <string name="QuickSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The pivot value will be selected in pink. The portion of the array being ordered will be highlighted in light-blue. Finally, the sorted array will turn light-blue. </string>
+
 
     <!-- Description Strings -->
     <string name="LinearSearchDescription">Linear search is an O(n) algorithm that looks through all the elements in an unsorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. </string>
 
     <string name="BinarySearchDescription">Binary search is an O(log n) algorithm that looks through all the elements in a pre-sorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. The runtime comes from the fact that, due to the fact the array is ordered, half of the array can be discarded at each step, since we can determine in which half the value should be found.</string>
+
+    <string name="BubbleSortDescription">Bubble sort is a O(n^2) algorithm where values are swapped in pairs and, at each step, the largest values \"bubble\" to the rightmost side of the array. The array ends up sorted at the end. </string>
+
+    <string name="InsertionSortDescription">Insertion sort is a O(n^2) algorithm where the first element is counted as sorted. Then, each element in the array is selected and inserted into the correct location in the sorted array. This algorithm is like how you organize a hand of cards, since you start with one card, and then, as you select additional cards, you insert them into the correct location in the hand one-by-one. At the end, you have a sorted hand of cards or, in our example, hand of cards. </string>
+
+    <string name="SelectionSortDescription">Selection sort is a O(n^2) algorithm where the minimum element from an unsorted portion of an array is selected and inserted into the sorted portion of the array. This is like how you would sort a group of coins if you had a pile in front of you. You would first look through all the coins, pick out a penny, and then place it in a sorted position. Next, you would look through and select all pennies this way. Next, you would repeat this process for nickles, dimes, and finally quarters. </string>
+
+    <string name="MergeSortDescription">Merge sort is a O(n logn) algorithm where the array is broken into pieces recursively with a base case of 1 element, which is automatically sorted and an alternate case of merging sorted halves, until the whole array is built up again, but this time sorted. </string>
+
+    <string name="QuickSortDescription">Quicksort is a O(n logn) algorithm where a pivot is selected and sections are recursively sorted by having all elements smaller and larger than the pivot organized on the proper side of the pivot. </string>
+    <string name="title_activity_depth_first_search">DepthFirstSearch</string>
+    <string name="title_activity_breadth_first_search">BreadthFirstSearchActivity</string>
+    <string name="title_activity_topological_ordering">TopologicalOrderingActivity</string>
 
 </resources>

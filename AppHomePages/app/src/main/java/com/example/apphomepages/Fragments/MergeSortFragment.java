@@ -1,6 +1,7 @@
 package com.example.apphomepages.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -92,6 +93,7 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
         Button startButton = view.findViewById(R.id.startButton);
         Button stopButton = view.findViewById(R.id.stopButton);
         Button rewindButton = view.findViewById(R.id.rewindButton);
+        Button proofButton = view.findViewById(R.id.proofButton);
         final Spinner spinner = view.findViewById(R.id.spinner);
 
         //Create an ArrayList of integers as the possible initial values
@@ -173,6 +175,17 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             {
                 animationDrawable.setVisible(true, true);
                 animationDrawable.stop();
+            }
+        });
+
+        proofButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
+                Uri uri = Uri.parse("https://www.cs.mcgill.ca/~dprecup/courses/IntroCS/Lectures/comp250-lecture16.pdf");
+                startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
 

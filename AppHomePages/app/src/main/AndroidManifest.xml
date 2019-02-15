@@ -9,7 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SortingActivity"></activity>
+        <activity
+            android:name=".Activities.TopologicalOrderingActivity"
+            android:label="@string/topological_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.BreadthFirstSearchActivity"
+            android:label="@string/breadth_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.DepthFirstSearchActivity"
+            android:label="@string/depth_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.SortingActivity" />
         <activity android:name=".Activities.SearchingActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
