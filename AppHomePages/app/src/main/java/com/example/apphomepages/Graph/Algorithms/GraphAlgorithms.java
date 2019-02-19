@@ -56,6 +56,7 @@ public class GraphAlgorithms
 
     }
 
+    //Used https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
     public static ArrayList<Integer> breadthFirstSearch(Graph g, Integer valueSought)
     {
 
@@ -84,13 +85,12 @@ public class GraphAlgorithms
             }
 
             ArrayList<Node> adjacent = n.getAdjacentNodes();
-            for (int i = adjacent.size() - 1; i >= 0; i--)
+            for (Node a : adjacent)
             {
-                Node node = adjacent.get(i);
-                if (!node.isVisited())
+                if (!a.isVisited())
                 {
-                    node.mark();
-                    queue.add(node);
+                    a.mark();
+                    queue.add(a);
                 }
             }
         }

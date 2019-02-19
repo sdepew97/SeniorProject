@@ -4,12 +4,15 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
 import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.Graph;
+import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.Point;
+import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
+import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 
 import java.util.ArrayList;
 
@@ -19,14 +22,15 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private final Paint mSecondPaint;
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
+    private final Paint mLinePaint;
 
     private Graph graph;
-    private int nodeToHightlight = -1;
+    private int nodeToHighlight = -1;
 
     private boolean target;
 
     //An ArraySearchDrawable constructor for searching
-    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHightlight, boolean target, Graph graph)
+    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHighlight, boolean target, Graph graph)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -39,54 +43,73 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         mTextPaint.setARGB(255, 0, 0, 0);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
+        mLinePaint = new Paint();
+        mLinePaint.setARGB(255, 0, 0, 0);
+        mLinePaint.setTextAlign(Paint.Align.CENTER);
+        mLinePaint.setStyle(Paint.Style.FILL);
+        mLinePaint.setStrokeWidth(10);
+
         mFoundPaint = new Paint();
         mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
 
-
         this.graph = graph;
-        this.nodeToHightlight = nodeToHightlight;
+        this.nodeToHighlight = nodeToHighlight;
         this.target = target;
     }
 
     @Override
     public void draw(Canvas canvas)
     {
-
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        /*
-        int numSquares = numbers.size();
-        int widthSideLength = width / numSquares;
-        int heightSideLength = height;
-
-        mTextPaint.setTextSize(widthSideLength / 3);
+        int numCircles = graph.numNodes();
+        int radius = height / (GraphHelperMethods.numLayers(graph) * 2 + 1); //the radius of the circle, since this means they will never overlap horizontally
+        mTextPaint.setTextSize(radius * 3 / 4);
 
         int left = 0;
         int top = 0;
 
-        Rect[] rectangles = new Rect[numSquares];
+        //Gets the center values of all the nodes and the correct value at the nodes in question
+        Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
+        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
-        for (int i = 0; i < numSquares; i++)
+        //Draw the lines connecting the nodes
+        //TODO (Sarah): draw the connecting edges on the graph
+        ArrayList<Node> nodes = graph.getGraphElements();
+
+        for (Node n : nodes)
         {
-            rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
+            ArrayList<Node> adjacentNodes = n.getAdjacentNodes();
 
-            left += widthSideLength;
+            for (Node a : adjacentNodes)
+            {
+                //TODO: test that the node's value is actually in the list and that this code doesn't error
+                Point start = centersOfCircles[layoutOrder.indexOf(n.getNodeValue())];
+                Point end = centersOfCircles[layoutOrder.indexOf(a.getNodeValue())];
 
-            if (squareToHighlight == i && !target)
+                canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
+            }
+        }
+
+        //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
+        for (int i = 0; i < numCircles; i++)
+        {
+            Node n = nodes.get(i);
+            if (nodeToHighlight == n.getNodeValue() && !target)
             {
-                canvas.drawRect(rectangles[i], mSecondPaint);
-            } else if (squareToHighlight == i && target)
+                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mSecondPaint);
+            } else if (nodeToHighlight == n.getNodeValue() && target)
             {
-                canvas.drawRect(rectangles[i], mFoundPaint);
+                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mFoundPaint);
             } else
             {
-                canvas.drawRect(rectangles[i], mMainPaint);
+                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMainPaint);
             }
 
-            canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+            canvas.drawText(Integer.toString(layoutOrder.get(i)), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
         }
-        */
+
     }
 
     @Override

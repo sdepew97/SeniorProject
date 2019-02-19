@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
+import com.example.apphomepages.Graph.Animations.GraphAnimations;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 import com.example.apphomepages.R;
@@ -109,14 +110,14 @@ public class DepthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought);
 
-                //stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size()];
+                stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
-                //animationDrawable = new AnimationDrawable();
-                //image = getWindow().getDecorView().getRootView().findViewById(R.id.imageView);
+                animationDrawable = new AnimationDrawable();
+                image = getWindow().getDecorView().getRootView().findViewById(R.id.imageView);
 
-                //GraphAnimations.generateDepthFirstSearch(valueInGraphSought, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
+                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
             }
 
             @Override
@@ -138,19 +139,22 @@ public class DepthFirstSearchActivity extends AppCompatActivity
 
                 //Run the algorithm to generate the animation frames
                 int valueInGraphSought = -1;
+                boolean targetFound = false;
+
                 if (soughtAfter != -1)
                 {
+                    targetFound = true;
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought);
 
-                //stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size()];
+                stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
                 image = getWindow().getDecorView().getRootView().findViewById(R.id.imageView);
 
-                //GraphAnimations.generateDepthFirstSearch(valueInGraphSought, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
+                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
             }
 
             @Override
@@ -165,7 +169,7 @@ public class DepthFirstSearchActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                animationDrawable.start();
             }
         });
 
@@ -174,7 +178,7 @@ public class DepthFirstSearchActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                animationDrawable.stop();
             }
         });
 
@@ -183,7 +187,8 @@ public class DepthFirstSearchActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-
+                animationDrawable.setVisible(true, true);
+                animationDrawable.stop();
             }
         });
 

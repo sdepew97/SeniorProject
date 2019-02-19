@@ -26,6 +26,11 @@ public class Graph
         return graphElements;
     }
 
+    public int numNodes()
+    {
+        return this.getGraphElements().size();
+    }
+
     public static void printGraph(Graph g)
     {
         for (Node n : g.getGraphElements())
