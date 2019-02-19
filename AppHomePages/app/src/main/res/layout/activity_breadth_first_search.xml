@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/BreadthFirstSearchInstructions"
+                android:text="@string/DepthFirstSearchInstructions"
                 android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/top_guideline2"
@@ -162,11 +162,10 @@
         app:layout_constraintRight_toRightOf="@id/right_guideline4"
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
-    <Button
-        android:id="@+id/generateButton"
+    <Spinner
+        android:id="@+id/spinnerSelect"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/generate_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
         app:layout_constraintLeft_toLeftOf="@id/right_guideline4"
@@ -231,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/BreadthFirstSearchDescription"
+                android:text="@string/DepthFirstSearchDescription"
                 android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"

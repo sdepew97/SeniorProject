@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class GraphAlgorithms
 {
-    //Used https://www.geeksforgeeks.org/iterative-depth-first-traversal/ for the algorithm
+    //Used https://www.geeksforgeeks.org/iterative-depth-first-traversal/ for the algorithm and Dianna Xu's CS330 slides, as well as https://en.wikipedia.org/wiki/Depth-first_search
     public static ArrayList<Integer> depthFirstSearch(Graph g, Integer valueSought)
     {
         ArrayList<Integer> visitOrder = new ArrayList<>();
