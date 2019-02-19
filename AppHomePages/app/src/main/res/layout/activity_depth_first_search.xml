@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.DepthFirstSearchActivity">
+    tools:context=".Graph.Activities.DepthFirstSearchActivity">
 
     <android.support.constraint.Guideline
         android:id="@+id/left_guideline_alltheway"
@@ -162,11 +162,10 @@
         app:layout_constraintRight_toRightOf="@id/right_guideline4"
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
-    <Button
-        android:id="@+id/generateButton"
+    <Spinner
+        android:id="@+id/spinnerSelect"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/generate_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
         app:layout_constraintLeft_toLeftOf="@id/right_guideline4"

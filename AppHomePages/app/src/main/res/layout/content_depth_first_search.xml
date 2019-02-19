@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.DepthFirstSearchActivity"
+    tools:context=".Graph.Activities.DepthFirstSearchActivity"
     tools:showIn="@layout/activity_depth_first_search">
 
 </android.support.constraint.ConstraintLayout>
