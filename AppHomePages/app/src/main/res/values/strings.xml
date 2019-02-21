@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Algorithm Visualizer</string>
+    <string name="depth_name">Depth First Search</string>
+    <string name="breadth_name">Breadth First Search</string>
+    <string name="topological_name">Topological Ordering</string>
+
+    <string name="title_activity_depth_first_search">Depth First Search</string>
+    <string name="title_activity_breadth_first_search">Breadth First Search</string>
+    <string name="title_activity_topological_ordering">Topological Ordering</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -8,6 +16,7 @@
     <string name="searching_button">Searching Algorithms</string>
 
     <string name="generate_button">Generate</string>
+    <string name="correctness_button">Correctness Proof</string>
     <string name="frame_button">Next Frame</string>
     <string name="start_button">Start</string>
     <string name="stop_button">Stop</string>
@@ -19,7 +28,7 @@
     <string name="button_depth_first">Depth First Search</string>
     <string name="button_breadth_first">Breadth First Search</string>
     <string name="button_topological_ordering">Topological Ordering</string>
-    
+
     <string name="text_linear_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque eu mauris non facilisis. Nam at varius neque. Duis tempus ut ex eu auctor. Aenean molestie rutrum hendrerit. Morbi sagittis elementum nibh luctus vulputate. Quisque commodo consectetur arcu, a laoreet risus semper ac. Vestibulum in quam dignissim, ornare leo at, venenatis elit.
 
 Nullam fermentum, nisl nec laoreet finibus, leo magna interdum lectus, quis commodo ipsum massa non nibh. Aliquam erat volutpat. Cras vitae elit ut erat fermentum venenatis. Suspendisse porta nisl ac tellus finibus molestie. Maecenas id auctor odio. Nunc turpis libero, tempus quis massa sed, vestibulum sagittis sem. Ut non lacinia ex, a sollicitudin ligula. Mauris vel sodales est. In a dui vel lectus luctus interdum non nec massa. Ut in scelerisque orci. Ut vel tempus risus. Sed tempus sem pellentesque faucibus molestie. Sed id tincidunt tellus, quis facilisis nisl. In non felis sit amet massa facilisis consectetur id at dui. Pellentesque blandit orci nibh, in faucibus mauris dapibus ut. Quisque quis ante vitae lacus fringilla ullamcorper.
@@ -65,9 +74,57 @@ Nulla facilisi. Quisque vel quam placerat, faucibus enim ac, commodo arcu. Etiam
 Vestibulum pulvinar sapien at sapien faucibus faucibus. Vestibulum in lobortis neque. Cras auctor metus purus, sit amet tincidunt ante fringilla sit amet. In diam mi, finibus ut luctus et, auctor sit amet velit. Donec quis fermentum nulla. Morbi sed augue massa. Maecenas tincidunt blandit nulla sit amet dapibus. Quisque tempor mi sed condimentum imperdiet. Nam mauris dolor, facilisis eu justo vitae, blandit convallis libero. Praesent dignissim euismod metus, eu eleifend nibh sagittis nec. Sed faucibus urna sit amet ante commodo consequat. Morbi non venenatis sem, nec hendrerit urna. Aenean non felis a neque porta pharetra ac quis tortor. Curabitur egestas metus id leo feugiat, in lacinia neque dignissim. Sed et convallis nisl, vel vestibulum ex. Morbi a viverra lacus, non scelerisque nisi.
 
 Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit amet mollis interdum, ex neque vulputate libero, vel consectetur orci lacus sit amet odio. Nulla risus augue, imperdiet at luctus in, commodo et turpis. Proin felis velit, vehicula a mauris nec, ornare semper nisl. Maecenas molestie mi augue. Suspendisse ut tempus elit, vestibulum condimentum nibh. Aenean venenatis porta arcu eu eleifend. Donec eget pellentesque velit. Curabitur tristique scelerisque aliquet. In semper pellentesque sapien, ut laoreet turpis scelerisque ut. Duis eget purus metus. Donec viverra nisi ut maximus mattis. Etiam tincidunt aliquam tortor vitae ornare. Praesent nibh nunc, aliquet nec arcu vel, iaculis dapibus leo. Phasellus rutrum enim nec dui egestas fringilla. Donec volutpat iaculis ultricies.
+        Morbi et lacus turpis. Cras convallis imperdiet vehicula. Maecenas rhoncus dictum urna, eu rutrum odio ornare ut. Nam lacus augue, ullamcorper et mauris nec, condimentum vestibulum ipsum. Nunc aliquam condimentum leo, ac pulvinar nulla fermentum nec. Nunc sit amet suscipit mi, ut molestie enim. Mauris scelerisque, augue in pellentesque interdum, magna dui malesuada elit, et convallis felis diam nec sapien. Vivamus lorem diam, aliquam ut nisl sed, mattis tempus sem. Donec lacinia accumsan enim, ac tincidunt lacus gravida ac. Proin accumsan nibh dolor, sed venenatis quam gravida eu. Aliquam quis sapien cursus, euismod lacus a, commodo nulla. Vestibulum sit amet pretium est. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse consequat ex in faucibus tincidunt. </string>
 
-Morbi et lacus turpis. Cras convallis imperdiet vehicula. Maecenas rhoncus dictum urna, eu rutrum odio ornare ut. Nam lacus augue, ullamcorper et mauris nec, condimentum vestibulum ipsum. Nunc aliquam condimentum leo, ac pulvinar nulla fermentum nec. Nunc sit amet suscipit mi, ut molestie enim. Mauris scelerisque, augue in pellentesque interdum, magna dui malesuada elit, et convallis felis diam nec sapien. Vivamus lorem diam, aliquam ut nisl sed, mattis tempus sem. Donec lacinia accumsan enim, ac tincidunt lacus gravida ac. Proin accumsan nibh dolor, sed venenatis quam gravida eu. Aliquam quis sapien cursus, euismod lacus a, commodo nulla. Vestibulum sit amet pretium est. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse consequat ex in faucibus tincidunt.
+    <!-- Instructions Strings -->
+    <string name="LinearSearchInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. The value in the drop-down menu is the one that the algorithm will search for. If you would like to change this value, then select another value form the drop-down menu. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink. </string>
 
-</string>
+    <string name="BinarySearchInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. The value in the drop-down menu is the one that the algorithm will search for. If you would like to change this value, then select another value form the drop-down menu. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink. </string>
+
+    <string name="BubbleSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. Elements will be selected in pairs for comparison and swapped if the value on the right is smaller than the value on the left. Then, once the array is sorted, it will turn light-blue. </string>
+
+    <string name="InsertionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. Selected elements to insert into the array will be selected in pink, then inserted in pink to their correct location in the array. Finally, the sorted array will be displayed in light-blue. </string>
+
+    <string name="SelectionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. The elements unsorted will be highlighted pink, then the sought will be highlighted pink and turn light-blue when it is placed into its proper location in the sorted array. </string>
+
+    <string name="MergeSortInstructions">First, select the size of array you would like to generate, then select the \"Generate\" button. Alternately, if you would like a randomly-sized array, then simply select the \"Generate\" button. This will cause an array of a size either one, five, or six filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. As elements are being swapped and merged, they will turn pink. </string>
+
+    <string name="QuickSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
+        The array will start as a dark blue color. The pivot value will be selected in pink. The portion of the array being ordered will be highlighted in light-blue. Finally, the sorted array will turn light-blue. </string>
+
+    <string name="DepthFirstSearchInstructions"> ... </string>
+
+    <string name="BreadthFirstSearchInstructions"> ... </string>
+
+    <string name="TopologicalOrderingInstructions"> ... </string>
+
+
+    <!-- Description Strings -->
+    <string name="LinearSearchDescription">Linear search is an O(n) algorithm that looks through all the elements in an unsorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. </string>
+
+    <string name="BinarySearchDescription">Binary search is an O(log n) algorithm that looks through all the elements in a pre-sorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. The runtime comes from the fact that, due to the fact the array is ordered, half of the array can be discarded at each step, since we can determine in which half the value should be found.</string>
+
+    <string name="BubbleSortDescription">Bubble sort is a O(n^2) algorithm where values are swapped in pairs and, at each step, the largest values \"bubble\" to the rightmost side of the array. The array ends up sorted at the end. </string>
+
+    <string name="InsertionSortDescription">Insertion sort is a O(n^2) algorithm where the first element is counted as sorted. Then, each element in the array is selected and inserted into the correct location in the sorted array. This algorithm is like how you organize a hand of cards, since you start with one card, and then, as you select additional cards, you insert them into the correct location in the hand one-by-one. At the end, you have a sorted hand of cards or, in our example, hand of cards. </string>
+
+    <string name="SelectionSortDescription">Selection sort is a O(n^2) algorithm where the sought element from an unsorted portion of an array is selected and inserted into the sorted portion of the array. This is like how you would sort a group of coins if you had a pile in front of you. You would first look through all the coins, pick out a penny, and then place it in a sorted position. Next, you would look through and select all pennies this way. Next, you would repeat this process for nickles, dimes, and finally quarters. </string>
+
+    <string name="MergeSortDescription">Merge sort is a O(n logn) algorithm where the array is broken into pieces recursively with a base case of 1 element, which is automatically sorted and an alternate case of merging sorted halves, until the whole array is built up again, but this time sorted. </string>
+
+    <string name="QuickSortDescription">Quicksort is a O(n logn) algorithm where a pivot is selected and sections are recursively sorted by having all elements smaller and larger than the pivot organized on the proper side of the pivot. </string>
+
+    <string name="DepthFirstSearchDescription">Depth first search is an O(...) algorithm where ... </string>
+
+    <string name="BreadthFirstSearchDescription">Breadth first search is an O(...) algorithm where ... </string>
+
+    <string name="TopologicalOrderingDescription">Topological ordering is an O(...) algorithm where ... </string>
+
 
 </resources>

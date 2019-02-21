@@ -1,0 +1,46 @@
+package com.example.apphomepages.Graph.Animations;
+
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
+
+import com.example.apphomepages.General.DataTypes.Color;
+import com.example.apphomepages.General.DataTypes.Graph;
+import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
+
+import java.util.ArrayList;
+
+public class GraphAnimations
+{
+    public static void generateGraphSearch(boolean found, ArrayList<Integer> nodesToHighlight, Graph graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    {
+        //Duration
+        int duration = 800;
+
+        //Set up the main frame
+        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, false, graph);
+
+        for (int i = 1; i < stopMotionAnimation.length - 1; i++)
+        {
+            stopMotionAnimation[i] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(i - 1), false, graph);
+        }
+
+        //Found or not?
+        if (found)
+        {
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(nodesToHighlight.size() - 1), true, graph);
+        } else
+        {
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, false, graph);
+        }
+
+        //Animate!
+        for (Drawable d : stopMotionAnimation)
+        {
+            animationDrawable.addFrame(d, duration);
+        }
+
+        animationDrawable.setOneShot(false);
+        image.setBackgroundDrawable(animationDrawable);
+    }
+}
