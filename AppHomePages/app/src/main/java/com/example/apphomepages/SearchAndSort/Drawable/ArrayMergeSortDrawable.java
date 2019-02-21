@@ -21,9 +21,10 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
     private ArrayList<Integer> numbers;
     private Integer leftValue;
     private Integer rightValue;
+    private boolean start;
 
     //An ArraySearchDrawable constructor for searching
-    public ArrayMergeSortDrawable(Color main, Color secondary, Integer leftValue, Integer rightValue, ArrayList<Integer> numbers)
+    public ArrayMergeSortDrawable(Color main, Color secondary, Integer leftValue, Integer rightValue, ArrayList<Integer> numbers, boolean start)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -40,6 +41,7 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
         this.numbers = numbers;
         this.leftValue = leftValue;
         this.rightValue = rightValue;
+        this.start = start;
     }
 
     @Override
@@ -65,9 +67,8 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
 
             left += widthSideLength;
 
-            if (leftValue <= i && i <= rightValue)
+            if (leftValue <= i && i <= rightValue && !start)
             {
-                System.out.println("hi");
                 canvas.drawRect(rectangles[i], mSecondPaint);
             } else
             {

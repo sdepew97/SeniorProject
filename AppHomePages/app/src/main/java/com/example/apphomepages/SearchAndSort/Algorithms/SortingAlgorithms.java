@@ -185,12 +185,14 @@ public class SortingAlgorithms
         return resultOfSteps;
     }
 
-    //Merge Sort algorithm adapted from https://www.geeksforgeeks.org/merge-sort/
+    //Merge Sort algorithm adapted from https://www.geeksforgeeks.org/merge-sort/, used https://en.wikipedia.org/wiki/Merge_sort as a resource, too
     // Merges two subarrays of arr[].
     // First subarray is arr[l..m]
     // Second subarray is arr[m+1..r]
-    public static void merge(ArrayList<Integer> arr, int l, int m, int r)
+    public static ArrayList<MergeSortReturnType> merge(ArrayList<Integer> arr, int l, int m, int r, Color c)
     {
+        ArrayList<MergeSortReturnType> returnList = new ArrayList<>();
+
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
@@ -206,6 +208,8 @@ public class SortingAlgorithms
             R[j] = arr.get(m + 1 + j);
 
 
+        returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
+
         /* Merge the temp arrays */
 
         // Initial indexes of first and second subarrays
@@ -217,31 +221,37 @@ public class SortingAlgorithms
         {
             if (L[i] <= R[j])
             {
-                arr.add(k, L[i]);
+                arr.set(k, L[i]);
                 i++;
             } else
             {
-                arr.add(k, R[j]);
+                arr.set(k, R[j]);
                 j++;
             }
             k++;
+
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
 
         /* Copy remaining elements of L[] if any */
         while (i < n1)
         {
-            arr.add(k, L[i]);
+            arr.set(k, L[i]);
             i++;
             k++;
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
 
         /* Copy remaining elements of R[] if any */
         while (j < n2)
         {
-            arr.add(k, R[j]);
+            arr.set(k, R[j]);
             j++;
             k++;
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
+
+        return returnList;
     }
 
     // Main function that sorts arr[l..r] using
@@ -263,7 +273,12 @@ public class SortingAlgorithms
             returnList.addAll(mergeSort(arr, m + 1, r));
 
             // Merge the sorted halves
-            merge(arr, l, m, r); //TODO (Sarah): include this process in my visualization (otherwise the runtime is off...)!
+            returnList.addAll(merge(arr, l, m, r, c));
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
+        } else
+        {
+            //Add the case where each element is a singleton!
+            Color c = Color.getFound(); //TODO (Sarah): determine if I want to use a consistent color for the base...
             returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
 

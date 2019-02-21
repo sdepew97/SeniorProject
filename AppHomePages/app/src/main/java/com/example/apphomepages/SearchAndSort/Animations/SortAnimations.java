@@ -133,34 +133,30 @@ public class SortAnimations
         int duration = 1000;
 
         int i = 0;
-        stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers);
+        stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers, true);
 
-        /*
         i++; //put the array at the proper value
 
         for (MergeSortReturnType mergeSortReturnType : iterations)
         {
-            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), mergeSortReturnType.getColor(), mergeSortReturnType.getLeft(), mergeSortReturnType.getRight(), mergeSortReturnType.getNumbers());
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), mergeSortReturnType.getColor(), mergeSortReturnType.getLeft(), mergeSortReturnType.getRight(), mergeSortReturnType.getNumbers(), false);
             i++;
         }
 
         if (iterations.size() > 0)
         {
-            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, iterations.get(iterations.size() - 1).getNumbers());
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, iterations.get(iterations.size() - 1).getNumbers(), false);
         } else
         {
-            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers); //in the case where the iterations are 0, then we have already had a sorted array with a single element!
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers, false); //in the case where the iterations are 0, then we have already had a sorted array with a single element!
         }
 
-*/
-        //for (Drawable d : stopMotionAnimation)
-        //{
-            animationDrawable.addFrame(stopMotionAnimation[0], duration);
-        //}
+        for (Drawable d : stopMotionAnimation)
+        {
+            animationDrawable.addFrame(d, duration);
+        }
 
         animationDrawable.setOneShot(false);
-
-
         image.setBackgroundDrawable(animationDrawable);
     }
 }
