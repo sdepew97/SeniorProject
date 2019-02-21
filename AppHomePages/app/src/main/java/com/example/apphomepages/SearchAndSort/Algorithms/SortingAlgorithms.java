@@ -1,5 +1,7 @@
 package com.example.apphomepages.SearchAndSort.Algorithms;
 
+import com.example.apphomepages.General.DataTypes.Color;
+import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.PairOfTuple;
 import com.example.apphomepages.General.DataTypes.Tuple;
 
@@ -13,7 +15,7 @@ public class SortingAlgorithms
         //Do nothing
     }
 
-    //Bubble sort adapted from https://www.geeksforgeeks.org/bubble-sort/
+    //Bubble mergeSort adapted from https://www.geeksforgeeks.org/bubble-sort/
     public static ArrayList<Tuple> bubbleSort(ArrayList<Integer> arr)
     {
         ArrayList<Tuple> resultsOfSteps = new ArrayList<>();
@@ -68,7 +70,7 @@ public class SortingAlgorithms
         return arrayWithResult;
     }
 
-    //Insertion sort adapted from https://www.geeksforgeeks.org/insertion-sort/
+    //Insertion mergeSort adapted from https://www.geeksforgeeks.org/insertion-sort/
     public static ArrayList<Tuple> insertionSort(ArrayList<Integer> arr)
     {
         ArrayList<Tuple> resultOfSteps = new ArrayList<>();
@@ -126,7 +128,7 @@ public class SortingAlgorithms
 
     }
 
-    //Selection sort adapted from https://www.geeksforgeeks.org/selection-sort/
+    //Selection mergeSort adapted from https://www.geeksforgeeks.org/selection-sort/
     public static ArrayList<Tuple> selectionSort(ArrayList<Integer> arr)
     {
         ArrayList<Tuple> resultOfSteps = new ArrayList<>();
@@ -187,7 +189,7 @@ public class SortingAlgorithms
     // Merges two subarrays of arr[].
     // First subarray is arr[l..m]
     // Second subarray is arr[m+1..r]
-    public static void mergeSort(int arr[], int l, int m, int r)
+    public static void merge(ArrayList<Integer> arr, int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -199,9 +201,9 @@ public class SortingAlgorithms
 
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i)
-            L[i] = arr[l + i];
+            L[i] = arr.get(l + i);
         for (int j = 0; j < n2; ++j)
-            R[j] = arr[m + 1 + j];
+            R[j] = arr.get(m + 1 + j);
 
 
         /* Merge the temp arrays */
@@ -215,11 +217,11 @@ public class SortingAlgorithms
         {
             if (L[i] <= R[j])
             {
-                arr[k] = L[i];
+                arr.add(k, L[i]);
                 i++;
             } else
             {
-                arr[k] = R[j];
+                arr.add(k, R[j]);
                 j++;
             }
             k++;
@@ -228,7 +230,7 @@ public class SortingAlgorithms
         /* Copy remaining elements of L[] if any */
         while (i < n1)
         {
-            arr[k] = L[i];
+            arr.add(k, L[i]);
             i++;
             k++;
         }
@@ -236,7 +238,7 @@ public class SortingAlgorithms
         /* Copy remaining elements of R[] if any */
         while (j < n2)
         {
-            arr[k] = R[j];
+            arr.add(k, R[j]);
             j++;
             k++;
         }
@@ -244,21 +246,30 @@ public class SortingAlgorithms
 
     // Main function that sorts arr[l..r] using
     // merge()
-    public static void sort(int arr[], int l, int r)
+    public static ArrayList<MergeSortReturnType> mergeSort(ArrayList<Integer> arr, int l, int r)
     {
+        ArrayList<MergeSortReturnType> returnList = new ArrayList<>();
+
         if (l < r)
         {
+            Color c = Color.randomColor();
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
+
             // Find the middle point
             int m = (l + r) / 2;
 
             // Sort first and second halves
-            sort(arr, l, m);
-            sort(arr, m + 1, r);
+            returnList.addAll(mergeSort(arr, l, m));
+            returnList.addAll(mergeSort(arr, m + 1, r));
 
             // Merge the sorted halves
-            mergeSort(arr, l, m, r);
+            merge(arr, l, m, r); //TODO (Sarah): include this process in my visualization (otherwise the runtime is off...)!
+            returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
+
+        return returnList;
     }
+
 
     //Quicksort algorithm adapted from https://www.geeksforgeeks.org/quick-sort/
     /* This function takes last element as pivot,
@@ -323,7 +334,7 @@ public class SortingAlgorithms
 
             int pi = pairOfTuplePartition.getPi();
 
-            // Recursively sort elements before
+            // Recursively mergeSort elements before
             // partition and after partition
             tuples.addAll(quicksort(arr, low, pi - 1));
             tuples.addAll(quicksort(arr, pi + 1, high));

@@ -80,7 +80,7 @@ public class SelectionSortFragment extends Fragment
     }
 
     /*
-     * The visualization, below, is adapted from the visualization of selection sort found on Wikipedia (https://en.m.wikipedia.org/wiki/Selection_sort) in the "Example" section
+     * The visualization, below, is adapted from the visualization of selection mergeSort found on Wikipedia (https://en.m.wikipedia.org/wiki/Selection_sort) in the "Example" section
      * I changed the orientation, colors, and visualization key, but not the overall idea of using colors to distinguish steps of the algorithm
      */
 

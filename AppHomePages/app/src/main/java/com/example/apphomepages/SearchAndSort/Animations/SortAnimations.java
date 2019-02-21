@@ -5,7 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.Color;
+import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.SearchAndSort.Drawable.ArrayMergeSortDrawable;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayQuicksortDrawable;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySortDrawable;
 
@@ -123,5 +125,42 @@ public class SortAnimations
         animationDrawable.setOneShot(false);
         image.setBackgroundDrawable(animationDrawable);
 
+    }
+
+    public static void generateMergeSort(ArrayList<Integer> originalNumbers, ArrayList<MergeSortReturnType> iterations, ArrayMergeSortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    {
+        //Duration
+        int duration = 1000;
+
+        int i = 0;
+        stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers);
+
+        /*
+        i++; //put the array at the proper value
+
+        for (MergeSortReturnType mergeSortReturnType : iterations)
+        {
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), mergeSortReturnType.getColor(), mergeSortReturnType.getLeft(), mergeSortReturnType.getRight(), mergeSortReturnType.getNumbers());
+            i++;
+        }
+
+        if (iterations.size() > 0)
+        {
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, iterations.get(iterations.size() - 1).getNumbers());
+        } else
+        {
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), 0, originalNumbers.size() - 1, originalNumbers); //in the case where the iterations are 0, then we have already had a sorted array with a single element!
+        }
+
+*/
+        //for (Drawable d : stopMotionAnimation)
+        //{
+            animationDrawable.addFrame(stopMotionAnimation[0], duration);
+        //}
+
+        animationDrawable.setOneShot(false);
+
+
+        image.setBackgroundDrawable(animationDrawable);
     }
 }

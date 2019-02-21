@@ -100,7 +100,7 @@ public class InsertionSortFragment extends Fragment
     }
 
     /*
-     * The visualization, below, is inspired by the visualization of insertion sort found on Wikipedia (https://en.wikipedia.org/wiki/Insertion_sort) in the "Algorithm" section
+     * The visualization, below, is inspired by the visualization of insertion mergeSort found on Wikipedia (https://en.wikipedia.org/wiki/Insertion_sort) in the "Algorithm" section
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

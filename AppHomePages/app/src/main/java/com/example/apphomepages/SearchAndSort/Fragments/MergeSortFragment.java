@@ -16,9 +16,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
-import com.example.apphomepages.SearchAndSort.Drawable.ArraySearchDrawable;
+import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
+import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
+import com.example.apphomepages.SearchAndSort.Drawable.ArrayMergeSortDrawable;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
 import java.util.ArrayList;
@@ -109,28 +112,22 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_merge_sort, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_merge_sort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = view.findViewById(R.id.generateButton);
-        Button startButton = view.findViewById(R.id.startButton);
-        Button stopButton = view.findViewById(R.id.stopButton);
-        Button rewindButton = view.findViewById(R.id.rewindButton);
-        Button proofButton = view.findViewById(R.id.proofButton);
-        final Spinner spinner = view.findViewById(R.id.spinner);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
+        Button startButton = viewGlobal.findViewById(R.id.startButton);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
+        final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
+        final Random r = new Random();
 
         //Create an ArrayList of integers as the possible initial values
-        ArrayList<Integer> lengths = new ArrayList<>();
+        final ArrayList<Integer> lengths = new ArrayList<>();
         lengths.add(1); //Trivial Case
         lengths.add(5); //Odd Case
         lengths.add(6); //Even Case
-
-        //Get random initial index
-        final Random r = new Random();
-        index = r.nextInt(lengths.size());
-
-        //set spinner selection (length of array) randomly with initial length
-        SortHelperMethods.populateSpinner(lengths, view, spinner, index);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -138,17 +135,28 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 //Set up variables for the method
-                ArraySearchDrawable[] stopMotionAnimation;
-                int numElements = index; //we want one of the length options in the dropdown spinner
+                ArrayMergeSortDrawable[] stopMotionAnimation;
+                index = r.nextInt(lengths.size()); //Get random initial index
+                int numElements = lengths.get(index); //we want one of the length options in the dropdown spinner
                 animationDrawable = new AnimationDrawable();
 
+                //set spinner selection (length of array) randomly with initial length
+                SortHelperMethods.populateSpinner(lengths, viewGlobal, spinner, index);
+
+                /*
                 //Get random numbers
                 numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                //TODO: finish body
+                ArrayList<MergeSortReturnType> iterations = SortingAlgorithms.mergeSort(numbers, 0, numbers.size() - 1);
 
+                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size() + 2];
+
+                image = viewGlobal.findViewById(R.id.imageView);
+
+                SortAnimations.generateMergeSort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
+                */
             }
         });
 
@@ -164,6 +172,24 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                 {
                     index = 0;
                 }
+
+                //Set up variables for the method
+                ArrayMergeSortDrawable[] stopMotionAnimation;
+                int numElements = lengths.get(index); //we want one of the length options in the dropdown spinner
+                animationDrawable = new AnimationDrawable();
+
+                //Get random numbers
+                numbers = HelperMethods.generateRandomArray(r, numElements);
+
+                //Run algorithm
+                ArrayList<Integer> originalNumbers = copyArray(numbers);
+                ArrayList<MergeSortReturnType> iterations = SortingAlgorithms.mergeSort(numbers, 0, numbers.size() - 1);
+
+                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size() + 2];
+
+                image = viewGlobal.findViewById(R.id.imageView);
+
+                SortAnimations.generateMergeSort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
             }
 
             @Override
@@ -212,7 +238,7 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             }
         });
 
-        return view;
+        return viewGlobal;
     }
 
     @Override

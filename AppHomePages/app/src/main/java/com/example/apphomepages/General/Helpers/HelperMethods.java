@@ -62,4 +62,16 @@ public class HelperMethods
         return numbersStrings;
     }
 
+    public static Integer[] convertToArray(ArrayList<Integer> arrayList)
+    {
+        Integer[] aArray = new Integer[arrayList.size()];
+
+        for (int i = 0; i < arrayList.size(); i++)
+        {
+            aArray[i] = arrayList.get(i);
+        }
+
+        return aArray;
+    }
+
 }

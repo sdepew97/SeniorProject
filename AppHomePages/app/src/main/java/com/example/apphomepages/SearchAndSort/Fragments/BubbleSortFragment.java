@@ -109,7 +109,7 @@ public class BubbleSortFragment extends Fragment
     }
 
     /*
-     * The visualization, below, is inspired by the visualization of bubble sort found on Wikipedia (https://en.wikipedia.org/wiki/Bubble_sort) in the "Example" section
+     * The visualization, below, is inspired by the visualization of bubble mergeSort found on Wikipedia (https://en.wikipedia.org/wiki/Bubble_sort) in the "Example" section
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

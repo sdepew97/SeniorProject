@@ -1,5 +1,7 @@
 package com.example.apphomepages.General.DataTypes;
 
+import java.util.Random;
+
 public class Color
 {
     private int red;
@@ -18,6 +20,12 @@ public class Color
     {
         //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
         return new Color(102, 102, 255);
+    }
+
+    public static Color randomColor()
+    {
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 
     public static Color getSecondary()
