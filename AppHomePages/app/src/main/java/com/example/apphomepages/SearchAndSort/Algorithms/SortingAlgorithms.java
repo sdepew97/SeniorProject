@@ -9,12 +9,6 @@ import java.util.ArrayList;
 
 public class SortingAlgorithms
 {
-    //Default constructor
-    public SortingAlgorithms()
-    {
-        //Do nothing
-    }
-
     //Bubble mergeSort adapted from https://www.geeksforgeeks.org/bubble-sort/
     public static ArrayList<Tuple> bubbleSort(ArrayList<Integer> arr)
     {

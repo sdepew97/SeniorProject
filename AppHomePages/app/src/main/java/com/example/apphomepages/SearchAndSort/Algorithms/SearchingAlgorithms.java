@@ -5,13 +5,6 @@ import java.util.Random;
 
 public class SearchingAlgorithms
 {
-
-    public SearchingAlgorithms()
-    {
-        //Default constructor
-    }
-
-
     public static int linearSearch(ArrayList<Integer> numbers, Integer target)
     {
         if (target == null)
@@ -21,7 +14,7 @@ public class SearchingAlgorithms
 
         for (int i = 0; i < numbers.size(); i++)
         {
-            if (numbers.get(i) == target)
+            if (numbers.get(i).equals(target))
             {
                 return i;
             }
@@ -69,13 +62,15 @@ public class SearchingAlgorithms
                 start = middle + 1;
             }
 
-            if (search == array.get(middle))
+            if (search.equals(array.get(middle)))
             {
                 squaresToHighlight.add(middle);
                 return squaresToHighlight;
             }
         }
 
+        //Add the fact is wasn't found!
+        squaresToHighlight.add(-1); //not found...
         return squaresToHighlight;
     }
 }
