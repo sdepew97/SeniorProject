@@ -26,6 +26,7 @@ public class HelperMethodsTest
     }
 
     @Test
+    //Used https://stackoverflow.com/questions/9712648/in-a-java-unit-test-how-do-i-assert-a-number-is-within-a-given-range
     public void generateRandomArray()
     {
         ArrayList<Integer> randomArray = HelperMethods.generateRandomArray(new Random(), 10);
