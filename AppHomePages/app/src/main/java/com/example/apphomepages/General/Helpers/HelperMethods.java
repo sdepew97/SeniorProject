@@ -11,8 +11,12 @@ public class HelperMethods
     }
 
     //Method that allows you to generate an array using the random input, the bound on elements, and the size of the size input
-    public static ArrayList<Integer> generateRandomArray(Random r, int size)
+    public static ArrayList<Integer> generateRandomArray(Random r, int size) throws IndexOutOfBoundsException
     {
+        if(size < 1) {
+            throw new IndexOutOfBoundsException();
+        }
+
         ArrayList<Integer> numbers = new ArrayList<>(size);
         int numElements = size;
 
@@ -69,6 +73,18 @@ public class HelperMethods
         for (int i = 0; i < arrayList.size(); i++)
         {
             aArray[i] = arrayList.get(i);
+        }
+
+        return aArray;
+    }
+
+    public static ArrayList<Integer> convertFromArray(int[] array)
+    {
+        ArrayList<Integer> aArray = new ArrayList<>();
+
+        for (int i = 0; i < array.length; i++)
+        {
+            aArray.add(array[i]);
         }
 
         return aArray;
