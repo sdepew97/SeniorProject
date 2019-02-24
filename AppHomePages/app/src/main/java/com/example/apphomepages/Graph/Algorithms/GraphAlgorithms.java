@@ -11,7 +11,7 @@ import java.util.Stack;
 public class GraphAlgorithms
 {
     //Used https://www.geeksforgeeks.org/iterative-depth-first-traversal/ for the algorithm and Dianna Xu's CS330 slides, as well as https://en.wikipedia.org/wiki/Depth-first_search
-    public static ArrayList<Integer> depthFirstSearch(Graph g, Integer valueSought)
+    public static ArrayList<Integer> depthFirstSearch(Graph g, Integer valueSought, boolean traversal)
     {
         ArrayList<Integer> visitOrder = new ArrayList<>();
         //set mark to all false
@@ -36,7 +36,7 @@ public class GraphAlgorithms
                 n.mark();
             }
 
-            if (n.getNodeValue() == valueSought)
+            if (n.getNodeValue() == valueSought && !traversal)
             {
                 break;
             }
@@ -57,9 +57,8 @@ public class GraphAlgorithms
     }
 
     //Used https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-    public static ArrayList<Integer> breadthFirstSearch(Graph g, Integer valueSought)
+    public static ArrayList<Integer> breadthFirstSearch(Graph g, Integer valueSought, boolean traversal)
     {
-
         ArrayList<Integer> visitOrder = new ArrayList<>();
         //set mark to all false
         ArrayList<Node> vertices = g.getGraphElements();
@@ -79,7 +78,7 @@ public class GraphAlgorithms
             Node n = queue.poll();
             visitOrder.add(n.getNodeValue());
 
-            if (n.getNodeValue() == valueSought)
+            if (n.getNodeValue() == valueSought && !traversal)
             {
                 break;
             }

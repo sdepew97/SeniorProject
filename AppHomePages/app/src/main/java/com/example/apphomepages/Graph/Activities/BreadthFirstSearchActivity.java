@@ -110,7 +110,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
@@ -147,7 +147,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 

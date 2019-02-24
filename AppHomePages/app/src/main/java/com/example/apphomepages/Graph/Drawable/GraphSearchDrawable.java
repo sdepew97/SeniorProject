@@ -25,7 +25,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private final Paint mLinePaint;
 
     private Graph graph;
-    private int nodeToHighlight = -1;
+    private int nodeToHighlight;
 
     private boolean target;
 
@@ -72,7 +72,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
-        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
+        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
         //TODO (Sarah): draw the connecting edges on the graph

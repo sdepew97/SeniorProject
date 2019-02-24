@@ -105,12 +105,13 @@ public class DepthFirstSearchActivity extends AppCompatActivity
 
                 //Run the algorithm to generate the animation frames
                 int valueInGraphSought = -1;
+
                 if (soughtAfter != -1)
                 {
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
@@ -147,7 +148,7 @@ public class DepthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 

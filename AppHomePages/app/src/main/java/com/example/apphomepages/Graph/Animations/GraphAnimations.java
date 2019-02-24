@@ -18,7 +18,7 @@ public class GraphAnimations
         int duration = 800;
 
         //Set up the main frame
-        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, false, graph);
+        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Integer.MAX_VALUE, false, graph); //TODO: talk with richard about this...this is the -1 issue!
 
         for (int i = 1; i < stopMotionAnimation.length - 1; i++)
         {
@@ -31,7 +31,7 @@ public class GraphAnimations
             stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(nodesToHighlight.size() - 1), true, graph);
         } else
         {
-            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), -1, false, graph);
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Integer.MAX_VALUE, false, graph);
         }
 
         //Animate!
