@@ -17,32 +17,14 @@ public class MergeSortReturnType
         this.numbers = numbers;
     }
 
-    public MergeSortReturnType(int left, int right, ArrayList<Integer> numbers)
-    {
-        this.left = left;
-        this.right = right;
-        this.color = Color.randomColor();
-        this.numbers = numbers;
-    }
-
     public int getLeft()
     {
         return left;
     }
 
-    public void setLeft(int left)
-    {
-        this.left = left;
-    }
-
     public int getRight()
     {
         return right;
-    }
-
-    public void setRight(int right)
-    {
-        this.right = right;
     }
 
     public Color getColor()

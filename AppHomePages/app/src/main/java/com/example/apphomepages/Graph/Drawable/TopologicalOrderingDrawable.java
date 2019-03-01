@@ -2,6 +2,7 @@ package com.example.apphomepages.Graph.Drawable;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Animatable;
@@ -16,7 +17,7 @@ import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 
 import java.util.ArrayList;
 
-public class GraphSearchDrawable extends Drawable implements Animatable
+public class TopologicalOrderingDrawable extends Drawable implements Animatable
 {
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
@@ -24,13 +25,12 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private final Paint mTextPaint;
     private final Paint mLinePaint;
 
-    private Graph<Integer> graph;
-    private int nodeToHighlight;
-
-    private boolean target;
+    private Graph<String> graph;
+    private String nodeToHighlight;
+    private boolean startOrEnd;
 
     //An ArraySearchDrawable constructor for searching
-    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHighlight, boolean target, Graph<Integer> graph)
+    public TopologicalOrderingDrawable(Color main, Color secondary, Color found, String nodeToHighlight, Graph<String> graph, boolean startOrEnd)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -54,7 +54,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         this.graph = graph;
         this.nodeToHighlight = nodeToHighlight;
-        this.target = target;
+        this.startOrEnd = startOrEnd;
     }
 
     @Override
@@ -64,52 +64,55 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         int width = getBounds().width();
         int height = getBounds().height();
         int numCircles = graph.numNodes();
-        int radius = height / (GraphHelperMethods.numLayers(graph) * 2 + 1); //the radius of the circle, since this means they will never overlap horizontally
-        mTextPaint.setTextSize(radius * 3 / 4);
+        int radius = (int) (height / (GraphHelperMethods.numLayers(graph) + 4.0)); //the radius of the circle, since this means they will never overlap horizontally
+        mTextPaint.setTextSize((float) (radius / 2.6));
 
         int left = 0;
         int top = 0;
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
-        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
+        ArrayList<String> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, "", true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
         //TODO (Sarah): draw the connecting edges on the graph
-        ArrayList<Node<Integer>> nodes = graph.getGraphElements();
+        ArrayList<Node<String>> nodes = graph.getGraphElements();
 
-        for (Node<Integer> n : nodes)
+        for (Node<String> n : nodes)
         {
-            ArrayList<Node<Integer>> adjacentNodes = n.getAdjacentNodes();
+            ArrayList<Node<String>> adjacentNodes = n.getAdjacentNodes();
 
-            for (Node<Integer> a : adjacentNodes)
+            for (Node<String> a : adjacentNodes)
             {
                 //TODO: test that the node's value is actually in the list and that this code doesn't error
                 Point start = centersOfCircles[layoutOrder.indexOf(n.getNodeValue())];
                 Point end = centersOfCircles[layoutOrder.indexOf(a.getNodeValue())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
+
+                //TODO: draw arrowheads here! (new idea...use a bitmap?) https://stackoverflow.com/questions/11975636/how-to-draw-an-arrow-using-android-graphic-class
+                //canvas.drawLine((float) ((start.getX() + end.getX()) / 2.0), ((float) ((start.getY() + end.getY()) / 2.0)), (float) ((start.getX() + end.getX()) / 2.0) - 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), mLinePaint);
+                //canvas.drawLine((float) ((start.getX() + end.getX()) / 2.0) - 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), (float) ((start.getX() + end.getX()) / 2.0) + 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), mLinePaint);
+
+                //canvas.drawLine((float) (end.getX() - (radius / Math.sqrt(2.0))), (float) (end.getY() + (radius / Math.sqrt(2.0))), (float) (end.getX() - (radius / Math.sqrt(2.0) - radius / 3.0)), (float) (end.getY() + (radius / Math.sqrt(2.0) + radius / 3.0)), mLinePaint);
+                //canvas.drawLine((float) (end.getX() - (radius / Math.sqrt(2.0))), (float) (end.getY() + (radius / Math.sqrt(2.0))), (float) (end.getX() - (radius / Math.sqrt(2.0) - radius / 3.0)), (float) (end.getY() + (radius / Math.sqrt(2.0) - radius / 3.0)), mLinePaint);
+
             }
         }
 
         //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
         for (int i = 0; i < numCircles; i++)
         {
-            Node<Integer> n = nodes.get(i);
-            if (nodeToHighlight == n.getNodeValue() && !target) //TODO: think about whether or not this is correct...
+            if (nodeToHighlight.equals(layoutOrder.get(i)) && !startOrEnd)
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mSecondPaint);
-            } else if (nodeToHighlight == n.getNodeValue() && target)
-            {
-                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mFoundPaint);
             } else
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMainPaint);
             }
 
-            canvas.drawText(Integer.toString(layoutOrder.get(i)), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
+            canvas.drawText(layoutOrder.get(i), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
         }
-
     }
 
     @Override
@@ -147,5 +150,31 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     public boolean isRunning()
     {
         return false;
+    }
+
+    private void fillArrow(Paint paint, Canvas canvas, float x0, float y0, float x1, float y1)
+    {
+        paint.setStyle(Paint.Style.STROKE);
+
+        int arrowHeadLenght = 10;
+        int arrowHeadAngle = 45;
+        float[] linePts = new float[]{x1 - arrowHeadLenght, y1, x1, y1};
+        float[] linePts2 = new float[]{x1, y1, x1, y1 + arrowHeadLenght};
+        Matrix rotateMat = new Matrix();
+
+        //get the center of the line
+        float centerX = x1;
+        float centerY = y1;
+
+        //set the angle
+        double angle = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI + arrowHeadAngle;
+
+        //rotate the matrix around the center
+        rotateMat.setRotate((float) angle, centerX, centerY);
+        rotateMat.mapPoints(linePts);
+        rotateMat.mapPoints(linePts2);
+
+        canvas.drawLine(linePts[0], linePts[1], linePts[2], linePts[3], paint);
+        canvas.drawLine(linePts2[0], linePts2[1], linePts2[2], linePts2[3], paint);
     }
 }

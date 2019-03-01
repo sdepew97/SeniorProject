@@ -21,4 +21,14 @@ public class GraphHelperMethodsTest
     public void placeNodes()
     {
     }
+
+    @Test
+    public void getIsolated()
+    {
+    }
+
+    @Test
+    public void computeDegree()
+    {
+    }
 }

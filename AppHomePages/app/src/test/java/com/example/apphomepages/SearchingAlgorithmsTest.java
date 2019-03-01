@@ -16,13 +16,13 @@ public class SearchingAlgorithmsTest
     @Test
     public void linearSearch()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
         int target1 = 22;
         int target2 = 12;
         int target3 = 452;
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
         int target4 = 1;
         int target5 = 8;
@@ -44,14 +44,14 @@ public class SearchingAlgorithmsTest
     {
         //Here I compare the result of my binary search with the result of the Arrays class binary search method
 
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         Arrays.sort(numbers1); //precondition
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
         int target1 = 22;
         int target2 = 12;
         int target3 = 452;
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         Arrays.sort(numbers2); //precondition
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
         int target4 = 1;

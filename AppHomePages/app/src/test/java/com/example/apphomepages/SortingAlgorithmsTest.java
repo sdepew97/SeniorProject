@@ -18,10 +18,10 @@ public class SortingAlgorithmsTest
     @Test
     public void bubbleSort()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
         ArrayList<Tuple> resultOfBubbleOn1 = SortingAlgorithms.bubbleSort(numbersArrayList1);
@@ -40,7 +40,7 @@ public class SortingAlgorithmsTest
     @Test
     public void copyArray()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
         ArrayList<Integer> numbersArrayListComp = SortingAlgorithms.copyArray(numbersArrayList1);
@@ -52,10 +52,10 @@ public class SortingAlgorithmsTest
     @Test
     public void insertionSort()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
         ArrayList<Tuple> resultOfInsertionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
@@ -74,10 +74,10 @@ public class SortingAlgorithmsTest
     @Test
     public void selectionSort()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
         ArrayList<Tuple> resultOfSelectionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
@@ -96,7 +96,7 @@ public class SortingAlgorithmsTest
     @Test
     public void merge()
     {
-        int[] numbers1 = {-1, 1, 12, 23, 24, 22, 86, 123};
+        Integer[] numbers1 = {-1, 1, 12, 23, 24, 22, 86, 123};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
         ArrayList<MergeSortReturnType> merged = SortingAlgorithms.merge(numbersArrayList1, 0, 4, numbers1.length - 1, Color.randomColor());
 
@@ -109,10 +109,10 @@ public class SortingAlgorithmsTest
     @Test
     public void mergeSort()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
         ArrayList<MergeSortReturnType> resultOfMergeOn1 = SortingAlgorithms.mergeSort(numbersArrayList1, 0, numbersArrayList1.size() - 1);
@@ -131,10 +131,10 @@ public class SortingAlgorithmsTest
     @Test
     public void quicksort()
     {
-        int[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
 
-        int[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
+        Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
         ArrayList<Tuple> resultOfQuickOn1 = SortingAlgorithms.quicksort(numbersArrayList1, 0, numbersArrayList1.size() - 1);

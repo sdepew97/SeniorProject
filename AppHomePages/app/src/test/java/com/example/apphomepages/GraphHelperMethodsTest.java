@@ -15,10 +15,21 @@ public class GraphHelperMethodsTest
     @Test
     public void numLayers()
     {
+
     }
 
     @Test
     public void placeNodes()
+    {
+    }
+
+    @Test
+    public void getIsolated()
+    {
+    }
+
+    @Test
+    public void computeDegree()
     {
     }
 }
