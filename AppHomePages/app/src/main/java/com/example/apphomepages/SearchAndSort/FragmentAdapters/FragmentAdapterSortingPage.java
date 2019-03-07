@@ -49,7 +49,7 @@ public class FragmentAdapterSortingPage extends FragmentPagerAdapter
                 result = "Quick Sort";
                 break;
             default:
-                result = "Linear Search";
+                result = "Bubble Sort";
         }
 
         return result;
@@ -77,7 +77,7 @@ public class FragmentAdapterSortingPage extends FragmentPagerAdapter
                 page = QuicksortFragment.newInstance("One", "Two");
                 break; //input is number of columns of data
             default:
-                page = SearchAndSortFragment.newInstance("One", "Two"); //default fragment to return
+                page = BubbleSortFragment.newInstance("One", "Two"); //default fragment to return
                 break;
         }
 

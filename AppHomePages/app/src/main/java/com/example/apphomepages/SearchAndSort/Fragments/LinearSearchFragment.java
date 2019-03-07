@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SearchingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SearchAnimations;
+import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySearchDrawable;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
@@ -119,6 +121,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
         Button proofButton = viewGlobal.findViewById(R.id.proofButton);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
 
         generateButton.setOnClickListener(new View.OnClickListener()
@@ -233,6 +236,17 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
                 Uri uri = Uri.parse("http://www.csd.uwo.ca/courses/CS2210a/slides/correctness.pdf");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
 
+            }
+        });
+
+        instructionsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentManager fm = getFragmentManager();
+                LinearSearchDialogFragment dialogFragment = new LinearSearchDialogFragment();
+                dialogFragment.show(fm, "Instructions Fragment");
             }
         });
 

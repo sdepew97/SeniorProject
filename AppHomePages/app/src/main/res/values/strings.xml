@@ -16,6 +16,7 @@
     <string name="searching_button">Searching Algorithms</string>
 
     <string name="generate_button">Generate</string>
+    <string name="instructions_button">Instructions</string>
     <string name="correctness_button">Correctness Proof</string>
     <string name="frame_button">Next Frame</string>
     <string name="start_button">Start</string>
