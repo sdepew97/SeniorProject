@@ -45,4 +45,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.10.0'
     // required if you want to use Mockito for Android tests
     testImplementation 'org.mockito:mockito-android:2.10.0'
+    // Espresso UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    // Optional if you need to detect intents.
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

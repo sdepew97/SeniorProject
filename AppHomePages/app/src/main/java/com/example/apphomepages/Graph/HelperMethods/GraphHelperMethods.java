@@ -26,12 +26,16 @@ public class GraphHelperMethods
 
     public static <A> int numLayers(Graph<A> g)
     {
-        return layersOfNodes(g).size();
+        if (layersOfNodes(g) == null)
+        {
+            return 0;
+        } else
+            return layersOfNodes(g).size();
     }
 
     public static <A> Point[] placeNodes(Graph<A> g, int width, int height)
     {
-        Point[] centers = new Point[g.numNodes()];
+        Point[] centers = new Point[g.getGraphElements().size()];
 
         //Initialize each point
         for (int i = 0; i < centers.length; i++)
@@ -64,14 +68,20 @@ public class GraphHelperMethods
         return centers;
     }
 
+    //TODO: add cycle breaking code and work on tests including multiple separate cycles in a graph
     private static <A> ArrayList<ArrayList<Node<A>>> layersOfNodes(Graph<A> g)
     {
         //Divides the nodes in a graph into layers using the breadth first search algorithm
-        ArrayList<ArrayList<Integer>> layers = new ArrayList<>();
         int currentLayer = 0;
 
         ArrayList<Node<A>> vertices = g.getGraphElements();
 
+        if (vertices.size() == 0)
+        {
+            return null;
+        }
+
+        //Now we know we have some vertices in the graph
         for (Node<A> n : vertices)
         {
             n.setVisited(false);

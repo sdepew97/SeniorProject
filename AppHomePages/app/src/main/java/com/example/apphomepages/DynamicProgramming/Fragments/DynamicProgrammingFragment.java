@@ -1,4 +1,4 @@
-package com.example.apphomepages.Greedy.Fragments;
+package com.example.apphomepages.DynamicProgramming.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,19 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.apphomepages.Greedy.Activities.GreedyActivity;
+import com.example.apphomepages.DynamicProgramming.Activities.DynamicProgrammingActivity;
 import com.example.apphomepages.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GreedyFragment.OnFragmentInteractionListener} interface
+ * {@link DynamicProgrammingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GreedyFragment#newInstance} factory method to
+ * Use the {@link DynamicProgrammingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GreedyFragment extends Fragment
+public class DynamicProgrammingFragment extends Fragment
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +35,7 @@ public class GreedyFragment extends Fragment
 
     private OnFragmentInteractionListener mListener;
 
-    public GreedyFragment()
+    public DynamicProgrammingFragment()
     {
         // Required empty public constructor
     }
@@ -46,12 +46,12 @@ public class GreedyFragment extends Fragment
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GreedyFragment.
+     * @return A new instance of fragment DynamicProgrammingFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GreedyFragment newInstance(String param1, String param2)
+    public static DynamicProgrammingFragment newInstance(String param1, String param2)
     {
-        GreedyFragment fragment = new GreedyFragment();
+        DynamicProgrammingFragment fragment = new DynamicProgrammingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -98,10 +98,10 @@ public class GreedyFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_greedy, container, false);
+        View view = inflater.inflate(R.layout.fragment_dynamic_programming, container, false);
 
         //Set up the buttons on the fragment
-        Button graphButton = view.findViewById(R.id.greedyAlgorithms);
+        Button graphButton = view.findViewById(R.id.dynamicProgrammingAlgorithms);
 
         graphButton.setOnClickListener(new View.OnClickListener()
         {
@@ -109,7 +109,7 @@ public class GreedyFragment extends Fragment
             public void onClick(View v)
             {
                 //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), GreedyActivity.class);
+                Intent i = new Intent(getActivity(), DynamicProgrammingActivity.class);
                 startActivity(i);
             }
         });

@@ -22,20 +22,6 @@
         app:layout_constraintGuide_percent=".95" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/right_guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".35" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/right_guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".65" />
-
-    <android.support.constraint.Guideline
         android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,41 +43,13 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <Button
-        android:id="@+id/depthFirstButton"
+        android:id="@+id/graphAlgorithms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:text="@string/button_depth_first"
+        android:text="@string/button_graph_algorithms"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
-        app:layout_constraintRight_toRightOf="@id/right_guideline2"
-        app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
-
-    <Button
-        android:id="@+id/breadthFirstButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:text="@string/button_breadth_first"
-
-        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
-        app:layout_constraintLeft_toLeftOf="@id/right_guideline2"
-        app:layout_constraintRight_toRightOf="@id/right_guideline3"
-        app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
-
-    <Button
-        android:id="@+id/topologicalOrderingButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:text="@string/button_topological_ordering"
-
-        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
-        app:layout_constraintLeft_toLeftOf="@id/right_guideline3"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 

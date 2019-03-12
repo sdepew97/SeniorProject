@@ -63,7 +63,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numCircles = graph.numNodes();
+        int numCircles = graph.getGraphElements().size();
         int radius = height / (GraphHelperMethods.numLayers(graph) * 2 + 1); //the radius of the circle, since this means they will never overlap horizontally
         mTextPaint.setTextSize(radius * 3 / 4);
 

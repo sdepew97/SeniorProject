@@ -32,18 +32,8 @@ public class MergeSortReturnType
         return color;
     }
 
-    public void setColor(Color color)
-    {
-        this.color = color;
-    }
-
     public ArrayList<Integer> getNumbers()
     {
         return numbers;
-    }
-
-    public void setNumbers(ArrayList<Integer> numbers)
-    {
-        this.numbers = numbers;
     }
 }

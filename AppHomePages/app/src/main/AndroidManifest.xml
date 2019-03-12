@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DynamicProgramming.Activities.DynamicProgrammingActivity"></activity>
+        <activity android:name=".Greedy.Activities.GreedyActivity" />
+        <activity android:name=".Graph.Activities.GraphActivity" />
         <activity
             android:name=".Graph.Activities.TopologicalOrderingActivity"
             android:label="@string/topological_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Graph.Activities.BreadthFirstSearchActivity"
             android:label="@string/breadth_name"

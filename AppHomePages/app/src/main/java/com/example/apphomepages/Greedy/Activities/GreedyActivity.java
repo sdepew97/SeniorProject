@@ -1,4 +1,4 @@
-package com.example.apphomepages.Main.Activities;
+package com.example.apphomepages.Greedy.Activities;
 
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -11,22 +11,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.apphomepages.DynamicProgramming.Fragments.DynamicProgrammingFragment;
-import com.example.apphomepages.Graph.Fragments.GraphFragment;
-import com.example.apphomepages.Greedy.Fragments.GreedyFragment;
-import com.example.apphomepages.Main.FragmentAdapters.FragmentAdapterMainPage;
+import com.example.apphomepages.Greedy.FragmentAdapters.FragmentAdapterGreedyPage;
+import com.example.apphomepages.Greedy.Fragments.DijkstrasFragment;
+import com.example.apphomepages.Greedy.Fragments.IntervalSchedulingFragment;
 import com.example.apphomepages.R;
-import com.example.apphomepages.SearchAndSort.Fragments.SearchAndSortFragment;
 
-public class MainActivity extends AppCompatActivity implements SearchAndSortFragment.OnFragmentInteractionListener, GraphFragment.OnFragmentInteractionListener, GreedyFragment.OnFragmentInteractionListener, DynamicProgrammingFragment.OnFragmentInteractionListener
+public class GreedyActivity extends AppCompatActivity implements IntervalSchedulingFragment.OnFragmentInteractionListener, DijkstrasFragment.OnFragmentInteractionListener
 {
-
     //LOG messages
-    private static String TAG = "MainActivity";
+    private static String TAG = "GreedyActivity";
 
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
-    private FragmentAdapterMainPage fragmentAdapterMainPage;
+    private FragmentAdapterGreedyPage fragmentAdapterGreedyPage;
     private TabLayout tabLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -34,17 +31,17 @@ public class MainActivity extends AppCompatActivity implements SearchAndSortFrag
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_greedy);
 
-        initViewPagerMainPage(); //This is the main swiping page from the UI/UX diagram
+        initViewPagerSearching();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    private void initViewPagerMainPage()
+    private void initViewPagerSearching()
     {
         viewPager = findViewById(R.id.viewPager);
-        fragmentAdapterMainPage = new FragmentAdapterMainPage(getSupportFragmentManager());
-        viewPager.setAdapter(fragmentAdapterMainPage); //linking the view manager and fragment adapter together
+        fragmentAdapterGreedyPage = new FragmentAdapterGreedyPage(getSupportFragmentManager());
+        viewPager.setAdapter(fragmentAdapterGreedyPage); //linking the view manager and fragment adapter together
 
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);

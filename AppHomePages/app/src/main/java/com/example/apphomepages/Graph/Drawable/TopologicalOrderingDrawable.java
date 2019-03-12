@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -47,7 +48,7 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         mLinePaint.setARGB(255, 0, 0, 0);
         mLinePaint.setTextAlign(Paint.Align.CENTER);
         mLinePaint.setStyle(Paint.Style.FILL);
-        mLinePaint.setStrokeWidth(10);
+        mLinePaint.setStrokeWidth(4);
 
         mFoundPaint = new Paint();
         mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
@@ -63,7 +64,7 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numCircles = graph.numNodes();
+        int numCircles = graph.getGraphElements().size();
         int radius = (int) (height / (GraphHelperMethods.numLayers(graph) + 4.0)); //the radius of the circle, since this means they will never overlap horizontally
         mTextPaint.setTextSize((float) (radius / 2.6));
 
@@ -89,14 +90,10 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
                 Point end = centersOfCircles[layoutOrder.indexOf(a.getNodeValue())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
-
-                //TODO: draw arrowheads here! (new idea...use a bitmap?) https://stackoverflow.com/questions/11975636/how-to-draw-an-arrow-using-android-graphic-class
-                //canvas.drawLine((float) ((start.getX() + end.getX()) / 2.0), ((float) ((start.getY() + end.getY()) / 2.0)), (float) ((start.getX() + end.getX()) / 2.0) - 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), mLinePaint);
-                //canvas.drawLine((float) ((start.getX() + end.getX()) / 2.0) - 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), (float) ((start.getX() + end.getX()) / 2.0) + 24, ((float) ((start.getY() + end.getY()) / 2.0) - 24), mLinePaint);
-
-                //canvas.drawLine((float) (end.getX() - (radius / Math.sqrt(2.0))), (float) (end.getY() + (radius / Math.sqrt(2.0))), (float) (end.getX() - (radius / Math.sqrt(2.0) - radius / 3.0)), (float) (end.getY() + (radius / Math.sqrt(2.0) + radius / 3.0)), mLinePaint);
-                //canvas.drawLine((float) (end.getX() - (radius / Math.sqrt(2.0))), (float) (end.getY() + (radius / Math.sqrt(2.0))), (float) (end.getX() - (radius / Math.sqrt(2.0) - radius / 3.0)), (float) (end.getY() + (radius / Math.sqrt(2.0) - radius / 3.0)), mLinePaint);
-
+                Matrix m = new Matrix();
+                double radians = Math.atan((end.getY() - end.getX() * 1.0) / (start.getY() - start.getX()));
+                m.setRotate((float) Math.toDegrees(radians), ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                drawTriangle(canvas, mFoundPaint, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)), 15, m);
             }
         }
 
@@ -152,29 +149,19 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         return false;
     }
 
-    private void fillArrow(Paint paint, Canvas canvas, float x0, float y0, float x1, float y1)
+    //Found code on https://kylewbanks.com/blog/drawing-triangles-rhombuses-and-other-shapes-on-android-canvas and http://android-er.blogspot.com/2014/06/rotate-path-with-matrix.html
+    public void drawTriangle(Canvas canvas, Paint paint, int x, int y, int width, Matrix m)
     {
-        paint.setStyle(Paint.Style.STROKE);
+        int halfWidth = width / 2;
 
-        int arrowHeadLenght = 10;
-        int arrowHeadAngle = 45;
-        float[] linePts = new float[]{x1 - arrowHeadLenght, y1, x1, y1};
-        float[] linePts2 = new float[]{x1, y1, x1, y1 + arrowHeadLenght};
-        Matrix rotateMat = new Matrix();
+        Path path = new Path();
+        path.moveTo(x, y - halfWidth); // Top
+        path.lineTo(x - halfWidth, y + halfWidth); // Bottom left
+        path.lineTo(x + halfWidth, y + halfWidth); // Bottom right
+        path.lineTo(x, y - halfWidth); // Back to Top
+        path.close();
+        path.transform(m); //rotate the triangle as needed
 
-        //get the center of the line
-        float centerX = x1;
-        float centerY = y1;
-
-        //set the angle
-        double angle = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI + arrowHeadAngle;
-
-        //rotate the matrix around the center
-        rotateMat.setRotate((float) angle, centerX, centerY);
-        rotateMat.mapPoints(linePts);
-        rotateMat.mapPoints(linePts2);
-
-        canvas.drawLine(linePts[0], linePts[1], linePts[2], linePts[3], paint);
-        canvas.drawLine(linePts2[0], linePts2[1], linePts2[2], linePts2[3], paint);
+        canvas.drawPath(path, paint);
     }
 }

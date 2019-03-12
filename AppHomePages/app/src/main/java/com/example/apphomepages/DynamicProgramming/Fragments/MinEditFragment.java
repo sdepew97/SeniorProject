@@ -1,28 +1,24 @@
-package com.example.apphomepages.Greedy.Fragments;
+package com.example.apphomepages.DynamicProgramming.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.example.apphomepages.Greedy.Activities.GreedyActivity;
 import com.example.apphomepages.R;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GreedyFragment.OnFragmentInteractionListener} interface
+ * {@link MinEditFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GreedyFragment#newInstance} factory method to
+ * Use the {@link MinEditFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GreedyFragment extends Fragment
+public class MinEditFragment extends Fragment
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +31,7 @@ public class GreedyFragment extends Fragment
 
     private OnFragmentInteractionListener mListener;
 
-    public GreedyFragment()
+    public MinEditFragment()
     {
         // Required empty public constructor
     }
@@ -46,12 +42,12 @@ public class GreedyFragment extends Fragment
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GreedyFragment.
+     * @return A new instance of fragment MinEditFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GreedyFragment newInstance(String param1, String param2)
+    public static MinEditFragment newInstance(String param1, String param2)
     {
-        GreedyFragment fragment = new GreedyFragment();
+        MinEditFragment fragment = new MinEditFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -98,23 +94,7 @@ public class GreedyFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_greedy, container, false);
-
-        //Set up the buttons on the fragment
-        Button graphButton = view.findViewById(R.id.greedyAlgorithms);
-
-        graphButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), GreedyActivity.class);
-                startActivity(i);
-            }
-        });
-
-        return view;
+        return inflater.inflate(R.layout.fragment_min_edit, container, false);
     }
 
     @Override
