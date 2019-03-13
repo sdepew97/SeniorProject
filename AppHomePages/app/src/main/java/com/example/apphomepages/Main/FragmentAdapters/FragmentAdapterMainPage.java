@@ -1,13 +1,13 @@
 package com.example.apphomepages.Main.FragmentAdapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-
 import com.example.apphomepages.DynamicProgramming.Fragments.DynamicProgrammingFragment;
 import com.example.apphomepages.Graph.Fragments.GraphFragment;
 import com.example.apphomepages.Greedy.Fragments.GreedyFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.SearchAndSortFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
 public class FragmentAdapterMainPage extends FragmentPagerAdapter
@@ -44,7 +44,7 @@ public class FragmentAdapterMainPage extends FragmentPagerAdapter
                 result = "Dynamic Programming";
                 break;
             default:
-                result = "SearchingActivity & SortingActivity";
+                result = "Searching & Sorting";
         }
 
         return result;
@@ -57,19 +57,19 @@ public class FragmentAdapterMainPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = SearchAndSortFragment.newInstance("One", "Two");
+                page = SearchAndSortFragment.newInstance();
                 break;
             case 1:
-                page = GraphFragment.newInstance("One", "Two");
+                page = GraphFragment.newInstance();
                 break; //input is number of columns of data
             case 2:
-                page = GreedyFragment.newInstance("One", "Two");
+                page = GreedyFragment.newInstance();
                 break;
             case 3:
-                page = DynamicProgrammingFragment.newInstance("One", "Two");
+                page = DynamicProgrammingFragment.newInstance();
                 break;
             default:
-                page = SearchAndSortFragment.newInstance("One", "Two"); //default fragment to return
+                page = SearchAndSortFragment.newInstance(); //default fragment to return
                 break;
         }
 

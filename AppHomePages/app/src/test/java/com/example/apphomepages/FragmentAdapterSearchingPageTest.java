@@ -1,6 +1,6 @@
 package com.example.apphomepages;
 
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.apphomepages.SearchAndSort.FragmentAdapters.FragmentAdapterSearchingPage;
 import com.example.apphomepages.SearchAndSort.Fragments.BinarySearchFragment;

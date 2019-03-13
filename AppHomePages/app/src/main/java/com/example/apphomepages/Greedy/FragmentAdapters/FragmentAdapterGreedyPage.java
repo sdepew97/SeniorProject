@@ -1,8 +1,8 @@
 package com.example.apphomepages.Greedy.FragmentAdapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.apphomepages.Greedy.Fragments.DijkstrasFragment;
 import com.example.apphomepages.Greedy.Fragments.IntervalSchedulingFragment;
@@ -47,13 +47,13 @@ public class FragmentAdapterGreedyPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = IntervalSchedulingFragment.newInstance("One", "Two");
+                page = IntervalSchedulingFragment.newInstance();
                 break;
             case 1:
-                page = DijkstrasFragment.newInstance("One", "Two");
+                page = DijkstrasFragment.newInstance();
                 break; //input is number of columns of data
             default:
-                page = IntervalSchedulingFragment.newInstance("One", "Two");
+                page = IntervalSchedulingFragment.newInstance();
                 break;
         }
 

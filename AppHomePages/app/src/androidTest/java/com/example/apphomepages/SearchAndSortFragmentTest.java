@@ -2,38 +2,11 @@ package com.example.apphomepages;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class SearchAndSortFragmentTest
 {
-
     @Test
-    public void newInstance()
+    public void testSearchAndSortFragment()
     {
-    }
 
-    @Test
-    public void onButtonPressed()
-    {
-    }
-
-    @Test
-    public void onAttach()
-    {
-    }
-
-    @Test
-    public void onCreate()
-    {
-    }
-
-    @Test
-    public void onCreateView()
-    {
-    }
-
-    @Test
-    public void onDetach()
-    {
     }
 }

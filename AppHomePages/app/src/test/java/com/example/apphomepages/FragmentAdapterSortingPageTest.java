@@ -1,6 +1,6 @@
 package com.example.apphomepages;
 
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.apphomepages.SearchAndSort.FragmentAdapters.FragmentAdapterSortingPage;
 import com.example.apphomepages.SearchAndSort.Fragments.BubbleSortFragment;

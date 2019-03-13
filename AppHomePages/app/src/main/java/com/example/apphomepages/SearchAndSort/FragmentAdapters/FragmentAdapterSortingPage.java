@@ -1,14 +1,13 @@
 package com.example.apphomepages.SearchAndSort.FragmentAdapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.apphomepages.SearchAndSort.Fragments.BubbleSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.InsertionSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.MergeSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.QuicksortFragment;
-import com.example.apphomepages.SearchAndSort.Fragments.SearchAndSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.SelectionSortFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through

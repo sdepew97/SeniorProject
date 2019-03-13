@@ -1,8 +1,8 @@
 package com.example.apphomepages.DynamicProgramming.FragmentAdapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
 import com.example.apphomepages.DynamicProgramming.Fragments.NQueensFragment;
@@ -47,13 +47,13 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = NQueensFragment.newInstance("One", "Two");
+                page = NQueensFragment.newInstance();
                 break;
             case 1:
-                page = MinEditFragment.newInstance("One", "Two");
+                page = MinEditFragment.newInstance();
                 break; //input is number of columns of data
             default:
-                page = NQueensFragment.newInstance("One", "Two"); //default fragment to return
+                page = NQueensFragment.newInstance(); //default fragment to return
                 break;
         }
 
