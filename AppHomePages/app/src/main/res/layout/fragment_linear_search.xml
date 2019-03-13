@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".15" />
+        app:layout_constraintGuide_percent=".10" />
 
     <android.support.constraint.Guideline
         android:id="@+id/bottom_guideline"
@@ -85,11 +85,11 @@
 
     <Button
         android:id="@+id/instructionsButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/instructions_button"
 
-        app:layout_constraintBottom_toBottomOf="@id/top_guideline2"
+        app:layout_constraintBottom_toBottomOf="@id/top_guideline"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
@@ -98,8 +98,6 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
@@ -108,8 +106,8 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
         app:layout_constraintLeft_toLeftOf="@id/right_guideline4"
@@ -118,8 +116,8 @@
 
     <Button
         android:id="@+id/generateButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/generate_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
@@ -129,8 +127,8 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/start_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline4"
@@ -140,8 +138,8 @@
 
     <Button
         android:id="@+id/stopButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/stop_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline4"
@@ -151,8 +149,8 @@
 
     <Button
         android:id="@+id/rewindButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/rewind_button"
 
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline4"
@@ -202,5 +200,4 @@
 
         </LinearLayout>
     </ScrollView>
-
 </android.support.constraint.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
+import com.example.apphomepages.Graph.DialogFragments.DFSDialogFragment;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 import com.example.apphomepages.R;
+import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
 import java.util.ArrayList;
@@ -128,6 +131,7 @@ public class DFSFragment extends Fragment
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
         Button proofButton = viewGlobal.findViewById(R.id.proofButton);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
         final Spinner spinnerSelect = viewGlobal.findViewById(R.id.spinnerSelect);
 
@@ -279,6 +283,17 @@ public class DFSFragment extends Fragment
                 //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
                 Uri uri = Uri.parse("http://home.cse.ust.hk/faculty/golin/COMP271Sp03/Notes/MyL08.pdf");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
+
+        instructionsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentManager fm = getFragmentManager();
+                DFSDialogFragment dialogFragment = new DFSDialogFragment();
+                dialogFragment.show(fm, "Instructions Fragment");
             }
         });
 

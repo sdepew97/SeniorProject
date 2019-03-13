@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,10 @@ import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
+import com.example.apphomepages.Graph.DialogFragments.TODialogFragment;
 import com.example.apphomepages.Graph.Drawable.TopologicalOrderingDrawable;
 import com.example.apphomepages.R;
+import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +129,7 @@ public class TopologicalFragment extends Fragment
             Button stopButton = viewGlobal.findViewById(R.id.stopButton);
             Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
             Button proofButton = viewGlobal.findViewById(R.id.proofButton);
+            Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
 
             //Construct the names of the graph's nodes
             String[] nodeValues = {"Algebra 1", "Geometry", "Algebra 2", "Trigonometry", "Statistics", "Probability", "Pre-Calculus", "Calculus I", "AP Calculus"};
@@ -195,6 +199,17 @@ public class TopologicalFragment extends Fragment
                     //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
                     Uri uri = Uri.parse("http://www.columbia.edu/~cs2035/courses/csor4231.F15/ts.pdf"); //TODO: find proof that doesn't require downloading anything!
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                }
+            });
+
+            instructionsButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    FragmentManager fm = getFragmentManager();
+                    TODialogFragment dialogFragment = new TODialogFragment();
+                    dialogFragment.show(fm, "Instructions Fragment");
                 }
             });
         }
