@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.apphomepages"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -50,4 +50,21 @@ dependencies {
     // Optional if you need to detect intents.
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
+    testImplementation "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.ext.rulesVersion"
+
+    // Espresso UI Testing dependencies.
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
+
 }
