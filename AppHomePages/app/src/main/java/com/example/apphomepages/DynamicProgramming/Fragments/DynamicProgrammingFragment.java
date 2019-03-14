@@ -2,7 +2,6 @@ package com.example.apphomepages.DynamicProgramming.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,14 +43,6 @@ public class DynamicProgrammingFragment extends Fragment
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -117,7 +108,5 @@ public class DynamicProgrammingFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

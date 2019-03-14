@@ -2,11 +2,15 @@ package com.example.apphomepages;
 
 import android.app.Activity;
 
+import com.example.apphomepages.DynamicProgramming.Activities.DynamicProgrammingActivity;
+import com.example.apphomepages.Graph.Activities.GraphActivity;
+import com.example.apphomepages.Greedy.Activities.GreedyActivity;
 import com.example.apphomepages.Main.Activities.MainActivity;
+import com.example.apphomepages.SearchAndSort.Activities.SearchingActivity;
+import com.example.apphomepages.SearchAndSort.Activities.SortingActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
@@ -14,11 +18,11 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 //I Used https://github.com/googlesamples/android-testing and the Android documentation when writing these tests
@@ -29,7 +33,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
  * <p>
  * Note that there is no need to tell Espresso that a view is in a different {@link Activity}.
  */
-@RunWith(AndroidJUnit4.class)
 @LargeTest
 public class MainActivityTest
 {
@@ -65,15 +68,6 @@ public class MainActivityTest
         scenario.moveToState(Lifecycle.State.RESUMED);
     }
 
-    //Not a supported state
-    /*
-    @Test
-    public void testMainInitialized()
-    {
-        rule.getScenario().moveToState(Lifecycle.State.INITIALIZED);
-    }
-    */
-
     @Test
     public void swipeThroughPages()
     {
@@ -89,44 +83,52 @@ public class MainActivityTest
     }
 
     @Test
-    public void selectSearching()
+    public void clickSearching()
     {
-        onView(withId(R.id.searchingButton)).perform(click());
+        onView(withId(R.id.searchingButton)).perform(ViewActions.click());
+        intended(hasComponent(SearchingActivity.class.getName()));
+    }
+
+    //Used https://stackoverflow.com/questions/25998659/espresso-how-can-i-check-if-an-activity-is-launched-after-performing-a-certain
+    @Test
+    public void clickSorting()
+    {
+        onView(withId(R.id.sortingButton)).perform(ViewActions.click());
+        intended(hasComponent(SortingActivity.class.getName()));
     }
 
     @Test
-    public void selectSorting()
+    public void clickGraph() throws InterruptedException
     {
-        onView(withId(R.id.sortingButton)).perform(click());
-    }
-
-    /*
-    @Test
-    public void selectGraph()
-    {
-        //onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.graphAlgorithms))
-                .perform(scrollTo(), click());
-        //onView(withId(R.id.graphAlgorithms)).perform(click());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        //TODO: figure out better solution than waiting here!
+        Thread.sleep(500);
+        onView(withId(R.id.graphAlgorithms)).perform(ViewActions.click());
+        intended(hasComponent(GraphActivity.class.getName()));
     }
 
     @Test
-    public void selectGreedy()
+    public void clickGreedy() throws InterruptedException
     {
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.greedyAlgorithms)).perform(click());
+        //TODO: figure out better solution than waiting here!
+        Thread.sleep(500);
+        onView(withId(R.id.greedyAlgorithms)).perform(ViewActions.click());
+        intended(hasComponent(GreedyActivity.class.getName()));
     }
 
     @Test
-    public void selectDynamicProgramming()
+    public void clickDP() throws InterruptedException
     {
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.dynamicProgrammingAlgorithms)).perform(click());
+        //TODO: figure out better solution than waiting here!
+        Thread.sleep(500);
+        onView(withId(R.id.dynamicProgrammingAlgorithms)).perform(ViewActions.click());
+        intended(hasComponent(DynamicProgrammingActivity.class.getName()));
     }
-    */
 
     @Test
     public void testMainDestroyed()

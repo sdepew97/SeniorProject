@@ -1,20 +1,19 @@
 package com.example.apphomepages.DynamicProgramming.Activities;
 
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.tabs.TabLayout;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.apphomepages.DynamicProgramming.FragmentAdapters.FragmentAdapterDPPage;
 import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
 import com.example.apphomepages.DynamicProgramming.Fragments.NQueensFragment;
 import com.example.apphomepages.R;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class DynamicProgrammingActivity extends AppCompatActivity implements NQueensFragment.OnFragmentInteractionListener, MinEditFragment.OnFragmentInteractionListener
 {
@@ -53,11 +52,4 @@ public class DynamicProgrammingActivity extends AppCompatActivity implements NQu
         int tabColors = ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null);
         tabLayout.setBackground(new ColorDrawable(tabColors));
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri)
-    {
-        Log.e(TAG, "Fragment interaction listener");
-    }
-
 }
