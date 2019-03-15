@@ -18,7 +18,7 @@ public class BubbleSortDialogFragment extends DialogFragment
         View rootView = inflater.inflate(R.layout.fragment_bubble_sort_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_bubble);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

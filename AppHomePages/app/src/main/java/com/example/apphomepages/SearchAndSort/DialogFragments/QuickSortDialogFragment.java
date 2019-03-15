@@ -18,7 +18,7 @@ public class QuickSortDialogFragment extends DialogFragment
         View rootView = inflater.inflate(R.layout.fragment_quick_sort_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_quick);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

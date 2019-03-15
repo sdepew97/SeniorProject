@@ -2,7 +2,6 @@ package com.example.apphomepages.SearchAndSort.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,22 +42,12 @@ public class SearchAndSortFragment extends Fragment
      *
      * @return A new instance of fragment SearchAndSortFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SearchAndSortFragment newInstance()
     {
         SearchAndSortFragment fragment = new SearchAndSortFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -140,7 +129,5 @@ public class SearchAndSortFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

@@ -6,8 +6,6 @@ import android.database.DataSetObserver;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +27,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,15 +41,6 @@ import java.util.Random;
  */
 public class BinarySearchFragment extends Fragment implements SpinnerAdapter
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     //Global variables
     private ArrayList<Integer> numbers = null;
     private Integer soughtAfter = -1;
@@ -67,28 +59,15 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment BinarySearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BinarySearchFragment newInstance(String param1, String param2)
+    public static BinarySearchFragment newInstance()
     {
         BinarySearchFragment fragment = new BinarySearchFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -109,11 +88,6 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -128,13 +102,13 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
         final View viewGlobal = inflater.inflate(R.layout.fragment_binary_search, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-        Button startButton = viewGlobal.findViewById(R.id.startButton);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
-        final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonBinary);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonBinary);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonBinary);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonBinary);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonBinary);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonBinary);
+        final Spinner spinner = viewGlobal.findViewById(R.id.spinnerBinary);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -172,7 +146,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
 
                 stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewBinary);
                 SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
             }
         });
@@ -206,7 +180,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
                 stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
 
                 animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewBinary);
                 SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
             }
 
@@ -356,7 +330,5 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

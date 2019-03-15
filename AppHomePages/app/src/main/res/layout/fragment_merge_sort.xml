@@ -84,7 +84,7 @@
         app:layout_constraintGuide_percent=".75" />
 
     <Button
-        android:id="@+id/instructionsButton"
+        android:id="@+id/instructionsButtonMerge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewMerge"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerMerge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/generateButton"
+        android:id="@+id/generateButtonMerge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/generate_button"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/startButtonMerge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButton"
+        android:id="@+id/stopButtonMerge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -150,7 +150,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButton"
+        android:id="@+id/rewindButtonMerge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -161,9 +161,10 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
+        android:id="@+id/scrollProofMerge"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
@@ -194,7 +195,7 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButton"
+                android:id="@+id/proofButtonMerge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />

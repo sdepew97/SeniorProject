@@ -1,11 +1,11 @@
 package com.example.apphomepages.SearchAndSort.FragmentAdapters;
 
+import com.example.apphomepages.SearchAndSort.Fragments.BinarySearchFragment;
+import com.example.apphomepages.SearchAndSort.Fragments.LinearSearchFragment;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.example.apphomepages.SearchAndSort.Fragments.BinarySearchFragment;
-import com.example.apphomepages.SearchAndSort.Fragments.LinearSearchFragment;
 
 //The FragmentAdapter controls all the fragments for the main page that we swipe through
 public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
@@ -52,7 +52,7 @@ public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
                 page = LinearSearchFragment.newInstance("One", "Two");
                 break;
             case 1:
-                page = BinarySearchFragment.newInstance("One", "Two");
+                page = BinarySearchFragment.newInstance();
                 break; //input is number of columns of data
             default:
                 page = LinearSearchFragment.newInstance("One", "Two"); //default fragment to return

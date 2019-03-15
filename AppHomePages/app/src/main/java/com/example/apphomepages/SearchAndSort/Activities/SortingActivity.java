@@ -57,7 +57,6 @@ public class SortingActivity extends AppCompatActivity implements BubbleSortFrag
         tabLayout.setBackground(new ColorDrawable(tabColors));
     }
 
-    @Override
     public void onFragmentInteraction(Uri uri)
     {
         Log.e(TAG, "Fragment interaction listener");

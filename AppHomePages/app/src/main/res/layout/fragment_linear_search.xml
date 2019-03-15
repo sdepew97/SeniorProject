@@ -84,7 +84,7 @@
         app:layout_constraintGuide_percent=".65" />
 
     <Button
-        android:id="@+id/instructionsButton"
+        android:id="@+id/instructionsButtonLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewLinear"
         android:layout_width="0dp"
         android:layout_height="0dp"
 
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/generateButton"
+        android:id="@+id/generateButtonLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/generate_button"
@@ -126,7 +126,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/startButtonLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -137,7 +137,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButton"
+        android:id="@+id/stopButtonLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -148,7 +148,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButton"
+        android:id="@+id/rewindButtonLinear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -159,9 +159,10 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
+        android:id="@+id/scrollProofLinear"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
@@ -179,7 +180,7 @@
 
             <!-- used resource (https://stackoverflow.com/questions/13264794/font-size-of-textview-in-android-application-changes-on-changing-font-size-from) to figure out how to adjust text size -->
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -193,7 +194,7 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButton"
+                android:id="@+id/proofButtonLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />

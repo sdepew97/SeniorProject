@@ -18,7 +18,7 @@ public class MergeSortDialogFragment extends DialogFragment
         View rootView = inflater.inflate(R.layout.fragment_merge_sort_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_merge);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

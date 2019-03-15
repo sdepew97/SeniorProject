@@ -7,13 +7,13 @@
     android:padding="10dp">
 
     <Button
-        android:id="@+id/close_instructions"
+        android:id="@+id/close_instructions_binary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_close_instructions" />
 
     <ScrollView
-        android:id="@+id/scroll"
+        android:id="@+id/scrollBinaryInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

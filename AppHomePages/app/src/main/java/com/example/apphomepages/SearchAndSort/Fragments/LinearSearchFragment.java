@@ -6,8 +6,6 @@ import android.database.DataSetObserver;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +25,9 @@ import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 /**
@@ -116,13 +117,13 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
         final View viewGlobal = inflater.inflate(R.layout.fragment_linear_search, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-        Button startButton = viewGlobal.findViewById(R.id.startButton);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
-        final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonLinear);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonLinear);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonLinear);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonLinear);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonLinear);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonLinear);
+        final Spinner spinner = viewGlobal.findViewById(R.id.spinnerLinear);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -155,7 +156,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
                     stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
                 }
 
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewLinear);
                 SearchAnimations.generateLinearSearch(locationInArray, numbers, stopMotionAnimation, image, animationDrawable);
             }
         });
@@ -188,7 +189,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
                 }
 
                 animationDrawable = new AnimationDrawable(); //wipe the drawable and put in new frames
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewLinear);
                 SearchAnimations.generateLinearSearch(locationInArray, numbers, stopMotionAnimation, image, animationDrawable);
             }
 

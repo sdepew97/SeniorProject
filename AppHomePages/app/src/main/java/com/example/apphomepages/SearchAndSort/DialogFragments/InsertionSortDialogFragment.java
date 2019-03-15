@@ -18,7 +18,7 @@ public class InsertionSortDialogFragment extends DialogFragment
         View rootView = inflater.inflate(R.layout.fragment_insertion_sort_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_insertion);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

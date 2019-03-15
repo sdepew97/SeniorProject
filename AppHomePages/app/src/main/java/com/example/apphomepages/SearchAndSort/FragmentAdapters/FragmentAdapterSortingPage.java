@@ -61,22 +61,22 @@ public class FragmentAdapterSortingPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = BubbleSortFragment.newInstance("One", "Two");
+                page = BubbleSortFragment.newInstance();
                 break;
             case 1:
-                page = InsertionSortFragment.newInstance("One", "Two");
+                page = InsertionSortFragment.newInstance();
                 break; //input is number of columns of data
             case 2:
-                page = SelectionSortFragment.newInstance("One", "Two");
+                page = SelectionSortFragment.newInstance();
                 break; //input is number of columns of data
             case 3:
-                page = MergeSortFragment.newInstance("One", "Two");
+                page = MergeSortFragment.newInstance();
                 break; //input is number of columns of data
             case 4:
-                page = QuicksortFragment.newInstance("One", "Two");
+                page = QuicksortFragment.newInstance();
                 break; //input is number of columns of data
             default:
-                page = BubbleSortFragment.newInstance("One", "Two"); //default fragment to return
+                page = BubbleSortFragment.newInstance(); //default fragment to return
                 break;
         }
 
