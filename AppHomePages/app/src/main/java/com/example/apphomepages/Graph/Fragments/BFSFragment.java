@@ -72,15 +72,6 @@ public class BFSFragment extends Fragment
         return fragment;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context)
     {
@@ -109,13 +100,13 @@ public class BFSFragment extends Fragment
         final View viewGlobal = inflater.inflate(R.layout.fragment_bf, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button startButton = viewGlobal.findViewById(R.id.startButton);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonBFS);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonBFS);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonBFS);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonBFS);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonBFS);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
-        final Spinner spinnerSelect = viewGlobal.findViewById(R.id.spinnerSelect);
+        final Spinner spinnerSelect = viewGlobal.findViewById(R.id.spinnerSelectBFS);
 
         //Create an ArrayList of integers as the possible initial values
         //Used this resource to figure out the types of binary trees https://www.geeksforgeeks.org/binary-tree-set-3-types-of-binary-tree/
@@ -179,7 +170,7 @@ public class BFSFragment extends Fragment
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewBFS);
 
                 GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
             }
@@ -216,7 +207,7 @@ public class BFSFragment extends Fragment
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewBFS);
 
                 GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
             }

@@ -105,7 +105,7 @@
         app:layout_constraintGuide_percent=".65" />
 
     <Button
-        android:id="@+id/instructionsButton"
+        android:id="@+id/instructionsButtonTopological"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -116,7 +116,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewTopological"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Button
-        android:id="@+id/generateButton"
+        android:id="@+id/generateButtonTopological"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/generate_button"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/startButtonTopological"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -150,7 +150,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButton"
+        android:id="@+id/stopButtonTopological"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -161,7 +161,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButton"
+        android:id="@+id/rewindButtonTopological"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -172,9 +172,10 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
+        android:id="@+id/scrollProofTopological"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
@@ -205,33 +206,11 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButton"
+                android:id="@+id/proofButtonTopological"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />
         </LinearLayout>
     </ScrollView>
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_topological_ordering"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        app:layout_constraintBottom_toBottomOf="@id/top_guideline"
-        app:layout_constraintLeft_toLeftOf="@id/left_guideline_alltheway"
-        app:layout_constraintRight_toRightOf="@id/right_guideline_alltheway"
-        app:layout_constraintTop_toTopOf="@id/top_guideline_alltheway" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_depth_first_search"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        app:layout_constraintBottom_toBottomOf="@id/top_guideline"
-        app:layout_constraintLeft_toLeftOf="@id/left_guideline_alltheway"
-        app:layout_constraintRight_toRightOf="@id/right_guideline_alltheway"
-        app:layout_constraintTop_toTopOf="@id/top_guideline_alltheway" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

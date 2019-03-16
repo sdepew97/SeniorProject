@@ -79,6 +79,176 @@ public class GraphActivityTest
     //TODO: make sure all buttons can be clicked
 
     @Test
+    public void checkInstructionsDFS() throws InterruptedException
+    {
+        onView(withId(R.id.instructionsButtonDFS)).perform(ViewActions.click());
+        Thread.sleep(500);
+        onView(withId(R.id.scrollDFSInstructions)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.close_instructions_dfs)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkInstructionsBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.instructionsButtonBFS)).perform(ViewActions.click());
+        Thread.sleep(500);
+        onView(withId(R.id.scrollBFSInstructions)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.close_instructions_bfs)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkInstructionsTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.instructionsButtonTopological)).perform(ViewActions.click());
+        Thread.sleep(500);
+        onView(withId(R.id.scrollTopologicalInstructions)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.close_instructions_topological)).perform(ViewActions.click());
+    }
+
+    //TODO: uncomment tests once the graphs are auto-generated!
+
+    /*
+    @Test
+    public void checkGenerateDFS() throws InterruptedException
+    {
+        onView(withId(R.id.generateButtonDFS)).perform(ViewActions.click());
+    }
+    */
+
+    /*
+    @Test
+    public void checkGenerateBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.generateButtonBFS)).perform(ViewActions.click());
+    }
+    */
+
+    @Test
+    public void checkGenerateTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.generateButtonTopological)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkSpinnerDFS()
+    {
+        onView(withId(R.id.spinnerSelectDFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkSpinnerBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.spinnerSelectBFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStartDFS()
+    {
+        onView(withId(R.id.startButtonDFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStartBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.startButtonBFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStartTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.startButtonTopological)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStopDFS()
+    {
+        onView(withId(R.id.stopButtonDFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStopBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.stopButtonBFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkStopTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.stopButtonTopological)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkRewindDFS()
+    {
+        onView(withId(R.id.rewindButtonDFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkRewindBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.rewindButtonBFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkRewindTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.rewindButtonTopological)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkProofDFS() throws InterruptedException
+    {
+        onView(withId(R.id.scrollProofDFS)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.proofButtonDFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkProofBFS() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.scrollProofBFS)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.proofButtonBFS)).perform(ViewActions.click());
+    }
+
+    @Test
+    public void checkProofTopological() throws InterruptedException
+    {
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
+        Thread.sleep(500);
+        onView(withId(R.id.scrollProofTopological)).perform(ViewActions.swipeUp());
+        onView(withId(R.id.proofButtonTopological)).perform(ViewActions.click());
+    }
+
+    @Test
     public void testGraphDestroyed()
     {
         ActivityScenario<GraphActivity> scenario = ActivityScenario.launch(GraphActivity.class);

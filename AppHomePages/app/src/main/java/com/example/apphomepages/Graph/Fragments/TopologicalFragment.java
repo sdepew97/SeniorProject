@@ -68,15 +68,6 @@ public class TopologicalFragment extends Fragment
         return fragment;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context)
     {
@@ -106,12 +97,12 @@ public class TopologicalFragment extends Fragment
 
         {
             //Set up the buttons and clickable elements on the fragment
-            Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-            Button startButton = viewGlobal.findViewById(R.id.startButton);
-            Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-            Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-            Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-            Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
+            Button generateButton = viewGlobal.findViewById(R.id.generateButtonTopological);
+            Button startButton = viewGlobal.findViewById(R.id.startButtonTopological);
+            Button stopButton = viewGlobal.findViewById(R.id.stopButtonTopological);
+            Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonTopological);
+            Button proofButton = viewGlobal.findViewById(R.id.proofButtonTopological);
+            Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonTopological);
 
             //Construct the names of the graph's nodes
             String[] nodeValues = {"Algebra 1", "Geometry", "Algebra 2", "Trigonometry", "Statistics", "Probability", "Pre-Calculus", "Calculus I", "AP Calculus"};
@@ -138,7 +129,7 @@ public class TopologicalFragment extends Fragment
                     stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlight.size() + 2];
 
                     animationDrawable = new AnimationDrawable();
-                    image = viewGlobal.findViewById(R.id.imageView);
+                    image = viewGlobal.findViewById(R.id.imageViewTopological);
 
                     GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlight, g, stopMotionAnimation, image, animationDrawable);
                 }
@@ -251,7 +242,5 @@ public class TopologicalFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
