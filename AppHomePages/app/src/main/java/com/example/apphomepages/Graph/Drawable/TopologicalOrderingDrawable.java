@@ -73,10 +73,9 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
-        ArrayList<String> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, "", true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
+        ArrayList<Node<String>> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, null, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
-        //TODO (Sarah): draw the connecting edges on the graph
         ArrayList<Node<String>> nodes = graph.getGraphElements();
 
         for (Node<String> n : nodes)
@@ -86,8 +85,8 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
             for (Node<String> a : adjacentNodes)
             {
                 //TODO: test that the node's value is actually in the list and that this code doesn't error
-                Point start = centersOfCircles[layoutOrder.indexOf(n.getNodeValue())];
-                Point end = centersOfCircles[layoutOrder.indexOf(a.getNodeValue())];
+                Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())];
+                Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
                 Matrix m = new Matrix();
@@ -108,7 +107,7 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMainPaint);
             }
 
-            canvas.drawText(layoutOrder.get(i), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
+            canvas.drawText(layoutOrder.get(i).getNodeValue(), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
         }
     }
 

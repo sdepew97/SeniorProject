@@ -1,12 +1,12 @@
 package com.example.apphomepages.Graph.FragmentAdapters;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-
 import com.example.apphomepages.Graph.Fragments.BFSFragment;
 import com.example.apphomepages.Graph.Fragments.DFSFragment;
 import com.example.apphomepages.Graph.Fragments.TopologicalFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 public class FragmentAdapterGraphPage extends FragmentPagerAdapter
 {
@@ -51,16 +51,16 @@ public class FragmentAdapterGraphPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = DFSFragment.newInstance("One", "Two");
+                page = DFSFragment.newInstance();
                 break;
             case 1:
-                page = BFSFragment.newInstance("One", "Two");
+                page = BFSFragment.newInstance();
                 break; //input is number of columns of data
             case 2:
-                page = TopologicalFragment.newInstance("One", "Two");
+                page = TopologicalFragment.newInstance();
                 break;
             default:
-                page = DFSFragment.newInstance("One", "Two"); //default fragment to return
+                page = DFSFragment.newInstance(); //default fragment to return
                 break;
         }
 

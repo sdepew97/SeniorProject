@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +16,14 @@ import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 import com.example.apphomepages.SearchAndSort.DialogFragments.QuickSortDialogFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayQuicksortDrawable;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArray;
 
@@ -38,15 +38,6 @@ import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithm
  */
 public class QuicksortFragment extends Fragment
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     //Global variables
     private ArrayList<Integer> numbers = null;
     private int index = 0;
@@ -65,28 +56,14 @@ public class QuicksortFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment QuicksortFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static QuicksortFragment newInstance(String param1, String param2)
+    public static QuicksortFragment newInstance()
     {
         QuicksortFragment fragment = new QuicksortFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -107,11 +84,6 @@ public class QuicksortFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -126,12 +98,12 @@ public class QuicksortFragment extends Fragment
         final View view = inflater.inflate(R.layout.fragment_quicksort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = view.findViewById(R.id.generateButton);
-        Button startButton = view.findViewById(R.id.startButton);
-        Button stopButton = view.findViewById(R.id.stopButton);
-        Button rewindButton = view.findViewById(R.id.rewindButton);
-        Button proofButton = view.findViewById(R.id.proofButton);
-        Button instructionsButton = view.findViewById(R.id.instructionsButton);
+        Button generateButton = view.findViewById(R.id.generateButtonQuick);
+        Button startButton = view.findViewById(R.id.startButtonQuick);
+        Button stopButton = view.findViewById(R.id.stopButtonQuick);
+        Button rewindButton = view.findViewById(R.id.rewindButtonQuick);
+        Button proofButton = view.findViewById(R.id.proofButtonQuick);
+        Button instructionsButton = view.findViewById(R.id.instructionsButtonQuick);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -152,7 +124,7 @@ public class QuicksortFragment extends Fragment
 
                 stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size() + 2];
 
-                image = view.findViewById(R.id.imageView);
+                image = view.findViewById(R.id.imageViewQuick);
                 SortAnimations.generateQuicksort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
             }
         });
@@ -230,7 +202,5 @@ public class QuicksortFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

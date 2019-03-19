@@ -4,11 +4,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.TabLayout;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import com.google.android.material.tabs.TabLayout;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.apphomepages.R;
@@ -57,7 +57,6 @@ public class SortingActivity extends AppCompatActivity implements BubbleSortFrag
         tabLayout.setBackground(new ColorDrawable(tabColors));
     }
 
-    @Override
     public void onFragmentInteraction(Uri uri)
     {
         Log.e(TAG, "Fragment interaction listener");

@@ -272,7 +272,7 @@ public class SortingAlgorithms
         } else
         {
             //Add the case where each element is a singleton!
-            Color c = Color.getFound(); //TODO (Sarah): determine if I want to use a consistent color for the base...
+            Color c = Color.getFound();
             returnList.add(new MergeSortReturnType(l, r, c, copyArray(arr)));
         }
 

@@ -10,6 +10,8 @@ import com.example.apphomepages.General.DataTypes.Point;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class GraphHelperMethods
 {
@@ -24,17 +26,36 @@ public class GraphHelperMethods
         spinner.setSelection(index); //choose the element in the array to select automatically from the dropdown menu (a.k.a. spinner menu)
     }
 
+    public static <A> int getNodeIndexBasedOnId(ArrayList<Node<A>> nodes, Integer nodeId)
+    {
+        for (int i = 0; i < nodes.size(); i++)
+        {
+            if (nodes.get(i).getNodeId().equals(nodeId))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     public static <A> int numLayers(Graph<A> g)
     {
-        if (layersOfNodes(g) == null)
+        ArrayList<ArrayList<Node<A>>> list = layersOfNodes(g);
+        if (list == null)
         {
             return 0;
         } else
-            return layersOfNodes(g).size();
+            return list.size();
     }
 
     public static <A> Point[] placeNodes(Graph<A> g, int width, int height)
     {
+        if (g.getGraphElements().size() == 0)
+        {
+            return new Point[0];
+        }
+
         Point[] centers = new Point[g.getGraphElements().size()];
 
         //Initialize each point
@@ -68,12 +89,8 @@ public class GraphHelperMethods
         return centers;
     }
 
-    //TODO: add cycle breaking code and work on tests including multiple separate cycles in a graph
     private static <A> ArrayList<ArrayList<Node<A>>> layersOfNodes(Graph<A> g)
     {
-        //Divides the nodes in a graph into layers using the breadth first search algorithm
-        int currentLayer = 0;
-
         ArrayList<Node<A>> vertices = g.getGraphElements();
 
         if (vertices.size() == 0)
@@ -81,64 +98,88 @@ public class GraphHelperMethods
             return null;
         }
 
+        //Order in which the nodes are visited
+        ArrayList<Node<A>> visitOrder = new ArrayList<>();
+
         //Now we know we have some vertices in the graph
         for (Node<A> n : vertices)
         {
             n.setVisited(false);
         }
 
-        ArrayList<ArrayList<Node<A>>> orderVisited = new ArrayList<>();
+        Queue<Node<A>> queue = new LinkedList<>();
 
         //Start with the root(s) of the graph (nodes that have no elements going into them...)
-        ArrayList<Node<A>> currentLayerNodes = getIsolated(vertices);
+        ArrayList<Node<A>> isolated = getIsolatedOrRoot(vertices);
 
         //Mark all of them!
-        for (Node<A> n : currentLayerNodes)
-            n.mark();
-
-        //The starting layer
-        orderVisited.add(currentLayerNodes);
-
-        while (!allNodesMarked(g))
+        for (Node<A> n : isolated)
         {
-            orderVisited.add(currentLayer + 1, new ArrayList<Node<A>>()); //initialize
-            for (Node<A> n : currentLayerNodes)
-            {
-                ArrayList<Node<A>> adjacent = n.getAdjacentNodes();
+            n.mark();
+            queue.add(n);
+        }
 
-                for (int i = adjacent.size() - 1; i >= 0; i--)
+        //Add the first marker
+        Node<A> marker1 = new Node<>(null, -1);
+        queue.add(marker1);
+
+        while (queue.size() != 0)
+        {
+            Node<A> n = queue.poll();
+
+            //when you pop a marker, if there are more nodes to look at, add a new one
+            if (n.getNodeValue() == null && queue.size() != 0)
+            {
+                Node<A> marker = new Node<>(null, -1);
+                visitOrder.add(marker);
+                queue.add(marker);
+            } else
+            {
+                visitOrder.add(n);
+
+                ArrayList<Node<A>> adjacent = n.getAdjacentNodes();
+                for (Node<A> a : adjacent)
                 {
-                    Node a = adjacent.get(i);
                     if (!a.isVisited())
                     {
-                        orderVisited.get(currentLayer + 1).add(a);
                         a.mark();
+                        queue.add(a);
                     }
                 }
-
             }
-
-            currentLayer++;
-            currentLayerNodes = orderVisited.get(currentLayer);
         }
+
+        //Take the list of visited nodes and create the return value
+        ArrayList<ArrayList<Node<A>>> orderVisited = new ArrayList<>();
+        ArrayList<Node<A>> currentLayer = new ArrayList<>();
+
+        for (Node<A> n : visitOrder)
+        {
+            if (n.getNodeValue() != null)
+            {
+                currentLayer.add(n);
+            } else
+            {
+                orderVisited.add(currentLayer);
+                currentLayer = new ArrayList<>();
+            }
+        }
+
+        /*
+        //TODO: remove code, below after debugging complete
+        for (int i = 0; i < orderVisited.size(); i++)
+        {
+            for (Node<A> n : orderVisited.get(i))
+            {
+                System.out.println("Layer:  " + i + " Value: " + n.getNodeValue());
+            }
+        }
+        */
 
         return orderVisited;
     }
 
-    private static <A> boolean allNodesMarked(Graph<A> g)
-    {
-        for (Node<A> n : g.getGraphElements())
-        {
-            if (!n.isVisited())
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public static <A> ArrayList<Node<A>> getIsolated(ArrayList<Node<A>> nodes)
+    public static <A> ArrayList<Node<A>> getIsolatedOrRoot(ArrayList<Node<A>> nodes)
     {
         ArrayList<Node<A>> isolatedNodes = new ArrayList<>();
         boolean[] visited = new boolean[nodes.size()];
@@ -170,7 +211,6 @@ public class GraphHelperMethods
         {
             isolatedNodes.add(nodes.get(0));
         }
-
 
         return isolatedNodes;
     }

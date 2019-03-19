@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +20,12 @@ import com.example.apphomepages.Graph.Animations.GraphAnimations;
 import com.example.apphomepages.Graph.DialogFragments.TODialogFragment;
 import com.example.apphomepages.Graph.Drawable.TopologicalOrderingDrawable;
 import com.example.apphomepages.R;
-import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,15 +37,6 @@ import java.util.List;
  */
 public class TopologicalFragment extends Fragment
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     //Class variables
@@ -66,28 +57,14 @@ public class TopologicalFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment TopologicalFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static TopologicalFragment newInstance(String param1, String param2)
+    public static TopologicalFragment newInstance()
     {
         TopologicalFragment fragment = new TopologicalFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -108,11 +85,6 @@ public class TopologicalFragment extends Fragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -124,12 +96,12 @@ public class TopologicalFragment extends Fragment
 
         {
             //Set up the buttons and clickable elements on the fragment
-            Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-            Button startButton = viewGlobal.findViewById(R.id.startButton);
-            Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-            Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-            Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-            Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
+            Button generateButton = viewGlobal.findViewById(R.id.generateButtonTopological);
+            Button startButton = viewGlobal.findViewById(R.id.startButtonTopological);
+            Button stopButton = viewGlobal.findViewById(R.id.stopButtonTopological);
+            Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonTopological);
+            Button proofButton = viewGlobal.findViewById(R.id.proofButtonTopological);
+            Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonTopological);
 
             //Construct the names of the graph's nodes
             String[] nodeValues = {"Algebra 1", "Geometry", "Algebra 2", "Trigonometry", "Statistics", "Probability", "Pre-Calculus", "Calculus I", "AP Calculus"};
@@ -156,7 +128,7 @@ public class TopologicalFragment extends Fragment
                     stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlight.size() + 2];
 
                     animationDrawable = new AnimationDrawable();
-                    image = viewGlobal.findViewById(R.id.imageView);
+                    image = viewGlobal.findViewById(R.id.imageViewTopological);
 
                     GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlight, g, stopMotionAnimation, image, animationDrawable);
                 }
@@ -222,9 +194,11 @@ public class TopologicalFragment extends Fragment
         //construct nodes with no connections
         ArrayList<Node<String>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (String s : nodeValuesList)
         {
-            nodes.add(new Node<>(s));
+            nodes.add(new Node<>(s, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections to create the graph; note that all connections must be acyclic! (because of topological ordering..
@@ -269,7 +243,5 @@ public class TopologicalFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

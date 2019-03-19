@@ -1,13 +1,14 @@
 package com.example.apphomepages.SearchAndSort.DialogFragments;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.apphomepages.R;
+
+import androidx.fragment.app.DialogFragment;
 
 //Used https://stacktips.com/tutorials/android/android-dialog-fragment-example as a resource to create this code
 public class SelectionSortDialogFragment extends DialogFragment
@@ -18,7 +19,7 @@ public class SelectionSortDialogFragment extends DialogFragment
         View rootView = inflater.inflate(R.layout.fragment_selection_sort_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_selection);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

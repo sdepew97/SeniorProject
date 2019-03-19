@@ -12,10 +12,12 @@ import java.util.Stack;
 
 public class GraphAlgorithms
 {
+    //DFS is used on a graph that is connected. This algorithm will not work on a graph that has multiple disjoint parts.
     //Used https://www.geeksforgeeks.org/iterative-depth-first-traversal/ for the algorithm and Dianna Xu's CS330 slides, as well as https://en.wikipedia.org/wiki/Depth-first_search
-    public static ArrayList<Integer> depthFirstSearch(Graph<Integer> g, Integer valueSought, boolean traversal)
+    public static ArrayList<Node<Integer>> depthFirstSearch(Graph<Integer> g, Node<Integer> nodeSought, boolean traversal)
     {
-        ArrayList<Integer> visitOrder = new ArrayList<>();
+        ArrayList<Node<Integer>> visitOrder = new ArrayList<>(); //order of node ids
+
         //set mark to all false
         ArrayList<Node<Integer>> vertices = g.getGraphElements();
 
@@ -26,14 +28,8 @@ public class GraphAlgorithms
 
         Stack<Node<Integer>> stack = new Stack<>();
 
-        //Start with the root(s) of the graph (nodes that have no elements going into them...)
-        ArrayList<Node<Integer>> isolated = GraphHelperMethods.getIsolated(vertices);
-
-        //Mark all of them!
-        for (Node<Integer> n : isolated)
-        {
-            stack.push(n);
-        }
+        //Put a source node
+        stack.push(g.getGraphElements().get(0));
 
         while (!stack.empty())
         {
@@ -42,11 +38,11 @@ public class GraphAlgorithms
 
             if (!n.isVisited())
             {
-                visitOrder.add(n.getNodeValue());
+                visitOrder.add(n);
                 n.mark();
             }
 
-            if (n.getNodeValue().equals(valueSought) && !traversal)
+            if (!traversal && n.getNodeId().equals(nodeSought.getNodeId()))
             {
                 break;
             }
@@ -63,13 +59,13 @@ public class GraphAlgorithms
         }
 
         return visitOrder;
-
     }
 
     //Used https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
-    public static <A> ArrayList<A> breadthFirstSearch(Graph<A> g, A valueSought, boolean traversal)
+    public static <A> ArrayList<Node<A>> breadthFirstSearch(Graph<A> g, Node<A> nodeSought, boolean traversal)
     {
-        ArrayList<A> visitOrder = new ArrayList<>();
+        ArrayList<Node<A>> visitOrder = new ArrayList<>();
+
         //set mark to all false
         ArrayList<Node<A>> vertices = g.getGraphElements();
 
@@ -80,8 +76,9 @@ public class GraphAlgorithms
 
         Queue<Node<A>> queue = new LinkedList<>();
 
-        //Start with the root(s) of the graph (nodes that have no elements going into them...)
-        ArrayList<Node<A>> isolated = GraphHelperMethods.getIsolated(vertices);
+        //Start with the root(s) of the graph (nodes that have no elements going into them...this is needed for Topological Ordering)
+        //TODO: talk with Richard about this oddness
+        ArrayList<Node<A>> isolated = GraphHelperMethods.getIsolatedOrRoot(vertices);
 
         //Mark all of them!
         for (Node<A> n : isolated)
@@ -93,9 +90,9 @@ public class GraphAlgorithms
         while (queue.size() != 0)
         {
             Node<A> n = queue.poll();
-            visitOrder.add(n.getNodeValue());
+            visitOrder.add(n);
 
-            if (n.getNodeValue().equals(valueSought) && !traversal)
+            if (!traversal && n.getNodeId().equals(nodeSought.getNodeId()))
             {
                 break;
             }
@@ -131,7 +128,7 @@ public class GraphAlgorithms
         Queue<Node<String>> queue = new LinkedList<>();
 
         //Start with the root(s) of the graph (nodes that have no elements going into them...)
-        ArrayList<Node<String>> isolated = GraphHelperMethods.getIsolated(vertices);
+        ArrayList<Node<String>> isolated = GraphHelperMethods.getIsolatedOrRoot(vertices);
 
         //Mark all of them!
         queue.addAll(isolated);

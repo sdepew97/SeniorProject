@@ -1,82 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchAndSort.Fragments.BinarySearchFragment">
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/left_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".05" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/right_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".95" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/right_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".35" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/right_guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".65" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/right_guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".50" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".05" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/top_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".10" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".45" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".95" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent=".55" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottom_guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         app:layout_constraintGuide_percent=".65" />
 
     <Button
-        android:id="@+id/instructionsButton"
+        android:id="@+id/instructionsButtonBinary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewBinary"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinnerBinary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/generateButton"
+        android:id="@+id/generateButtonBinary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/generate_button"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/startButtonBinary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButton"
+        android:id="@+id/stopButtonBinary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -150,7 +150,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButton"
+        android:id="@+id/rewindButtonBinary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -161,9 +161,10 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
+        android:id="@+id/scrollProofBinary"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
         app:layout_constraintLeft_toLeftOf="@id/left_guideline"
         app:layout_constraintRight_toRightOf="@id/right_guideline"
@@ -180,7 +181,7 @@
             app:layout_constraintTop_toTopOf="@id/bottom_guideline4">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewBinary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -194,10 +195,10 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButton"
+                android:id="@+id/proofButtonBinary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />
         </LinearLayout>
     </ScrollView>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

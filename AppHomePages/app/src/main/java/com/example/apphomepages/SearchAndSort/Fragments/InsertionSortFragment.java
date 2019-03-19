@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +22,9 @@ import com.example.apphomepages.SearchAndSort.Drawable.ArraySortDrawable;
 import java.util.ArrayList;
 import java.util.Random;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArray;
 
 
@@ -37,11 +38,6 @@ import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithm
  */
 public class InsertionSortFragment extends Fragment
 {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     //Global variables
     private ArrayList<Integer> numbers = null;
     private ImageView image = null;
@@ -57,28 +53,14 @@ public class InsertionSortFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment InsertionSortFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static InsertionSortFragment newInstance(String param1, String param2)
+    public static InsertionSortFragment newInstance()
     {
         InsertionSortFragment fragment = new InsertionSortFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -116,12 +98,12 @@ public class InsertionSortFragment extends Fragment
         final View viewGlobal = inflater.inflate(R.layout.fragment_insertion_sort, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button generateButton = viewGlobal.findViewById(R.id.generateButton);
-        Button startButton = viewGlobal.findViewById(R.id.startButton);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButton);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButton);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonInsertion);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonInsertion);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonInsertion);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonInsertion);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonInsertion);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonInsertion);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -144,7 +126,7 @@ public class InsertionSortFragment extends Fragment
 
                 stopMotionAnimation = new ArraySortDrawable[iterations.size() + 1 + 1];
 
-                image = viewGlobal.findViewById(R.id.imageView);
+                image = viewGlobal.findViewById(R.id.imageViewInsertion);
 
                 SortAnimations.generateInsertionSort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
             }
@@ -222,7 +204,5 @@ public class InsertionSortFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

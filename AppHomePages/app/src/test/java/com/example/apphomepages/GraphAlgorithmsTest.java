@@ -23,9 +23,11 @@ public class GraphAlgorithmsTest
 
         ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (Integer i : graphValues)
         {
-            nodes.add(new Node<>(i));
+            nodes.add(new Node<>(i, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections
@@ -64,13 +66,15 @@ public class GraphAlgorithmsTest
 
         Graph<Integer> g = new Graph<>(nodes);
 
-        ArrayList<Integer> result = GraphAlgorithms.depthFirstSearch(g, -1, true);
+        ArrayList<Node<Integer>> result = GraphAlgorithms.depthFirstSearch(g, null, true);
 
         Integer[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         ArrayList<Integer> expected = HelperMethods.convertFromArray(nums);
 
         for (int i = 0; i < nums.length; i++)
-            assertEquals(expected.get(i), result.get(i));
+            assertEquals(expected.get(i), result.get(i).getNodeValue());
+
+        Assert.assertEquals(nums.length, result.size());
     }
 
     @Test
@@ -81,9 +85,11 @@ public class GraphAlgorithmsTest
 
         ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (Integer i : graphValues)
         {
-            nodes.add(new Node<>(i));
+            nodes.add(new Node<>(i, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections
@@ -122,13 +128,15 @@ public class GraphAlgorithmsTest
 
         Graph<Integer> g = new Graph<>(nodes);
 
-        ArrayList<Integer> result = GraphAlgorithms.depthFirstSearch(g, 8, false);
+        ArrayList<Node<Integer>> result = GraphAlgorithms.depthFirstSearch(g, nodes.get(3), false);
 
         Integer[] nums = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> expected = HelperMethods.convertFromArray(nums);
 
         for (int i = 0; i < nums.length; i++)
-            assertEquals(expected.get(i), result.get(i));
+            assertEquals(expected.get(i), result.get(i).getNodeValue());
+
+        Assert.assertEquals(nums.length, result.size());
     }
 
     @Test
@@ -139,9 +147,11 @@ public class GraphAlgorithmsTest
 
         ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (Integer i : graphValues)
         {
-            nodes.add(new Node<>(i));
+            nodes.add(new Node<>(i, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections
@@ -180,13 +190,15 @@ public class GraphAlgorithmsTest
 
         Graph<Integer> g = new Graph<>(nodes);
 
-        ArrayList<Integer> result = GraphAlgorithms.breadthFirstSearch(g, -1, true);
+        ArrayList<Node<Integer>> result = GraphAlgorithms.breadthFirstSearch(g, null, true);
 
         Integer[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         ArrayList<Integer> expected = HelperMethods.convertFromArray(nums);
 
         for (int i = 0; i < nums.length; i++)
-            assertEquals(expected.get(i), result.get(i));
+            assertEquals(expected.get(i), result.get(i).getNodeValue());
+
+        Assert.assertEquals(nums.length, result.size());
     }
 
     @Test
@@ -197,9 +209,11 @@ public class GraphAlgorithmsTest
 
         ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (Integer i : graphValues)
         {
-            nodes.add(new Node<>(i));
+            nodes.add(new Node<>(i, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections
@@ -238,13 +252,15 @@ public class GraphAlgorithmsTest
 
         Graph<Integer> g = new Graph<>(nodes);
 
-        ArrayList<Integer> result = GraphAlgorithms.breadthFirstSearch(g, 8, false);
+        ArrayList<Node<Integer>> result = GraphAlgorithms.breadthFirstSearch(g, nodes.get(7), false);
 
         Integer[] nums = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> expected = HelperMethods.convertFromArray(nums);
 
         for (int i = 0; i < nums.length; i++)
-            assertEquals(expected.get(i), result.get(i));
+            assertEquals(expected.get(i), result.get(i).getNodeValue());
+
+        Assert.assertEquals(nums.length, result.size());
     }
 
     @Test
@@ -269,9 +285,11 @@ public class GraphAlgorithmsTest
         //construct nodes with no connections
         ArrayList<Node<String>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (String s : nodeValuesList)
         {
-            nodes.add(new Node<>(s));
+            nodes.add(new Node<>(s, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections to create the graph; note that all connections must be acyclic! (because of topological ordering..
