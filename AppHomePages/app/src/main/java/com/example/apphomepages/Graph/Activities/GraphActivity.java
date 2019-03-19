@@ -1,21 +1,20 @@
 package com.example.apphomepages.Graph.Activities;
 
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.tabs.TabLayout;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.apphomepages.Graph.FragmentAdapters.FragmentAdapterGraphPage;
 import com.example.apphomepages.Graph.Fragments.BFSFragment;
 import com.example.apphomepages.Graph.Fragments.DFSFragment;
 import com.example.apphomepages.Graph.Fragments.TopologicalFragment;
 import com.example.apphomepages.R;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class GraphActivity extends AppCompatActivity implements DFSFragment.OnFragmentInteractionListener, BFSFragment.OnFragmentInteractionListener, TopologicalFragment.OnFragmentInteractionListener
 {
@@ -54,11 +53,5 @@ public class GraphActivity extends AppCompatActivity implements DFSFragment.OnFr
 
         int tabColors = ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null);
         tabLayout.setBackground(new ColorDrawable(tabColors));
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri)
-    {
-        Log.e(TAG, "Fragment interaction listener");
     }
 }
