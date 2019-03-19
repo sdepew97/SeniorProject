@@ -70,7 +70,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
         valueLists.add(Arrays.asList(graphValues));
         valueLists.add(Arrays.asList(graphWithCycleValues));
 
-        final ArrayList<Graph> graphList = new ArrayList<>();
+        final ArrayList<Graph<Integer>> graphList = new ArrayList<>();
         graphList.add(createTreeGraph(treeValues));
         graphList.add(createGraphGraph(graphValues));
         graphList.add(createGraphWithCyclesGraph(graphWithCycleValues));
@@ -110,7 +110,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
@@ -147,7 +147,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
                     valueInGraphSought = numbers.get(soughtAfter);
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought);
+                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
@@ -205,14 +205,14 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
 
     }
 
-    private Graph createTreeGraph(Integer[] nodeValues)
+    private Graph<Integer> createTreeGraph(Integer[] nodeValues)
     {
         //construct nodes with no connections
-        ArrayList<Node> nodes = new ArrayList<>();
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
         for (Integer i : nodeValues)
         {
-            nodes.add(new Node(i));
+            nodes.add(new Node<>(i));
         }
 
         //put in all desired connections
@@ -235,17 +235,17 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
         nodes.get(6).addAdjacentNode(nodes.get(2));
 
         //return the graph
-        return new Graph(nodes);
+        return new Graph<>(nodes);
     }
 
-    private Graph createGraphGraph(Integer[] nodeValues)
+    private Graph<Integer> createGraphGraph(Integer[] nodeValues)
     {
         //construct nodes with no connections
-        ArrayList<Node> nodes = new ArrayList<>();
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
         for (Integer i : nodeValues)
         {
-            nodes.add(new Node(i));
+            nodes.add(new Node<>(i));
         }
 
         //put in all desired connections
@@ -283,17 +283,17 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
         nodes.get(11).addAdjacentNode(nodes.get(6));
 
         //return the graph
-        return new Graph(nodes);
+        return new Graph<>(nodes);
     }
 
-    private Graph createGraphWithCyclesGraph(Integer[] nodeValues)
+    private Graph<Integer> createGraphWithCyclesGraph(Integer[] nodeValues)
     {
         //construct nodes with no connections
-        ArrayList<Node> nodes = new ArrayList<>();
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
 
         for (Integer i : nodeValues)
         {
-            nodes.add(new Node(i));
+            nodes.add(new Node<>(i));
         }
 
         //put in all desired connections
@@ -319,7 +319,7 @@ public class BreadthFirstSearchActivity extends AppCompatActivity
         nodes.get(6).addAdjacentNode(nodes.get(4));
 
         //return the graph
-        return new Graph(nodes);
+        return new Graph<>(nodes);
     }
 
 }

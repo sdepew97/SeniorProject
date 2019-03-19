@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,11 @@ import android.widget.Button;
 
 import com.example.apphomepages.Graph.Activities.BreadthFirstSearchActivity;
 import com.example.apphomepages.Graph.Activities.DepthFirstSearchActivity;
+import com.example.apphomepages.Graph.Activities.GraphActivity;
 import com.example.apphomepages.Graph.Activities.TopologicalOrderingActivity;
 import com.example.apphomepages.R;
+import com.example.apphomepages.SearchAndSort.Activities.SearchingActivity;
+import com.example.apphomepages.SearchAndSort.Activities.SortingActivity;
 
 
 /**
@@ -103,42 +107,19 @@ public class GraphFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_graph, container, false);
 
         //Set up the buttons on the fragment
-        Button depthFirstButton = view.findViewById(R.id.depthFirstButton);
-        Button breadthFirstButton = view.findViewById(R.id.breadthFirstButton);
-        Button topologicalOrderingButton = view.findViewById(R.id.topologicalOrderingButton);
+        Button graphButton = view.findViewById(R.id.graphAlgorithms);
 
-        depthFirstButton.setOnClickListener(new View.OnClickListener()
+        graphButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), DepthFirstSearchActivity.class);
+                Intent i = new Intent(getActivity(), GraphActivity.class);
                 startActivity(i);
             }
         });
 
-        breadthFirstButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), BreadthFirstSearchActivity.class);
-                startActivity(i);
-            }
-        });
-
-        topologicalOrderingButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //used https://stackoverflow.com/questions/28961842/how-to-move-from-a-one-fragment-to-an-activity to figure out the transition between a fragment and an activity
-                Intent i = new Intent(getActivity(), TopologicalOrderingActivity.class);
-                startActivity(i);
-            }
-        });
         return view;
     }
 

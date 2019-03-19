@@ -16,6 +16,7 @@
     <string name="searching_button">Searching Algorithms</string>
 
     <string name="generate_button">Generate</string>
+    <string name="instructions_button">Instructions</string>
     <string name="correctness_button">Correctness Proof</string>
     <string name="frame_button">Next Frame</string>
     <string name="start_button">Start</string>
@@ -28,6 +29,10 @@
     <string name="button_depth_first">Depth First Search</string>
     <string name="button_breadth_first">Breadth First Search</string>
     <string name="button_topological_ordering">Topological Ordering</string>
+    <string name="button_graph_algorithms">Graph Algorithms</string>
+    <string name="button_greedy_algorithms">Greedy Algorithms</string>
+    <string name="button_dp_algorithms">Dynamic Programing Algorithms</string>
+    <string name="button_close_instructions">Close Instructions</string>
 
     <string name="text_linear_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque eu mauris non facilisis. Nam at varius neque. Duis tempus ut ex eu auctor. Aenean molestie rutrum hendrerit. Morbi sagittis elementum nibh luctus vulputate. Quisque commodo consectetur arcu, a laoreet risus semper ac. Vestibulum in quam dignissim, ornare leo at, venenatis elit.
 
@@ -78,25 +83,25 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
 
     <!-- Instructions Strings -->
     <string name="LinearSearchInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. The value in the drop-down menu is the one that the algorithm will search for. If you would like to change this value, then select another value form the drop-down menu. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink. </string>
+        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink.\n </string>
 
     <string name="BinarySearchInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. The value in the drop-down menu is the one that the algorithm will search for. If you would like to change this value, then select another value form the drop-down menu. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink. </string>
+        The array will start as a dark blue color. As elements are checked for equality with the value-sought, then they will turn light-blue. Finally, if the value sought is found it turns pink.\n </string>
 
     <string name="BubbleSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. Elements will be selected in pairs for comparison and swapped if the value on the right is smaller than the value on the left. Then, once the array is sorted, it will turn light-blue. </string>
+        The array will start as a dark blue color. Elements will be selected in pairs for comparison and swapped if the value on the right is smaller than the value on the left. Then, once the array is sorted, it will turn light-blue.\n </string>
 
     <string name="InsertionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. Selected elements to insert into the array will be selected in pink, then inserted in pink to their correct location in the array. Finally, the sorted array will be displayed in light-blue. </string>
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. Selected elements to insert into the array will be selected in pink, then inserted in pink to their correct location in the array. Finally, the sorted array will be displayed in light-blue.\n </string>
 
     <string name="SelectionSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. The elements unsorted will be highlighted pink, then the sought will be highlighted pink and turn light-blue when it is placed into its proper location in the sorted array. </string>
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. The elements unsorted will be highlighted pink, then the sought will be highlighted pink and turn light-blue when it is placed into its proper location in the sorted array.\n </string>
 
     <string name="MergeSortInstructions">First, select the \"Generate\" button. This will cause an array of either 1, 5, or 6 to be generated. Then, if unsatisfied with the generated value, select the size of array you would like to sort. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. As elements are being swapped and merged, they will turn different colors that correspond to the step of the algorithm. </string>
+        The array will start as a dark blue color. The sorted portion of the array will be displayed in light-blue. As elements are being swapped and merged, they will turn different colors that correspond to the step of the algorithm.\n </string>
 
     <string name="QuickSortInstructions">First, select the \"Generate\" button. This will cause an array of a size between one and ten filled with random values to show up on the screen. Next, click \"Start\" to begin the animation. If you would like to go back to the beginning of the animation, then click the \"Rewind\" button. If you would like to stop on a certain frame, then use the \"Stop\" button to do so.\n\n
-        The array will start as a dark blue color. The pivot value will be selected in pink. The portion of the array being ordered will be highlighted in light-blue. Finally, the sorted array will turn light-blue. </string>
+        The array will start as a dark blue color. The pivot value will be selected in pink. The portion of the array being ordered will be highlighted in light-blue. Finally, the sorted array will turn light-blue.\n </string>
 
     <string name="DepthFirstSearchInstructions"> ... </string>
 

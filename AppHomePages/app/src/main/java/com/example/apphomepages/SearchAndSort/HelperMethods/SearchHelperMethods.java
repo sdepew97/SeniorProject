@@ -11,10 +11,6 @@ import java.util.List;
 
 public class SearchHelperMethods
 {
-    public SearchHelperMethods()
-    {
-    }
-
     public static void populateSpinner(List<Integer> numbers, View viewGlobal, Spinner spinner, Integer locationInArray)
     {
         //populate the spinner used https://stackoverflow.com/questions/20244419/android-spinner-populating-using-arrayliststring as a resource as well as https://stackoverflow.com/questions/10582283/how-to-populate-spinner-from-a-array-string

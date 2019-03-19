@@ -24,13 +24,13 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private final Paint mTextPaint;
     private final Paint mLinePaint;
 
-    private Graph graph;
-    private int nodeToHighlight = -1;
+    private Graph<Integer> graph;
+    private int nodeToHighlight;
 
     private boolean target;
 
     //An ArraySearchDrawable constructor for searching
-    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHighlight, boolean target, Graph graph)
+    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHighlight, boolean target, Graph<Integer> graph)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -63,7 +63,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numCircles = graph.numNodes();
+        int numCircles = graph.getGraphElements().size();
         int radius = height / (GraphHelperMethods.numLayers(graph) * 2 + 1); //the radius of the circle, since this means they will never overlap horizontally
         mTextPaint.setTextSize(radius * 3 / 4);
 
@@ -72,17 +72,17 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
-        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
+        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
         //TODO (Sarah): draw the connecting edges on the graph
-        ArrayList<Node> nodes = graph.getGraphElements();
+        ArrayList<Node<Integer>> nodes = graph.getGraphElements();
 
-        for (Node n : nodes)
+        for (Node<Integer> n : nodes)
         {
-            ArrayList<Node> adjacentNodes = n.getAdjacentNodes();
+            ArrayList<Node<Integer>> adjacentNodes = n.getAdjacentNodes();
 
-            for (Node a : adjacentNodes)
+            for (Node<Integer> a : adjacentNodes)
             {
                 //TODO: test that the node's value is actually in the list and that this code doesn't error
                 Point start = centersOfCircles[layoutOrder.indexOf(n.getNodeValue())];
@@ -95,8 +95,8 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
         for (int i = 0; i < numCircles; i++)
         {
-            Node n = nodes.get(i);
-            if (nodeToHighlight == n.getNodeValue() && !target)
+            Node<Integer> n = nodes.get(i);
+            if (nodeToHighlight == n.getNodeValue() && !target) //TODO: think about whether or not this is correct...
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mSecondPaint);
             } else if (nodeToHighlight == n.getNodeValue() && target)

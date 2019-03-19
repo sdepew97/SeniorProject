@@ -2,42 +2,30 @@ package com.example.apphomepages.General.DataTypes;
 
 import java.util.ArrayList;
 
-public class Node
+public class Node<A>
 {
-    private int nodeValue;
-    private ArrayList<Node> adjacentNodes;
+    private A nodeValue; //allows for a general value to be inserted into nodes, so nodes of type in or String can be created for example
+    private ArrayList<Node<A>> adjacentNodes;
     private boolean visited;
 
-    public Node(int nodeValue)
+    public Node(A nodeValue)
     {
         this.nodeValue = nodeValue;
         this.adjacentNodes = new ArrayList<>();
         this.visited = false;
     }
 
-    public Node(int nodeValue, ArrayList<Node> adjacentNodes)
-    {
-        this.nodeValue = nodeValue;
-        this.adjacentNodes = adjacentNodes;
-        this.visited = false;
-    }
-
-    public int getNodeValue()
+    public A getNodeValue()
     {
         return nodeValue;
     }
 
-    public ArrayList<Node> getAdjacentNodes()
+    public ArrayList<Node<A>> getAdjacentNodes()
     {
         return adjacentNodes;
     }
 
-    public void setAdjacentNodes(ArrayList<Node> adjacentNodes)
-    {
-        this.adjacentNodes = adjacentNodes;
-    }
-
-    public void addAdjacentNode(Node adjacentNode)
+    public void addAdjacentNode(Node<A> adjacentNode)
     {
         this.adjacentNodes.add(adjacentNode);
     }

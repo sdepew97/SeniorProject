@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.apphomepages"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -26,6 +26,7 @@ android {
         // in the path_to_your_project/module_name/build/outputs/test-results/ directory.
         // '$rootDir' sets the path relative to the root directory of the current project.
         resultsDir "$rootDir/test-results"
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -41,7 +42,29 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // required if you want to use Mockito for unit tests
-    testImplementation 'org.mockito:mockito-core:2.7.22'
+    testImplementation 'org.mockito:mockito-core:2.10.0'
     // required if you want to use Mockito for Android tests
-    testImplementation 'org.mockito:mockito-android:2.7.22'
+    testImplementation 'org.mockito:mockito-android:2.10.0'
+    // Espresso UI Testing
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
+    // Optional if you need to detect intents.
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-all:$rootProject.ext.mockitoVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.ext.hamcrestVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$rootProject.ext.powerMockito"
+    testImplementation "org.powermock:powermock-api-mockito:$rootProject.ext.powerMockito"
+
+    // Android Testing Support Library's runner and rules
+    androidTestImplementation "com.android.support.test:runner:$rootProject.ext.runnerVersion"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.ext.rulesVersion"
+
+    // Espresso UI Testing dependencies.
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espressoVersion"
+
 }

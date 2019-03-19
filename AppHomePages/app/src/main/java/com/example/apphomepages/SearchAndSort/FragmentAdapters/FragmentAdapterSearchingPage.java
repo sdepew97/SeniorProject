@@ -56,7 +56,7 @@ public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
                 page = BinarySearchFragment.newInstance("One", "Two");
                 break; //input is number of columns of data
             default:
-                page = SearchAndSortFragment.newInstance("One", "Two"); //default fragment to return
+                page = LinearSearchFragment.newInstance("One", "Two"); //default fragment to return
                 break;
         }
 

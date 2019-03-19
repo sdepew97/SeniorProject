@@ -79,7 +79,7 @@ public class HelperMethodsTest
     @Test
     public void convertFromArray()
     {
-        int[] arr = {12, 14, 122, -10};
+        Integer[] arr = {12, 14, 122, -10};
         ArrayList<Integer> arrayList = HelperMethods.convertFromArray(arr);
 
         for (int i = 0; i < arr.length; i++)

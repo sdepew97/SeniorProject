@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
+import com.example.apphomepages.SearchAndSort.DialogFragments.BubbleSortDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySortDrawable;
 
 import java.util.ArrayList;
@@ -127,6 +130,7 @@ public class BubbleSortFragment extends Fragment
         Button stopButton = viewGlobal.findViewById(R.id.stopButton);
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButton);
         Button proofButton = viewGlobal.findViewById(R.id.proofButton);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButton);
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -190,6 +194,17 @@ public class BubbleSortFragment extends Fragment
                 //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
                 Uri uri = Uri.parse("http://www-users.cselabs.umn.edu/classes/Fall-2018/csci4041/assignments/BSC.pdf");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            }
+        });
+
+        instructionsButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentManager fm = getFragmentManager();
+                BubbleSortDialogFragment dialogFragment = new BubbleSortDialogFragment();
+                dialogFragment.show(fm, "Instructions Fragment");
             }
         });
 

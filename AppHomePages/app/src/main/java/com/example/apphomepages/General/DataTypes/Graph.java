@@ -2,47 +2,17 @@ package com.example.apphomepages.General.DataTypes;
 
 import java.util.ArrayList;
 
-public class Graph
+public class Graph<A>
 {
-    ArrayList<Node> graphElements;
+    private ArrayList<Node<A>> graphElements;
 
-    public Graph()
-    {
-        this.graphElements = new ArrayList<>();
-    }
-
-    public Graph(ArrayList<Node> graphElements)
+    public Graph(ArrayList<Node<A>> graphElements)
     {
         this.graphElements = graphElements;
     }
 
-    public void addGraphElement(Node node)
-    {
-        this.graphElements.add(node);
-    }
-
-    public ArrayList<Node> getGraphElements()
+    public ArrayList<Node<A>> getGraphElements()
     {
         return graphElements;
-    }
-
-    public int numNodes()
-    {
-        return this.getGraphElements().size();
-    }
-
-    public static void printGraph(Graph g)
-    {
-        for (Node n : g.getGraphElements())
-        {
-            System.out.println("\n" + n.getNodeValue() + " connected to:");
-
-            //Print connections
-            for (Node node : n.getAdjacentNodes())
-            {
-                System.out.println("\t\t" + node.getNodeValue());
-            }
-            System.out.println();
-        }
     }
 }
