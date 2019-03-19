@@ -1,10 +1,8 @@
 package com.example.apphomepages.Main.Activities;
 
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.apphomepages.DynamicProgramming.Fragments.DynamicProgrammingFragment;
 import com.example.apphomepages.Graph.Fragments.GraphFragment;
@@ -56,11 +54,5 @@ public class MainActivity extends AppCompatActivity implements SearchAndSortFrag
 
         int tabColors = ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null);
         tabLayout.setBackground(new ColorDrawable(tabColors));
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri)
-    {
-        Log.e(TAG, "Fragment interaction listener");
     }
 }
