@@ -80,8 +80,6 @@ public class SortingActivityTest
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeRight());
     }
 
-    //TODO: make sure all buttons can be clicked
-
     @Test
     public void checkInstructionsBubble() throws InterruptedException
     {

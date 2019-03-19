@@ -2,7 +2,6 @@ package com.example.apphomepages.Graph.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,22 +37,12 @@ public class GraphFragment extends Fragment
      *
      * @return A new instance of fragment GraphFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static GraphFragment newInstance()
     {
         GraphFragment fragment = new GraphFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -119,7 +108,5 @@ public class GraphFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

@@ -25,12 +25,12 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private final Paint mLinePaint;
 
     private Graph<Integer> graph;
-    private int nodeToHighlight;
+    private Node<Integer> nodeToHighlight;
 
     private boolean target;
 
     //An ArraySearchDrawable constructor for searching
-    public GraphSearchDrawable(Color main, Color secondary, Color found, int nodeToHighlight, boolean target, Graph<Integer> graph)
+    public GraphSearchDrawable(Color main, Color secondary, Color found, Node<Integer> nodeToHighlight, boolean target, Graph<Integer> graph)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -54,6 +54,8 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         this.graph = graph;
         this.nodeToHighlight = nodeToHighlight;
+        //TODO: remove below when done with project and no more debugging is needed
+        // System.out.println("Node To HIGHLIGHT: " + nodeToHighlight.getNodeValue());
         this.target = target;
     }
 
@@ -72,10 +74,9 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
-        ArrayList<Integer> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, -1, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
+        ArrayList<Node<Integer>> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, null, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
-        //TODO (Sarah): draw the connecting edges on the graph
         ArrayList<Node<Integer>> nodes = graph.getGraphElements();
 
         for (Node<Integer> n : nodes)
@@ -85,8 +86,8 @@ public class GraphSearchDrawable extends Drawable implements Animatable
             for (Node<Integer> a : adjacentNodes)
             {
                 //TODO: test that the node's value is actually in the list and that this code doesn't error
-                Point start = centersOfCircles[layoutOrder.indexOf(n.getNodeValue())];
-                Point end = centersOfCircles[layoutOrder.indexOf(a.getNodeValue())];
+                Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())];
+                Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
             }
@@ -95,11 +96,11 @@ public class GraphSearchDrawable extends Drawable implements Animatable
         //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
         for (int i = 0; i < numCircles; i++)
         {
-            Node<Integer> n = nodes.get(i);
-            if (nodeToHighlight == n.getNodeValue() && !target) //TODO: think about whether or not this is correct...
+            Node<Integer> n = layoutOrder.get(i);
+            if (nodeToHighlight.getNodeId().equals(n.getNodeId()) && !target)
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mSecondPaint);
-            } else if (nodeToHighlight == n.getNodeValue() && target)
+            } else if (nodeToHighlight.getNodeId().equals(n.getNodeId()) && target)
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mFoundPaint);
             } else
@@ -107,7 +108,7 @@ public class GraphSearchDrawable extends Drawable implements Animatable
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMainPaint);
             }
 
-            canvas.drawText(Integer.toString(layoutOrder.get(i)), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
+            canvas.drawText(Integer.toString(layoutOrder.get(i).getNodeValue()), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
         }
 
     }

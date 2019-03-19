@@ -59,7 +59,6 @@ public class TopologicalFragment extends Fragment
      *
      * @return A new instance of fragment TopologicalFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static TopologicalFragment newInstance()
     {
         TopologicalFragment fragment = new TopologicalFragment();
@@ -195,9 +194,11 @@ public class TopologicalFragment extends Fragment
         //construct nodes with no connections
         ArrayList<Node<String>> nodes = new ArrayList<>();
 
+        int nodeId = 0;
         for (String s : nodeValuesList)
         {
-            nodes.add(new Node<>(s));
+            nodes.add(new Node<>(s, nodeId));
+            nodeId++;
         }
 
         //put in all desired connections to create the graph; note that all connections must be acyclic! (because of topological ordering..

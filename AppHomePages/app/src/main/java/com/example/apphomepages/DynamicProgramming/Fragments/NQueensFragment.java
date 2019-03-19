@@ -1,7 +1,6 @@
 package com.example.apphomepages.DynamicProgramming.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +33,6 @@ public class NQueensFragment extends Fragment
      *
      * @return A new instance of fragment NQueensFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static NQueensFragment newInstance()
     {
         NQueensFragment fragment = new NQueensFragment();

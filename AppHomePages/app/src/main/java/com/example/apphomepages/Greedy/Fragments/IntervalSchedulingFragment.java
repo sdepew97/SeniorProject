@@ -1,7 +1,6 @@
 package com.example.apphomepages.Greedy.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,22 +33,12 @@ public class IntervalSchedulingFragment extends Fragment
      *
      * @return A new instance of fragment IntervalSchedulingFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static IntervalSchedulingFragment newInstance()
     {
         IntervalSchedulingFragment fragment = new IntervalSchedulingFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -99,7 +88,5 @@ public class IntervalSchedulingFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

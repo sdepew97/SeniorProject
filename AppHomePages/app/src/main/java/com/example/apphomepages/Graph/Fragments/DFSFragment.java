@@ -15,16 +15,15 @@ import android.widget.Spinner;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
 import com.example.apphomepages.Graph.DialogFragments.DFSDialogFragment;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
-import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -44,9 +43,9 @@ public class DFSFragment extends Fragment
     private OnFragmentInteractionListener mListener;
 
     //Class variables
-    private int index = 0; //type of graph being searched
     private List<Integer> numbers = new ArrayList<>(); //numbers on nodes searched
-    private Integer soughtAfter = -1; //actual node value being sought
+    Graph<Integer> graph = null; //the current graph
+    private Node<Integer> soughtAfter = null; //actual node being sought
     private ImageView image = null;
 
     //The animation that will be played when the "next frame" button is clicked
@@ -63,7 +62,6 @@ public class DFSFragment extends Fragment
      *
      * @return A new instance of fragment DFSFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static DFSFragment newInstance()
     {
         DFSFragment fragment = new DFSFragment();
@@ -105,81 +103,69 @@ public class DFSFragment extends Fragment
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonDFS);
         Button proofButton = viewGlobal.findViewById(R.id.proofButtonDFS);
         Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonDFS);
-        final Spinner spinner = viewGlobal.findViewById(R.id.spinner);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonDFS);
         final Spinner spinnerSelect = viewGlobal.findViewById(R.id.spinnerSelectDFS);
-
-        //Create an ArrayList of integers as the possible initial values
-        //Used this resource to figure out the types of binary trees https://www.geeksforgeeks.org/binary-tree-set-3-types-of-binary-tree/
-        //Used this resource to read about depth-first search https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
-        final ArrayList<String> treeTypes = new ArrayList<>();
-        treeTypes.add("Tree");
-        treeTypes.add("Graph");
-        treeTypes.add("Graph with Cycles");
-
-        //Construct the graphs to be used to search with depth-first search
-        final ArrayList<List<Integer>> valueLists = new ArrayList<>();
-        Integer treeValues[] = {18, 15, 30, 40, 50, 100, 70};
-        Integer graphValues[] = {1, 2, 7, 8, 3, 6, 9, 12, 4, 5, 10, 11};
-        Integer graphWithCycleValues[] = {12, 15, 17, 22, 21, 32, 16};
-        valueLists.add(Arrays.asList(treeValues));
-        valueLists.add(Arrays.asList(graphValues));
-        valueLists.add(Arrays.asList(graphWithCycleValues));
-
-        final ArrayList<Graph<Integer>> graphList = new ArrayList<>();
-        graphList.add(createTreeGraph(treeValues));
-        graphList.add(createGraphGraph(graphValues));
-        graphList.add(createGraphWithCyclesGraph(graphWithCycleValues));
 
         //Get random initial index for spinner selections
         final Random r = new Random();
-        index = r.nextInt(treeTypes.size());
-        numbers = valueLists.get(index);
 
-        //set spinner selection (length of array) randomly with initial length
-        //used https://stackoverflow.com/questions/4486034/get-root-view-from-current-activity to figure out the view
-        GraphHelperMethods.populateSpinner(treeTypes, viewGlobal, spinner, index);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            public void onClick(View view)
             {
-                //Get the value of the item selected on the spinner to know the array to populate with
-                index = spinner.getSelectedItemPosition();
-                numbers = valueLists.get(index);
-
                 //Set up variables for the method
                 GraphSearchDrawable[] stopMotionAnimation;
+                numbers = HelperMethods.generateRandomArray(new Random(), r.nextInt(10) + 1);
+                graph = HelperMethods.generateGraph(r.nextBoolean(), numbers);
 
                 //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
                 boolean targetFound = r.nextBoolean();
-                soughtAfter = targetFound ? r.nextInt(numbers.size()) : -1; //"index" into the array of spinner elements
-
-                //populate the node selection list
-                SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, soughtAfter);
+                int soughtAfterIndex = targetFound ? r.nextInt(numbers.size()) : -1; //"index" into the array of spinner elements
 
                 //Run the algorithm to generate the animation frames
-                int valueInGraphSought = -1;
-
-                if (soughtAfter != -1)
+                if (soughtAfterIndex != -1)
                 {
-                    valueInGraphSought = numbers.get(soughtAfter);
+                    soughtAfter = graph.getGraphElements().get(soughtAfterIndex);
+
+                    //populate the node selection list
+                    //ArrayList<Integer> sortedNumbers = HelperMethods.copyList(numbers);
+                    //Collections.sort(sortedNumbers);
+                    SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, numbers.indexOf(soughtAfter.getNodeValue()));
+
+                } else
+                {
+                    soughtAfter = null; //the node was not found
+                    SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, -1); //-1 means the element was not found
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
+                ArrayList<Node<Integer>> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graph, soughtAfter, !targetFound);
+
+                /*
+                //TODO: remove when debugged
+                System.out.println("Graph:");
+                ArrayList<Node<Integer>> graphElements = graph.getGraphElements();
+                for (Node<Integer> node : graphElements)
+                {
+                    ArrayList<Node<Integer>> adjacentNodes = node.getAdjacentNodes();
+                    for (Node<Integer> m : adjacentNodes)
+                    {
+                        System.out.println("Node: " + node.getNodeValue() + ", " + node.getNodeId() + " connected to " + m.getNodeValue() + ", " + m.getNodeId());
+                    }
+                }
+
+                for (Node<Integer> n : nodesToHighlight)
+                {
+                    System.out.println(n.getNodeValue());
+                }
+                */
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
                 image = viewGlobal.findViewById(R.id.imageViewDFS);
 
-                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-                //Do nothing
+                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graph, stopMotionAnimation, image, animationDrawable);
             }
         });
 
@@ -191,26 +177,56 @@ public class DFSFragment extends Fragment
                 //Set up variables for the method
                 GraphSearchDrawable[] stopMotionAnimation;
 
-                soughtAfter = (spinnerSelect.getSelectedItemPosition()) - 1;
+                //Set the proper node value based on the item selected, which is the node's value
+                Object itemSelected = spinnerSelect.getSelectedItem();
+                ArrayList<Node<Integer>> nodes = graph.getGraphElements();
 
                 //Run the algorithm to generate the animation frames
-                int valueInGraphSought = -1;
                 boolean targetFound = false;
 
-                if (soughtAfter != -1)
+                if (!itemSelected.toString().equals("Not Found"))
                 {
                     targetFound = true;
-                    valueInGraphSought = numbers.get(soughtAfter);
+                    for (Node<Integer> n : nodes)
+                    {
+                        if (n.getNodeValue().toString().equals(itemSelected.toString()))
+                        {
+                            soughtAfter = n;
+                            break;
+                        }
+                    }
+                } else
+                {
+                    soughtAfter = null;
                 }
 
-                ArrayList<Integer> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graphList.get(index), valueInGraphSought, !targetFound);
+                ArrayList<Node<Integer>> nodesToHighlight = GraphAlgorithms.depthFirstSearch(graph, soughtAfter, !targetFound);
+
+                /*
+                //TODO: remove when debugged
+                System.out.println("Graph:");
+                ArrayList<Node<Integer>> graphElements = graph.getGraphElements();
+                for (Node<Integer> node : graphElements)
+                {
+                    ArrayList<Node<Integer>> adjacentNodes = node.getAdjacentNodes();
+                    for (Node<Integer> m : adjacentNodes)
+                    {
+                        System.out.println("Node: " + node.getNodeValue() + ", " + node.getNodeId() + " connected to " + m.getNodeValue() + ", " + m.getNodeId());
+                    }
+                }
+
+                for (Node<Integer> n : nodesToHighlight)
+                {
+                    System.out.println(n.getNodeValue());
+                }
+                */
 
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
                 image = viewGlobal.findViewById(R.id.imageViewDFS);
 
-                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graphList.get(index), stopMotionAnimation, image, animationDrawable);
+                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graph, stopMotionAnimation, image, animationDrawable);
             }
 
             @Override
@@ -271,123 +287,6 @@ public class DFSFragment extends Fragment
         });
 
         return viewGlobal;
-    }
-
-    private Graph<Integer> createTreeGraph(Integer[] nodeValues)
-    {
-        //construct nodes with no connections
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-
-        for (Integer i : nodeValues)
-        {
-            nodes.add(new Node<>(i));
-        }
-
-        //put in all desired connections
-        nodes.get(0).addAdjacentNode(nodes.get(1));
-        nodes.get(1).addAdjacentNode(nodes.get(0));
-
-        nodes.get(0).addAdjacentNode(nodes.get(2));
-        nodes.get(2).addAdjacentNode(nodes.get(0));
-
-        nodes.get(1).addAdjacentNode(nodes.get(3));
-        nodes.get(3).addAdjacentNode(nodes.get(1));
-
-        nodes.get(1).addAdjacentNode(nodes.get(4));
-        nodes.get(4).addAdjacentNode(nodes.get(1));
-
-        nodes.get(2).addAdjacentNode(nodes.get(5));
-        nodes.get(5).addAdjacentNode(nodes.get(2));
-
-        nodes.get(2).addAdjacentNode(nodes.get(6));
-        nodes.get(6).addAdjacentNode(nodes.get(2));
-
-        //return the graph
-        return new Graph<>(nodes);
-    }
-
-    private Graph<Integer> createGraphGraph(Integer[] nodeValues)
-    {
-        //construct nodes with no connections
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-
-        for (Integer i : nodeValues)
-        {
-            nodes.add(new Node<>(i));
-        }
-
-        //put in all desired connections
-        nodes.get(0).addAdjacentNode(nodes.get(1));
-        nodes.get(1).addAdjacentNode(nodes.get(0));
-
-        nodes.get(0).addAdjacentNode(nodes.get(2));
-        nodes.get(2).addAdjacentNode(nodes.get(0));
-
-        nodes.get(0).addAdjacentNode(nodes.get(3));
-        nodes.get(3).addAdjacentNode(nodes.get(0));
-
-        nodes.get(1).addAdjacentNode(nodes.get(4));
-        nodes.get(4).addAdjacentNode(nodes.get(1));
-
-        nodes.get(1).addAdjacentNode(nodes.get(5));
-        nodes.get(5).addAdjacentNode(nodes.get(1));
-
-        nodes.get(3).addAdjacentNode(nodes.get(6));
-        nodes.get(6).addAdjacentNode(nodes.get(3));
-
-        nodes.get(3).addAdjacentNode(nodes.get(7));
-        nodes.get(7).addAdjacentNode(nodes.get(3));
-
-        nodes.get(4).addAdjacentNode(nodes.get(8));
-        nodes.get(8).addAdjacentNode(nodes.get(4));
-
-        nodes.get(4).addAdjacentNode(nodes.get(9));
-        nodes.get(9).addAdjacentNode(nodes.get(4));
-
-        nodes.get(6).addAdjacentNode(nodes.get(10));
-        nodes.get(10).addAdjacentNode(nodes.get(6));
-
-        nodes.get(6).addAdjacentNode(nodes.get(11));
-        nodes.get(11).addAdjacentNode(nodes.get(6));
-
-        //return the graph
-        return new Graph<>(nodes);
-    }
-
-    private Graph<Integer> createGraphWithCyclesGraph(Integer[] nodeValues)
-    {
-        //construct nodes with no connections
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-
-        for (Integer i : nodeValues)
-        {
-            nodes.add(new Node<>(i));
-        }
-
-        //put in all desired connections
-        nodes.get(0).addAdjacentNode(nodes.get(1));
-        nodes.get(1).addAdjacentNode(nodes.get(0));
-
-        nodes.get(0).addAdjacentNode(nodes.get(2));
-        nodes.get(2).addAdjacentNode(nodes.get(0));
-
-        nodes.get(1).addAdjacentNode(nodes.get(3));
-        nodes.get(3).addAdjacentNode(nodes.get(1));
-
-        nodes.get(2).addAdjacentNode(nodes.get(3));
-        nodes.get(3).addAdjacentNode(nodes.get(2));
-
-        nodes.get(2).addAdjacentNode(nodes.get(4));
-        nodes.get(4).addAdjacentNode(nodes.get(2));
-
-        nodes.get(2).addAdjacentNode(nodes.get(5));
-        nodes.get(5).addAdjacentNode(nodes.get(2));
-
-        nodes.get(4).addAdjacentNode(nodes.get(6));
-        nodes.get(6).addAdjacentNode(nodes.get(4));
-
-        //return the graph
-        return new Graph<>(nodes);
     }
 
     @Override

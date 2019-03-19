@@ -1,5 +1,9 @@
 package com.example.apphomepages.General.Helpers;
 
+import com.example.apphomepages.General.DataTypes.Graph;
+import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +24,7 @@ public class HelperMethods
         for (int j = 0; j < numElements; j++)
         {
             int randomInt = r.nextInt(100);
+            //int randomInt = 12;
             if (r.nextBoolean())
             {
                 numbers.add(j, -randomInt);
@@ -32,21 +37,98 @@ public class HelperMethods
         return numbers;
     }
 
-    //Method for testing against Wikipedia visualizations
-    public static ArrayList<Integer> generateSetArray()
+    public static <A> Graph<A> generateGraph(boolean binaryTree, List<A> nodeValues)
     {
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.add(8);
-        numbers.add(5);
-        numbers.add(2);
-        numbers.add(6);
-        numbers.add(9);
-        numbers.add(3);
-        numbers.add(1);
-        numbers.add(4);
-        numbers.add(0);
-        numbers.add(7);
-        return numbers;
+        ArrayList<Node<A>> nodes = new ArrayList<>();
+        Random r = new Random();
+
+        //Add all the nodes
+        for (int i = 0; i < nodeValues.size(); i++)
+        {
+            nodes.add(new Node<>(nodeValues.get(i), i)); //i is the nodeId value
+        }
+
+        //Make connections
+        if (binaryTree)
+        {
+            //if we have only one node, then that is a complete binary tree already
+            if (nodes.size() > 1)
+            {
+                int currentNode = 1;
+                //build binary tree
+                for (int i = 0; i < nodes.size(); i++)
+                {
+                    //give each node two children
+                    for (int j = 0; j < 2; j++)
+                    {
+                        if (currentNode == nodeValues.size())
+                        {
+                            break;
+                        }
+
+                        //Add the connection
+                        nodes.get(i).addAdjacentNode(nodes.get(currentNode));
+                        nodes.get(currentNode).addAdjacentNode(nodes.get(i));
+                        currentNode++;
+                    }
+                }
+            }
+
+        } else
+        {
+            //If we only have one node, then we have a complete graph, already
+            if (nodes.size() > 1)
+            {
+                //TODO: ask Richard about this code for graph generation? Need to use something like Prim's?
+                for (int i = 0; i < nodes.size(); i++)
+                {
+                    //not a tree, so can have cycles, etc
+                    //Give the numConnections at least one child
+                    while (nodes.get(i).getAdjacentNodes().size() < 1)
+                    {
+                        int connectionPoint;
+                        //Make sure there are no self-looping nodes, since that's not allowed on the graph we're building
+                        do
+                        {
+                            connectionPoint = r.nextInt(nodeValues.size());
+                        } while (connectionPoint == i);
+
+                        //Add connection, as long as it is not repeated
+                        if (!nodes.get(i).getAdjacentNodes().contains(nodes.get(connectionPoint)))
+                        {
+                            nodes.get(i).addAdjacentNode(nodes.get(connectionPoint));
+                            nodes.get(connectionPoint).addAdjacentNode(nodes.get(i));
+                        }
+                    }
+                }
+
+                //Code to check the graph is connected
+                ArrayList<Node<A>> traversal = GraphAlgorithms.breadthFirstSearch(new Graph<>(nodes), new Node<A>(null, -1), true);
+
+                //If this is the case, the graph is not connected
+                if (traversal.size() != nodeValues.size())
+                {
+                    //add edges until we have a connected graph
+                    while (traversal.size() != nodeValues.size())
+                    {
+                        Node<A> node = traversal.get(0); //we know there is at least one element here, since our graph has 2 or more elements
+                        //Find a node not yet contained in the traversal to connect this node to
+                        for (Node<A> n : nodes)
+                        {
+                            if (!traversal.contains(n))
+                            {
+                                //make connection
+                                node.addAdjacentNode(n);
+                                n.addAdjacentNode(node);
+                            }
+                        }
+                        traversal = GraphAlgorithms.breadthFirstSearch(new Graph<>(nodes), new Node<A>(null, -1), true);
+                    }
+                }
+            }
+        }
+
+        return new Graph<>(nodes);
     }
 
     //Convert an array list of type A to an array list of strings
@@ -86,5 +168,4 @@ public class HelperMethods
 
         return aArray;
     }
-
 }

@@ -53,10 +53,4 @@ public class GreedyActivity extends AppCompatActivity implements IntervalSchedul
         int tabColors = ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null);
         tabLayout.setBackground(new ColorDrawable(tabColors));
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri)
-    {
-        Log.e(TAG, "Fragment interaction listener");
-    }
 }

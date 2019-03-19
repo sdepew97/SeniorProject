@@ -61,7 +61,6 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
      *
      * @return A new instance of fragment BinarySearchFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static BinarySearchFragment newInstance()
     {
         BinarySearchFragment fragment = new BinarySearchFragment();

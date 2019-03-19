@@ -49,13 +49,13 @@ public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = LinearSearchFragment.newInstance("One", "Two");
+                page = LinearSearchFragment.newInstance();
                 break;
             case 1:
                 page = BinarySearchFragment.newInstance();
                 break; //input is number of columns of data
             default:
-                page = LinearSearchFragment.newInstance("One", "Two"); //default fragment to return
+                page = LinearSearchFragment.newInstance(); //default fragment to return
                 break;
         }
 

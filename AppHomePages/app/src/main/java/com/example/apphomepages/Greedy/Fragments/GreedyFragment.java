@@ -2,7 +2,6 @@ package com.example.apphomepages.Greedy.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,22 +37,12 @@ public class GreedyFragment extends Fragment
      *
      * @return A new instance of fragment GreedyFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static GreedyFragment newInstance()
     {
         GreedyFragment fragment = new GreedyFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
-    {
-        if (mListener != null)
-        {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -119,7 +108,5 @@ public class GreedyFragment extends Fragment
      */
     public interface OnFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

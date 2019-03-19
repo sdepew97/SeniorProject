@@ -1,7 +1,10 @@
 package com.example.apphomepages;
 
+import com.example.apphomepages.General.DataTypes.Graph;
+import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.General.Helpers.HelperMethods;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -36,7 +39,53 @@ public class HelperMethodsTest
     }
 
     @Test
-    public void generateSetArray()
+    public void generateTree()
+    {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(0);
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        numbers.add(4);
+        numbers.add(5);
+        numbers.add(6);
+
+        Graph<Integer> integerGraph = HelperMethods.generateGraph(true, numbers);
+        ArrayList<Node<Integer>> nodes = integerGraph.getGraphElements();
+
+        Assert.assertEquals(new Integer(1), nodes.get(0).getAdjacentNodes().get(0).getNodeValue());
+        Assert.assertEquals(new Integer(2), nodes.get(0).getAdjacentNodes().get(1).getNodeValue());
+
+        Assert.assertEquals(new Integer(0), nodes.get(1).getAdjacentNodes().get(0).getNodeValue());
+        Assert.assertEquals(new Integer(3), nodes.get(1).getAdjacentNodes().get(1).getNodeValue());
+        Assert.assertEquals(new Integer(4), nodes.get(1).getAdjacentNodes().get(2).getNodeValue());
+
+        Assert.assertEquals(new Integer(0), nodes.get(2).getAdjacentNodes().get(0).getNodeValue());
+        Assert.assertEquals(new Integer(5), nodes.get(2).getAdjacentNodes().get(1).getNodeValue());
+        Assert.assertEquals(new Integer(6), nodes.get(2).getAdjacentNodes().get(2).getNodeValue());
+
+        Assert.assertEquals(new Integer(1), nodes.get(3).getAdjacentNodes().get(0).getNodeValue());
+
+        Assert.assertEquals(new Integer(1), nodes.get(4).getAdjacentNodes().get(0).getNodeValue());
+
+        Assert.assertEquals(new Integer(2), nodes.get(5).getAdjacentNodes().get(0).getNodeValue());
+
+        Assert.assertEquals(new Integer(2), nodes.get(6).getAdjacentNodes().get(0).getNodeValue());
+
+        //TODO: remove code, below after debugging complete
+        /*
+        for (Node<Integer> n : nodes)
+        {
+            for (Node<Integer> m : n.getAdjacentNodes())
+            {
+                System.out.println("Node:  " + n.getNodeValue() + " Connected to: " + m.getNodeValue());
+            }
+        }
+        */
+    }
+
+    @Test
+    public void testGenerateSetArray()
     {
         ArrayList<Integer> numbers = new ArrayList<>();
         numbers.add(8);
@@ -50,10 +99,27 @@ public class HelperMethodsTest
         numbers.add(0);
         numbers.add(7);
 
-        ArrayList<Integer> numbersGenerated = HelperMethods.generateSetArray();
+        ArrayList<Integer> numbersGenerated = generateSetArray();
 
         for (Integer i : numbers)
             assertEquals(numbers.get(i), numbersGenerated.get(i));
+    }
+
+    //Method for testing against Wikipedia visualizations
+    private static ArrayList<Integer> generateSetArray()
+    {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(8);
+        numbers.add(5);
+        numbers.add(2);
+        numbers.add(6);
+        numbers.add(9);
+        numbers.add(3);
+        numbers.add(1);
+        numbers.add(4);
+        numbers.add(0);
+        numbers.add(7);
+        return numbers;
     }
 
     @Test

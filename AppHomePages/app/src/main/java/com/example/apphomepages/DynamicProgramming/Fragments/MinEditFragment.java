@@ -33,7 +33,6 @@ public class MinEditFragment extends Fragment
      *
      * @return A new instance of fragment MinEditFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MinEditFragment newInstance()
     {
         MinEditFragment fragment = new MinEditFragment();

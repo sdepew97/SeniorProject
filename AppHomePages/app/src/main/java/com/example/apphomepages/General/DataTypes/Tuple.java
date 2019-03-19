@@ -69,7 +69,6 @@ public class Tuple
         return pivot;
     }
 
-
     public ArrayList<Integer> constructPair()
     {
         ArrayList<Integer> returnVal = new ArrayList<>();

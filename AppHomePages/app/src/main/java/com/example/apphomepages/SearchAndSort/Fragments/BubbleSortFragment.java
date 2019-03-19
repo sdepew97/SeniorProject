@@ -55,7 +55,6 @@ public class BubbleSortFragment extends Fragment
      *
      * @return A new instance of fragment BubbleSortFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static BubbleSortFragment newInstance()
     {
         BubbleSortFragment fragment = new BubbleSortFragment();

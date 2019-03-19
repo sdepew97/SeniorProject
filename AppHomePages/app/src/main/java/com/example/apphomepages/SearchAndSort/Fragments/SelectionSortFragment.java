@@ -55,7 +55,6 @@ public class SelectionSortFragment extends Fragment
      *
      * @return A new instance of fragment SelectionSortFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static SelectionSortFragment newInstance()
     {
         SelectionSortFragment fragment = new SelectionSortFragment();

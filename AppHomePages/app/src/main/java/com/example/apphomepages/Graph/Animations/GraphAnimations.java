@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.Graph;
+import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.Graph.Drawable.TopologicalOrderingDrawable;
 
@@ -13,13 +14,13 @@ import java.util.ArrayList;
 
 public class GraphAnimations
 {
-    public static void generateGraphSearch(boolean found, ArrayList<Integer> nodesToHighlight, Graph graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateGraphSearch(boolean found, ArrayList<Node<Integer>> nodesToHighlight, Graph graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 800;
 
         //Set up the main frame
-        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Integer.MAX_VALUE, false, graph);
+        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
 
         for (int i = 1; i < stopMotionAnimation.length - 1; i++)
         {
@@ -32,7 +33,7 @@ public class GraphAnimations
             stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(nodesToHighlight.size() - 1), true, graph);
         } else
         {
-            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Integer.MAX_VALUE, false, graph);
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
         }
 
         //Animate!
@@ -60,7 +61,6 @@ public class GraphAnimations
 
         stopMotionAnimation[stopMotionAnimation.length - 1] = new TopologicalOrderingDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), "", graph, true);
 
-
         //Animate!
         for (Drawable d : stopMotionAnimation)
         {
@@ -68,6 +68,6 @@ public class GraphAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackgroundDrawable(animationDrawable); //TODO use something not depriciated
     }
 }

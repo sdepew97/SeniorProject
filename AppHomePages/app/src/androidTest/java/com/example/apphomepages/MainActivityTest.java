@@ -101,7 +101,6 @@ public class MainActivityTest
     public void clickGraph() throws InterruptedException
     {
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        //TODO: figure out better solution than waiting here!
         Thread.sleep(500);
         onView(withId(R.id.graphAlgorithms)).perform(ViewActions.click());
         intended(hasComponent(GraphActivity.class.getName()));
@@ -112,7 +111,6 @@ public class MainActivityTest
     {
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        //TODO: figure out better solution than waiting here!
         Thread.sleep(500);
         onView(withId(R.id.greedyAlgorithms)).perform(ViewActions.click());
         intended(hasComponent(GreedyActivity.class.getName()));
@@ -124,7 +122,6 @@ public class MainActivityTest
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        //TODO: figure out better solution than waiting here!
         Thread.sleep(500);
         onView(withId(R.id.dynamicProgrammingAlgorithms)).perform(ViewActions.click());
         intended(hasComponent(DynamicProgrammingActivity.class.getName()));

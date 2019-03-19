@@ -76,8 +76,6 @@ public class GraphActivityTest
         onView(withId(R.id.viewPager)).perform(ViewActions.swipeRight());
     }
 
-    //TODO: make sure all buttons can be clicked
-
     @Test
     public void checkInstructionsDFS() throws InterruptedException
     {
@@ -110,17 +108,12 @@ public class GraphActivityTest
         onView(withId(R.id.close_instructions_topological)).perform(ViewActions.click());
     }
 
-    //TODO: uncomment tests once the graphs are auto-generated!
-
-    /*
     @Test
     public void checkGenerateDFS() throws InterruptedException
     {
         onView(withId(R.id.generateButtonDFS)).perform(ViewActions.click());
     }
-    */
 
-    /*
     @Test
     public void checkGenerateBFS() throws InterruptedException
     {
@@ -128,7 +121,6 @@ public class GraphActivityTest
         Thread.sleep(500);
         onView(withId(R.id.generateButtonBFS)).perform(ViewActions.click());
     }
-    */
 
     @Test
     public void checkGenerateTopological() throws InterruptedException
