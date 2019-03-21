@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.example.apphomepages.DynamicProgramming.FragmentAdapters.FragmentAdapterDPPage;
-import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
 import com.example.apphomepages.DynamicProgramming.Fragments.NQueensFragment;
 import com.example.apphomepages.R;
 import com.google.android.material.tabs.TabLayout;
@@ -15,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager.widget.ViewPager;
 
-public class DynamicProgrammingActivity extends AppCompatActivity implements NQueensFragment.OnFragmentInteractionListener, MinEditFragment.OnFragmentInteractionListener
+public class DynamicProgrammingActivity extends AppCompatActivity implements NQueensFragment.OnFragmentInteractionListener
 {
     //LOG messages
     private static String TAG = "DynamicProgrammingActivity";

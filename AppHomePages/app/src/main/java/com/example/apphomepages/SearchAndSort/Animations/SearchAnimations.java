@@ -35,7 +35,7 @@ public class SearchAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackground(animationDrawable);
     }
 
     public static void generateBinarySearch(int locationInArray, ArrayList<Integer> squaresToHighlight, ArrayList<Integer> numbers, ArraySearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
@@ -60,6 +60,6 @@ public class SearchAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackground(animationDrawable);
     }
 }

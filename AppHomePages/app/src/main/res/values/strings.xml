@@ -109,6 +109,8 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
 
     <string name="TopologicalOrderingInstructions"> ... </string>
 
+    <string name="DijkstrasInstructions"> ... </string>
+
 
     <!-- Description Strings -->
     <string name="LinearSearchDescription">Linear search is an O(n) algorithm that looks through all the elements in an unsorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. </string>
@@ -130,6 +132,8 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
     <string name="BreadthFirstSearchDescription">Breadth first search is an O(...) algorithm where ... </string>
 
     <string name="TopologicalOrderingDescription">Topological ordering is an O(...) algorithm where ... </string>
+
+    <string name="DijkstrasDescription">Dijkstra\'s algorithm is an O(...) algorithm where ... </string>
 
 
 </resources>

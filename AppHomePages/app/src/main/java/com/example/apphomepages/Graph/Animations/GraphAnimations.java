@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class GraphAnimations
 {
-    public static void generateGraphSearch(boolean found, ArrayList<Node<Integer>> nodesToHighlight, Graph graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateGraphSearch(boolean found, ArrayList<Node<Integer>> nodesToHighlight, Graph<Integer> graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 800;
@@ -43,7 +43,7 @@ public class GraphAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackground(animationDrawable);
     }
 
     public static void generateTopologicalGraphOrdering(ArrayList<String> nodesToHighlight, Graph<String> graph, TopologicalOrderingDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
@@ -68,6 +68,6 @@ public class GraphAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable); //TODO use something not depriciated
+        image.setBackground(animationDrawable);
     }
 }
