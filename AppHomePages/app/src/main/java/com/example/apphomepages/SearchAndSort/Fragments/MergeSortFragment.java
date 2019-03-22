@@ -120,7 +120,6 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 //Set up variables for the method
-                ArrayMergeSortDrawable[] stopMotionAnimation;
                 index = r.nextInt(lengths.size()); //Get random initial index
                 animationDrawable = new AnimationDrawable();
 
@@ -151,14 +150,97 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                 numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
-                ArrayList<Integer> originalNumbers = copyArray(numbers);
+                //ArrayList<Integer> originalNumbers = copyArray(numbers);
                 ArrayList<MergeSortReturnType> iterations = SortingAlgorithms.mergeSort(numbers, 0, numbers.size() - 1);
 
-                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size() + 2];
+                for (MergeSortReturnType mergeSortReturnType : iterations)
+                {
+                    for (Integer x : mergeSortReturnType.getNumbers())
+                    {
+                        System.out.print(x + " ");
+                    }
+                    System.out.println();
+                }
+
+                //Convert each iteration to an ArrayList<ArrayList<Integer>> to represent the sections of numbers
+                ArrayList<ArrayList<ArrayList<Integer>>> iterationPartitions = new ArrayList<>();
+
+                ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+                list.add((iterations.get(0).getNumbers()));
+                iterationPartitions.add(list);
+
+                for (int i = 1; i < iterations.size(); i++)
+                {
+                    ArrayList<Integer> currentPart = copyArray(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getRight());
+                    //ArrayList<Integer> rightPart = copyArray(iterations.get(i).getNumbers(), iterations.get(i).getRight() + 1, iterations.get(i - 1).getRight());
+
+                    //Put the new piece in its proper place...
+                    ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
+                    //list.add(leftPart);
+                    //lists.add(rightPart);
+
+                    ArrayList<ArrayList<Integer>> otherPartLeft = new ArrayList<>();
+                    ArrayList<ArrayList<Integer>> otherPartRight = new ArrayList<>();
+
+                    //Add other left pieces, if they exist
+                    if (0 < iterations.get(i).getLeft())
+                    {
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            if (iterations.get(j).getRight() + 1 == iterations.get(i).getLeft())
+                            {
+                                otherPartLeft = iterationPartitions.get(j);
+                            }
+                        }
+                    }
+
+                    //Add other right pieces if they exist
+                    if (iterations.get(i).getRight() < iterations.get(i).getNumbers().size() - 1)
+                    {
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            if (iterations.get(i).getRight() + 1 == iterations.get(j).getLeft())
+                            {
+                                otherPartRight = iterationPartitions.get(j);
+                            }
+                        }
+
+                    }
+
+                    //Combine all pieces together
+                    if (otherPartLeft.size() > 0)
+                        lists.addAll(otherPartLeft);
+
+                    lists.add(currentPart);
+
+                    if (otherPartRight.size() > 0)
+                        lists.addAll(otherPartRight);
+
+                    iterationPartitions.add(lists);
+                }
+
+                /*
+                //TODO: remove once debugging complete
+                for (ArrayList<ArrayList<Integer>> lists : iterationPartitions)
+                {
+                    System.out.println("\nList size:" + lists.size());
+
+                    for (ArrayList<Integer> arr : lists)
+                    {
+                        for (Integer i : arr)
+                        {
+                            System.out.print(i + " ");
+                        }
+                        System.out.print("||");
+                    }
+                }
+                */
+
+                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size()];
 
                 image = viewGlobal.findViewById(R.id.imageViewMerge);
 
-                SortAnimations.generateMergeSort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
+                SortAnimations.generateMergeSort(iterationPartitions, stopMotionAnimation, image, animationDrawable);
             }
 
             @Override

@@ -18,13 +18,11 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
     private final Paint mSecondPaint;
     private final Paint mTextPaint;
 
-    private ArrayList<Integer> numbers;
-    private Integer leftValue;
-    private Integer rightValue;
-    private boolean start;
+    private ArrayList<ArrayList<Integer>> arraysToDraw;
+    private boolean done;
 
     //An ArraySearchDrawable constructor for searching
-    public ArrayMergeSortDrawable(Color main, Color secondary, Integer leftValue, Integer rightValue, ArrayList<Integer> numbers, boolean start)
+    public ArrayMergeSortDrawable(Color main, Color secondary, ArrayList<ArrayList<Integer>> arraysToDraw, boolean done)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -38,10 +36,8 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
         mTextPaint.setTextSize(60);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
 
-        this.numbers = numbers;
-        this.leftValue = leftValue;
-        this.rightValue = rightValue;
-        this.start = start;
+        this.arraysToDraw = arraysToDraw;
+        this.done = done;
     }
 
     @Override
@@ -50,8 +46,8 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numSquares = numbers.size();
-        int widthSideLength = width / numSquares;
+        int numSquares = numSquares(arraysToDraw);
+        int widthSideLength = width / (numSquares);
         int heightSideLength = height;
 
         mTextPaint.setTextSize(widthSideLength / 3);
@@ -61,22 +57,43 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
 
         Rect[] rectangles = new Rect[numSquares];
 
-        for (int i = 0; i < numSquares; i++)
+        for (int i = 0; i < arraysToDraw.size(); i++)
         {
-            rectangles[i] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
-
-            left += widthSideLength;
-
-            if (leftValue <= i && i <= rightValue && !start)
+            ArrayList<Integer> list = arraysToDraw.get(i);
+            for (int j = 0; j < list.size(); j++)
             {
-                canvas.drawRect(rectangles[i], mSecondPaint);
-            } else
-            {
-                canvas.drawRect(rectangles[i], mMainPaint);
+                rectangles[j] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
+
+                left += widthSideLength;
+
+                if (!done)
+                    canvas.drawRect(rectangles[j], mMainPaint);
+                else
+                    canvas.drawRect(rectangles[j], mSecondPaint);
+
+                canvas.drawText(Integer.toString(list.get(j)), rectangles[j].centerX(), rectangles[j].centerY(), mTextPaint);
             }
 
-            canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
+            if (arraysToDraw.size() > 1)
+            {
+                left += widthSideLength;
+            }
         }
+    }
+
+    private int numSquares(ArrayList<ArrayList<Integer>> squareToCount)
+    {
+        int i = 0;
+
+        for (ArrayList<Integer> list : squareToCount)
+        {
+            for (Integer item : list)
+            {
+                i++;
+            }
+        }
+
+        return i;
     }
 
     @Override
