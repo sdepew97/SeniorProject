@@ -15,7 +15,7 @@ public class GreedyAnimations
     public static void generateDijkstras(ArrayList<DijkstrasReturnType> frames, int[][] graph, DijkstrasDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
-        int duration = 1000;
+        int duration = 2000;
 
         for (int i = 0; i < stopMotionAnimation.length; i++)
         {
