@@ -1,6 +1,6 @@
 package com.example.apphomepages;
 
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.SearchAndSort.Algorithms.SearchingAlgorithms;
 
 import org.junit.Test;

@@ -207,7 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/DepthFirstSearchDescription"
+                android:text="@string/BreadthFirstSearchDescription"
                 android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"

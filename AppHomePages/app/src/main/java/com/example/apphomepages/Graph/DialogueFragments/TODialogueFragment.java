@@ -1,4 +1,4 @@
-package com.example.apphomepages.Graph.DialogFragments;
+package com.example.apphomepages.Graph.DialogueFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import com.example.apphomepages.R;
 import androidx.fragment.app.DialogFragment;
 
 //Used https://stacktips.com/tutorials/android/android-dialog-fragment-example as a resource to create this code
-public class TODialogFragment extends DialogFragment
+public class TODialogueFragment extends DialogFragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

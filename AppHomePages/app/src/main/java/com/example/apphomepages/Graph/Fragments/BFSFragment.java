@@ -15,10 +15,10 @@ import android.widget.Spinner;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
-import com.example.apphomepages.Graph.DialogFragments.BFSDialogFragment;
+import com.example.apphomepages.Graph.DialogueFragments.BFSDialogueFragment;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
@@ -40,11 +40,10 @@ import androidx.fragment.app.FragmentManager;
  */
 public class BFSFragment extends Fragment
 {
+    Graph<Integer> graph = null; //the current graph
     private OnFragmentInteractionListener mListener;
-
     //Class variables
     private List<Integer> numbers = new ArrayList<>(); //numbers on nodes searched
-    Graph<Integer> graph = null; //the current graph
     private Node<Integer> soughtAfter = null; //actual node being sought
     private ImageView image = null;
 
@@ -183,6 +182,8 @@ public class BFSFragment extends Fragment
 
                 ArrayList<Node<Integer>> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graph, soughtAfter, !targetFound);
 
+                System.out.println("hi");
+
                 stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
 
                 animationDrawable = new AnimationDrawable();
@@ -243,7 +244,7 @@ public class BFSFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                BFSDialogFragment dialogFragment = new BFSDialogFragment();
+                BFSDialogueFragment dialogFragment = new BFSDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

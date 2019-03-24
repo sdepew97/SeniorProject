@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Spinner;
 
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
 import org.junit.Assert;
