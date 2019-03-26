@@ -84,7 +84,6 @@ public class DynamicProgrammingAlgorithms
             /* Check if the queen can be placed on
                board[i][col] */
             accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), true, i, col));
-
             if (isSafe(accumulator, board, i, col, N))
             {
                 /* Place this queen in board[i][col] */
