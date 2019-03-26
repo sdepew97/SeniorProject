@@ -1,6 +1,5 @@
 package com.example.apphomepages;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.Tuple;
 import com.example.apphomepages.General.Helpers.HelperMethods;
@@ -98,7 +97,7 @@ public class SortingAlgorithmsTest
     {
         Integer[] numbers1 = {-1, 1, 12, 23, 24, 22, 86, 123};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
-        ArrayList<MergeSortReturnType> merged = SortingAlgorithms.merge(numbersArrayList1, 0, 4, numbers1.length - 1, Color.randomColor());
+        ArrayList<MergeSortReturnType> merged = SortingAlgorithms.merge(numbersArrayList1, 0, 4, numbers1.length - 1);
 
         Arrays.sort(numbers1);
 
