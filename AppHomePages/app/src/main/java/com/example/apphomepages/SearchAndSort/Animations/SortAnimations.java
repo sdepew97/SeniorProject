@@ -126,20 +126,20 @@ public class SortAnimations
 
     }
 
-    public static void generateMergeSort(ArrayList<ArrayList<ArrayList<Integer>>> iterationValues, ArrayMergeSortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateMergeSort(ArrayList<ArrayList<ArrayList<String>>> iterationValues, ArrayMergeSortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
-        int duration = 1000;
+        int duration = 1500;
 
         int i = 0;
         for (int j = 0; j < iterationValues.size() - 1; j++)
         {
-            ArrayList<ArrayList<Integer>> iteration = iterationValues.get(j);
+            ArrayList<ArrayList<String>> iteration = iterationValues.get(j);
             stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), iteration, false);
             i++;
         }
 
-        ArrayList<ArrayList<Integer>> iteration = iterationValues.get(iterationValues.size() - 1);
+        ArrayList<ArrayList<String>> iteration = iterationValues.get(iterationValues.size() - 1);
         stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), iteration, true);
 
         for (Drawable d : stopMotionAnimation)

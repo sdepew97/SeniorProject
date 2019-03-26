@@ -18,11 +18,11 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
     private final Paint mSecondPaint;
     private final Paint mTextPaint;
 
-    private ArrayList<ArrayList<Integer>> arraysToDraw;
+    private ArrayList<ArrayList<String>> arraysToDraw;
     private boolean done;
 
     //An ArraySearchDrawable constructor for searching
-    public ArrayMergeSortDrawable(Color main, Color secondary, ArrayList<ArrayList<Integer>> arraysToDraw, boolean done)
+    public ArrayMergeSortDrawable(Color main, Color secondary, ArrayList<ArrayList<String>> arraysToDraw, boolean done)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -48,18 +48,19 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
         int height = getBounds().height();
         int numSquares = numSquares(arraysToDraw);
         int widthSideLength = width / (numSquares);
-        int heightSideLength = height;
+        int heightSideLength = height / (numSquares);
 
-        mTextPaint.setTextSize(widthSideLength / 3);
+        mTextPaint.setTextSize((float) (widthSideLength / 3.0));
 
+        //Center the array
         int left = 0;
-        int top = 0;
+        int top = (height - heightSideLength) / 2;
 
         Rect[] rectangles = new Rect[numSquares];
 
         for (int i = 0; i < arraysToDraw.size(); i++)
         {
-            ArrayList<Integer> list = arraysToDraw.get(i);
+            ArrayList<String> list = arraysToDraw.get(i);
             for (int j = 0; j < list.size(); j++)
             {
                 rectangles[j] = new Rect(left, top, left + widthSideLength, top + heightSideLength);
@@ -71,7 +72,7 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
                 else
                     canvas.drawRect(rectangles[j], mSecondPaint);
 
-                canvas.drawText(Integer.toString(list.get(j)), rectangles[j].centerX(), rectangles[j].centerY(), mTextPaint);
+                canvas.drawText(list.get(j), rectangles[j].centerX(), rectangles[j].centerY(), mTextPaint);
             }
 
             if (arraysToDraw.size() > 1)
@@ -81,17 +82,23 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
         }
     }
 
-    private int numSquares(ArrayList<ArrayList<Integer>> squareToCount)
+    private int numSquares(ArrayList<ArrayList<String>> squareToCount)
     {
         int i = 0;
 
-        for (ArrayList<Integer> list : squareToCount)
+        for (ArrayList<String> list : squareToCount)
         {
-            for (Integer item : list)
+            for (String item : list)
             {
                 i++;
             }
+
+            //include the spacing squares
+            i++;
         }
+
+        //remove unnecessary right padding
+        i--;
 
         return i;
     }

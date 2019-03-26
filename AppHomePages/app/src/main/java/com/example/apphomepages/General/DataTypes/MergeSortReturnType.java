@@ -7,12 +7,14 @@ public class MergeSortReturnType
     private int left;
     private int right;
     private ArrayList<Integer> numbers;
+    private boolean merging;
 
-    public MergeSortReturnType(int left, int right, ArrayList<Integer> numbers)
+    public MergeSortReturnType(int left, int right, ArrayList<Integer> numbers, boolean merging)
     {
         this.left = left;
         this.right = right;
         this.numbers = numbers;
+        this.merging = merging;
     }
 
     public int getLeft()
@@ -28,5 +30,10 @@ public class MergeSortReturnType
     public ArrayList<Integer> getNumbers()
     {
         return numbers;
+    }
+
+    public boolean isMerging()
+    {
+        return merging;
     }
 }

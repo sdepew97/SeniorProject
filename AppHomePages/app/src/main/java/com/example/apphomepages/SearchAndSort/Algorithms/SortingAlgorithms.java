@@ -1,6 +1,5 @@
 package com.example.apphomepages.SearchAndSort.Algorithms;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.PairOfTuple;
 import com.example.apphomepages.General.DataTypes.Tuple;
@@ -64,6 +63,7 @@ public class SortingAlgorithms
         return arrayWithResult;
     }
 
+    //Copies an array list from left to right inclusive of right
     public static ArrayList<Integer> copyArray(ArrayList<Integer> arrayToCopy, int left, int right)
     {
         ArrayList<Integer> arrayWithResult = new ArrayList<>();
@@ -71,6 +71,19 @@ public class SortingAlgorithms
         for (int i = left; i <= right; i++)
         {
             arrayWithResult.add(arrayToCopy.get(i));
+        }
+
+        return arrayWithResult;
+    }
+
+    //Copies an array list from left to right inclusive of right
+    public static ArrayList<String> copyArrayString(ArrayList<Integer> arrayToCopy, int left, int right)
+    {
+        ArrayList<String> arrayWithResult = new ArrayList<>();
+
+        for (int i = left; i <= right; i++)
+        {
+            arrayWithResult.add(arrayToCopy.get(i).toString());
         }
 
         return arrayWithResult;
@@ -195,7 +208,7 @@ public class SortingAlgorithms
     // Merges two subarrays of arr[].
     // First subarray is arr[l..m]
     // Second subarray is arr[m+1..r]
-    public static ArrayList<MergeSortReturnType> merge(ArrayList<Integer> arr, int l, int m, int r, Color c)
+    public static ArrayList<MergeSortReturnType> merge(ArrayList<Integer> arr, int l, int m, int r)
     {
         ArrayList<MergeSortReturnType> returnList = new ArrayList<>();
 
@@ -212,8 +225,6 @@ public class SortingAlgorithms
             L[i] = arr.get(l + i);
         for (int j = 0; j < n2; ++j)
             R[j] = arr.get(m + 1 + j);
-
-        returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
 
         /* Merge the temp arrays */
 
@@ -235,7 +246,7 @@ public class SortingAlgorithms
             }
             k++;
 
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
         }
 
         /* Copy remaining elements of L[] if any */
@@ -244,7 +255,7 @@ public class SortingAlgorithms
             arr.set(k, L[i]);
             i++;
             k++;
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
         }
 
         /* Copy remaining elements of R[] if any */
@@ -253,7 +264,7 @@ public class SortingAlgorithms
             arr.set(k, R[j]);
             j++;
             k++;
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
         }
 
         return returnList;
@@ -267,8 +278,7 @@ public class SortingAlgorithms
 
         if (l < r)
         {
-            Color c = Color.randomColor();
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
 
             // Find the middle point
             int m = (l + r) / 2;
@@ -278,13 +288,12 @@ public class SortingAlgorithms
             returnList.addAll(mergeSort(arr, m + 1, r));
 
             // Merge the sorted halves
-            returnList.addAll(merge(arr, l, m, r, c));
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.addAll(merge(arr, l, m, r));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
         } else
         {
             //Add the case where each element is a singleton!
-            Color c = Color.getFound();
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr)));
+            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
         }
 
         return returnList;
