@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
+import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
@@ -115,27 +116,27 @@ public class QuicksortFragment extends Fragment
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = new ArrayList<>(); //HelperMethods.generateRandomArray(r, numElements);
-                numbers.add(10);
-                numbers.add(80);
-                numbers.add(30);
-                numbers.add(90);
-                numbers.add(40);
-                numbers.add(50);
-                numbers.add(70);
+                numbers = HelperMethods.generateRandomArray(r, numElements); //new ArrayList<>();
+//                numbers.add(10);
+//                numbers.add(80);
+//                numbers.add(30);
+//                numbers.add(90);
+//                numbers.add(40);
+//                numbers.add(50);
+//                numbers.add(70);
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Tuple> iterations = new ArrayList<>();
+                ArrayList<QuickSortReturnType> iterations = new ArrayList<>();
 
                 //First frame (original array)
-                iterations.add(new Tuple(originalNumbers, 0, 0, -1, -1, false));
+                iterations.add(new QuickSortReturnType(originalNumbers, 0, 0, -1, -1, false));
 
                 //get the middle frames of the animation
                 SortingAlgorithms.quicksort(iterations, numbers, 0, numbers.size() - 1);
 
                 //Final frame
-                iterations.add(new Tuple(iterations.get(iterations.size() - 1).getList(), 0, 0, -1, -1, false));
+                iterations.add(new QuickSortReturnType(iterations.get(iterations.size() - 1).getList(), 0, 0, -1, -1, false));
 
                 stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size()];
 

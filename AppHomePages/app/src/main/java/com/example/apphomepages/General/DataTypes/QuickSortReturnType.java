@@ -2,9 +2,8 @@ package com.example.apphomepages.General.DataTypes;
 
 import java.util.ArrayList;
 
-public class Tuple
+public class QuickSortReturnType
 {
-
     private ArrayList<Integer> list;
     private Integer a;
     private Integer b;
@@ -12,31 +11,7 @@ public class Tuple
     private Integer beingViewed;
     private boolean partitioning;
 
-    public Tuple()
-    {
-        this.list = new ArrayList<>();
-        a = -1;
-        b = -1;
-        pivot = -1;
-    }
-
-    public Tuple(ArrayList<Integer> list)
-    {
-        this.list = list;
-        a = -1;
-        b = -1;
-        pivot = -1;
-    }
-
-    public Tuple(ArrayList<Integer> list, Integer a, Integer b, Integer pivot)
-    {
-        this.list = list;
-        this.a = a;
-        this.b = b;
-        this.pivot = pivot;
-    }
-
-    public Tuple(ArrayList<Integer> list, Integer a, Integer b, Integer pivot, Integer beingViewed, boolean partitioning)
+    public QuickSortReturnType(ArrayList<Integer> list, Integer a, Integer b, Integer pivot, Integer beingViewed, boolean partitioning)
     {
         this.list = list;
         this.a = a;
@@ -79,16 +54,6 @@ public class Tuple
     public Integer getPivot()
     {
         return pivot;
-    }
-
-    public ArrayList<Integer> constructPair()
-    {
-        ArrayList<Integer> returnVal = new ArrayList<>();
-
-        returnVal.add(a);
-        returnVal.add(b);
-
-        return returnVal;
     }
 
     public Integer getBeingViewed()

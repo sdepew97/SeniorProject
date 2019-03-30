@@ -1,16 +1,17 @@
 package com.example.apphomepages.SearchAndSort.Algorithms;
 
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
+import com.example.apphomepages.General.DataTypes.SortReturnType;
 
 import java.util.ArrayList;
 
 public class SortingAlgorithms
 {
     //Bubble mergeSort adapted from https://www.geeksforgeeks.org/bubble-sort/
-    public static ArrayList<Tuple> bubbleSort(ArrayList<Integer> arr)
+    public static ArrayList<SortReturnType> bubbleSort(ArrayList<Integer> arr)
     {
-        ArrayList<Tuple> resultsOfSteps = new ArrayList<>();
+        ArrayList<SortReturnType> resultsOfSteps = new ArrayList<>();
 
         int n = arr.size();
         for (int i = 0; i < n - 1; i++)
@@ -19,8 +20,8 @@ public class SortingAlgorithms
             {
                 if (arr.get(j) > arr.get(j + 1))
                 {
-                    Tuple t1 = new Tuple();
-                    Tuple t2 = new Tuple();
+                    SortReturnType t1 = new SortReturnType();
+                    SortReturnType t2 = new SortReturnType();
                     // swap arr[j+1] and arr[j]
                     t1.setA(j + 1);
                     t2.setA(j + 1);
@@ -35,7 +36,7 @@ public class SortingAlgorithms
                     resultsOfSteps.add(t2);
                 } else
                 {
-                    Tuple t1 = new Tuple();
+                    SortReturnType t1 = new SortReturnType();
                     t1.setA(j + 1);
                     t1.setB(j);
                     t1.setList(copyArray(arr));
@@ -45,8 +46,8 @@ public class SortingAlgorithms
             }
         }
 
-        resultsOfSteps.add(new Tuple(arr));
-        resultsOfSteps.add(new Tuple(arr));
+        resultsOfSteps.add(new SortReturnType(arr));
+        resultsOfSteps.add(new SortReturnType(arr));
         return resultsOfSteps;
     }
 
@@ -89,14 +90,14 @@ public class SortingAlgorithms
     }
 
     //Insertion mergeSort adapted from https://www.geeksforgeeks.org/insertion-sort/
-    public static ArrayList<Tuple> insertionSort(ArrayList<Integer> arr)
+    public static ArrayList<SortReturnType> insertionSort(ArrayList<Integer> arr)
     {
-        ArrayList<Tuple> resultOfSteps = new ArrayList<>();
+        ArrayList<SortReturnType> resultOfSteps = new ArrayList<>();
 
         int n = arr.size();
 
         //Initial array
-        Tuple t = new Tuple();
+        SortReturnType t = new SortReturnType();
         t.setList(copyArray(arr));
         t.setA(-1);
         t.setB(1);
@@ -107,7 +108,7 @@ public class SortingAlgorithms
             int key = arr.get(i);
             int j = i - 1;
 
-            Tuple t1 = new Tuple();
+            SortReturnType t1 = new SortReturnType();
             t1.setA(j + 1);
             t1.setList(copyArray(arr));
             t1.setB(i + 1);
@@ -122,13 +123,13 @@ public class SortingAlgorithms
             {
                 arr.set(j + 1, arr.get(j));
                 j = j - 1;
-                Tuple tuple = new Tuple();
-                tuple.setList(copyArray(arr));
-                tuple.setA(-1);
-                tuple.setB(i + 1);
-                resultOfSteps.add(tuple);
+                SortReturnType sortReturnType = new SortReturnType();
+                sortReturnType.setList(copyArray(arr));
+                sortReturnType.setA(-1);
+                sortReturnType.setB(i + 1);
+                resultOfSteps.add(sortReturnType);
             }
-            Tuple t2 = new Tuple();
+            SortReturnType t2 = new SortReturnType();
             t2.setA(j + 1);
             arr.set(j + 1, key);
 
@@ -137,19 +138,19 @@ public class SortingAlgorithms
             resultOfSteps.add(t2);
         }
 
-        Tuple finalTuple = new Tuple();
-        finalTuple.setList(copyArray(arr));
-        finalTuple.setB(n);
-        resultOfSteps.add(finalTuple); //This is the sorted array...
+        SortReturnType sortReturnType = new SortReturnType();
+        sortReturnType.setList(copyArray(arr));
+        sortReturnType.setB(n);
+        resultOfSteps.add(sortReturnType); //This is the sorted array...
 
         return resultOfSteps;
 
     }
 
     //Selection mergeSort adapted from https://www.geeksforgeeks.org/selection-sort/
-    public static ArrayList<Tuple> selectionSort(ArrayList<Integer> arr)
+    public static ArrayList<SortReturnType> selectionSort(ArrayList<Integer> arr)
     {
-        ArrayList<Tuple> resultOfSteps = new ArrayList<>();
+        ArrayList<SortReturnType> resultOfSteps = new ArrayList<>();
 
         int n = arr.size();
 
@@ -157,14 +158,14 @@ public class SortingAlgorithms
         for (int i = 0; i < n; i++)
         {
             // Frame with the minimum
-            Tuple t = new Tuple();
+            SortReturnType t = new SortReturnType();
             t.setList(copyArray(arr));
             t.setB(i);
 
             // Find the minimum element in unsorted array
             // Frame with the first search value
             int min_idx = i;
-            Tuple t2 = new Tuple();
+            SortReturnType t2 = new SortReturnType();
             t2.setList(copyArray(arr));
             t2.setA(min_idx);
             t2.setB(i);
@@ -173,7 +174,7 @@ public class SortingAlgorithms
             for (int j = i + 1; j < n; j++)
             {
                 //Frame with all search values
-                Tuple t3 = new Tuple();
+                SortReturnType t3 = new SortReturnType();
                 t3.setList(copyArray(arr));
                 t3.setA(j);
                 t3.setB(i);
@@ -194,11 +195,11 @@ public class SortingAlgorithms
             resultOfSteps.add(t);
         }
 
-        Tuple finalTuple = new Tuple();
-        finalTuple.setList(copyArray(arr));
-        finalTuple.setA(n);
-        finalTuple.setB(n);
-        resultOfSteps.add(finalTuple); //This is the sorted array...
+        SortReturnType sortReturnType = new SortReturnType();
+        sortReturnType.setList(copyArray(arr));
+        sortReturnType.setA(n);
+        sortReturnType.setB(n);
+        resultOfSteps.add(sortReturnType); //This is the sorted array...
 
         return resultOfSteps;
     }
@@ -299,22 +300,22 @@ public class SortingAlgorithms
     }
 
 
-    //Quicksort algorithm adapted from https://www.geeksforgeeks.org/quick-sort/
+    //Quicksort algorithm adapted from https://www.geeksforgeeks.org/quick-sort/ and used https://www.youtube.com/watch?v=PgBzjlCcFvc
     /* This function takes last element as pivot,
       places the pivot element at its correct
       position in sorted array, and places all
       smaller (smaller than pivot) to left of
       pivot and all greater elements to right
       of pivot */
-    private static int partition(ArrayList<Integer> arr, int low, int high, ArrayList<Tuple> accumulator)
+    private static int partition(ArrayList<Integer> arr, int low, int high, ArrayList<QuickSortReturnType> accumulator)
     {
-        accumulator.add(new Tuple(copyArray(arr), low, high, high, -1, false));
+        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, -1, false));
 
         int pivot = arr.get(high);
         int i = (low - 1); // index of smaller element
         for (int j = low; j < high; j++)
         {
-            accumulator.add(new Tuple(copyArray(arr), low, high, high, j, true));
+            accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, j, true));
             // If current element is smaller than or
             // equal to pivot
             if (arr.get(j) <= pivot)
@@ -326,18 +327,18 @@ public class SortingAlgorithms
                 arr.set(i, arr.get(j));
                 arr.set(j, temp);
 
-                accumulator.add(new Tuple(copyArray(arr), low, high, high, j, true));
+                accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, j, true));
             }
         }
 
-        accumulator.add(new Tuple(copyArray(arr), low, high, high, -1, false));
+        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, -1, false));
 
         // swap arr[i+1] and arr[high] (or pivot)
         int temp = arr.get(i + 1);
         arr.set(i + 1, arr.get(high));
         arr.set(high, temp);
 
-        accumulator.add(new Tuple(copyArray(arr), low, high, i + 1, -1, false));
+        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, i + 1, -1, false));
 
         return i + 1;
     }
@@ -347,7 +348,7 @@ public class SortingAlgorithms
       arr[] --> Array to be sorted,
       low  --> Starting index,
       high  --> Ending index */
-    public static void quicksort(ArrayList<Tuple> accumulator, ArrayList<Integer> arr, int low, int high)
+    public static void quicksort(ArrayList<QuickSortReturnType> accumulator, ArrayList<Integer> arr, int low, int high)
     {
         int pi;
 

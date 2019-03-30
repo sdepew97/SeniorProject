@@ -45,6 +45,15 @@ public class ColorTest
     }
 
     @Test
+    public void getCurrent()
+    {
+        Color found = Color.getCurrent();
+        Assert.assertEquals(15, found.getRed());
+        Assert.assertEquals(188, found.getGreen());
+        Assert.assertEquals(107, found.getBlue());
+    }
+
+    @Test
     public void getRed()
     {
         Assert.assertEquals(12, color.getRed());
