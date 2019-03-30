@@ -24,7 +24,6 @@ public class HelperMethods
         for (int j = 0; j < numElements; j++)
         {
             int randomInt = r.nextInt(100);
-            //int randomInt = 12;
             if (r.nextBoolean())
             {
                 numbers.add(j, -randomInt);

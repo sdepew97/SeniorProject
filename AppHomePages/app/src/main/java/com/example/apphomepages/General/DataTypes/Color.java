@@ -38,6 +38,11 @@ public class Color
         return new Color(255, 102, 178);
     }
 
+    public static Color getCurrent()
+    {
+        return new Color(15, 188, 107);
+    }
+
     public int getRed()
     {
         return red;

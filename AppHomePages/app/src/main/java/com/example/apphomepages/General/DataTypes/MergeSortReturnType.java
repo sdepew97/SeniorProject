@@ -6,15 +6,15 @@ public class MergeSortReturnType
 {
     private int left;
     private int right;
-    private Color color;
     private ArrayList<Integer> numbers;
+    private boolean merging;
 
-    public MergeSortReturnType(int left, int right, Color color, ArrayList<Integer> numbers)
+    public MergeSortReturnType(int left, int right, ArrayList<Integer> numbers, boolean merging)
     {
         this.left = left;
         this.right = right;
-        this.color = color;
         this.numbers = numbers;
+        this.merging = merging;
     }
 
     public int getLeft()
@@ -27,13 +27,13 @@ public class MergeSortReturnType
         return right;
     }
 
-    public Color getColor()
-    {
-        return color;
-    }
-
     public ArrayList<Integer> getNumbers()
     {
         return numbers;
+    }
+
+    public boolean isMerging()
+    {
+        return merging;
     }
 }

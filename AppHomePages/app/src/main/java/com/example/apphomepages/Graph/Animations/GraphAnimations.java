@@ -43,7 +43,7 @@ public class GraphAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackground(animationDrawable);
     }
 
     public static void generateTopologicalGraphOrdering(ArrayList<String> nodesToHighlight, Graph<String> graph, TopologicalOrderingDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)

@@ -2,36 +2,24 @@ package com.example.apphomepages.General.DataTypes;
 
 import java.util.ArrayList;
 
-public class Tuple
+public class SortReturnType
 {
-
     private ArrayList<Integer> list;
     private Integer a;
     private Integer b;
-    private Integer pivot;
 
-    public Tuple()
+    public SortReturnType()
     {
         this.list = new ArrayList<>();
         a = -1;
         b = -1;
-        pivot = -1;
     }
 
-    public Tuple(ArrayList<Integer> list)
+    public SortReturnType(ArrayList<Integer> list)
     {
         this.list = list;
         a = -1;
         b = -1;
-        pivot = -1;
-    }
-
-    public Tuple(ArrayList<Integer> list, Integer a, Integer b, Integer pivot)
-    {
-        this.list = list;
-        this.a = a;
-        this.b = b;
-        this.pivot = pivot;
     }
 
     public ArrayList<Integer> getList()
@@ -62,11 +50,6 @@ public class Tuple
     public void setB(Integer b)
     {
         this.b = b;
-    }
-
-    public Integer getPivot()
-    {
-        return pivot;
     }
 
     public ArrayList<Integer> constructPair()

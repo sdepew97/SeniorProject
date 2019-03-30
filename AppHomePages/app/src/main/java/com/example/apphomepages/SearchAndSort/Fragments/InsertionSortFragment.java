@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.SortReturnType;
 import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
@@ -120,7 +120,7 @@ public class InsertionSortFragment extends Fragment
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Tuple> iterations = SortingAlgorithms.insertionSort(numbers);
+                ArrayList<SortReturnType> iterations = SortingAlgorithms.insertionSort(numbers);
                 ArrayList<Integer> squaresToHighlight = new ArrayList<>();
                 squaresToHighlight.add(-1);
 
