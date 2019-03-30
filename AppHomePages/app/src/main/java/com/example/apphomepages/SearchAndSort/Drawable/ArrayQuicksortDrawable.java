@@ -9,9 +9,9 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
 import com.example.apphomepages.General.DataTypes.Color;
+import com.example.apphomepages.General.DataTypes.Tuple;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ArrayQuicksortDrawable extends Drawable implements Animatable
 {
@@ -20,12 +20,12 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
     private final Paint mFoundPaint;
     private final Paint mTextPaint;
 
-    private ArrayList<Integer> numbers;
-    private List<Integer> valuesBeingArranged;
-    private Integer pivot;
+    private Tuple t;
+    private boolean start; //flag to tell if it is the start
+    private boolean end; //flag to tell if it is the end
 
     //An ArraySearchDrawable constructor for searching
-    public ArrayQuicksortDrawable(Color main, Color secondary, Color found, Integer pivot, List<Integer> valuesBeingArranged, ArrayList<Integer> numbers)
+    public ArrayQuicksortDrawable(Color main, Color secondary, Color found, boolean start, boolean end, Tuple t)
     {
         // Set up color and text size
         mMainPaint = new Paint();
@@ -42,26 +42,32 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
         mFoundPaint = new Paint();
         mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
 
-
-        this.numbers = numbers;
-        this.pivot = pivot;
-        this.valuesBeingArranged = valuesBeingArranged;
+        this.t = t;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public void draw(Canvas canvas)
     {
+        ArrayList<Integer> numbers = t.getList();
+        Integer a = t.getA();
+        Integer b = t.getB();
+        Integer pivot = t.getPivot();
+        Integer beingViewed = t.getBeingViewed();
+        boolean partitioning = t.isPartitioning();
+
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
         int numSquares = numbers.size();
         int widthSideLength = width / numSquares;
-        int heightSideLength = height;
+        int heightSideLength = height / numSquares;
 
         mTextPaint.setTextSize(widthSideLength / 3);
 
         int left = 0;
-        int top = 0;
+        int top = (height - heightSideLength) / 2;
 
         Rect[] rectangles = new Rect[numSquares];
 
@@ -71,21 +77,35 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
 
             left += widthSideLength;
 
-            if (valuesBeingArranged.size() > 1 && valuesBeingArranged.get(0) <= i && i <= valuesBeingArranged.get(1))
+            if (start || end)
             {
-                canvas.drawRect(rectangles[i], mSecondPaint);
+                if (start)
+                {
+                    canvas.drawRect(rectangles[i], mMainPaint);
+                } else
+                {
+                    canvas.drawRect(rectangles[i], mSecondPaint);
+                }
             } else
             {
-                canvas.drawRect(rectangles[i], mMainPaint);
-            }
+                //highlight the area of the array being examined
+                if (a <= i && i <= b)
+                {
+                    canvas.drawRect(rectangles[i], mSecondPaint);
+                } else
+                {
+                    canvas.drawRect(rectangles[i], mMainPaint);
+                }
 
-            if (pivot == i)
-            {
-                canvas.drawRect(rectangles[i], mFoundPaint);
+                if (pivot == i || (partitioning && beingViewed == i))
+                {
+                    canvas.drawRect(rectangles[i], mFoundPaint);
+                }
             }
 
             canvas.drawText(Integer.toString(numbers.get(i)), rectangles[i].centerX(), rectangles[i].centerY(), mTextPaint);
         }
+
     }
 
     @Override

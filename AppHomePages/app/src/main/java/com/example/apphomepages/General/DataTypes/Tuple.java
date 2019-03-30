@@ -9,6 +9,8 @@ public class Tuple
     private Integer a;
     private Integer b;
     private Integer pivot;
+    private Integer beingViewed;
+    private boolean partitioning;
 
     public Tuple()
     {
@@ -32,6 +34,16 @@ public class Tuple
         this.a = a;
         this.b = b;
         this.pivot = pivot;
+    }
+
+    public Tuple(ArrayList<Integer> list, Integer a, Integer b, Integer pivot, Integer beingViewed, boolean partitioning)
+    {
+        this.list = list;
+        this.a = a;
+        this.b = b;
+        this.pivot = pivot;
+        this.beingViewed = beingViewed;
+        this.partitioning = partitioning;
     }
 
     public ArrayList<Integer> getList()
@@ -77,5 +89,15 @@ public class Tuple
         returnVal.add(b);
 
         return returnVal;
+    }
+
+    public Integer getBeingViewed()
+    {
+        return beingViewed;
+    }
+
+    public boolean isPartitioning()
+    {
+        return partitioning;
     }
 }
