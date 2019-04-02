@@ -116,14 +116,7 @@ public class QuicksortFragment extends Fragment
                 animationDrawable = new AnimationDrawable();
 
                 //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements); //new ArrayList<>();
-//                numbers.add(10);
-//                numbers.add(80);
-//                numbers.add(30);
-//                numbers.add(90);
-//                numbers.add(40);
-//                numbers.add(50);
-//                numbers.add(70);
+                numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
