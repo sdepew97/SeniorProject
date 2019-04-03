@@ -97,7 +97,6 @@ public class TopologicalFragment extends Fragment
 
         {
             //Set up the buttons and clickable elements on the fragment
-            Button generateButton = viewGlobal.findViewById(R.id.generateButtonTopological);
             Button startButton = viewGlobal.findViewById(R.id.startButtonTopological);
             Button stopButton = viewGlobal.findViewById(R.id.stopButtonTopological);
             Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonTopological);
@@ -109,31 +108,25 @@ public class TopologicalFragment extends Fragment
             ArrayList<String> nodeValuesList = HelperMethods.convertFromArray(nodeValues);
             final Graph<String> g = createDAG(nodeValuesList);
 
-            generateButton.setOnClickListener(new View.OnClickListener()
+            //Set up variables for the method
+            TopologicalOrderingDrawable[] stopMotionAnimation;
+            TopologicalOrderingReturnType nodesToHighlightAndGraphs = new TopologicalOrderingReturnType();
+
+            try
             {
-                @Override
-                public void onClick(View v)
-                {
-                    //Set up variables for the method
-                    TopologicalOrderingDrawable[] stopMotionAnimation;
-                    TopologicalOrderingReturnType nodesToHighlightAndGraphs = new TopologicalOrderingReturnType();
+                nodesToHighlightAndGraphs = GraphAlgorithms.topologicalOrdering(g);
+            } catch (RuntimeException r)
+            {
+                Log.e("Topological Ordering", String.valueOf(r));
+            }
 
-                    try
-                    {
-                        nodesToHighlightAndGraphs = GraphAlgorithms.topologicalOrdering(g);
-                    } catch (RuntimeException r)
-                    {
-                        Log.e("Topological Ordering", String.valueOf(r));
-                    }
+            stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlightAndGraphs.getVisitOrder().size() + 2];
 
-                    stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlightAndGraphs.getVisitOrder().size() + 2];
+            animationDrawable = new AnimationDrawable();
+            image = viewGlobal.findViewById(R.id.imageViewTopological);
 
-                    animationDrawable = new AnimationDrawable();
-                    image = viewGlobal.findViewById(R.id.imageViewTopological);
+            GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlightAndGraphs, stopMotionAnimation, image, animationDrawable);
 
-                    GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlightAndGraphs, stopMotionAnimation, image, animationDrawable);
-                }
-            });
 
             startButton.setOnClickListener(new View.OnClickListener()
             {
