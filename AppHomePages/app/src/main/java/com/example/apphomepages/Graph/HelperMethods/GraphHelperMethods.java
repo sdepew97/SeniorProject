@@ -240,4 +240,52 @@ public class GraphHelperMethods
 
         return nodeCount;
     }
+
+    public static <A> Graph<A> trimNode(Graph<A> graph, Node<A> node)
+    {
+        ArrayList<Node<A>> nodes = graph.getGraphElements();
+        ArrayList<Node<A>> revisedNodes = new ArrayList<>();
+
+        for (Node<A> n : nodes)
+        {
+            if (!n.getNodeId().equals(node.getNodeId()))
+            {
+                revisedNodes.add(n);
+            }
+        }
+
+        return new Graph<>(revisedNodes);
+    }
+
+    public static <A> Graph<A> copyGraph(Graph<A> original)
+    {
+        ArrayList<Node<A>> originalNodes = original.getGraphElements();
+        ArrayList<Node<A>> copyNodes = new ArrayList<>();
+
+        //Add nodes
+        for (Node<A> n : originalNodes)
+        {
+            copyNodes.add(new Node<>(n.getNodeValue(), n.getNodeId()));
+        }
+
+        //Add connections
+        for (Node<A> n : originalNodes)
+        {
+            for (Node<A> adj : n.getAdjacentNodes())
+            {
+                for (Node<A> x : copyNodes)
+                {
+                    for (Node<A> y : copyNodes)
+                    {
+                        if (n.getNodeId().equals(x.getNodeId()) && adj.getNodeId().equals(y.getNodeId()))
+                        {
+                            x.addAdjacentNode(y);
+                        }
+                    }
+                }
+            }
+        }
+
+        return new Graph<>(copyNodes);
+    }
 }

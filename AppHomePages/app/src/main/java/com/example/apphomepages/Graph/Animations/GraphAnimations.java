@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.Graph.Drawable.TopologicalOrderingDrawable;
 
@@ -43,23 +44,23 @@ public class GraphAnimations
         }
 
         animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable);
+        image.setBackground(animationDrawable);
     }
 
-    public static void generateTopologicalGraphOrdering(ArrayList<String> nodesToHighlight, Graph<String> graph, TopologicalOrderingDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateTopologicalGraphOrdering(TopologicalOrderingReturnType topologicalOrderingReturnType, TopologicalOrderingDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
-        int duration = 800;
+        int duration = 1500;
 
         //Set up the main frame
-        stopMotionAnimation[0] = new TopologicalOrderingDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), "", graph, true);
+        stopMotionAnimation[0] = new TopologicalOrderingDrawable(-1, topologicalOrderingReturnType.getGraphs().get(0), topologicalOrderingReturnType.getGraphs().get(0), topologicalOrderingReturnType.getVisitOrder(), true, false);
 
         for (int i = 1; i < stopMotionAnimation.length - 1; i++)
         {
-            stopMotionAnimation[i] = new TopologicalOrderingDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(i - 1), graph, false);
+            stopMotionAnimation[i] = new TopologicalOrderingDrawable(topologicalOrderingReturnType.getVisitOrder().get(i - 1), topologicalOrderingReturnType.getGraphs().get(i - 1), topologicalOrderingReturnType.getGraphs().get(0), topologicalOrderingReturnType.getVisitOrder(), false, false);
         }
 
-        stopMotionAnimation[stopMotionAnimation.length - 1] = new TopologicalOrderingDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), "", graph, true);
+        stopMotionAnimation[stopMotionAnimation.length - 1] = new TopologicalOrderingDrawable(-1, topologicalOrderingReturnType.getGraphs().get(0), topologicalOrderingReturnType.getGraphs().get(0), topologicalOrderingReturnType.getVisitOrder(), false, true);
 
         //Animate!
         for (Drawable d : stopMotionAnimation)
@@ -67,7 +68,7 @@ public class GraphAnimations
             animationDrawable.addFrame(d, duration);
         }
 
-        animationDrawable.setOneShot(false);
-        image.setBackgroundDrawable(animationDrawable); //TODO use something not depriciated
+        animationDrawable.setOneShot(true);
+        image.setBackground(animationDrawable);
     }
 }

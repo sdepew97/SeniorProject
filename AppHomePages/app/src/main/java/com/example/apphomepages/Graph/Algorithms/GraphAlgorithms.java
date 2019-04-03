@@ -2,6 +2,7 @@ package com.example.apphomepages.Graph.Algorithms;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
 import com.example.apphomepages.Graph.HelperMethods.GraphHelperMethods;
 
 import java.util.ArrayList;
@@ -111,10 +112,12 @@ public class GraphAlgorithms
         return visitOrder;
     }
 
-    //Used https://www.geeksforgeeks.org/topological-sorting/
-    public static ArrayList<String> topologicalOrdering(Graph<String> g) throws RuntimeException
+    //Used https://www.geeksforgeeks.org/topological-sorting/ and https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+    public static TopologicalOrderingReturnType topologicalOrdering(Graph<String> g) throws RuntimeException
     {
-        ArrayList<String> visitOrder = new ArrayList<>();
+        TopologicalOrderingReturnType topologicalOrderingReturnType = new TopologicalOrderingReturnType();
+        ArrayList<Integer> visitOrder = new ArrayList<>();
+
         //set mark to all false
         ArrayList<Node<String>> vertices = g.getGraphElements();
 
@@ -138,7 +141,10 @@ public class GraphAlgorithms
         while (queue.size() != 0)
         {
             Node<String> node = queue.poll();
-            visitOrder.add(node.getNodeValue());
+            //Add to the visit order and add a copy of the graph to the return type
+            visitOrder.add(node.getNodeId());
+            topologicalOrderingReturnType.addGraph(GraphHelperMethods.copyGraph(g));
+
             visitedNodes++;
 
             for (Node<String> a : node.getAdjacentNodes())
@@ -155,6 +161,9 @@ public class GraphAlgorithms
                     }
                 }
             }
+
+            //trim node out of graph...(only one way check, since DAG was input)
+            g = GraphHelperMethods.trimNode(g, node);
         }
 
         //error if count is not number of nodes in the graph
@@ -164,8 +173,9 @@ public class GraphAlgorithms
             throw new RuntimeException();
         }
 
-        return visitOrder;
+        topologicalOrderingReturnType.setVisitOrder(visitOrder);
 
+        return topologicalOrderingReturnType;
     }
 }
 

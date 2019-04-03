@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
 import com.example.apphomepages.General.Helpers.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
@@ -115,22 +116,22 @@ public class TopologicalFragment extends Fragment
                 {
                     //Set up variables for the method
                     TopologicalOrderingDrawable[] stopMotionAnimation;
-                    ArrayList<String> nodesToHighlight = new ArrayList<>();
+                    TopologicalOrderingReturnType nodesToHighlightAndGraphs = new TopologicalOrderingReturnType();
 
                     try
                     {
-                        nodesToHighlight = GraphAlgorithms.topologicalOrdering(g);
+                        nodesToHighlightAndGraphs = GraphAlgorithms.topologicalOrdering(g);
                     } catch (RuntimeException r)
                     {
                         Log.e("Topological Ordering", String.valueOf(r));
                     }
 
-                    stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlight.size() + 2];
+                    stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlightAndGraphs.getVisitOrder().size() + 2];
 
                     animationDrawable = new AnimationDrawable();
                     image = viewGlobal.findViewById(R.id.imageViewTopological);
 
-                    GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlight, g, stopMotionAnimation, image, animationDrawable);
+                    GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlightAndGraphs, stopMotionAnimation, image, animationDrawable);
                 }
             });
 
