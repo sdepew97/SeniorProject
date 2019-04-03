@@ -3,7 +3,7 @@ package com.example.apphomepages;
 import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.Tuple;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 
 import org.junit.Test;

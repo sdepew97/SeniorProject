@@ -15,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SearchingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SearchAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.BinarySearchDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogueFragments.BinarySearchDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySearchDrawable;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
@@ -236,7 +236,7 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                BinarySearchDialogFragment dialogFragment = new BinarySearchDialogFragment();
+                BinarySearchDialogueFragment dialogFragment = new BinarySearchDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

@@ -1,4 +1,4 @@
-package com.example.apphomepages.General.Helpers;
+package com.example.apphomepages.General.HelperMethods;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;

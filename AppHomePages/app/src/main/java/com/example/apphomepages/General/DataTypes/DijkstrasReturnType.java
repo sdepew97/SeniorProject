@@ -20,19 +20,9 @@ public class DijkstrasReturnType
         return distances;
     }
 
-    public void setDistances(int[] distances)
-    {
-        this.distances = distances;
-    }
-
     public Boolean[] getProcessed()
     {
         return processed;
-    }
-
-    public void setProcessed(Boolean[] processed)
-    {
-        this.processed = processed;
     }
 
     public int getNodeIDBeingScanned()
@@ -40,18 +30,8 @@ public class DijkstrasReturnType
         return nodeIDBeingScanned;
     }
 
-    public void setNodeIDBeingScanned(int nodeIDBeingScanned)
-    {
-        this.nodeIDBeingScanned = nodeIDBeingScanned;
-    }
-
     public int getMinimumNodeId()
     {
         return minimumNodeId;
-    }
-
-    public void setMinimumNodeId(int minimumNodeId)
-    {
-        this.minimumNodeId = minimumNodeId;
     }
 }

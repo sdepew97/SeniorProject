@@ -15,10 +15,10 @@ import android.widget.Spinner;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
-import com.example.apphomepages.Graph.DialogFragments.DFSDialogFragment;
+import com.example.apphomepages.Graph.DialogueFragments.DFSDialogueFragment;
 import com.example.apphomepages.Graph.Drawable.GraphSearchDrawable;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
@@ -40,11 +40,10 @@ import androidx.fragment.app.FragmentManager;
  */
 public class DFSFragment extends Fragment
 {
+    Graph<Integer> graph = null; //the current graph
     private OnFragmentInteractionListener mListener;
-
     //Class variables
     private List<Integer> numbers = new ArrayList<>(); //numbers on nodes searched
-    Graph<Integer> graph = null; //the current graph
     private Node<Integer> soughtAfter = null; //actual node being sought
     private ImageView image = null;
 
@@ -281,7 +280,7 @@ public class DFSFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                DFSDialogFragment dialogFragment = new DFSDialogFragment();
+                DFSDialogueFragment dialogFragment = new DFSDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

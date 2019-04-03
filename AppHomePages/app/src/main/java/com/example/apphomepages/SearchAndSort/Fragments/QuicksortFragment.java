@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.Tuple;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.QuickSortDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogueFragments.QuickSortDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayQuicksortDrawable;
 
 import java.util.ArrayList;
@@ -175,7 +175,7 @@ public class QuicksortFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                QuickSortDialogFragment dialogFragment = new QuickSortDialogFragment();
+                QuickSortDialogueFragment dialogFragment = new QuickSortDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

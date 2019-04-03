@@ -11,21 +11,6 @@ public class GreedyAlgorithms
     // A utility function to find the vertex with minimum distance value,
     // from the set of vertices not yet included in shortest path tree
 
-    private static int minDistance(int dist[], Boolean sptSet[], int numNodes)
-    {
-        // Initialize min value
-        int min = Integer.MAX_VALUE, min_index = -1;
-
-        for (int v = 0; v < numNodes; v++)
-            if (!sptSet[v] && dist[v] <= min)
-            {
-                min = dist[v];
-                min_index = v;
-            }
-
-        return min_index;
-    }
-
     public static ArrayList<DijkstrasReturnType> DijkstrasAlgorithm(int[][] graph, int src, int numNodes)
     {
         //Return values that are snapshots of information from the array
@@ -90,5 +75,20 @@ public class GreedyAlgorithms
         returnValues.add(new DijkstrasReturnType(Arrays.copyOf(dist, numNodes), Arrays.copyOf(sptSet, numNodes), -1, -1));
 
         return returnValues;
+    }
+
+    private static int minDistance(int dist[], Boolean sptSet[], int numNodes)
+    {
+        // Initialize min value
+        int min = Integer.MAX_VALUE, min_index = -1;
+
+        for (int v = 0; v < numNodes; v++)
+            if (!sptSet[v] && dist[v] <= min)
+            {
+                min = dist[v];
+                min_index = v;
+            }
+
+        return min_index;
     }
 }

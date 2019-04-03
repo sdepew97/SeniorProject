@@ -30,6 +30,5 @@ public class GreedyAnimations
 
         animationDrawable.setOneShot(false);
         image.setBackground(animationDrawable);
-
     }
 }

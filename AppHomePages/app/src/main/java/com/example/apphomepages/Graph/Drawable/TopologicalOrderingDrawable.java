@@ -130,6 +130,22 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         return PixelFormat.OPAQUE;
     }
 
+    //Found code on https://kylewbanks.com/blog/drawing-triangles-rhombuses-and-other-shapes-on-android-canvas and http://android-er.blogspot.com/2014/06/rotate-path-with-matrix.html
+    public void drawTriangle(Canvas canvas, Paint paint, int x, int y, int width, Matrix m)
+    {
+        int halfWidth = width / 2;
+
+        Path path = new Path();
+        path.moveTo(x, y - halfWidth); // Top
+        path.lineTo(x - halfWidth, y + halfWidth); // Bottom left
+        path.lineTo(x + halfWidth, y + halfWidth); // Bottom right
+        path.lineTo(x, y - halfWidth); // Back to Top
+        path.close();
+        path.transform(m); //rotate the triangle as needed
+
+        canvas.drawPath(path, paint);
+    }
+
     @Override
     public void start()
     {
@@ -146,21 +162,5 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
     public boolean isRunning()
     {
         return false;
-    }
-
-    //Found code on https://kylewbanks.com/blog/drawing-triangles-rhombuses-and-other-shapes-on-android-canvas and http://android-er.blogspot.com/2014/06/rotate-path-with-matrix.html
-    public void drawTriangle(Canvas canvas, Paint paint, int x, int y, int width, Matrix m)
-    {
-        int halfWidth = width / 2;
-
-        Path path = new Path();
-        path.moveTo(x, y - halfWidth); // Top
-        path.lineTo(x - halfWidth, y + halfWidth); // Bottom left
-        path.lineTo(x + halfWidth, y + halfWidth); // Bottom right
-        path.lineTo(x, y - halfWidth); // Back to Top
-        path.close();
-        path.transform(m); //rotate the triangle as needed
-
-        canvas.drawPath(path, paint);
     }
 }

@@ -8,13 +8,9 @@
     <string name="title_activity_breadth_first_search">Breadth First Search</string>
     <string name="title_activity_topological_ordering">Topological Ordering</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- Button Titles -->
     <string name="sorting_button">Sorting Algorithms</string>
     <string name="searching_button">Searching Algorithms</string>
-
     <string name="generate_button">Generate</string>
     <string name="instructions_button">Instructions</string>
     <string name="correctness_button">Correctness Proof</string>
@@ -34,6 +30,7 @@
     <string name="button_dp_algorithms">Dynamic Programing Algorithms</string>
     <string name="button_close_instructions">Close Instructions</string>
 
+    <!-- Generate Strings-->
     <string name="text_linear_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc scelerisque eu mauris non facilisis. Nam at varius neque. Duis tempus ut ex eu auctor. Aenean molestie rutrum hendrerit. Morbi sagittis elementum nibh luctus vulputate. Quisque commodo consectetur arcu, a laoreet risus semper ac. Vestibulum in quam dignissim, ornare leo at, venenatis elit.
 
 Nullam fermentum, nisl nec laoreet finibus, leo magna interdum lectus, quis commodo ipsum massa non nibh. Aliquam erat volutpat. Cras vitae elit ut erat fermentum venenatis. Suspendisse porta nisl ac tellus finibus molestie. Maecenas id auctor odio. Nunc turpis libero, tempus quis massa sed, vestibulum sagittis sem. Ut non lacinia ex, a sollicitudin ligula. Mauris vel sodales est. In a dui vel lectus luctus interdum non nec massa. Ut in scelerisque orci. Ut vel tempus risus. Sed tempus sem pellentesque faucibus molestie. Sed id tincidunt tellus, quis facilisis nisl. In non felis sit amet massa facilisis consectetur id at dui. Pellentesque blandit orci nibh, in faucibus mauris dapibus ut. Quisque quis ante vitae lacus fringilla ullamcorper.
@@ -111,6 +108,7 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
 
     <string name="DijkstrasInstructions"> ... </string>
 
+    <string name="NQueensInstructions"> ... </string>
 
     <!-- Description Strings -->
     <string name="LinearSearchDescription">Linear search is an O(n) algorithm that looks through all the elements in an unsorted array for a specific value. If that value is found, then its location in the array is returned. If not, then -1 is returned. </string>
@@ -135,5 +133,6 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
 
     <string name="DijkstrasDescription">Dijkstra\'s algorithm is an O(...) algorithm where ... </string>
 
+    <string name="NQueensDescription">N-Queens\'s algorithm is an O(...) algorithm where ... </string>
 
 </resources>

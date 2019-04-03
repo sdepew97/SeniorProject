@@ -15,7 +15,7 @@ import com.example.apphomepages.General.DataTypes.DijkstrasReturnType;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.Greedy.Algorithms.GreedyAlgorithms;
 import com.example.apphomepages.Greedy.Animations.GreedyAnimations;
-import com.example.apphomepages.Greedy.DialogFragments.DijkstrasDialogFragment;
+import com.example.apphomepages.Greedy.DialogueFragments.DijkstrasDialogueFragment;
 import com.example.apphomepages.Greedy.Drawable.DijkstrasDrawable;
 import com.example.apphomepages.R;
 
@@ -35,11 +35,10 @@ import androidx.fragment.app.FragmentManager;
  */
 public class DijkstrasFragment extends Fragment
 {
+    int[][] graph = null; //the current graph
     private OnFragmentInteractionListener mListener;
-
     //Class variables
     private List<Integer> numbers = new ArrayList<>(); //numbers on nodes searched
-    int[][] graph = null; //the current graph
     private Node<Integer> soughtAfter = null; //actual node being sought
     private ImageView image = null;
 
@@ -205,7 +204,7 @@ public class DijkstrasFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                DijkstrasDialogFragment dialogFragment = new DijkstrasDialogFragment();
+                DijkstrasDialogueFragment dialogFragment = new DijkstrasDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });
