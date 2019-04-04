@@ -49,53 +49,13 @@ public class GraphHelperMethods
             return list.size();
     }
 
-    public static <A> Point[] placeNodes(Graph<A> g, int width, int height)
-    {
-        if (g.getGraphElements().size() == 0)
-        {
-            return new Point[0];
-        }
-
-        Point[] centers = new Point[g.getGraphElements().size()];
-
-        //Initialize each point
-        for (int i = 0; i < centers.length; i++)
-        {
-            centers[i] = new Point();
-        }
-
-        ArrayList<ArrayList<Node<A>>> nodeLayers = layersOfNodes(g);
-        int radius = height / (nodeLayers.size() * 2);
-
-        int heightValue = radius * 2;
-        int i = 0;
-        int left = 0;
-        int top = radius;
-
-        //Get the lists of values to place at each location
-        for (ArrayList<Node<A>> nodesInLayer : nodeLayers)
-        {
-            left = width / (nodesInLayer.size() + 1);
-            for (Node<A> n : nodesInLayer)
-            {
-                centers[i].setX(left);
-                centers[i].setY(top);
-                i++;
-                left += width / (nodesInLayer.size() + 1);
-            }
-            top += heightValue;
-        }
-
-        return centers;
-    }
-
     private static <A> ArrayList<ArrayList<Node<A>>> layersOfNodes(Graph<A> g)
     {
         ArrayList<Node<A>> vertices = g.getGraphElements();
 
         if (vertices.size() == 0)
         {
-            return null;
+            return new ArrayList<>(); //TODO: Ask Richard about this place and what is commonly returned here...
         }
 
         //Order in which the nodes are visited
@@ -213,6 +173,46 @@ public class GraphHelperMethods
         }
 
         return isolatedNodes;
+    }
+
+    public static <A> Point[] placeNodes(Graph<A> g, int width, int height)
+    {
+        if (g.getGraphElements().size() == 0)
+        {
+            return new Point[0];
+        }
+
+        Point[] centers = new Point[g.getGraphElements().size()];
+
+        //Initialize each point
+        for (int i = 0; i < centers.length; i++)
+        {
+            centers[i] = new Point();
+        }
+
+        ArrayList<ArrayList<Node<A>>> nodeLayers = layersOfNodes(g);
+        int radius = height / (nodeLayers.size() * 2);
+
+        int heightValue = radius * 2;
+        int i = 0;
+        int left;
+        int top = radius;
+
+        //Get the lists of values to place at each location
+        for (ArrayList<Node<A>> nodesInLayer : nodeLayers)
+        {
+            left = width / (nodesInLayer.size() + 1);
+            for (Node<A> n : nodesInLayer)
+            {
+                centers[i].setX(left);
+                centers[i].setY(top);
+                i++;
+                left += width / (nodesInLayer.size() + 1);
+            }
+            top += heightValue;
+        }
+
+        return centers;
     }
 
     public static <A> HashMap<Node<A>, Integer> computeDegree(ArrayList<Node<A>> nodes)

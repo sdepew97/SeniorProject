@@ -2,7 +2,7 @@ package com.example.apphomepages;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 
 import org.junit.Assert;
 import org.junit.Rule;

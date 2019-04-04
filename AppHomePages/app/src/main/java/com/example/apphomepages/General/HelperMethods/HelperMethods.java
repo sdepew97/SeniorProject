@@ -1,4 +1,4 @@
-package com.example.apphomepages.General.Helpers;
+package com.example.apphomepages.General.HelperMethods;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
@@ -19,9 +19,8 @@ public class HelperMethods
         }
 
         ArrayList<Integer> numbers = new ArrayList<>(size);
-        int numElements = size;
 
-        for (int j = 0; j < numElements; j++)
+        for (int j = 0; j < size; j++)
         {
             int randomInt = r.nextInt(100);
             if (r.nextBoolean())
@@ -160,9 +159,9 @@ public class HelperMethods
     {
         ArrayList<A> aArray = new ArrayList<>();
 
-        for (int i = 0; i < array.length; i++)
+        for (A a : array)
         {
-            aArray.add(array[i]);
+            aArray.add(a);
         }
 
         return aArray;

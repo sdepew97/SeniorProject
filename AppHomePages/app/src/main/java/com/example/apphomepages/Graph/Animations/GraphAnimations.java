@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class GraphAnimations
 {
-    public static void generateGraphSearch(boolean found, ArrayList<Node<Integer>> nodesToHighlight, Graph graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateGraphSearch(boolean found, ArrayList<Node<Integer>> nodesToHighlight, Graph<Integer> graph, GraphSearchDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 800;

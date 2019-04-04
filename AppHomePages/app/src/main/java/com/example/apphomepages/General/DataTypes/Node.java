@@ -42,13 +42,13 @@ public class Node<A>
         return visited;
     }
 
-    public void mark()
-    {
-        this.visited = true;
-    }
-
     public void setVisited(boolean b)
     {
         this.visited = b;
+    }
+
+    public void mark()
+    {
+        this.visited = true;
     }
 }

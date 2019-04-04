@@ -4,11 +4,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.tabs.TabLayout;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.apphomepages.R;
@@ -18,6 +13,12 @@ import com.example.apphomepages.SearchAndSort.Fragments.InsertionSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.MergeSortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.QuicksortFragment;
 import com.example.apphomepages.SearchAndSort.Fragments.SelectionSortFragment;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
 
 public class SortingActivity extends AppCompatActivity implements BubbleSortFragment.OnFragmentInteractionListener, InsertionSortFragment.OnFragmentInteractionListener, SelectionSortFragment.OnFragmentInteractionListener, MergeSortFragment.OnFragmentInteractionListener, QuicksortFragment.OnFragmentInteractionListener
 {

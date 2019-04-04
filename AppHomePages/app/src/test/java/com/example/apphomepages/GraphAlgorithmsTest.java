@@ -3,7 +3,7 @@ package com.example.apphomepages;
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 
 import org.junit.Assert;

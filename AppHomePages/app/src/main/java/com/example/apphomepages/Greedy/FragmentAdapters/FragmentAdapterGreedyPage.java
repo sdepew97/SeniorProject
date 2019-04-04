@@ -1,11 +1,10 @@
 package com.example.apphomepages.Greedy.FragmentAdapters;
 
+import com.example.apphomepages.Greedy.Fragments.DijkstrasFragment;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.example.apphomepages.Greedy.Fragments.DijkstrasFragment;
-import com.example.apphomepages.Greedy.Fragments.IntervalSchedulingFragment;
 
 public class FragmentAdapterGreedyPage extends FragmentPagerAdapter
 {
@@ -17,7 +16,7 @@ public class FragmentAdapterGreedyPage extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 2; //the number of pages there are on the main page
+        return 1; //the number of pages there are on the main page
     }
 
     @Override
@@ -28,13 +27,10 @@ public class FragmentAdapterGreedyPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                result = "Interval Scheduling";
-                break;
-            case 1:
                 result = "Dijkstra's Algorithm";
                 break;
             default:
-                result = "Interval Scheduling";
+                result = "Dijkstra's Algorithm";
         }
 
         return result;
@@ -47,13 +43,10 @@ public class FragmentAdapterGreedyPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = IntervalSchedulingFragment.newInstance();
-                break;
-            case 1:
                 page = DijkstrasFragment.newInstance();
                 break; //input is number of columns of data
             default:
-                page = IntervalSchedulingFragment.newInstance();
+                page = DijkstrasFragment.newInstance();
                 break;
         }
 

@@ -1,22 +1,20 @@
 package com.example.apphomepages.Greedy.Activities;
 
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.tabs.TabLayout;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 
 import com.example.apphomepages.Greedy.FragmentAdapters.FragmentAdapterGreedyPage;
 import com.example.apphomepages.Greedy.Fragments.DijkstrasFragment;
-import com.example.apphomepages.Greedy.Fragments.IntervalSchedulingFragment;
 import com.example.apphomepages.R;
+import com.google.android.material.tabs.TabLayout;
 
-public class GreedyActivity extends AppCompatActivity implements IntervalSchedulingFragment.OnFragmentInteractionListener, DijkstrasFragment.OnFragmentInteractionListener
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.viewpager.widget.ViewPager;
+
+public class GreedyActivity extends AppCompatActivity implements DijkstrasFragment.OnFragmentInteractionListener
 {
     //LOG messages
     private static String TAG = "GreedyActivity";

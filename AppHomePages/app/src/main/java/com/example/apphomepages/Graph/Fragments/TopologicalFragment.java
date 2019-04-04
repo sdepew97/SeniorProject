@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
-import com.example.apphomepages.Graph.DialogFragments.TODialogFragment;
+import com.example.apphomepages.Graph.DialogueFragments.TODialogueFragment;
 import com.example.apphomepages.Graph.Drawable.TopologicalOrderingDrawable;
 import com.example.apphomepages.R;
 
@@ -174,7 +174,7 @@ public class TopologicalFragment extends Fragment
                 public void onClick(View v)
                 {
                     FragmentManager fm = getFragmentManager();
-                    TODialogFragment dialogFragment = new TODialogFragment();
+                    TODialogueFragment dialogFragment = new TODialogueFragment();
                     dialogFragment.show(fm, "Instructions Fragment");
                 }
             });

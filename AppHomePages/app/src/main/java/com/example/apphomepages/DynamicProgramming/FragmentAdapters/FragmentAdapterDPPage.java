@@ -1,11 +1,10 @@
 package com.example.apphomepages.DynamicProgramming.FragmentAdapters;
 
+import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
-import com.example.apphomepages.DynamicProgramming.Fragments.NQueensFragment;
 
 public class FragmentAdapterDPPage extends FragmentPagerAdapter
 {
@@ -17,7 +16,7 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 2; //the number of pages there are on the main page
+        return 1; //the number of pages there are on the main page
     }
 
     @Override
@@ -28,13 +27,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                result = "N-Queens";
-                break;
-            case 1:
                 result = "Min Edit Distance";
                 break;
             default:
-                result = "N-Queens";
+                result = "Min Edit Distance";
         }
 
         return result;
@@ -47,13 +43,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = NQueensFragment.newInstance();
-                break;
-            case 1:
                 page = MinEditFragment.newInstance();
-                break; //input is number of columns of data
+                break;
             default:
-                page = NQueensFragment.newInstance(); //default fragment to return
+                page = MinEditFragment.newInstance(); //default fragment to return
                 break;
         }
 

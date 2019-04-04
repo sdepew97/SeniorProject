@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.SortReturnType;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.SelectionSortDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogueFragments.SelectionSortDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySortDrawable;
 
 import java.util.ArrayList;
@@ -182,7 +182,7 @@ public class SelectionSortFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                SelectionSortDialogFragment dialogFragment = new SelectionSortDialogFragment();
+                SelectionSortDialogueFragment dialogFragment = new SelectionSortDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

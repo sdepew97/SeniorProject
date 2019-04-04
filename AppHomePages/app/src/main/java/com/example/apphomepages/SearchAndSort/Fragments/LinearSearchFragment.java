@@ -15,11 +15,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SearchingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SearchAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.LinearSearchDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogueFragments.LinearSearchDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySearchDrawable;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SearchHelperMethods;
 
@@ -227,7 +227,7 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                LinearSearchDialogFragment dialogFragment = new LinearSearchDialogFragment();
+                LinearSearchDialogueFragment dialogFragment = new LinearSearchDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });

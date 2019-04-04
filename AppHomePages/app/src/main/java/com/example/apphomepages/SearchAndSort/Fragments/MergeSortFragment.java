@@ -16,11 +16,11 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
-import com.example.apphomepages.General.Helpers.HelperMethods;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
-import com.example.apphomepages.SearchAndSort.DialogFragments.MergeSortDialogFragment;
+import com.example.apphomepages.SearchAndSort.DialogueFragments.MergeSortDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayMergeSortDrawable;
 import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
@@ -287,7 +287,7 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                MergeSortDialogFragment dialogFragment = new MergeSortDialogFragment();
+                MergeSortDialogueFragment dialogFragment = new MergeSortDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });
