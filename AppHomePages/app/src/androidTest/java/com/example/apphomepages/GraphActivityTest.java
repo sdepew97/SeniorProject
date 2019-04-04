@@ -123,15 +123,6 @@ public class GraphActivityTest
     }
 
     @Test
-    public void checkGenerateTopological() throws InterruptedException
-    {
-        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        onView(withId(R.id.viewPager)).perform(ViewActions.swipeLeft());
-        Thread.sleep(500);
-        onView(withId(R.id.generateButtonTopological)).perform(ViewActions.click());
-    }
-
-    @Test
     public void checkSpinnerDFS()
     {
         onView(withId(R.id.spinnerSelectDFS)).perform(ViewActions.click());

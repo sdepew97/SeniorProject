@@ -12,13 +12,13 @@ public class DynamicProgrammingHelperMethods
 {
     //The input to this method must be an NxN array
     //TODO: Ask richard about this method from a design perspective
-    public static boolean[][] copy2DArray(boolean[][] source, int N)
+    public static int[][] copy2DArray(int[][] source, int x, int y)
     {
-        boolean[][] copy = new boolean[N][N]; //the input must be a nxn array
+        int[][] copy = new int[x][y]; //the input must be an x by y array
 
-        for (int i = 0; i < N; i++)
+        for (int i = 0; i < x; i++)
         {
-            for (int j = 0; j < N; j++)
+            for (int j = 0; j < y; j++)
             {
                 copy[i][j] = source[i][j];
             }

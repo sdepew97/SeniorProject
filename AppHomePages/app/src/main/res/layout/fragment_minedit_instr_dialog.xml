@@ -7,13 +7,13 @@
     android:padding="10dp">
 
     <Button
-        android:id="@+id/close_instructions_nqueens"
+        android:id="@+id/close_instructions_minedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_close_instructions" />
 
     <ScrollView
-        android:id="@+id/scrollBFSInstructions"
+        android:id="@+id/scrollMinEditInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/NQueensInstructions"
+            android:text="@string/MinEditInstructions"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@id/bottom_guideline4"
             app:layout_constraintLeft_toLeftOf="@id/left_guideline"

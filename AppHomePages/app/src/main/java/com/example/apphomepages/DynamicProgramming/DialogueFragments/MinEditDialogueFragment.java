@@ -10,15 +10,15 @@ import com.example.apphomepages.R;
 
 import androidx.fragment.app.DialogFragment;
 
-public class NQueensDialogueFragment extends DialogFragment
+public class MinEditDialogueFragment extends DialogFragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_nqueens_instr_dialog, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_minedit_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions_nqueens);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_minedit);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

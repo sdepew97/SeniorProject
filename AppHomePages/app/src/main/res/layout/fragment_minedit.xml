@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DynamicProgramming.Fragments.NQueensFragment">
+    tools:context=".DynamicProgramming.Fragments.MinEditFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/left_guideline_alltheway"
@@ -104,7 +104,7 @@
         app:layout_constraintGuide_percent=".65" />
 
     <Button
-        android:id="@+id/instructionsButtonNQueens"
+        android:id="@+id/instructionsButtonMinEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageViewNQueens"
+        android:id="@+id/imageViewMinEdit"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -127,28 +127,18 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Button
-        android:id="@+id/generateButtonNQueens"
+        android:id="@+id/generateButtonMinEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:text="@string/generate_button"
         app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
-        app:layout_constraintLeft_toLeftOf="@id/left_guideline"
-        app:layout_constraintRight_toRightOf="@id/right_guideline4"
-        app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
-
-    <Spinner
-        android:id="@+id/spinnerSelectNQueens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintBottom_toBottomOf="@id/bottom_guideline3"
-        app:layout_constraintLeft_toLeftOf="@id/right_guideline4"
-        app:layout_constraintRight_toRightOf="@id/right_guideline"
+        app:layout_constraintLeft_toLeftOf="@id/right_guideline2"
+        app:layout_constraintRight_toRightOf="@id/right_guideline3"
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButtonNQueens"
+        android:id="@+id/startButtonMinEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -159,7 +149,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButtonNQueens"
+        android:id="@+id/stopButtonMinEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -170,7 +160,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButtonNQueens"
+        android:id="@+id/rewindButtonMinEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -181,7 +171,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
-        android:id="@+id/scrollProofNQueens"
+        android:id="@+id/scrollProofMinEdit"
         android:layout_width="0dp"
 
         android:layout_height="0dp"
@@ -206,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/NQueensDescription"
+                android:text="@string/MinEditDescription"
                 android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
@@ -215,7 +205,7 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButtonNQueens"
+                android:id="@+id/proofButtonMinEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />

@@ -4,22 +4,23 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.apphomepages.DynamicProgramming.Drawable.NQueensDrawable;
-import com.example.apphomepages.General.DataTypes.Color;
-import com.example.apphomepages.General.DataTypes.NQueensReturnType;
+import com.example.apphomepages.DynamicProgramming.Drawable.MinEditDrawable;
+import com.example.apphomepages.General.DataTypes.MinEditReturnType;
 
 import java.util.ArrayList;
 
 public class DynamicProgrammingAnimations
 {
-    public static void generateNQueens(ArrayList<NQueensReturnType> frames, NQueensDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateMinEditDistance(ArrayList<MinEditReturnType> frames, String target, String source, MinEditDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
-        int duration = 1000;
+        int duration = 1500;
 
-        for (int i = 0; i < stopMotionAnimation.length; i++)
+        stopMotionAnimation[0] = new MinEditDrawable(frames.get(0), target, source, true); //start...so special case!
+
+        for (int i = 1; i < stopMotionAnimation.length; i++)
         {
-            stopMotionAnimation[i] = new NQueensDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Color.getCurrent(), frames.get(i));
+            stopMotionAnimation[i] = new MinEditDrawable(frames.get(i), target, source, false);
         }
 
         //Animate!

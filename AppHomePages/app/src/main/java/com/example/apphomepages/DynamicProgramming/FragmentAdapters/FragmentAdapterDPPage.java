@@ -1,6 +1,6 @@
 package com.example.apphomepages.DynamicProgramming.FragmentAdapters;
 
-import com.example.apphomepages.DynamicProgramming.Fragments.NQueensFragment;
+import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,10 +27,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                result = "N-Queens";
+                result = "Min Edit Distance";
                 break;
             default:
-                result = "N-Queens";
+                result = "Min Edit Distance";
         }
 
         return result;
@@ -43,10 +43,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = NQueensFragment.newInstance();
+                page = MinEditFragment.newInstance();
                 break;
             default:
-                page = NQueensFragment.newInstance(); //default fragment to return
+                page = MinEditFragment.newInstance(); //default fragment to return
                 break;
         }
 

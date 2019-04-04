@@ -1,114 +1,83 @@
 package com.example.apphomepages.DynamicProgramming.Algorithms;
 
 import com.example.apphomepages.DynamicProgramming.HelperMethods.DynamicProgrammingHelperMethods;
-import com.example.apphomepages.General.DataTypes.NQueensReturnType;
+import com.example.apphomepages.General.DataTypes.MinEditReturnType;
 
 import java.util.ArrayList;
 
 public class DynamicProgrammingAlgorithms
 {
-    //Used https://en.wikipedia.org/wiki/Eight_queens_puzzle, https://haseebq.com/n-queens-visualizer/, and https://www.geeksforgeeks.org/java-program-for-n-queen-problem-backtracking-3/ for creating this visualization
-    public static ArrayList<NQueensReturnType> solveNQ(boolean[][] board)
+    //Used notes from Professor Kumar's CS325 Computational Linguistic's Class also used https://www.youtube.com/watch?v=Thv3TfsZVpw
+    /*
+        Computes the min edit distance from target to source. Assume that insertions, deletions cost 1 and (actual) substitutions cost 2.
+    */
+    public static ArrayList<MinEditReturnType> minEditDist(String target, String source)
     {
-        //The place where all frames can be stored
-        ArrayList<NQueensReturnType> accumulator = new ArrayList<>();
+        ArrayList<MinEditReturnType> frames = new ArrayList<>();
 
-        boolean valid = solveNQUtil(accumulator, board, 0, board.length);
+        int n = target.trim().length();
+        int m = source.trim().length();
 
-        if (!valid)
+        int[][] distance = new int[n + 1][m + 1];
+
+        for (int i = 0; i < n + 1; i++)
         {
-            return null;
+            for (int j = 0; j < m + 1; j++)
+            {
+                distance[i][j] = 0;
+            }
+        }
+
+        //Initial frame
+        frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, -1, -1, null));
+
+        for (int k = 1; k < n + 1; k++)
+        {
+            distance[k][0] = distance[k - 1][0] + insertCost(target.charAt(k - 1));
+            frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, k, 0, null));
+        }
+
+        for (int l = 1; l < m + 1; l++)
+        {
+            distance[0][l] = distance[0][l - 1] + deleteCost(source.charAt(l - 1));
+            frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, 0, l, null));
+        }
+
+        for (int o = 1; o < n + 1; o++)
+        {
+            for (int p = 1; p < m + 1; p++)
+            {
+                String[] valuesToMin = {distance[o - 1][p] + " + " + insertCost(target.charAt(o - 1)), distance[o][p - 1] + " + " + deleteCost(source.charAt(p - 1)), distance[o - 1][p - 1] + " + " + substCost(source.charAt(p - 1), target.charAt(o - 1))};
+                frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), true, o, p, valuesToMin));
+                distance[o][p] = Math.min(Math.min(distance[o - 1][p] + insertCost(target.charAt(o - 1)), distance[o][p - 1] + deleteCost(source.charAt(p - 1))), distance[o - 1][p - 1] + substCost(source.charAt(p - 1), target.charAt(o - 1)));
+
+                frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, o, p, null));
+            }
+        }
+
+        //The final frame is special, since it is the end and what we want to highlight
+        frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, m, n, null));
+        return frames;
+    }
+
+    private static int insertCost(char c)
+    {
+        return 1;
+    }
+
+    private static int deleteCost(char c)
+    {
+        return 1;
+    }
+
+    private static int substCost(char x, char y)
+    {
+        if (x == y)
+        {
+            return 0;
         } else
         {
-            return accumulator;
+            return 2;
         }
     }
-
-    /* A utility function to check if a queen can
-       be placed on board[row][col]. Note that this
-       function is called when "col" queens are already
-       placed in columns from 0 to col -1. So we need
-       to check only left side for attacking queens */
-    private static boolean isSafe(ArrayList<NQueensReturnType> accumulator, boolean board[][], int row, int col, int N)
-    {
-        int i, j;
-
-        /* Check this row on left side */
-        for (i = 0; i < col; i++)
-        {
-            if (board[row][i])
-            {
-                //accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), true, row, i));
-                return false;
-            }
-        }
-
-        /* Check upper diagonal on left side */
-        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
-        {
-            if (board[i][j])
-            {
-                //accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), true, i, j));
-                return false;
-            }
-        }
-
-        /* Check lower diagonal on left side */
-        for (i = row, j = col; j >= 0 && i < N; i++, j--)
-        {
-            if (board[i][j])
-            {
-                //accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), true, i, j));
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /* A recursive utility function to solve N
-       Queen problem */
-    private static boolean solveNQUtil(ArrayList<NQueensReturnType> accumulator, boolean board[][], int col, int N)
-    {
-        /* base case: If all queens are placed
-           then return true */
-        if (col >= N)
-        {
-            return true;
-        }
-
-        /* Consider this column and try placing
-           this queen in all rows one by one */
-        for (int i = 0; i < N; i++)
-        {
-            /* Check if the queen can be placed on
-               board[i][col] */
-            accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), true, i, col));
-            if (isSafe(accumulator, board, i, col, N))
-            {
-                /* Place this queen in board[i][col] */
-                board[i][col] = true;
-
-                accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), false, -1, -1));
-
-                /* recur to place rest of the queens */
-                if (solveNQUtil(accumulator, board, col + 1, N))
-                {
-                    return true;
-                }
-
-                /* If placing queen in board[i][col]
-                   doesn't lead to a solution then
-                   remove queen from board[i][col] */
-                board[i][col] = false; // BACKTRACK
-
-                accumulator.add(new NQueensReturnType(DynamicProgrammingHelperMethods.copy2DArray(board, N), false, -1, -1));
-            }
-        }
-
-        /* If the queen can not be placed in any row in
-           this column col, then return false */
-        return false;
-    }
-
 }

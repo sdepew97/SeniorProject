@@ -8,17 +8,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import com.example.apphomepages.DynamicProgramming.Algorithms.DynamicProgrammingAlgorithms;
 import com.example.apphomepages.DynamicProgramming.Animations.DynamicProgrammingAnimations;
-import com.example.apphomepages.DynamicProgramming.DialogueFragments.NQueensDialogueFragment;
-import com.example.apphomepages.DynamicProgramming.Drawable.NQueensDrawable;
-import com.example.apphomepages.DynamicProgramming.HelperMethods.DynamicProgrammingHelperMethods;
-import com.example.apphomepages.General.DataTypes.NQueensReturnType;
+import com.example.apphomepages.DynamicProgramming.DialogueFragments.MinEditDialogueFragment;
+import com.example.apphomepages.DynamicProgramming.Drawable.MinEditDrawable;
+import com.example.apphomepages.General.DataTypes.MinEditReturnType;
 import com.example.apphomepages.R;
 
 import java.util.ArrayList;
@@ -30,12 +27,12 @@ import androidx.fragment.app.FragmentManager;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link NQueensFragment.OnFragmentInteractionListener} interface
+ * {@link MinEditFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link NQueensFragment#newInstance} factory method to
+ * Use the {@link MinEditFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NQueensFragment extends Fragment
+public class MinEditFragment extends Fragment
 {
     private OnFragmentInteractionListener mListener;
 
@@ -47,7 +44,7 @@ public class NQueensFragment extends Fragment
     //The animation that will be played when the "next frame" button is clicked
     private AnimationDrawable animationDrawable = new AnimationDrawable();
 
-    public NQueensFragment()
+    public MinEditFragment()
     {
         // Required empty public constructor
     }
@@ -56,11 +53,11 @@ public class NQueensFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment NQueensFragment.
+     * @return A new instance of fragment MinEditFragment.
      */
-    public static NQueensFragment newInstance()
+    public static MinEditFragment newInstance()
     {
-        NQueensFragment fragment = new NQueensFragment();
+        MinEditFragment fragment = new MinEditFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -91,19 +88,21 @@ public class NQueensFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_nqueens, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_minedit, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button startButton = viewGlobal.findViewById(R.id.startButtonNQueens);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButtonNQueens);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonNQueens);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButtonNQueens);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonNQueens);
-        Button generateButton = viewGlobal.findViewById(R.id.generateButtonNQueens);
-        final Spinner spinnerSelect = viewGlobal.findViewById(R.id.spinnerSelectNQueens);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonMinEdit);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonMinEdit);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonMinEdit);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonMinEdit);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonMinEdit);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonMinEdit);
 
         //Get random initial index for the board size selection
         final Random r = new Random();
+
+        //Create a list of similar words
+        final String[] words = {"Sarah", "Salmon"}; //TODO: populate!
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -111,7 +110,7 @@ public class NQueensFragment extends Fragment
             public void onClick(View v)
             {
                 //Set up variables for the method
-                NQueensDrawable[] stopMotionAnimation;
+                MinEditDrawable[] stopMotionAnimation;
 
                 //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
                 int boardSizeIndex = r.nextInt(possibleBoardSizes.length);  //"index" into the array of board sizes
@@ -128,56 +127,17 @@ public class NQueensFragment extends Fragment
                     }
                 }
 
-                DynamicProgrammingHelperMethods.populateSpinner(possibleBoardSizes, viewGlobal, spinnerSelect, boardSizeIndex);
+                String target = words[r.nextInt(words.length)];
+                String source = words[r.nextInt(words.length)];
 
-                ArrayList<NQueensReturnType> frames = DynamicProgrammingAlgorithms.solveNQ(board);
+                ArrayList<MinEditReturnType> frames = DynamicProgrammingAlgorithms.minEditDist(target, source);
 
-                stopMotionAnimation = new NQueensDrawable[frames.size()];
-
-                animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageViewNQueens);
-
-                DynamicProgrammingAnimations.generateNQueens(frames, stopMotionAnimation, image, animationDrawable);
-            }
-        });
-
-        spinnerSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                //Set up variables for the method
-                NQueensDrawable[] stopMotionAnimation;
-
-                //Set the proper node value based on the item selected, which is the node's value
-                int boardSizeIndex = spinnerSelect.getSelectedItemPosition();
-                N = possibleBoardSizes[boardSizeIndex];
-
-                //Create a board
-                boolean[][] board = new boolean[N][N];
-
-                for (int i = 0; i < N; i++)
-                {
-                    for (int j = 0; j < N; j++)
-                    {
-                        board[i][j] = false;
-                    }
-                }
-
-                ArrayList<NQueensReturnType> frames = DynamicProgrammingAlgorithms.solveNQ(board);
-
-                stopMotionAnimation = new NQueensDrawable[frames.size()];
+                stopMotionAnimation = new MinEditDrawable[frames.size()];
 
                 animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageViewNQueens);
+                image = viewGlobal.findViewById(R.id.imageViewMinEdit);
 
-                DynamicProgrammingAnimations.generateNQueens(frames, stopMotionAnimation, image, animationDrawable);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-                //Do nothing
+                DynamicProgrammingAnimations.generateMinEditDistance(frames, target, source, stopMotionAnimation, image, animationDrawable);
             }
         });
 
@@ -227,7 +187,7 @@ public class NQueensFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                NQueensDialogueFragment dialogFragment = new NQueensDialogueFragment();
+                MinEditDialogueFragment dialogFragment = new MinEditDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });
