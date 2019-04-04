@@ -193,7 +193,7 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
     }
 
     //Found code on https://kylewbanks.com/blog/drawing-triangles-rhombuses-and-other-shapes-on-android-canvas and http://android-er.blogspot.com/2014/06/rotate-path-with-matrix.html
-    public void drawTriangle(Canvas canvas, Paint paint, int x, int y, int width, Matrix m)
+    private void drawTriangle(Canvas canvas, Paint paint, int x, int y, int width, Matrix m)
     {
         int halfWidth = width / 2;
 

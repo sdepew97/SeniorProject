@@ -31,10 +31,10 @@ public class SortingAlgorithmsTest
         Arrays.sort(numbers2);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), resultOfBubbleOn1.get(resultOfBubbleOn1.size() - 1).getList().get(i));
+            assertEquals(numbers1[i], resultOfBubbleOn1.get(resultOfBubbleOn1.size() - 1).getList().get(i));
 
         for (int j = 0; j < numbers2.length; j++)
-            assertEquals(new Integer(numbers2[j]), resultOfBubbleOn2.get(resultOfBubbleOn2.size() - 1).getList().get(j));
+            assertEquals(numbers2[j], resultOfBubbleOn2.get(resultOfBubbleOn2.size() - 1).getList().get(j));
     }
 
     @Test
@@ -65,10 +65,10 @@ public class SortingAlgorithmsTest
         Arrays.sort(numbers2);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), resultOfInsertionOn1.get(resultOfInsertionOn1.size() - 1).getList().get(i));
+            assertEquals(numbers1[i], resultOfInsertionOn1.get(resultOfInsertionOn1.size() - 1).getList().get(i));
 
         for (int j = 0; j < numbers2.length; j++)
-            assertEquals(new Integer(numbers2[j]), resultOfInsertionOn2.get(resultOfInsertionOn2.size() - 1).getList().get(j));
+            assertEquals(numbers2[j], resultOfInsertionOn2.get(resultOfInsertionOn2.size() - 1).getList().get(j));
     }
 
     @Test
@@ -87,10 +87,10 @@ public class SortingAlgorithmsTest
         Arrays.sort(numbers2);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), resultOfSelectionOn1.get(resultOfSelectionOn1.size() - 1).getList().get(i));
+            assertEquals(numbers1[i], resultOfSelectionOn1.get(resultOfSelectionOn1.size() - 1).getList().get(i));
 
         for (int j = 0; j < numbers2.length; j++)
-            assertEquals(new Integer(numbers2[j]), resultOfSelectionOn2.get(resultOfSelectionOn2.size() - 1).getList().get(j));
+            assertEquals(numbers2[j], resultOfSelectionOn2.get(resultOfSelectionOn2.size() - 1).getList().get(j));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class SortingAlgorithmsTest
         Arrays.sort(numbers1);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), merged.get(merged.size() - 1).getNumbers().get(i));
+            assertEquals(numbers1[i], merged.get(merged.size() - 1).getNumbers().get(i));
     }
 
     @Test
@@ -122,10 +122,10 @@ public class SortingAlgorithmsTest
         Arrays.sort(numbers2);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), resultOfMergeOn1.get(resultOfMergeOn1.size() - 1).getNumbers().get(i));
+            assertEquals(numbers1[i], resultOfMergeOn1.get(resultOfMergeOn1.size() - 1).getNumbers().get(i));
 
         for (int j = 0; j < numbers2.length; j++)
-            assertEquals(new Integer(numbers2[j]), resultOfMergeOn2.get(resultOfMergeOn2.size() - 1).getNumbers().get(j));
+            assertEquals(numbers2[j], resultOfMergeOn2.get(resultOfMergeOn2.size() - 1).getNumbers().get(j));
     }
 
     @Test

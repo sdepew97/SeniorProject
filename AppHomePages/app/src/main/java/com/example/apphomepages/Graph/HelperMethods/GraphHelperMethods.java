@@ -55,7 +55,7 @@ public class GraphHelperMethods
 
         if (vertices.size() == 0)
         {
-            return null;
+            return new ArrayList<>(); //TODO: Ask Richard about this place and what is commonly returned here...
         }
 
         //Order in which the nodes are visited
@@ -195,7 +195,7 @@ public class GraphHelperMethods
 
         int heightValue = radius * 2;
         int i = 0;
-        int left = 0;
+        int left;
         int top = radius;
 
         //Get the lists of values to place at each location

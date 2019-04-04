@@ -33,11 +33,6 @@ public class Color
         return new Color(153, 255, 255);
     }
 
-    public static Color getCurrent()
-    {
-        return new Color(15, 188, 107);
-    }
-
     public static Color getFound()
     {
         return new Color(255, 102, 178);
