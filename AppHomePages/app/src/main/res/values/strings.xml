@@ -125,14 +125,14 @@ Pellentesque tempor leo non turpis tincidunt tincidunt. Donec malesuada, ex sit 
 
     <string name="QuickSortDescription">Quicksort is a O(n logn) algorithm where a pivot is selected and sections are recursively sorted by having all elements smaller and larger than the pivot organized on the proper side of the pivot. </string>
 
-    <string name="DepthFirstSearchDescription">Depth first search is an O(...) algorithm where ... </string>
+    <string name="DepthFirstSearchDescription">Depth first search is an O(|V| + |E|) algorithm where |V| is the number of vertices in the graph and |E| is the number of edges. This algorithm uses a Stack to explore the farthest down a path in a graph before backtracking. If no element is being sought, the depth-first search becomes a depth-first traversal of the graph.</string>
 
-    <string name="BreadthFirstSearchDescription">Breadth first search is an O(...) algorithm where ... </string>
+    <string name="BreadthFirstSearchDescription">Breadth first search is an O(|V| + |E|) algorithm where |V| is the number of vertices in the graph and |E| is the number of edges. This algorithm uses a Queue to explore the layers of a graph. If no element is being sought, the breadth-first search becomes a breadth-first traversal of the graph where each layer of the graph is traversed.</string>
 
-    <string name="TopologicalOrderingDescription">Topological ordering is an O(...) algorithm where ... </string>
+    <string name="TopologicalOrderingDescription">Topological ordering is commonly an O(|V| + |E|) algorithm where |V| is the number of vertices in the graph and |E| is the number of edges. Topological ordering is useful whenever there are dependencies between data that needs to be ordered. For example, course scheduling, cooking recipes, and getting dressed are all scenarios where some steps must come before others, and different pieces of the data are interconnected. </string>
 
     <string name="DijkstrasDescription">Dijkstra\'s algorithm is an O(...) algorithm where ... </string>
 
-    <string name="MinEditDescription">N-Queens\'s algorithm is an O(...) algorithm where ... </string>
+    <string name="MinEditDescription">Min Edit Distance algorithm is an O(...) algorithm where ... </string>
 
 </resources>

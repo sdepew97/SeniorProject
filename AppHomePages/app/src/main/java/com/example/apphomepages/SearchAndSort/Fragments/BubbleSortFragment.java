@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.SortReturnType;
 import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
@@ -119,7 +119,7 @@ public class BubbleSortFragment extends Fragment
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Tuple> iterations = SortingAlgorithms.bubbleSort(numbers);
+                ArrayList<SortReturnType> iterations = SortingAlgorithms.bubbleSort(numbers);
                 ArrayList<Integer> squaresToHighlight = new ArrayList<>();
                 squaresToHighlight.add(-1);
 

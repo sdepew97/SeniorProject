@@ -2,6 +2,7 @@ package com.example.apphomepages;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
 import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 
@@ -270,12 +271,12 @@ public class GraphAlgorithmsTest
         ArrayList<String> nodeValuesList = HelperMethods.convertFromArray(nodeValues);
         Graph<String> g = createDAG(nodeValuesList);
 
-        ArrayList<String> topologicalOrdering = GraphAlgorithms.topologicalOrdering(g);
-        String[] expectedValues = {"Algebra 1", "Statistics", "Probability", "Geometry", "Algebra 2", "Trigonometry", "Pre-Calculus", "Calculus I", "AP Calculus"};
+        TopologicalOrderingReturnType topologicalOrdering = GraphAlgorithms.topologicalOrdering(g);
+        Integer[] expectedValues = {0, 4, 5, 1, 2, 3, 6, 7, 8};
 
         for (int i = 0; i < nodeValues.length; i++)
         {
-            Assert.assertTrue(expectedValues[i].equals(topologicalOrdering.get(i)));
+            Assert.assertEquals(expectedValues[i], (topologicalOrdering.getVisitOrder().get(i)));
         }
     }
 

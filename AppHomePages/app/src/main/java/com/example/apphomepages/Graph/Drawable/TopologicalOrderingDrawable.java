@@ -22,23 +22,26 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
 {
     private final Paint mMainPaint;
     private final Paint mSecondPaint;
-    private final Paint mFoundPaint;
     private final Paint mTextPaint;
     private final Paint mLinePaint;
 
     private Graph<String> graph;
-    private String nodeToHighlight;
-    private boolean startOrEnd;
+    private Graph<String> originalGraph;
+    private ArrayList<Integer> orderVisited;
+    private Integer nodeToHighlightId;
+    private boolean start;
+    private boolean end;
+
 
     //An ArraySearchDrawable constructor for searching
-    public TopologicalOrderingDrawable(Color main, Color secondary, Color found, String nodeToHighlight, Graph<String> graph, boolean startOrEnd)
+    public TopologicalOrderingDrawable(Integer nodeToHighlightId, Graph<String> graph, Graph<String> originalGraph, ArrayList<Integer> orderVisited, boolean start, boolean end)
     {
         // Set up color and text size
         mMainPaint = new Paint();
-        mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
+        mMainPaint.setARGB(255, Color.getMain().getRed(), Color.getMain().getGreen(), Color.getMain().getBlue());
 
         mSecondPaint = new Paint();
-        mSecondPaint.setARGB(255, secondary.getRed(), secondary.getGreen(), secondary.getBlue());
+        mSecondPaint.setARGB(255, Color.getSecondary().getRed(), Color.getSecondary().getGreen(), Color.getSecondary().getBlue());
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);
@@ -50,12 +53,12 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         mLinePaint.setStyle(Paint.Style.FILL);
         mLinePaint.setStrokeWidth(4);
 
-        mFoundPaint = new Paint();
-        mFoundPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
-
         this.graph = graph;
-        this.nodeToHighlight = nodeToHighlight;
-        this.startOrEnd = startOrEnd;
+        this.originalGraph = originalGraph;
+        this.orderVisited = orderVisited;
+        this.nodeToHighlightId = nodeToHighlightId;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
@@ -65,14 +68,12 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
         int width = getBounds().width();
         int height = getBounds().height();
         int numCircles = graph.getGraphElements().size();
-        int radius = (int) (height / (GraphHelperMethods.numLayers(graph) + 4.0)); //the radius of the circle, since this means they will never overlap horizontally
+        int radius = (int) (height / (GraphHelperMethods.numLayers(originalGraph) + 4.0)); //the radius of the circle, since this means they will never overlap horizontally
         mTextPaint.setTextSize((float) (radius / 2.6));
 
-        int left = 0;
-        int top = 0;
-
         //Gets the center values of all the nodes and the correct value at the nodes in question
-        Point[] centersOfCircles = GraphHelperMethods.placeNodes(graph, width, height);
+        Point[] centersOfCircles = GraphHelperMethods.placeNodes(originalGraph, width, height);
+        ArrayList<Node<String>> layoutOrderOriginal = GraphAlgorithms.breadthFirstSearch(originalGraph, null, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
         ArrayList<Node<String>> layoutOrder = GraphAlgorithms.breadthFirstSearch(graph, null, true); //this will do a breadth-first traversal, which is also how we are planning to lay out the nodes
 
         //Draw the lines connecting the nodes
@@ -84,30 +85,91 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
 
             for (Node<String> a : adjacentNodes)
             {
-                //TODO: test that the node's value is actually in the list and that this code doesn't error
-                Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())];
-                Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())];
+                Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrderOriginal, n.getNodeId())];
+                Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrderOriginal, a.getNodeId())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
                 Matrix m = new Matrix();
-                double radians = Math.atan((end.getY() - end.getX() * 1.0) / (start.getY() - start.getX()));
-                m.setRotate((float) Math.toDegrees(radians), ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
-                drawTriangle(canvas, mFoundPaint, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)), 15, m);
+
+                //I had to hardcode the values, here, because I couldn't figure out another way to give the proper values for the arrow's directions
+                //Algebra 1 --> Geometry
+                if (n.getNodeId() == 0 && a.getNodeId() == 1)
+                {
+                    m.setRotate(180, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Algebra 1 --> Algebra 2
+                if (n.getNodeId() == 0 && a.getNodeId() == 2)
+                {
+                    m.setRotate(120, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Geometry --> Algebra 2
+                if (n.getNodeId() == 1 && a.getNodeId() == 2)
+                {
+                    m.setRotate(90, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Algebra 2 --> Trigonometry
+                if (n.getNodeId() == 2 && a.getNodeId() == 3)
+                {
+                    m.setRotate(240, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Trigonometry --> Pre-Calculus
+                if (n.getNodeId() == 3 && a.getNodeId() == 6)
+                {
+                    m.setRotate(60, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Statistics --> Pre-Calculus
+                if (n.getNodeId() == 4 && a.getNodeId() == 6)
+                {
+                    m.setRotate(120, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Probability --> Pre-Calculus
+                if (n.getNodeId() == 5 && a.getNodeId() == 6)
+                {
+                    m.setRotate(180, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Pre-Calculus --> Calculus I
+                if (n.getNodeId() == 6 && a.getNodeId() == 7)
+                {
+                    m.setRotate(240, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                //Pre-Calculus --> AP Calculus
+                if (n.getNodeId() == 6 && a.getNodeId() == 8)
+                {
+                    m.setRotate(0, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)));
+                }
+
+                drawTriangle(canvas, mTextPaint, ((int) ((start.getX() + end.getX()) / 2.0)), ((int) ((start.getY() + end.getY()) / 2.0)), 15, m);
             }
         }
 
         //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
         for (int i = 0; i < numCircles; i++)
         {
-            if (nodeToHighlight.equals(layoutOrder.get(i)) && !startOrEnd)
+            int x = GraphHelperMethods.getNodeIndexBasedOnId(layoutOrderOriginal, layoutOrder.get(i).getNodeId());
+
+            if (nodeToHighlightId.equals(layoutOrder.get(i).getNodeId()) && !start && !end)
             {
-                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mSecondPaint);
+                canvas.drawCircle(centersOfCircles[x].getX(), centersOfCircles[x].getY(), radius, mSecondPaint);
             } else
             {
-                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMainPaint);
+                canvas.drawCircle(centersOfCircles[x].getX(), centersOfCircles[x].getY(), radius, mMainPaint);
             }
 
-            canvas.drawText(layoutOrder.get(i).getNodeValue(), centersOfCircles[i].getX(), centersOfCircles[i].getY(), mTextPaint);
+            if (!end)
+            {
+                canvas.drawText(layoutOrder.get(i).getNodeValue(), centersOfCircles[x].getX(), centersOfCircles[x].getY(), mTextPaint);
+            } else
+            {
+                canvas.drawText(layoutOrder.get(i).getNodeValue() + " (" + (orderVisited.indexOf(layoutOrder.get(i).getNodeId()) + 1) + ")", centersOfCircles[x].getX(), centersOfCircles[x].getY(), mTextPaint);
+            }
         }
     }
 

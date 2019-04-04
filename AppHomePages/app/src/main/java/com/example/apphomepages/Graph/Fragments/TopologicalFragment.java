@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
+import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
 import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.Graph.Algorithms.GraphAlgorithms;
 import com.example.apphomepages.Graph.Animations.GraphAnimations;
@@ -96,7 +97,6 @@ public class TopologicalFragment extends Fragment
 
         {
             //Set up the buttons and clickable elements on the fragment
-            Button generateButton = viewGlobal.findViewById(R.id.generateButtonTopological);
             Button startButton = viewGlobal.findViewById(R.id.startButtonTopological);
             Button stopButton = viewGlobal.findViewById(R.id.stopButtonTopological);
             Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonTopological);
@@ -108,31 +108,25 @@ public class TopologicalFragment extends Fragment
             ArrayList<String> nodeValuesList = HelperMethods.convertFromArray(nodeValues);
             final Graph<String> g = createDAG(nodeValuesList);
 
-            generateButton.setOnClickListener(new View.OnClickListener()
+            //Set up variables for the method
+            TopologicalOrderingDrawable[] stopMotionAnimation;
+            TopologicalOrderingReturnType nodesToHighlightAndGraphs = new TopologicalOrderingReturnType();
+
+            try
             {
-                @Override
-                public void onClick(View v)
-                {
-                    //Set up variables for the method
-                    TopologicalOrderingDrawable[] stopMotionAnimation;
-                    ArrayList<String> nodesToHighlight = new ArrayList<>();
+                nodesToHighlightAndGraphs = GraphAlgorithms.topologicalOrdering(g);
+            } catch (RuntimeException r)
+            {
+                Log.e("Topological Ordering", String.valueOf(r));
+            }
 
-                    try
-                    {
-                        nodesToHighlight = GraphAlgorithms.topologicalOrdering(g);
-                    } catch (RuntimeException r)
-                    {
-                        Log.e("Topological Ordering", String.valueOf(r));
-                    }
+            stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlightAndGraphs.getVisitOrder().size() + 2];
 
-                    stopMotionAnimation = new TopologicalOrderingDrawable[nodesToHighlight.size() + 2];
+            animationDrawable = new AnimationDrawable();
+            image = viewGlobal.findViewById(R.id.imageViewTopological);
 
-                    animationDrawable = new AnimationDrawable();
-                    image = viewGlobal.findViewById(R.id.imageViewTopological);
+            GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlightAndGraphs, stopMotionAnimation, image, animationDrawable);
 
-                    GraphAnimations.generateTopologicalGraphOrdering(nodesToHighlight, g, stopMotionAnimation, image, animationDrawable);
-                }
-            });
 
             startButton.setOnClickListener(new View.OnClickListener()
             {

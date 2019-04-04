@@ -30,7 +30,7 @@ import java.util.Random;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArray;
+import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArrayString;
 
 
 /**
@@ -113,6 +113,7 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
         lengths.add(1); //Trivial Case
         lengths.add(5); //Odd Case
         lengths.add(6); //Even Case
+        lengths.add(8); //Power of 2 Case
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {
@@ -120,7 +121,6 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
             public void onClick(View v)
             {
                 //Set up variables for the method
-                ArrayMergeSortDrawable[] stopMotionAnimation;
                 index = r.nextInt(lengths.size()); //Get random initial index
                 animationDrawable = new AnimationDrawable();
 
@@ -151,14 +151,88 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                 numbers = HelperMethods.generateRandomArray(r, numElements);
 
                 //Run algorithm
-                ArrayList<Integer> originalNumbers = copyArray(numbers);
                 ArrayList<MergeSortReturnType> iterations = SortingAlgorithms.mergeSort(numbers, 0, numbers.size() - 1);
 
-                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size() + 2];
+                //Convert each iteration to an ArrayList<ArrayList<Integer>> to represent the sections of numbers
+                ArrayList<ArrayList<ArrayList<String>>> iterationPartitions = new ArrayList<>();
+
+                ArrayList<ArrayList<String>> list = new ArrayList<>();
+                list.add(copyArrayString(iterations.get(0).getNumbers(), 0, iterations.get(0).getNumbers().size() - 1));
+                iterationPartitions.add(list);
+
+                int i = 1;
+                int k = 0;
+                while (i < iterations.size())
+                {
+                    ArrayList<String> currentPart;
+                    if (!iterations.get(i).isMerging())
+                    {
+                        currentPart = copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getRight());
+                        k = 0; //restart the j-value after done merging
+                    } else //we are in the case that we are merging...what should we do here?
+                    {
+                        //only copy j number elements for the array and then leave the remainder as blanks so that the merging of the arrays is clear
+                        currentPart = copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getLeft() + k);
+                        for (int l = k; l < (iterations.get(i).getRight() - iterations.get(i).getLeft()); l++)
+                        {
+                            currentPart.add(" ");
+                        }
+
+                        k++; //increment the number of elements of the array copied
+                    }
+
+                    //Put the new piece in its proper place...
+                    ArrayList<ArrayList<String>> lists = new ArrayList<>();
+
+                    ArrayList<ArrayList<String>> otherPartLeft = new ArrayList<>();
+                    ArrayList<ArrayList<String>> otherPartRight = new ArrayList<>();
+
+                    //Add other left pieces, if they exist unless it is the other half
+                    if (0 < iterations.get(i).getLeft())
+                    {
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            if ((iterations.get(j).getRight() + 1 == iterations.get(i).getLeft()))
+                            {
+                                otherPartLeft = iterationPartitions.get(j);
+                                break; //we want the first instance of this!
+                            }
+                        }
+                    }
+
+                    //Add other right pieces if they exist
+                    if (iterations.get(i).getRight() < iterations.get(i).getNumbers().size() - 1)
+                    {
+                        for (int j = i - 1; j >= 0; j--)
+                        {
+                            if (iterations.get(i).getRight() + 1 == iterations.get(j).getLeft())
+                            {
+                                otherPartRight = iterationPartitions.get(j);
+                                break; //we want the first instance of this!
+                            }
+                        }
+
+                    }
+
+                    //Combine all pieces together
+                    if (otherPartLeft.size() > 0)
+                        lists.addAll(otherPartLeft);
+
+                    lists.add(currentPart);
+
+                    if (otherPartRight.size() > 0)
+                        lists.addAll(otherPartRight);
+
+
+                    iterationPartitions.add(lists);
+                    i++;
+                }
+
+                stopMotionAnimation = new ArrayMergeSortDrawable[iterations.size()];
 
                 image = viewGlobal.findViewById(R.id.imageViewMerge);
 
-                SortAnimations.generateMergeSort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
+                SortAnimations.generateMergeSort(iterationPartitions, stopMotionAnimation, image, animationDrawable);
             }
 
             @Override

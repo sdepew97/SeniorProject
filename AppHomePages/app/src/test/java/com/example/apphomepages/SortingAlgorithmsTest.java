@@ -1,8 +1,8 @@
 package com.example.apphomepages;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
+import com.example.apphomepages.General.DataTypes.SortReturnType;
 import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 
@@ -24,8 +24,8 @@ public class SortingAlgorithmsTest
         Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
-        ArrayList<Tuple> resultOfBubbleOn1 = SortingAlgorithms.bubbleSort(numbersArrayList1);
-        ArrayList<Tuple> resultOfBubbleOn2 = SortingAlgorithms.bubbleSort(numbersArrayList2);
+        ArrayList<SortReturnType> resultOfBubbleOn1 = SortingAlgorithms.bubbleSort(numbersArrayList1);
+        ArrayList<SortReturnType> resultOfBubbleOn2 = SortingAlgorithms.bubbleSort(numbersArrayList2);
 
         Arrays.sort(numbers1);
         Arrays.sort(numbers2);
@@ -58,8 +58,8 @@ public class SortingAlgorithmsTest
         Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
-        ArrayList<Tuple> resultOfInsertionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
-        ArrayList<Tuple> resultOfInsertionOn2 = SortingAlgorithms.insertionSort(numbersArrayList2);
+        ArrayList<SortReturnType> resultOfInsertionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
+        ArrayList<SortReturnType> resultOfInsertionOn2 = SortingAlgorithms.insertionSort(numbersArrayList2);
 
         Arrays.sort(numbers1);
         Arrays.sort(numbers2);
@@ -80,8 +80,8 @@ public class SortingAlgorithmsTest
         Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
-        ArrayList<Tuple> resultOfSelectionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
-        ArrayList<Tuple> resultOfSelectionOn2 = SortingAlgorithms.insertionSort(numbersArrayList2);
+        ArrayList<SortReturnType> resultOfSelectionOn1 = SortingAlgorithms.insertionSort(numbersArrayList1);
+        ArrayList<SortReturnType> resultOfSelectionOn2 = SortingAlgorithms.insertionSort(numbersArrayList2);
 
         Arrays.sort(numbers1);
         Arrays.sort(numbers2);
@@ -98,7 +98,7 @@ public class SortingAlgorithmsTest
     {
         Integer[] numbers1 = {-1, 1, 12, 23, 24, 22, 86, 123};
         ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
-        ArrayList<MergeSortReturnType> merged = SortingAlgorithms.merge(numbersArrayList1, 0, 4, numbers1.length - 1, Color.randomColor());
+        ArrayList<MergeSortReturnType> merged = SortingAlgorithms.merge(numbersArrayList1, 0, 4, numbers1.length - 1);
 
         Arrays.sort(numbers1);
 
@@ -137,16 +137,19 @@ public class SortingAlgorithmsTest
         Integer[] numbers2 = {1, 2, 3, 4, 5, 6, 7, 8};
         ArrayList<Integer> numbersArrayList2 = HelperMethods.convertFromArray(numbers2);
 
-        ArrayList<Tuple> resultOfQuickOn1 = SortingAlgorithms.quicksort(numbersArrayList1, 0, numbersArrayList1.size() - 1);
-        ArrayList<Tuple> resultOfQuickOn2 = SortingAlgorithms.quicksort(numbersArrayList2, 0, numbersArrayList2.size() - 1);
+        ArrayList<QuickSortReturnType> accumulator1 = new ArrayList<>();
+        ArrayList<QuickSortReturnType> accumulator2 = new ArrayList<>();
+
+        SortingAlgorithms.quicksort(accumulator1, numbersArrayList1, 0, numbersArrayList1.size() - 1);
+        SortingAlgorithms.quicksort(accumulator2, numbersArrayList2, 0, numbersArrayList2.size() - 1);
 
         Arrays.sort(numbers1);
         Arrays.sort(numbers2);
 
         for (int i = 0; i < numbers1.length; i++)
-            assertEquals(new Integer(numbers1[i]), resultOfQuickOn1.get(resultOfQuickOn1.size() - 1).getList().get(i));
+            assertEquals(numbers1[i], accumulator1.get(accumulator1.size() - 1).getList().get(i));
 
         for (int j = 0; j < numbers2.length; j++)
-            assertEquals(new Integer(numbers2[j]), resultOfQuickOn2.get(resultOfQuickOn2.size() - 1).getList().get(j));
+            assertEquals(numbers2[j], accumulator2.get(accumulator2.size() - 1).getList().get(j));
     }
 }

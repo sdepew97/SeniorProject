@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Tuple;
+import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
 import com.example.apphomepages.General.HelperMethods.HelperMethods;
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
@@ -120,12 +120,21 @@ public class QuicksortFragment extends Fragment
 
                 //Run algorithm
                 ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<Tuple> iterations = SortingAlgorithms.quicksort(numbers, 0, numbers.size() - 1);
+                ArrayList<QuickSortReturnType> iterations = new ArrayList<>();
 
-                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size() + 2];
+                //First frame (original array)
+                iterations.add(new QuickSortReturnType(originalNumbers, 0, 0, -1, -1, false));
+
+                //get the middle frames of the animation
+                SortingAlgorithms.quicksort(iterations, numbers, 0, numbers.size() - 1);
+
+                //Final frame
+                iterations.add(new QuickSortReturnType(iterations.get(iterations.size() - 1).getList(), 0, 0, -1, -1, false));
+
+                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size()];
 
                 image = view.findViewById(R.id.imageViewQuick);
-                SortAnimations.generateQuicksort(originalNumbers, iterations, stopMotionAnimation, image, animationDrawable);
+                SortAnimations.generateQuicksort(iterations, stopMotionAnimation, image, animationDrawable);
             }
         });
 

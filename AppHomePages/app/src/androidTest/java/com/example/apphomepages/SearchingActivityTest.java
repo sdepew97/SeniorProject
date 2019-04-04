@@ -82,6 +82,7 @@ public class SearchingActivityTest
         Thread.sleep(500);
         onView(withId(R.id.scrollLinearInstructions)).perform(ViewActions.swipeUp());
         onView(withId(R.id.close_instructions_linear)).perform(ViewActions.click());
+        //TODO: check if we are back on the page
     }
 
     @Test
