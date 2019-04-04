@@ -68,8 +68,8 @@ public class MinEditDrawable extends Drawable implements Animatable
         // Get the drawable's bounds
         int width = getBounds().width();
         int height = getBounds().height();
-        int numRectanglesHeight = board.length;
-        int numRectanglesWidth = board[0].length;
+        int numRectanglesHeight = board.length + 1;
+        int numRectanglesWidth = board[0].length + 1;
         int widthOfSquare = width / numRectanglesWidth;
         int heightOfSquare = height / numRectanglesHeight;
         mTextPaint.setTextSize((float) (widthOfSquare / 6 * 1.0));
@@ -77,7 +77,7 @@ public class MinEditDrawable extends Drawable implements Animatable
         int left = 0;
         int top = 0;
 
-        Rect[][] rectangles = new Rect[board.length][board[0].length];
+        Rect[][] rectangles = new Rect[numRectanglesHeight][numRectanglesWidth];
 
         //This places the nodes and puts their value in their center (this assumes that the value of the nodes in the graph is unique!)
         for (int x = 0; x < numRectanglesHeight; x++)
@@ -90,20 +90,23 @@ public class MinEditDrawable extends Drawable implements Animatable
                 if (minOperation)
                 {
                     //Draw all the surrounding squares as look at color...
-                    if ((x == i - 1 && y == j) || (x == i && y == j - 1) || (x == i - 1 && y == j - 1))
+                    if (((x - 1) == i - 1 && (y - 1) == j) || ((x - 1) == i && (y - 1) == j - 1) || ((x - 1) == i - 1 && (y - 1) == j - 1))
                     {
                         canvas.drawRect(rectangles[x][y], mLookAtPaint);
+                    } else
+                    {
+                        canvas.drawRect(rectangles[x][y], mSquarePaint);
                     }
-
-                }
-
-                if (x == i && y == j)
-                {
-                    canvas.drawRect(rectangles[x][y], mCurrentPaint);
                 } else
                 {
                     canvas.drawRect(rectangles[x][y], mSquarePaint);
                 }
+
+                if (x > 0 && y > 0 && (x - 1) == i && (y - 1) == j)
+                {
+                    canvas.drawRect(rectangles[x][y], mCurrentPaint);
+                }
+
 
                 //Vertical line
                 canvas.drawLine(left, 0, left, height, mLinePaint);
@@ -112,25 +115,24 @@ public class MinEditDrawable extends Drawable implements Animatable
 
                 if ((x == 0) || (y == 0))
                 {
-                    //TODO: draw letter of either target or source!
-                    if (x == 0 && y == 0)
+                    if ((x == 0 && y == 0) || (x == 1 && y == 0) || (x == 0 && y == 1))
                     {
                         canvas.drawText("", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
                     } else if (x == 0)
                     {
-                        canvas.drawText(target.charAt(y - 1) + "", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
+                        canvas.drawText(source.charAt(y - 2) + "", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
                     } else
                     { //y==0
-                        canvas.drawText(source.charAt(x - 1) + "", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
+                        canvas.drawText(target.charAt(x - 2) + "", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
                     }
                 } else
                 {
-                    if (minOperation)
+                    if (minOperation && (x - 1) == i && (y - 1) == j)
                     {
-                        canvas.drawText("min(" + valuesToMin[0] + "," + valuesToMin[1] + "," + valuesToMin[2] + ")", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
+                        canvas.drawText("", rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
                     } else
                     {
-                        canvas.drawText(Integer.toString(board[x][y]), rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
+                        canvas.drawText(Integer.toString(board[x - 1][y - 1]), rectangles[x][y].centerX(), rectangles[x][y].centerY(), mTextPaint);
                     }
                 }
             }

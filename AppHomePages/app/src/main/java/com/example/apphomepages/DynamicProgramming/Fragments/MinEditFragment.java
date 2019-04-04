@@ -102,7 +102,7 @@ public class MinEditFragment extends Fragment
         final Random r = new Random();
 
         //Create a list of similar words
-        final String[] words = {"Sarah", "Salmon"}; //TODO: populate!
+        final String[] words = {"dolphin", "turtle", "albatross", "armadillo", "rabbit", "pig", "dove", "chickadee", "eagle", "cat", "dog", "cow", "longhorn", "tiger", "sphinx", "greyhound", "zebra", "gorilla", "bear", "panther"};
 
         generateButton.setOnClickListener(new View.OnClickListener()
         {

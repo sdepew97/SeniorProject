@@ -55,8 +55,6 @@ public class DynamicProgrammingAlgorithms
             }
         }
 
-        //The final frame is special, since it is the end and what we want to highlight
-        frames.add(new MinEditReturnType(DynamicProgrammingHelperMethods.copy2DArray(distance, n + 1, m + 1), false, m, n, null));
         return frames;
     }
 
