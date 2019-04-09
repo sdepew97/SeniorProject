@@ -18,14 +18,13 @@ import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
 import com.example.apphomepages.SearchAndSort.DialogueFragments.QuickSortDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayQuicksortDrawable;
+import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArray;
 
 
 /**
@@ -105,36 +104,15 @@ public class QuicksortFragment extends Fragment
         Button proofButton = view.findViewById(R.id.proofButtonQuick);
         Button instructionsButton = view.findViewById(R.id.instructionsButtonQuick);
 
+        //Set Up
+        populateScreen(r, bound, view);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                ArrayQuicksortDrawable[] stopMotionAnimation;
-                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                animationDrawable = new AnimationDrawable();
-
-                //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements);
-
-                //Run algorithm
-                ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<QuickSortReturnType> iterations = new ArrayList<>();
-
-                //First frame (original array)
-                iterations.add(new QuickSortReturnType(originalNumbers, 0, 0, -1, -1, false));
-
-                //get the middle frames of the animation
-                SortingAlgorithms.quicksort(iterations, numbers, 0, numbers.size() - 1);
-
-                //Final frame
-                iterations.add(new QuickSortReturnType(iterations.get(iterations.size() - 1).getList(), 0, 0, -1, -1, false));
-
-                stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size()];
-
-                image = view.findViewById(R.id.imageViewQuick);
-                SortAnimations.generateQuicksort(iterations, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, bound, view);
             }
         });
 
@@ -190,6 +168,35 @@ public class QuicksortFragment extends Fragment
         });
 
         return view;
+    }
+
+    private void populateScreen(Random r, int bound, View view)
+    {
+        //Set up variables for the method
+        ArrayQuicksortDrawable[] stopMotionAnimation;
+        int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+        animationDrawable = new AnimationDrawable();
+
+        //Get random numbers
+        numbers = HelperMethods.generateRandomArray(r, numElements);
+
+        //Run algorithm
+        ArrayList<Integer> originalNumbers = SortHelperMethods.copyArray(numbers);
+        ArrayList<QuickSortReturnType> iterations = new ArrayList<>();
+
+        //First frame (original array)
+        iterations.add(new QuickSortReturnType(originalNumbers, 0, 0, -1, -1, false));
+
+        //get the middle frames of the animation
+        SortingAlgorithms.quicksort(iterations, numbers, 0, numbers.size() - 1);
+
+        //Final frame
+        iterations.add(new QuickSortReturnType(iterations.get(iterations.size() - 1).getList(), 0, 0, -1, -1, false));
+
+        stopMotionAnimation = new ArrayQuicksortDrawable[iterations.size()];
+
+        image = view.findViewById(R.id.imageViewQuick);
+        SortAnimations.generateQuickSort(iterations, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

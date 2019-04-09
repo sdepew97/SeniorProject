@@ -16,9 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class DynamicProgrammingActivity extends AppCompatActivity implements MinEditFragment.OnFragmentInteractionListener
 {
-    //LOG messages
-    private static String TAG = "DynamicProgrammingActivity";
-
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
     private FragmentAdapterDPPage fragmentAdapterDPPage;

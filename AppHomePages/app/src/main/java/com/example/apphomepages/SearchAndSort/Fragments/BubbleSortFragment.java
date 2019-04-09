@@ -18,14 +18,13 @@ import com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms;
 import com.example.apphomepages.SearchAndSort.Animations.SortAnimations;
 import com.example.apphomepages.SearchAndSort.DialogueFragments.BubbleSortDialogueFragment;
 import com.example.apphomepages.SearchAndSort.Drawable.ArraySortDrawable;
+import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArray;
 
 
 /**
@@ -104,29 +103,15 @@ public class BubbleSortFragment extends Fragment
         Button proofButton = viewGlobal.findViewById(R.id.proofButtonBubble);
         Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonBubble);
 
+        //Set Up
+        populateScreen(r, bound, viewGlobal);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                ArraySortDrawable[] stopMotionAnimation;
-                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                animationDrawable = new AnimationDrawable();
-
-                //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements);
-
-                //Run algorithm
-                ArrayList<Integer> originalNumbers = copyArray(numbers);
-                ArrayList<SortReturnType> iterations = SortingAlgorithms.bubbleSort(numbers);
-                ArrayList<Integer> squaresToHighlight = new ArrayList<>();
-                squaresToHighlight.add(-1);
-
-                stopMotionAnimation = new ArraySortDrawable[iterations.size()];
-
-                image = viewGlobal.findViewById(R.id.imageViewBubble);
-                SortAnimations.generateBubbleSort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, bound, viewGlobal);
             }
         });
 
@@ -181,6 +166,28 @@ public class BubbleSortFragment extends Fragment
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, int bound, View viewGlobal)
+    {
+        //Set up variables for the method
+        ArraySortDrawable[] stopMotionAnimation;
+        int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+        animationDrawable = new AnimationDrawable();
+
+        //Get random numbers
+        numbers = HelperMethods.generateRandomArray(r, numElements);
+
+        //Run algorithm
+        ArrayList<Integer> originalNumbers = SortHelperMethods.copyArray(numbers);
+        ArrayList<SortReturnType> iterations = SortingAlgorithms.bubbleSort(numbers);
+        ArrayList<Integer> squaresToHighlight = new ArrayList<>();
+        squaresToHighlight.add(-1);
+
+        stopMotionAnimation = new ArraySortDrawable[iterations.size()];
+
+        image = viewGlobal.findViewById(R.id.imageViewBubble);
+        SortAnimations.generateBubbleSort(originalNumbers, squaresToHighlight, iterations, numbers, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

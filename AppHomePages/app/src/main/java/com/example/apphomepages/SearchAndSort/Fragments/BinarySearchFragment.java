@@ -109,44 +109,15 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
         Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonBinary);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinnerBinary);
 
+        //Set Up
+        populateScreen(r, bound, viewGlobal, spinner);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                ArraySearchDrawable[] stopMotionAnimation;
-                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                animationDrawable = new AnimationDrawable();
-
-                //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements);
-
-                //Used https://beginnersbook.com/2013/12/how-to-sort-arraylist-in-java/ as a resource
-                //Binary search requires a sorted array
-                Collections.sort(numbers);
-
-                //Run algorithm
-                boolean targetFound = r.nextBoolean();
-                soughtAfter = targetFound ? numbers.get(r.nextInt(numbers.size())) : -1;
-                ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
-                int locationInArray;
-
-                if (soughtAfter != -1)
-                {
-                    locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
-                } else
-                {
-                    locationInArray = -1;
-                }
-
-                //Populate the spinner and set initial random selection
-                SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
-
-                stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
-
-                image = viewGlobal.findViewById(R.id.imageViewBinary);
-                SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, bound, viewGlobal, spinner);
             }
         });
 
@@ -242,6 +213,43 @@ public class BinarySearchFragment extends Fragment implements SpinnerAdapter
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, int bound, View viewGlobal, Spinner spinner)
+    {
+        //Set up variables for the method
+        ArraySearchDrawable[] stopMotionAnimation;
+        int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+        animationDrawable = new AnimationDrawable();
+
+        //Get random numbers
+        numbers = HelperMethods.generateRandomArray(r, numElements);
+
+        //Used https://beginnersbook.com/2013/12/how-to-sort-arraylist-in-java/ as a resource
+        //Binary search requires a sorted array
+        Collections.sort(numbers);
+
+        //Run algorithm
+        boolean targetFound = r.nextBoolean();
+        soughtAfter = targetFound ? numbers.get(r.nextInt(numbers.size())) : -1;
+        ArrayList<Integer> squaresToHighlight = SearchingAlgorithms.binarySearchWithLocations(numbers, soughtAfter);
+        int locationInArray;
+
+        if (soughtAfter != -1)
+        {
+            locationInArray = squaresToHighlight.get(squaresToHighlight.size() - 1); //the last location is the place that we are trying to find
+        } else
+        {
+            locationInArray = -1;
+        }
+
+        //Populate the spinner and set initial random selection
+        SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
+
+        stopMotionAnimation = new ArraySearchDrawable[squaresToHighlight.size() + 1];
+
+        image = viewGlobal.findViewById(R.id.imageViewBinary);
+        SearchAnimations.generateBinarySearch(locationInArray, squaresToHighlight, numbers, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

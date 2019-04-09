@@ -30,8 +30,6 @@ import java.util.Random;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import static com.example.apphomepages.SearchAndSort.Algorithms.SortingAlgorithms.copyArrayString;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,17 +113,15 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
         lengths.add(6); //Even Case
         lengths.add(8); //Power of 2 Case
 
+        //Set Up
+        populateScreen(r, lengths, viewGlobal, spinner);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                index = r.nextInt(lengths.size()); //Get random initial index
-                animationDrawable = new AnimationDrawable();
-
-                //set spinner selection (length of array) randomly with initial length
-                SortHelperMethods.populateSpinner(lengths, viewGlobal, spinner, index);
+                populateScreen(r, lengths, viewGlobal, spinner);
             }
         });
 
@@ -157,7 +153,7 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                 ArrayList<ArrayList<ArrayList<String>>> iterationPartitions = new ArrayList<>();
 
                 ArrayList<ArrayList<String>> list = new ArrayList<>();
-                list.add(copyArrayString(iterations.get(0).getNumbers(), 0, iterations.get(0).getNumbers().size() - 1));
+                list.add(SortHelperMethods.copyArrayString(iterations.get(0).getNumbers(), 0, iterations.get(0).getNumbers().size() - 1));
                 iterationPartitions.add(list);
 
                 int i = 1;
@@ -167,12 +163,12 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
                     ArrayList<String> currentPart;
                     if (!iterations.get(i).isMerging())
                     {
-                        currentPart = copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getRight());
+                        currentPart = SortHelperMethods.copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getRight());
                         k = 0; //restart the j-value after done merging
                     } else //we are in the case that we are merging...what should we do here?
                     {
                         //only copy j number elements for the array and then leave the remainder as blanks so that the merging of the arrays is clear
-                        currentPart = copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getLeft() + k);
+                        currentPart = SortHelperMethods.copyArrayString(iterations.get(i).getNumbers(), iterations.get(i).getLeft(), iterations.get(i).getLeft() + k);
                         for (int l = k; l < (iterations.get(i).getRight() - iterations.get(i).getLeft()); l++)
                         {
                             currentPart.add(" ");
@@ -293,6 +289,16 @@ public class MergeSortFragment extends Fragment implements SpinnerAdapter
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, ArrayList<Integer> lengths, View viewGlobal, Spinner spinner)
+    {
+        //Set up variables for the method
+        index = r.nextInt(lengths.size()); //Get random initial index
+        animationDrawable = new AnimationDrawable();
+
+        //set spinner selection (length of array) randomly with initial length
+        SortHelperMethods.populateSpinner(lengths, viewGlobal, spinner, index);
     }
 
     @Override

@@ -28,18 +28,23 @@ public class ArrayQuicksortDrawable extends Drawable implements Animatable
     //An ArraySearchDrawable constructor for searching
     public ArrayQuicksortDrawable(boolean start, boolean end, QuickSortReturnType t)
     {
+        Color main = Color.getMain();
+        Color secondary = Color.getSecondary();
+        Color found = Color.getFound();
+        Color current = Color.getCurrent();
+
         // Set up color and text size
         mMainPaint = new Paint();
-        mMainPaint.setARGB(255, Color.getMain().getRed(), Color.getMain().getGreen(), Color.getMain().getBlue());
+        mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
 
         mSecondPaint = new Paint();
-        mSecondPaint.setARGB(255, Color.getSecondary().getRed(), Color.getSecondary().getGreen(), Color.getSecondary().getBlue());
+        mSecondPaint.setARGB(255, secondary.getRed(), secondary.getGreen(), secondary.getBlue());
 
         mPivotPaint = new Paint();
-        mPivotPaint.setARGB(255, Color.getFound().getRed(), Color.getFound().getGreen(), Color.getFound().getBlue());
+        mPivotPaint.setARGB(255, found.getRed(), found.getGreen(), found.getBlue());
 
         mCurrentPaint = new Paint();
-        mCurrentPaint.setARGB(255, Color.getCurrent().getRed(), Color.getCurrent().getGreen(), Color.getCurrent().getBlue());
+        mCurrentPaint.setARGB(255, current.getRed(), current.getGreen(), current.getBlue());
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);

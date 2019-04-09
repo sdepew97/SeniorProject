@@ -22,8 +22,11 @@ public class ArrayMergeSortDrawable extends Drawable implements Animatable
     private boolean done;
 
     //An ArraySearchDrawable constructor for searching
-    public ArrayMergeSortDrawable(Color main, Color secondary, ArrayList<ArrayList<String>> arraysToDraw, boolean done)
+    public ArrayMergeSortDrawable(ArrayList<ArrayList<String>> arraysToDraw, boolean done)
     {
+        Color main = Color.getMain();
+        Color secondary = Color.getSecondary();
+
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());

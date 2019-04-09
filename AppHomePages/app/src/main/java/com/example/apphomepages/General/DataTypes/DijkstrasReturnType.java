@@ -6,13 +6,15 @@ public class DijkstrasReturnType
     private Boolean[] processed;
     private int nodeIDBeingScanned;
     private int minimumNodeId;
+    private boolean scanningForMin;
 
-    public DijkstrasReturnType(int[] distances, Boolean[] processed, int nodeIDBeingScanned, int minimumNodeId)
+    public DijkstrasReturnType(int[] distances, Boolean[] processed, int nodeIDBeingScanned, int minimumNodeId, boolean scanningForMin)
     {
         this.distances = distances;
         this.processed = processed;
         this.nodeIDBeingScanned = nodeIDBeingScanned;
         this.minimumNodeId = minimumNodeId;
+        this.scanningForMin = scanningForMin;
     }
 
     public int[] getDistances()
@@ -33,5 +35,10 @@ public class DijkstrasReturnType
     public int getMinimumNodeId()
     {
         return minimumNodeId;
+    }
+
+    public boolean isScanningForMin()
+    {
+        return scanningForMin;
     }
 }

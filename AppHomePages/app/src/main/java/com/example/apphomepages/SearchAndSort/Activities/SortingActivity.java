@@ -1,10 +1,8 @@
 package com.example.apphomepages.SearchAndSort.Activities;
 
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.apphomepages.R;
 import com.example.apphomepages.SearchAndSort.FragmentAdapters.FragmentAdapterSortingPage;
@@ -22,9 +20,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class SortingActivity extends AppCompatActivity implements BubbleSortFragment.OnFragmentInteractionListener, InsertionSortFragment.OnFragmentInteractionListener, SelectionSortFragment.OnFragmentInteractionListener, MergeSortFragment.OnFragmentInteractionListener, QuicksortFragment.OnFragmentInteractionListener
 {
-    //LOG messages
-    private static String TAG = "SortingActivity";
-
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
     private FragmentAdapterSortingPage fragmentAdapterSortingPage;
@@ -56,11 +51,6 @@ public class SortingActivity extends AppCompatActivity implements BubbleSortFrag
 
         int tabColors = ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null);
         tabLayout.setBackground(new ColorDrawable(tabColors));
-    }
-
-    public void onFragmentInteraction(Uri uri)
-    {
-        Log.e(TAG, "Fragment interaction listener");
     }
 }
 

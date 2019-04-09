@@ -46,11 +46,6 @@ public class QuickSortReturnType
         return b;
     }
 
-    public void setB(Integer b)
-    {
-        this.b = b;
-    }
-
     public Integer getPivot()
     {
         return pivot;

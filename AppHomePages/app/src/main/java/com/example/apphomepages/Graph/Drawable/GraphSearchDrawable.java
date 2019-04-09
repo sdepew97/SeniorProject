@@ -30,8 +30,12 @@ public class GraphSearchDrawable extends Drawable implements Animatable
     private boolean target;
 
     //An ArraySearchDrawable constructor for searching
-    public GraphSearchDrawable(Color main, Color secondary, Color found, Node<Integer> nodeToHighlight, boolean target, Graph<Integer> graph)
+    public GraphSearchDrawable(Node<Integer> nodeToHighlight, boolean target, Graph<Integer> graph)
     {
+        Color main = Color.getMain();
+        Color secondary = Color.getSecondary();
+        Color found = Color.getFound();
+
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -54,8 +58,6 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
         this.graph = graph;
         this.nodeToHighlight = nodeToHighlight;
-        //TODO: remove below when done with project and no more debugging is needed
-        // System.out.println("Node To HIGHLIGHT: " + nodeToHighlight.getNodeValue());
         this.target = target;
     }
 
@@ -85,7 +87,6 @@ public class GraphSearchDrawable extends Drawable implements Animatable
 
             for (Node<Integer> a : adjacentNodes)
             {
-                //TODO: test that the node's value is actually in the list and that this code doesn't error
                 Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())];
                 Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())];
 

@@ -16,6 +16,7 @@ public class Color
     }
 
     //These colors are ones that are used the most in the program, so they are able to be easily referenced in the code
+    //I used Google's color picker functionality for multiple of the colors, below
     public static Color getMain()
     {
         //https://www.rapidtables.com/web/color/RGB_Color.html used to get the colors
@@ -41,6 +42,11 @@ public class Color
     public static Color getCurrent()
     {
         return new Color(15, 188, 107);
+    }
+
+    public static Color getScan()
+    {
+        return new Color(176, 66, 244);
     }
 
     public int getRed()

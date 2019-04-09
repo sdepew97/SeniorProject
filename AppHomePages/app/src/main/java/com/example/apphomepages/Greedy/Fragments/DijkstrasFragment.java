@@ -98,72 +98,16 @@ public class DijkstrasFragment extends Fragment
         Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonDijkstras);
         Button proofButton = viewGlobal.findViewById(R.id.proofButtonDijkstras);
         Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonDijkstras);
-        Button generateButton = viewGlobal.findViewById(R.id.generateButtonDijkstras);
 
-        generateButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Set up variables for the method
-                DijkstrasDrawable[] stopMotionAnimation;
-
-                //TODO: generate this
-                graph = new int[][]{
-                        {0, 4, 0, 0, 0, 0, 0, 8, 0},
-                        {4, 0, 8, 0, 0, 0, 0, 11, 0},
-                        {0, 8, 0, 7, 0, 4, 0, 0, 2},
-                        {0, 0, 7, 0, 9, 14, 0, 0, 0},
-                        {0, 0, 0, 9, 0, 10, 0, 0, 0},
-                        {0, 0, 4, 14, 10, 0, 2, 0, 0},
-                        {0, 0, 0, 0, 0, 2, 0, 1, 6},
-                        {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                        {0, 0, 2, 0, 0, 0, 6, 7, 0}
-                };
-
-                ArrayList<DijkstrasReturnType> frames = GreedyAlgorithms.DijkstrasAlgorithm(graph, 0, graph.length);
-
-                //TODO: remove once debugged
-                for (DijkstrasReturnType frame : frames)
-                {
-                    System.out.println("Graph:");
-                    for (int i = 0; i < graph.length; i++)
-                    {
-                        for (int j = 0; j < graph[i].length; j++)
-                        {
-                            System.out.print(graph[i][j] + "\t");
-                        }
-                        System.out.println();
-                    }
-
-                    System.out.println("Distances:");
-                    for (int k = 0; k < graph.length; k++)
-                    {
-                        System.out.print(frame.getDistances()[k] + "\t");
-                    }
-                    System.out.println();
-
-                    System.out.println("State of Nodes:");
-                    for (int l = 0; l < graph.length; l++)
-                    {
-                        System.out.println("State of node " + l + " is " + frame.getProcessed()[l]);
-                    }
-                }
-
-                stopMotionAnimation = new DijkstrasDrawable[frames.size()];
-
-                animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageViewDijkstras);
-
-                GreedyAnimations.generateDijkstras(frames, graph, stopMotionAnimation, image, animationDrawable);
-            }
-        });
+        //Set Up
+        populateScreen(viewGlobal);
 
         startButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                animationDrawable.setVisible(true, true);
                 animationDrawable.start();
             }
         });
@@ -210,6 +154,31 @@ public class DijkstrasFragment extends Fragment
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(View viewGlobal)
+    {
+        //Set up variables for the method
+        DijkstrasDrawable[] stopMotionAnimation;
+
+        //https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm is the graph used...
+        graph = new int[][]{
+                {0, 7, 9, 0, 0, 14},
+                {7, 0, 10, 15, 0, 0},
+                {9, 10, 0, 11, 0, 2},
+                {0, 15, 11, 0, 6, 0},
+                {0, 0, 0, 6, 0, 9},
+                {14, 0, 2, 0, 9, 0}
+        };
+
+        ArrayList<DijkstrasReturnType> frames = GreedyAlgorithms.DijkstrasAlgorithm(graph, 0, graph.length);
+
+        stopMotionAnimation = new DijkstrasDrawable[frames.size()];
+
+        animationDrawable = new AnimationDrawable();
+        image = viewGlobal.findViewById(R.id.imageViewDijkstras);
+
+        GreedyAnimations.generateDijkstras(frames, graph, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

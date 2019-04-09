@@ -21,4 +21,27 @@ public class SortHelperMethods
         //Set spinner selection
         spinner.setSelection(index); //choose the element in the array to select automatically from the dropdown menu (a.k.a. spinner menu)
     }
+
+    public static ArrayList<Integer> copyArray(ArrayList<Integer> arrayToCopy)
+    {
+        ArrayList<Integer> arrayWithResult = new ArrayList<>();
+
+        for (int i = 0; i < arrayToCopy.size(); i++)
+            arrayWithResult.add(arrayToCopy.get(i));
+
+        return arrayWithResult;
+    }
+
+    //Copies an array list from left to right inclusive of right into a string type
+    public static ArrayList<String> copyArrayString(ArrayList<Integer> arrayToCopy, int left, int right)
+    {
+        ArrayList<String> arrayWithResult = new ArrayList<>();
+
+        for (int i = left; i <= right; i++)
+        {
+            arrayWithResult.add(arrayToCopy.get(i).toString());
+        }
+
+        return arrayWithResult;
+    }
 }

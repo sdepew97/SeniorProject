@@ -25,8 +25,12 @@ public class ArraySortDrawable extends Drawable implements Animatable
     private int currentSquare;
 
     //An ArraySearchDrawable constructor for searching
-    public ArraySortDrawable(Color main, Color secondary, Color found, List<Integer> squaresToHighlight, int currentSquare, ArrayList<Integer> numbers)
+    public ArraySortDrawable(List<Integer> squaresToHighlight, int currentSquare, ArrayList<Integer> numbers)
     {
+        Color main = Color.getMain();
+        Color secondary = Color.getSecondary();
+        Color found = Color.getFound();
+
         // Set up color and text size
         mMainPaint = new Paint();
         mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
@@ -55,13 +59,14 @@ public class ArraySortDrawable extends Drawable implements Animatable
         int width = getBounds().width();
         int height = getBounds().height();
         int numSquares = numbers.size();
-        int widthSideLength = width / numSquares;
-        int heightSideLength = height;
+        int widthSideLength = width / (numSquares);
+        int heightSideLength = height / (numSquares);
 
-        mTextPaint.setTextSize(widthSideLength / 3);
+        mTextPaint.setTextSize((float) (widthSideLength / 3.0));
 
+        //Center the array
         int left = 0;
-        int top = 0;
+        int top = (height - heightSideLength) / 2;
 
         Rect[] rectangles = new Rect[numSquares];
 

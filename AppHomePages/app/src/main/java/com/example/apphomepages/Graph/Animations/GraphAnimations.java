@@ -4,7 +4,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.Graph;
 import com.example.apphomepages.General.DataTypes.Node;
 import com.example.apphomepages.General.DataTypes.TopologicalOrderingReturnType;
@@ -21,20 +20,20 @@ public class GraphAnimations
         int duration = 800;
 
         //Set up the main frame
-        stopMotionAnimation[0] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
+        stopMotionAnimation[0] = new GraphSearchDrawable(new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
 
         for (int i = 1; i < stopMotionAnimation.length - 1; i++)
         {
-            stopMotionAnimation[i] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(i - 1), false, graph);
+            stopMotionAnimation[i] = new GraphSearchDrawable(nodesToHighlight.get(i - 1), false, graph);
         }
 
         //Found or not?
         if (found)
         {
-            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), nodesToHighlight.get(nodesToHighlight.size() - 1), true, graph);
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(nodesToHighlight.get(nodesToHighlight.size() - 1), true, graph);
         } else
         {
-            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
+            stopMotionAnimation[stopMotionAnimation.length - 1] = new GraphSearchDrawable(new Node<Integer>(null, Integer.MAX_VALUE), false, graph);
         }
 
         //Animate!

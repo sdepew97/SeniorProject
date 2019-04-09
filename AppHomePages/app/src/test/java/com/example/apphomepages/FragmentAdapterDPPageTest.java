@@ -29,8 +29,8 @@ public class FragmentAdapterDPPageTest
         FragmentManager fm = Mockito.mock(FragmentManager.class);
         FragmentAdapterDPPage fragmentAdapterDPPage = new FragmentAdapterDPPage(fm);
 
-        Assert.assertEquals("N-Queens", fragmentAdapterDPPage.getPageTitle(0));
-        Assert.assertEquals("N-Queens", fragmentAdapterDPPage.getPageTitle(22));
+        Assert.assertEquals("Min Edit Distance", fragmentAdapterDPPage.getPageTitle(0));
+        Assert.assertEquals("Min Edit Distance", fragmentAdapterDPPage.getPageTitle(22));
     }
 
     @Test

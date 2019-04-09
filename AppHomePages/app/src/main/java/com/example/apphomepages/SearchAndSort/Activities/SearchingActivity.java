@@ -17,9 +17,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class SearchingActivity extends AppCompatActivity implements LinearSearchFragment.OnFragmentInteractionListener, BinarySearchFragment.OnFragmentInteractionListener
 {
-    //LOG messages
-    private static String TAG = "SearchingActivity";
-
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
     private FragmentAdapterSearchingPage fragmentAdapterSearchingPage;

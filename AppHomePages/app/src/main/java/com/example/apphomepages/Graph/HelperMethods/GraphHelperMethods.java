@@ -55,7 +55,7 @@ public class GraphHelperMethods
 
         if (vertices.size() == 0)
         {
-            return new ArrayList<>(); //TODO: Ask Richard about this place and what is commonly returned here...
+            return new ArrayList<>();
         }
 
         //Order in which the nodes are visited
@@ -125,17 +125,6 @@ public class GraphHelperMethods
             }
         }
 
-        /*
-        //TODO: remove code, below after debugging complete
-        for (int i = 0; i < orderVisited.size(); i++)
-        {
-            for (Node<A> n : orderVisited.get(i))
-            {
-                System.out.println("Layer:  " + i + " Value: " + n.getNodeValue());
-            }
-        }
-        */
-
         return orderVisited;
     }
 
@@ -153,7 +142,6 @@ public class GraphHelperMethods
         {
             for (Node<A> a : nodes.get(i).getAdjacentNodes())
             {
-                //TODO: if not here, then error!
                 visited[nodes.indexOf(a)] = true;
             }
         }
@@ -252,6 +240,22 @@ public class GraphHelperMethods
             {
                 revisedNodes.add(n);
             }
+        }
+
+        //remove any unnecessary edges...
+        for (Node<A> a : revisedNodes)
+        {
+            ArrayList<Node<A>> correctAdjacentNodes = new ArrayList<>();
+
+            for (Node<A> adj : a.getAdjacentNodes())
+            {
+                if (!adj.getNodeId().equals(node.getNodeId()))
+                {
+                    correctAdjacentNodes.add(adj);
+                }
+            }
+
+            a.setAdjacentNodes(correctAdjacentNodes);
         }
 
         return new Graph<>(revisedNodes);

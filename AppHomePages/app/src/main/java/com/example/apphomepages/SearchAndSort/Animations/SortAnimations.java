@@ -4,7 +4,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
 import com.example.apphomepages.General.DataTypes.SortReturnType;
 import com.example.apphomepages.SearchAndSort.Drawable.ArrayMergeSortDrawable;
@@ -22,14 +21,14 @@ public class SortAnimations
         int duration = 800;
 
         //setup main frame
-        stopMotionAnimation[0] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
+        stopMotionAnimation[0] = new ArraySortDrawable(squaresToHighlight, -1, originalNumbers);
 
         for (int i = 1; i <= stopMotionAnimation.length - 2; i++)
         {
-            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), iterations.get(i - 1).constructPair(), -1, iterations.get(i - 1).getList());
+            stopMotionAnimation[i] = new ArraySortDrawable(iterations.get(i - 1).constructPair(), -1, iterations.get(i - 1).getList());
         }
 
-        stopMotionAnimation[stopMotionAnimation.length - 1] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, iterations.size() - 1, iterations.get(stopMotionAnimation.length - 2).getList());
+        stopMotionAnimation[stopMotionAnimation.length - 1] = new ArraySortDrawable(squaresToHighlight, iterations.size() - 1, iterations.get(stopMotionAnimation.length - 2).getList());
 
         for (Drawable d : stopMotionAnimation)
         {
@@ -46,16 +45,16 @@ public class SortAnimations
         int duration = 1000;
 
         int i = 0;
-        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
+        stopMotionAnimation[i] = new ArraySortDrawable(squaresToHighlight, -1, originalNumbers);
         i++;
 
         for (SortReturnType sortReturnType : iterations)
         {
-            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(sortReturnType.getA()), sortReturnType.getB(), sortReturnType.getList());
+            stopMotionAnimation[i] = new ArraySortDrawable(Arrays.asList(sortReturnType.getA()), sortReturnType.getB(), sortReturnType.getList());
             i++;
         }
 
-        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(iterations.get(iterations.size() - 1).getA()), iterations.get(iterations.size() - 1).getB(), iterations.get(iterations.size() - 1).getList());
+        stopMotionAnimation[i] = new ArraySortDrawable(Arrays.asList(iterations.get(iterations.size() - 1).getA()), iterations.get(iterations.size() - 1).getB(), iterations.get(iterations.size() - 1).getList());
 
         for (Drawable d : stopMotionAnimation)
         {
@@ -72,16 +71,16 @@ public class SortAnimations
         int duration = 1000;
 
         int i = 0;
-        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), squaresToHighlight, -1, originalNumbers);
+        stopMotionAnimation[i] = new ArraySortDrawable(squaresToHighlight, -1, originalNumbers);
         i++;
 
         for (SortReturnType sortReturnType : iterations)
         {
-            stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(sortReturnType.getA()), sortReturnType.getB(), sortReturnType.getList());
+            stopMotionAnimation[i] = new ArraySortDrawable(Arrays.asList(sortReturnType.getA()), sortReturnType.getB(), sortReturnType.getList());
             i++;
         }
 
-        stopMotionAnimation[i] = new ArraySortDrawable(Color.getMain(), Color.getSecondary(), Color.getFound(), Arrays.asList(iterations.get(iterations.size() - 1).getA()), i - 1, iterations.get(iterations.size() - 1).getList());
+        stopMotionAnimation[i] = new ArraySortDrawable(Arrays.asList(iterations.get(iterations.size() - 1).getA()), i - 1, iterations.get(iterations.size() - 1).getList());
 
         for (Drawable d : stopMotionAnimation)
         {
@@ -90,10 +89,9 @@ public class SortAnimations
 
         animationDrawable.setOneShot(false);
         image.setBackground(animationDrawable);
-
     }
 
-    public static void generateQuicksort(ArrayList<QuickSortReturnType> iterations, ArrayQuicksortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateQuickSort(ArrayList<QuickSortReturnType> iterations, ArrayQuicksortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 1500;
@@ -117,7 +115,6 @@ public class SortAnimations
 
         animationDrawable.setOneShot(false);
         image.setBackground(animationDrawable);
-
     }
 
     public static void generateMergeSort(ArrayList<ArrayList<ArrayList<String>>> iterationValues, ArrayMergeSortDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
@@ -129,12 +126,12 @@ public class SortAnimations
         for (int j = 0; j < iterationValues.size() - 1; j++)
         {
             ArrayList<ArrayList<String>> iteration = iterationValues.get(j);
-            stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), iteration, false);
+            stopMotionAnimation[i] = new ArrayMergeSortDrawable(iteration, false);
             i++;
         }
 
         ArrayList<ArrayList<String>> iteration = iterationValues.get(iterationValues.size() - 1);
-        stopMotionAnimation[i] = new ArrayMergeSortDrawable(Color.getMain(), Color.getSecondary(), iteration, true);
+        stopMotionAnimation[i] = new ArrayMergeSortDrawable(iteration, true);
 
         for (Drawable d : stopMotionAnimation)
         {

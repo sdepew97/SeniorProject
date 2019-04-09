@@ -18,10 +18,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class GraphActivity extends AppCompatActivity implements DFSFragment.OnFragmentInteractionListener, BFSFragment.OnFragmentInteractionListener, TopologicalFragment.OnFragmentInteractionListener
 {
-
-    //LOG messages
-    private static String TAG = "GraphActivity";
-
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
     private FragmentAdapterGraphPage fragmentAdapterGraphPage;

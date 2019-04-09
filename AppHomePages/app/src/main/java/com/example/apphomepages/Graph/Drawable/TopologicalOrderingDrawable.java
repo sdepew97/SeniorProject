@@ -32,16 +32,18 @@ public class TopologicalOrderingDrawable extends Drawable implements Animatable
     private boolean start;
     private boolean end;
 
-
     //An ArraySearchDrawable constructor for searching
     public TopologicalOrderingDrawable(Integer nodeToHighlightId, Graph<String> graph, Graph<String> originalGraph, ArrayList<Integer> orderVisited, boolean start, boolean end)
     {
+        Color main = Color.getMain();
+        Color secondary = Color.getSecondary();
+
         // Set up color and text size
         mMainPaint = new Paint();
-        mMainPaint.setARGB(255, Color.getMain().getRed(), Color.getMain().getGreen(), Color.getMain().getBlue());
+        mMainPaint.setARGB(255, main.getRed(), main.getGreen(), main.getBlue());
 
         mSecondPaint = new Paint();
-        mSecondPaint.setARGB(255, Color.getSecondary().getRed(), Color.getSecondary().getGreen(), Color.getSecondary().getBlue());
+        mSecondPaint.setARGB(255, secondary.getRed(), secondary.getGreen(), secondary.getBlue());
 
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);

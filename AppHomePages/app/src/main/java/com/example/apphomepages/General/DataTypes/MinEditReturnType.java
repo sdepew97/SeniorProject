@@ -6,15 +6,13 @@ public class MinEditReturnType
     private boolean minOperation;
     private int i;
     private int j;
-    private String[] valuesToMin;
 
-    public MinEditReturnType(int[][] board, boolean minOperation, int i, int j, String[] valuesToMin)
+    public MinEditReturnType(int[][] board, boolean minOperation, int i, int j)
     {
         this.board = board;
         this.minOperation = minOperation;
         this.i = i;
         this.j = j;
-        this.valuesToMin = valuesToMin;
     }
 
     public int[][] getBoard()
@@ -35,10 +33,5 @@ public class MinEditReturnType
     public int getJ()
     {
         return j;
-    }
-
-    public String[] getValuesToMin()
-    {
-        return valuesToMin;
     }
 }

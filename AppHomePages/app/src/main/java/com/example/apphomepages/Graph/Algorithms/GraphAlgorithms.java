@@ -78,7 +78,6 @@ public class GraphAlgorithms
         Queue<Node<A>> queue = new LinkedList<>();
 
         //Start with the root(s) of the graph (nodes that have no elements going into them...this is needed for Topological Ordering)
-        //TODO: talk with Richard about this oddness
         ArrayList<Node<A>> isolated = GraphHelperMethods.getIsolatedOrRoot(vertices);
 
         //Mark all of them!

@@ -32,6 +32,11 @@ public class Node<A>
         return adjacentNodes;
     }
 
+    public void setAdjacentNodes(ArrayList<Node<A>> adjacentNodes)
+    {
+        this.adjacentNodes = adjacentNodes;
+    }
+
     public void addAdjacentNode(Node<A> adjacentNode)
     {
         this.adjacentNodes.add(adjacentNode);

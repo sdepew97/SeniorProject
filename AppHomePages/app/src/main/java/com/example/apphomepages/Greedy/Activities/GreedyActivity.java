@@ -16,9 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 
 public class GreedyActivity extends AppCompatActivity implements DijkstrasFragment.OnFragmentInteractionListener
 {
-    //LOG messages
-    private static String TAG = "GreedyActivity";
-
     //These are the various portions of the main page for the application
     private ViewPager viewPager;
     private FragmentAdapterGreedyPage fragmentAdapterGreedyPage;

@@ -38,18 +38,6 @@ public class SortingAlgorithmsTest
     }
 
     @Test
-    public void copyArray()
-    {
-        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
-        ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
-
-        ArrayList<Integer> numbersArrayListComp = SortingAlgorithms.copyArray(numbersArrayList1);
-
-        for (int i = 0; i < numbersArrayList1.size(); i++)
-            assertEquals(numbersArrayList1.get(i), numbersArrayListComp.get(i));
-    }
-
-    @Test
     public void insertionSort()
     {
         Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};

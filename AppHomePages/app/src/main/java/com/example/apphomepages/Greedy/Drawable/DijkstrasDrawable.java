@@ -25,16 +25,22 @@ public class DijkstrasDrawable extends Drawable implements Animatable
     private final Paint mMarkedPaint;
     private final Paint mCurrentPaint;
     private final Paint mLookAtPaint;
+    private final Paint mScanPaint;
 
     private final Paint mTextPaint;
-    private final Paint mTextWeightPaint;
     private final Paint mLinePaint;
 
     private int[][] graph;
     private DijkstrasReturnType frameToAnimate;
 
-    public DijkstrasDrawable(Color initial, Color marked, Color current, Color lookAt, int[][] graph, DijkstrasReturnType frameToAnimate)
+    public DijkstrasDrawable(int[][] graph, DijkstrasReturnType frameToAnimate)
     {
+        Color initial = Color.getMain();
+        Color marked = Color.getSecondary();
+        Color current = Color.getCurrent();
+        Color lookAt = Color.getFound();
+        Color scan = Color.getScan();
+
         // Set up color and text size
         mInitialPaint = new Paint();
         mInitialPaint.setARGB(255, initial.getRed(), initial.getGreen(), initial.getBlue());
@@ -48,20 +54,18 @@ public class DijkstrasDrawable extends Drawable implements Animatable
         mLookAtPaint = new Paint();
         mLookAtPaint.setARGB(255, lookAt.getRed(), lookAt.getGreen(), lookAt.getBlue());
 
+        mScanPaint = new Paint();
+        mScanPaint.setARGB(255, scan.getRed(), scan.getGreen(), scan.getBlue());
+
         mTextPaint = new Paint();
         mTextPaint.setARGB(255, 0, 0, 0);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
-
-        mTextWeightPaint = new Paint();
-        mTextWeightPaint.setARGB(255, 8, 135, 116); //used Google color picker
-        mTextWeightPaint.setTextAlign(Paint.Align.CENTER);
-        mTextWeightPaint.setStyle(Paint.Style.FILL);
 
         mLinePaint = new Paint();
         mLinePaint.setARGB(255, 0, 0, 0);
         mLinePaint.setTextAlign(Paint.Align.CENTER);
         mLinePaint.setStyle(Paint.Style.FILL);
-        mLinePaint.setStrokeWidth(10);
+        mLinePaint.setStrokeWidth(2);
 
         this.graph = graph;
         this.frameToAnimate = frameToAnimate;
@@ -94,12 +98,8 @@ public class DijkstrasDrawable extends Drawable implements Animatable
         int width = getBounds().width();
         int height = getBounds().height();
         int numCircles = graph.length;
-        int radius = height / (GraphHelperMethods.numLayers(graphA) * 2 + 1); //the radius of the circle, since this means they will never overlap horizontally
+        int radius = height / (GraphHelperMethods.numLayers(graphA) * 2 + 4); //the radius of the circle, since this means they will never overlap horizontally
         mTextPaint.setTextSize(radius * 3 / 4);
-        mTextWeightPaint.setTextSize(radius * 3 / 4);
-
-        int left = 0;
-        int top = 0;
 
         //Gets the center values of all the nodes and the correct value at the nodes in question
         Point[] centersOfCircles = GraphHelperMethods.placeNodes(graphA, width, height);
@@ -114,14 +114,13 @@ public class DijkstrasDrawable extends Drawable implements Animatable
 
             for (Node<Integer> a : adjacentNodes)
             {
-                //TODO: test that the node's value is actually in the list and that this code doesn't error
                 Point start = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())];
                 Point end = centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())];
 
                 canvas.drawLine(start.getX(), start.getY(), end.getX(), end.getY(), mLinePaint);
 
                 //Edge weights
-                canvas.drawText(Integer.toString(graph[n.getNodeId()][a.getNodeId()]), (float) (Math.abs((centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())].getX() + centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())].getX())) / 2.0), (float) (Math.abs((centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())].getY() + centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())].getY())) / 2.0), mTextWeightPaint);
+                canvas.drawText(Integer.toString(graph[n.getNodeId()][a.getNodeId()]), (float) (Math.abs((centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())].getX() + centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())].getX())) / 2.0) - (radius / 2), (float) (Math.abs((centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, a.getNodeId())].getY() + centersOfCircles[GraphHelperMethods.getNodeIndexBasedOnId(layoutOrder, n.getNodeId())].getY())) / 2.0), mTextPaint);
             }
         }
 
@@ -134,6 +133,9 @@ public class DijkstrasDrawable extends Drawable implements Animatable
             } else if (frameToAnimate.getProcessed()[layoutOrder.get(i).getNodeId()])
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mMarkedPaint);
+            } else if (frameToAnimate.isScanningForMin() && frameToAnimate.getNodeIDBeingScanned() == layoutOrder.get(i).getNodeId())
+            {
+                canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mScanPaint);
             } else if (frameToAnimate.getNodeIDBeingScanned() == layoutOrder.get(i).getNodeId())
             {
                 canvas.drawCircle(centersOfCircles[i].getX(), centersOfCircles[i].getY(), radius, mLookAtPaint);

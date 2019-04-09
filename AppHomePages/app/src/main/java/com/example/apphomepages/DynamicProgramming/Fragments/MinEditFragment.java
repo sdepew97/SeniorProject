@@ -104,40 +104,15 @@ public class MinEditFragment extends Fragment
         //Create a list of similar words
         final String[] words = {"dolphin", "turtle", "albatross", "armadillo", "rabbit", "pig", "dove", "chickadee", "eagle", "cat", "dog", "cow", "longhorn", "tiger", "sphinx", "greyhound", "zebra", "gorilla", "bear", "panther"};
 
+        //Set Up
+        populateScreen(r, words, viewGlobal);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                MinEditDrawable[] stopMotionAnimation;
-
-                //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
-                int boardSizeIndex = r.nextInt(possibleBoardSizes.length);  //"index" into the array of board sizes
-                N = possibleBoardSizes[boardSizeIndex];
-
-                //Create a board
-                boolean[][] board = new boolean[N][N];
-
-                for (int i = 0; i < N; i++)
-                {
-                    for (int j = 0; j < N; j++)
-                    {
-                        board[i][j] = false;
-                    }
-                }
-
-                String target = words[r.nextInt(words.length)];
-                String source = words[r.nextInt(words.length)];
-
-                ArrayList<MinEditReturnType> frames = DynamicProgrammingAlgorithms.minEditDist(target, source);
-
-                stopMotionAnimation = new MinEditDrawable[frames.size()];
-
-                animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageViewMinEdit);
-
-                DynamicProgrammingAnimations.generateMinEditDistance(frames, target, source, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, words, viewGlobal);
             }
         });
 
@@ -193,6 +168,28 @@ public class MinEditFragment extends Fragment
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, String[] words, View viewGlobal)
+    {
+        //Set up variables for the method
+        MinEditDrawable[] stopMotionAnimation;
+
+        //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
+        int boardSizeIndex = r.nextInt(possibleBoardSizes.length);  //"index" into the array of board sizes
+        N = possibleBoardSizes[boardSizeIndex];
+
+        String target = words[r.nextInt(words.length)];
+        String source = words[r.nextInt(words.length)];
+
+        ArrayList<MinEditReturnType> frames = DynamicProgrammingAlgorithms.minEditDist(target, source);
+
+        stopMotionAnimation = new MinEditDrawable[frames.size()];
+
+        animationDrawable = new AnimationDrawable();
+        image = viewGlobal.findViewById(R.id.imageViewMinEdit);
+
+        DynamicProgrammingAnimations.generateMinEditDistance(frames, target, source, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

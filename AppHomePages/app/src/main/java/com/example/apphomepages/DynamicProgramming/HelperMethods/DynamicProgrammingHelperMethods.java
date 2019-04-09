@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 public class DynamicProgrammingHelperMethods
 {
-    //The input to this method must be an NxN array
-    //TODO: Ask richard about this method from a design perspective
+    //The input to this method must be an x by y array
     public static int[][] copy2DArray(int[][] source, int x, int y)
     {
         int[][] copy = new int[x][y]; //the input must be an x by y array

@@ -14,6 +14,8 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static org.junit.Assert.assertEquals;
+
 public class SortHelperMethodsTest
 {
 
@@ -27,5 +29,29 @@ public class SortHelperMethodsTest
         SortHelperMethods.populateSpinner(integerArrayList, v, s, 0);
 
         Assert.assertEquals(0, s.getSelectedItemPosition());
+    }
+
+    @Test
+    public void copyArray()
+    {
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
+
+        ArrayList<Integer> numbersArrayListComp = SortHelperMethods.copyArray(numbersArrayList1);
+
+        for (int i = 0; i < numbersArrayList1.size(); i++)
+            assertEquals(numbersArrayList1.get(i), numbersArrayListComp.get(i));
+    }
+
+    @Test
+    public void copyArrayString()
+    {
+        Integer[] numbers1 = {12, 1, 23, -1, 22, 142, 122, 452};
+        ArrayList<Integer> numbersArrayList1 = HelperMethods.convertFromArray(numbers1);
+
+        ArrayList<String> numbersArrayListComp = SortHelperMethods.copyArrayString(numbersArrayList1, 0, numbersArrayList1.size() - 1);
+
+        for (int i = 0; i < numbersArrayList1.size(); i++)
+            assertEquals(numbersArrayList1.get(i).toString(), numbersArrayListComp.get(i));
     }
 }

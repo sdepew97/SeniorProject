@@ -77,7 +77,6 @@ public class HelperMethods
             //If we only have one node, then we have a complete graph, already
             if (nodes.size() > 1)
             {
-                //TODO: ask Richard about this code for graph generation? Need to use something like Prim's?
                 for (int i = 0; i < nodes.size(); i++)
                 {
                     //not a tree, so can have cycles, etc

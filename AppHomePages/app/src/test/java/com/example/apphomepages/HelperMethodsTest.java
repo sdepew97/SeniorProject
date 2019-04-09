@@ -71,55 +71,44 @@ public class HelperMethodsTest
         Assert.assertEquals(new Integer(2), nodes.get(5).getAdjacentNodes().get(0).getNodeValue());
 
         Assert.assertEquals(new Integer(2), nodes.get(6).getAdjacentNodes().get(0).getNodeValue());
-
-        //TODO: remove code, below after debugging complete
-        /*
-        for (Node<Integer> n : nodes)
-        {
-            for (Node<Integer> m : n.getAdjacentNodes())
-            {
-                System.out.println("Node:  " + n.getNodeValue() + " Connected to: " + m.getNodeValue());
-            }
-        }
-        */
     }
 
     @Test
-    public void testGenerateSetArray()
+    public void generateGraph()
     {
         ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.add(8);
-        numbers.add(5);
-        numbers.add(2);
-        numbers.add(6);
-        numbers.add(9);
-        numbers.add(3);
-        numbers.add(1);
-        numbers.add(4);
         numbers.add(0);
-        numbers.add(7);
-
-        ArrayList<Integer> numbersGenerated = generateSetArray();
-
-        for (Integer i : numbers)
-            assertEquals(numbers.get(i), numbersGenerated.get(i));
-    }
-
-    //Method for testing against Wikipedia visualizations
-    private static ArrayList<Integer> generateSetArray()
-    {
-        ArrayList<Integer> numbers = new ArrayList<>();
-        numbers.add(8);
-        numbers.add(5);
-        numbers.add(2);
-        numbers.add(6);
-        numbers.add(9);
-        numbers.add(3);
         numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
         numbers.add(4);
-        numbers.add(0);
-        numbers.add(7);
-        return numbers;
+        numbers.add(5);
+        numbers.add(6);
+
+        Graph<Integer> integerGraph = HelperMethods.generateGraph(false, numbers);
+        ArrayList<Node<Integer>> nodes = integerGraph.getGraphElements();
+
+        //check all values ended up on nodes...
+        for (Node<Integer> node : nodes)
+        {
+            Assert.assertTrue(numbers.contains(node.getNodeValue()));
+        }
+
+        //check an edge goes into each value...(graph is connected!)
+        for (Node<Integer> n : nodes)
+        {
+            boolean atLeastOne = false;
+
+            for (Node<Integer> node : nodes)
+            {
+                if (!n.getNodeId().equals(node.getNodeId()) && node.getAdjacentNodes().contains(n))
+                {
+                    atLeastOne = true;
+                }
+            }
+
+            Assert.assertTrue(atLeastOne);
+        }
     }
 
     @Test
@@ -150,5 +139,44 @@ public class HelperMethodsTest
 
         for (int i = 0; i < arr.length; i++)
             assertEquals(new Integer(arr[i]), arrayList.get(i));
+    }
+
+    @Test
+    public void testGenerateSetArray()
+    {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(8);
+        numbers.add(5);
+        numbers.add(2);
+        numbers.add(6);
+        numbers.add(9);
+        numbers.add(3);
+        numbers.add(1);
+        numbers.add(4);
+        numbers.add(0);
+        numbers.add(7);
+
+        ArrayList<Integer> numbersGenerated = generateSetArray();
+
+        for (Integer i : numbers)
+            assertEquals(numbers.get(i), numbersGenerated.get(i));
+    }
+
+    //Test Helper Methods
+    //Method for testing against Wikipedia visualizations
+    private static ArrayList<Integer> generateSetArray()
+    {
+        ArrayList<Integer> numbers = new ArrayList<>();
+        numbers.add(8);
+        numbers.add(5);
+        numbers.add(2);
+        numbers.add(6);
+        numbers.add(9);
+        numbers.add(3);
+        numbers.add(1);
+        numbers.add(4);
+        numbers.add(0);
+        numbers.add(7);
+        return numbers;
     }
 }

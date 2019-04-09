@@ -47,7 +47,7 @@ public class MinEditDrawable extends Drawable implements Animatable
         mLinePaint.setARGB(255, 0, 0, 0);
         mLinePaint.setTextAlign(Paint.Align.CENTER);
         mLinePaint.setStyle(Paint.Style.FILL);
-        mLinePaint.setStrokeWidth(10);
+        mLinePaint.setStrokeWidth(2);
 
         this.frameToAnimate = frameToAnimate;
         this.target = target;
@@ -63,7 +63,6 @@ public class MinEditDrawable extends Drawable implements Animatable
         boolean minOperation = frameToAnimate.isMinOperation();
         int i = frameToAnimate.getI();
         int j = frameToAnimate.getJ();
-        String[] valuesToMin = frameToAnimate.getValuesToMin();
 
         // Get the drawable's bounds
         int width = getBounds().width();
@@ -72,7 +71,7 @@ public class MinEditDrawable extends Drawable implements Animatable
         int numRectanglesWidth = board[0].length + 1;
         int widthOfSquare = width / numRectanglesWidth;
         int heightOfSquare = height / numRectanglesHeight;
-        mTextPaint.setTextSize((float) (widthOfSquare / 6 * 1.0));
+        mTextPaint.setTextSize((float) (widthOfSquare / 4 * 1.0));
 
         int left = 0;
         int top = 0;

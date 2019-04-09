@@ -4,7 +4,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.apphomepages.General.DataTypes.Color;
 import com.example.apphomepages.General.DataTypes.DijkstrasReturnType;
 import com.example.apphomepages.Greedy.Drawable.DijkstrasDrawable;
 
@@ -19,7 +18,7 @@ public class GreedyAnimations
 
         for (int i = 0; i < stopMotionAnimation.length; i++)
         {
-            stopMotionAnimation[i] = new DijkstrasDrawable(Color.getMain(), Color.getSecondary(), Color.getCurrent(), Color.getFound(), graph, frames.get(i));
+            stopMotionAnimation[i] = new DijkstrasDrawable(graph, frames.get(i));
         }
 
         //Animate!
@@ -28,7 +27,7 @@ public class GreedyAnimations
             animationDrawable.addFrame(d, duration);
         }
 
-        animationDrawable.setOneShot(false);
+        animationDrawable.setOneShot(true);
         image.setBackground(animationDrawable);
     }
 }

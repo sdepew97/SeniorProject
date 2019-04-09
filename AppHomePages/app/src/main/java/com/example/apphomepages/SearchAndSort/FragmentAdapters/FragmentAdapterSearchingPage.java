@@ -45,7 +45,7 @@ public class FragmentAdapterSearchingPage extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int i)
     {
-        Fragment page = null;
+        Fragment page;
         switch (i)
         {
             case 0:

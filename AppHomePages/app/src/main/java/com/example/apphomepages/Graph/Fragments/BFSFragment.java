@@ -108,44 +108,15 @@ public class BFSFragment extends Fragment
         //Get random initial index for spinner selections
         final Random r = new Random();
 
+        //Set Up
+        populateScreen(r, viewGlobal, spinnerSelect);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                GraphSearchDrawable[] stopMotionAnimation;
-                numbers = HelperMethods.generateRandomArray(new Random(), r.nextInt(10) + 1);
-                graph = HelperMethods.generateGraph(r.nextBoolean(), numbers);
-
-                //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
-                boolean targetFound = r.nextBoolean();
-                int soughtAfterIndex = targetFound ? r.nextInt(numbers.size()) : -1; //"index" into the array of spinner elements
-
-                //Run the algorithm to generate the animation frames
-                if (soughtAfterIndex != -1)
-                {
-                    soughtAfter = graph.getGraphElements().get(soughtAfterIndex);
-
-                    //populate the node selection list
-                    //ArrayList<Integer> sortedNumbers = HelperMethods.copyList(numbers);
-                    //Collections.sort(sortedNumbers);
-                    SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, numbers.indexOf(soughtAfter.getNodeValue()));
-
-                } else
-                {
-                    soughtAfter = null; //the node was not found
-                    SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, -1); //-1 means the element was not found
-                }
-
-                ArrayList<Node<Integer>> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graph, soughtAfter, !targetFound);
-
-                stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
-
-                animationDrawable = new AnimationDrawable();
-                image = viewGlobal.findViewById(R.id.imageViewBFS);
-
-                GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graph, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, viewGlobal, spinnerSelect);
             }
         });
 
@@ -250,6 +221,43 @@ public class BFSFragment extends Fragment
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, View viewGlobal, Spinner spinnerSelect)
+    {
+        //Set up variables for the method
+        GraphSearchDrawable[] stopMotionAnimation;
+        numbers = HelperMethods.generateRandomArray(new Random(), r.nextInt(10) + 1);
+        graph = HelperMethods.generateGraph(r.nextBoolean(), numbers);
+
+        //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
+        boolean targetFound = r.nextBoolean();
+        int soughtAfterIndex = targetFound ? r.nextInt(numbers.size()) : -1; //"index" into the array of spinner elements
+
+        //Run the algorithm to generate the animation frames
+        if (soughtAfterIndex != -1)
+        {
+            soughtAfter = graph.getGraphElements().get(soughtAfterIndex);
+
+            //populate the node selection list
+            //ArrayList<Integer> sortedNumbers = HelperMethods.copyList(numbers);
+            //Collections.sort(sortedNumbers);
+            SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, numbers.indexOf(soughtAfter.getNodeValue()));
+
+        } else
+        {
+            soughtAfter = null; //the node was not found
+            SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinnerSelect, -1); //-1 means the element was not found
+        }
+
+        ArrayList<Node<Integer>> nodesToHighlight = GraphAlgorithms.breadthFirstSearch(graph, soughtAfter, !targetFound);
+
+        stopMotionAnimation = new GraphSearchDrawable[nodesToHighlight.size() + 2];
+
+        animationDrawable = new AnimationDrawable();
+        image = viewGlobal.findViewById(R.id.imageViewBFS);
+
+        GraphAnimations.generateGraphSearch(targetFound, nodesToHighlight, graph, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

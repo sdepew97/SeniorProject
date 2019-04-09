@@ -106,39 +106,15 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
         Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonLinear);
         final Spinner spinner = viewGlobal.findViewById(R.id.spinnerLinear);
 
+        //Start with screen populated!
+        populateScreen(r, bound, viewGlobal, spinner);
+
         generateButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Set up variables for the method
-                ArraySearchDrawable[] stopMotionAnimation;
-                int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
-                animationDrawable = new AnimationDrawable();
-
-                //Get random numbers
-                numbers = HelperMethods.generateRandomArray(r, numElements);
-
-                //Run algorithm
-                boolean targetFound = r.nextBoolean();
-                soughtAfter = targetFound ? numbers.get(r.nextInt(numbers.size())) : -1;
-                int locationInArray = SearchingAlgorithms.linearSearch(numbers, soughtAfter);
-
-                //Populate the spinner and set initial random selection
-                SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
-
-                //Generate the animation
-                //Choose the size of the array depending if the element is found or not...
-                if (locationInArray == -1)
-                {
-                    stopMotionAnimation = new ArraySearchDrawable[numbers.size() + 1];
-                } else
-                {
-                    stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
-                }
-
-                image = viewGlobal.findViewById(R.id.imageViewLinear);
-                SearchAnimations.generateLinearSearch(locationInArray, numbers, stopMotionAnimation, image, animationDrawable);
+                populateScreen(r, bound, viewGlobal, spinner);
             }
         });
 
@@ -233,6 +209,38 @@ public class LinearSearchFragment extends Fragment implements SpinnerAdapter
         });
 
         return viewGlobal;
+    }
+
+    private void populateScreen(Random r, int bound, View viewGlobal, Spinner spinner)
+    {
+        //Set up variables for the method
+        ArraySearchDrawable[] stopMotionAnimation;
+        int numElements = r.nextInt(bound) + 1; //want a value between 1 and 10, so 1-10 elements in the array
+        animationDrawable = new AnimationDrawable();
+
+        //Get random numbers
+        numbers = HelperMethods.generateRandomArray(r, numElements);
+
+        //Run algorithm
+        boolean targetFound = r.nextBoolean();
+        soughtAfter = targetFound ? numbers.get(r.nextInt(numbers.size())) : -1;
+        int locationInArray = SearchingAlgorithms.linearSearch(numbers, soughtAfter);
+
+        //Populate the spinner and set initial random selection
+        SearchHelperMethods.populateSpinner(numbers, viewGlobal, spinner, locationInArray);
+
+        //Generate the animation
+        //Choose the size of the array depending if the element is found or not...
+        if (locationInArray == -1)
+        {
+            stopMotionAnimation = new ArraySearchDrawable[numbers.size() + 1];
+        } else
+        {
+            stopMotionAnimation = new ArraySearchDrawable[locationInArray + 1 + 1];
+        }
+
+        image = viewGlobal.findViewById(R.id.imageViewLinear);
+        SearchAnimations.generateLinearSearch(locationInArray, numbers, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

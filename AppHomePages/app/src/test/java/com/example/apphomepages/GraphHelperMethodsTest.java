@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 public class GraphHelperMethodsTest
 {
-
     @Test
     public void populateSpinner()
     {
@@ -33,6 +32,21 @@ public class GraphHelperMethodsTest
         GraphHelperMethods.populateSpinner(stringArrayList, v, s, 0);
 
         Assert.assertEquals(0, s.getSelectedItemPosition());
+    }
+
+    @Test
+    public void getNodeIndexBasedOnId()
+    {
+        //Nodes
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
+        nodes.add(new Node<>(12, 1));
+        nodes.add(new Node<>(14, 9));
+        nodes.add(new Node<>(23, 7));
+
+        Assert.assertEquals(0, GraphHelperMethods.getNodeIndexBasedOnId(nodes, 1));
+        Assert.assertEquals(1, GraphHelperMethods.getNodeIndexBasedOnId(nodes, 9));
+        Assert.assertEquals(2, GraphHelperMethods.getNodeIndexBasedOnId(nodes, 7));
+        Assert.assertEquals(-1, GraphHelperMethods.getNodeIndexBasedOnId(nodes, 99));
     }
 
     @Test
@@ -74,48 +88,6 @@ public class GraphHelperMethodsTest
         Assert.assertEquals(3, GraphHelperMethods.numLayers(g));
     }
 
-    //TODO: Talk with Richard about the types of graphs allowed...
-    /*
-    @Test
-    public void numLayersNonEmptyOneIsolated()
-    {
-        //Create the nodes that go in the graph
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-        nodes.add(new Node<>(12));
-        nodes.add(new Node<>(14));
-        nodes.add(new Node<>(23));
-        nodes.get(0).addAdjacentNode(nodes.get(1));
-        nodes.get(1).addAdjacentNode(nodes.get(0));
-
-        Graph<Integer> g = new Graph<>(nodes);
-        Assert.assertEquals(2, GraphHelperMethods.numLayers(g));
-    }
-    */
-
-    //It was difficult to figure out how to test place nodes...
-    @Test
-    public void placeNodesEmpty()
-    {
-        //Create the nodes that go in the graph
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-        Graph<Integer> g = new Graph<>(nodes);
-
-        Assert.assertEquals(0, GraphHelperMethods.placeNodes(g, 10, 10).length);
-    }
-
-    @Test
-    public void placeNodesNonEmpty()
-    {
-        //Create the nodes that go in the graph
-        ArrayList<Node<Integer>> nodes = new ArrayList<>();
-        nodes.add(new Node<>(12, 0));
-        nodes.add(new Node<>(14, 1));
-        nodes.add(new Node<>(23, 2));
-
-        Graph<Integer> g = new Graph<>(nodes);
-        Assert.assertEquals(3, GraphHelperMethods.placeNodes(g, 10, 10).length);
-    }
-
     @Test
     public void getIsolatedOrRootTest1()
     {
@@ -145,6 +117,30 @@ public class GraphHelperMethodsTest
 
         Graph<Integer> g = new Graph<>(nodes);
         Assert.assertEquals(1, GraphHelperMethods.getIsolatedOrRoot(g.getGraphElements()).size());
+    }
+
+    //It was difficult to figure out how to test place nodes...
+    @Test
+    public void placeNodesEmpty()
+    {
+        //Create the nodes that go in the graph
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
+        Graph<Integer> g = new Graph<>(nodes);
+
+        Assert.assertEquals(0, GraphHelperMethods.placeNodes(g, 10, 10).length);
+    }
+
+    @Test
+    public void placeNodesNonEmpty()
+    {
+        //Create the nodes that go in the graph
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
+        nodes.add(new Node<>(12, 0));
+        nodes.add(new Node<>(14, 1));
+        nodes.add(new Node<>(23, 2));
+
+        Graph<Integer> g = new Graph<>(nodes);
+        Assert.assertEquals(3, GraphHelperMethods.placeNodes(g, 10, 10).length);
     }
 
     @Test
@@ -194,5 +190,81 @@ public class GraphHelperMethodsTest
         Assert.assertEquals(new Integer(1), degrees.get(nodes.get(3)));
         Assert.assertEquals(new Integer(0), degrees.get(nodes.get(4)));
         Assert.assertEquals(new Integer(1), degrees.get(nodes.get(5)));
+    }
+
+    @Test
+    public void trimNode()
+    {
+        //Create the nodes that go in the graph
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
+        nodes.add(new Node<>(12, 0));
+        nodes.add(new Node<>(14, 1));
+        nodes.add(new Node<>(23, 2));
+
+        // 0-->0
+        nodes.get(0).addAdjacentNode(nodes.get(0));
+        // 0-->1
+        nodes.get(0).addAdjacentNode(nodes.get(1));
+        // 1-->0
+        nodes.get(1).addAdjacentNode(nodes.get(0));
+        // 1-->2
+        nodes.get(1).addAdjacentNode(nodes.get(2));
+
+        Graph<Integer> g = new Graph<>(nodes);
+
+        Graph<Integer> trimmedGraph = GraphHelperMethods.trimNode(g, nodes.get(0));
+
+        ArrayList<Node<Integer>> nodesTrimmed = trimmedGraph.getGraphElements();
+
+        for (Node<Integer> node : nodesTrimmed)
+        {
+            //Make sure the node is removed
+            Assert.assertTrue(node.getNodeId() != 0);
+
+            //Make sure the node doesn't show up in any of the nodes adjacent nodes lists...
+            for (Node<Integer> adjacent : node.getAdjacentNodes())
+            {
+                Assert.assertTrue(adjacent.getNodeId() != 0);
+            }
+        }
+    }
+
+    @Test
+    public void copyGraph()
+    {
+        //Create the nodes that go in the graph
+        ArrayList<Node<Integer>> nodes = new ArrayList<>();
+        nodes.add(new Node<>(12, 0));
+        nodes.add(new Node<>(14, 1));
+        nodes.add(new Node<>(23, 2));
+
+        // 0-->0
+        nodes.get(0).addAdjacentNode(nodes.get(0));
+        // 0-->1
+        nodes.get(0).addAdjacentNode(nodes.get(1));
+        // 1-->0
+        nodes.get(1).addAdjacentNode(nodes.get(0));
+        // 1-->2
+        nodes.get(1).addAdjacentNode(nodes.get(2));
+
+        Graph<Integer> g = new Graph<>(nodes);
+
+        Graph<Integer> copyGraph = GraphHelperMethods.copyGraph(g);
+
+        Assert.assertEquals(g.getGraphElements().size(), copyGraph.getGraphElements().size());
+
+        for (int i = 0; i < g.getGraphElements().size(); i++)
+        {
+            Assert.assertEquals(g.getGraphElements().get(i).getNodeId(), copyGraph.getGraphElements().get(i).getNodeId());
+            Assert.assertEquals(g.getGraphElements().get(i).getAdjacentNodes().size(), copyGraph.getGraphElements().get(i).getAdjacentNodes().size());
+
+            //Make sure contents of adjacent nodes is the same...
+            for (int j = 0; j < g.getGraphElements().get(i).getAdjacentNodes().size(); j++)
+            {
+                Assert.assertEquals(g.getGraphElements().get(i).getAdjacentNodes().get(j).getNodeId(), copyGraph.getGraphElements().get(i).getAdjacentNodes().get(j).getNodeId());
+            }
+        }
+
+
     }
 }

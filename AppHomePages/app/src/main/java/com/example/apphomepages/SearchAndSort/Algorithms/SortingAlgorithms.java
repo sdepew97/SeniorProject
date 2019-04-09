@@ -3,6 +3,8 @@ package com.example.apphomepages.SearchAndSort.Algorithms;
 import com.example.apphomepages.General.DataTypes.MergeSortReturnType;
 import com.example.apphomepages.General.DataTypes.QuickSortReturnType;
 import com.example.apphomepages.General.DataTypes.SortReturnType;
+import com.example.apphomepages.General.HelperMethods.HelperMethods;
+import com.example.apphomepages.SearchAndSort.HelperMethods.SortHelperMethods;
 
 import java.util.ArrayList;
 
@@ -27,11 +29,11 @@ public class SortingAlgorithms
                     t2.setA(j + 1);
                     t1.setB(j);
                     t2.setB(j);
-                    t1.setList(copyArray(arr));
+                    t1.setList(SortHelperMethods.copyArray(arr));
                     int temp = arr.get(j);
                     arr.set(j, arr.get(j + 1));
                     arr.set(j + 1, temp);
-                    t2.setList(copyArray(arr));
+                    t2.setList(SortHelperMethods.copyArray(arr));
                     resultsOfSteps.add(t1);
                     resultsOfSteps.add(t2);
                 } else
@@ -39,7 +41,7 @@ public class SortingAlgorithms
                     SortReturnType t1 = new SortReturnType();
                     t1.setA(j + 1);
                     t1.setB(j);
-                    t1.setList(copyArray(arr));
+                    t1.setList(SortHelperMethods.copyArray(arr));
                     resultsOfSteps.add(t1);
                     resultsOfSteps.add(t1);
                 }
@@ -51,44 +53,6 @@ public class SortingAlgorithms
         return resultsOfSteps;
     }
 
-    public static ArrayList<Integer> copyArray(ArrayList<Integer> arrayToCopy)
-    {
-        ArrayList<Integer> arrayWithResult = new ArrayList<>();
-
-        for (Integer i : arrayToCopy)
-        {
-            arrayWithResult.add(i);
-        }
-
-        return arrayWithResult;
-    }
-
-    //Copies an array list from left to right inclusive of right
-    public static ArrayList<Integer> copyArray(ArrayList<Integer> arrayToCopy, int left, int right)
-    {
-        ArrayList<Integer> arrayWithResult = new ArrayList<>();
-
-        for (int i = left; i <= right; i++)
-        {
-            arrayWithResult.add(arrayToCopy.get(i));
-        }
-
-        return arrayWithResult;
-    }
-
-    //Copies an array list from left to right inclusive of right
-    public static ArrayList<String> copyArrayString(ArrayList<Integer> arrayToCopy, int left, int right)
-    {
-        ArrayList<String> arrayWithResult = new ArrayList<>();
-
-        for (int i = left; i <= right; i++)
-        {
-            arrayWithResult.add(arrayToCopy.get(i).toString());
-        }
-
-        return arrayWithResult;
-    }
-
     //Insertion mergeSort adapted from https://www.geeksforgeeks.org/insertion-sort/
     public static ArrayList<SortReturnType> insertionSort(ArrayList<Integer> arr)
     {
@@ -98,7 +62,7 @@ public class SortingAlgorithms
 
         //Initial array
         SortReturnType t = new SortReturnType();
-        t.setList(copyArray(arr));
+        t.setList(SortHelperMethods.copyArray(arr));
         t.setA(-1);
         t.setB(1);
         resultOfSteps.add(t);
@@ -110,7 +74,7 @@ public class SortingAlgorithms
 
             SortReturnType t1 = new SortReturnType();
             t1.setA(j + 1);
-            t1.setList(copyArray(arr));
+            t1.setList(SortHelperMethods.copyArray(arr));
             t1.setB(i + 1);
             resultOfSteps.add(t1);
 
@@ -124,7 +88,7 @@ public class SortingAlgorithms
                 arr.set(j + 1, arr.get(j));
                 j = j - 1;
                 SortReturnType sortReturnType = new SortReturnType();
-                sortReturnType.setList(copyArray(arr));
+                sortReturnType.setList(SortHelperMethods.copyArray(arr));
                 sortReturnType.setA(-1);
                 sortReturnType.setB(i + 1);
                 resultOfSteps.add(sortReturnType);
@@ -134,12 +98,12 @@ public class SortingAlgorithms
             arr.set(j + 1, key);
 
             t2.setB(i + 1);
-            t2.setList(copyArray(arr));
+            t2.setList(SortHelperMethods.copyArray(arr));
             resultOfSteps.add(t2);
         }
 
         SortReturnType sortReturnType = new SortReturnType();
-        sortReturnType.setList(copyArray(arr));
+        sortReturnType.setList(SortHelperMethods.copyArray(arr));
         sortReturnType.setB(n);
         resultOfSteps.add(sortReturnType); //This is the sorted array...
 
@@ -159,14 +123,14 @@ public class SortingAlgorithms
         {
             // Frame with the minimum
             SortReturnType t = new SortReturnType();
-            t.setList(copyArray(arr));
+            t.setList(SortHelperMethods.copyArray(arr));
             t.setB(i);
 
             // Find the minimum element in unsorted array
             // Frame with the first search value
             int min_idx = i;
             SortReturnType t2 = new SortReturnType();
-            t2.setList(copyArray(arr));
+            t2.setList(SortHelperMethods.copyArray(arr));
             t2.setA(min_idx);
             t2.setB(i);
             resultOfSteps.add(t2);
@@ -175,7 +139,7 @@ public class SortingAlgorithms
             {
                 //Frame with all search values
                 SortReturnType t3 = new SortReturnType();
-                t3.setList(copyArray(arr));
+                t3.setList(SortHelperMethods.copyArray(arr));
                 t3.setA(j);
                 t3.setB(i);
                 if (arr.get(j) < arr.get(min_idx))
@@ -196,7 +160,7 @@ public class SortingAlgorithms
         }
 
         SortReturnType sortReturnType = new SortReturnType();
-        sortReturnType.setList(copyArray(arr));
+        sortReturnType.setList(SortHelperMethods.copyArray(arr));
         sortReturnType.setA(n);
         sortReturnType.setB(n);
         resultOfSteps.add(sortReturnType); //This is the sorted array...
@@ -246,7 +210,7 @@ public class SortingAlgorithms
             }
             k++;
 
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), true));
         }
 
         /* Copy remaining elements of L[] if any */
@@ -255,7 +219,7 @@ public class SortingAlgorithms
             arr.set(k, L[i]);
             i++;
             k++;
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), true));
         }
 
         /* Copy remaining elements of R[] if any */
@@ -264,7 +228,7 @@ public class SortingAlgorithms
             arr.set(k, R[j]);
             j++;
             k++;
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), true));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), true));
         }
 
         return returnList;
@@ -278,7 +242,7 @@ public class SortingAlgorithms
 
         if (l < r)
         {
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), false));
 
             // Find the middle point
             int m = (l + r) / 2;
@@ -289,11 +253,11 @@ public class SortingAlgorithms
 
             // Merge the sorted halves
             returnList.addAll(merge(arr, l, m, r));
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), false));
         } else
         {
             //Add the case where each element is a singleton!
-            returnList.add(new MergeSortReturnType(l, r, copyArray(arr), false));
+            returnList.add(new MergeSortReturnType(l, r, SortHelperMethods.copyArray(arr), false));
         }
 
         return returnList;
@@ -309,13 +273,13 @@ public class SortingAlgorithms
       of pivot */
     private static int partition(ArrayList<Integer> arr, int low, int high, ArrayList<QuickSortReturnType> accumulator)
     {
-        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, -1, false));
+        accumulator.add(new QuickSortReturnType(SortHelperMethods.copyArray(arr), low, high, high, -1, false));
 
         int pivot = arr.get(high);
         int i = (low - 1); // index of smaller element
         for (int j = low; j < high; j++)
         {
-            accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, j, true));
+            accumulator.add(new QuickSortReturnType(SortHelperMethods.copyArray(arr), low, high, high, j, true));
             // If current element is smaller than or
             // equal to pivot
             if (arr.get(j) <= pivot)
@@ -327,18 +291,18 @@ public class SortingAlgorithms
                 arr.set(i, arr.get(j));
                 arr.set(j, temp);
 
-                accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, j, true));
+                accumulator.add(new QuickSortReturnType(SortHelperMethods.copyArray(arr), low, high, high, j, true));
             }
         }
 
-        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, high, -1, false));
+        accumulator.add(new QuickSortReturnType(SortHelperMethods.copyArray(arr), low, high, high, -1, false));
 
         // swap arr[i+1] and arr[high] (or pivot)
         int temp = arr.get(i + 1);
         arr.set(i + 1, arr.get(high));
         arr.set(high, temp);
 
-        accumulator.add(new QuickSortReturnType(copyArray(arr), low, high, i + 1, -1, false));
+        accumulator.add(new QuickSortReturnType(SortHelperMethods.copyArray(arr), low, high, i + 1, -1, false));
 
         return i + 1;
     }
