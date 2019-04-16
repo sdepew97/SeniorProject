@@ -163,7 +163,7 @@ public class TopologicalFragment extends Fragment
                 public void onClick(View v)
                 {
                     //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
-                    Uri uri = Uri.parse("http://www.columbia.edu/~cs2035/courses/csor4231.F15/ts.pdf"); //TODO: find proof that doesn't require downloading anything!
+                    Uri uri = Uri.parse("http://www.cs.cmu.edu/afs/cs/academic/class/15451-s06/www/lectures/DFS-background.txt");
                     startActivity(new Intent(Intent.ACTION_VIEW, uri));
                 }
             });

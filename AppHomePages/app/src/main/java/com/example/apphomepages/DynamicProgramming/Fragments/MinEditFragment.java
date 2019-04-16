@@ -150,8 +150,7 @@ public class MinEditFragment extends Fragment
             public void onClick(View v)
             {
                 //Open a webpage! (resource used to figure out code at https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application)
-                //TODO: replace with proper resource!
-                Uri uri = Uri.parse("http://home.cse.ust.hk/faculty/golin/COMP271Sp03/Notes/MyL08.pdf");
+                Uri uri = Uri.parse("https://www.cs.helsinki.fi/u/tpkarkka/opetus/13s/spa/lecture07.pdf");
                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
             }
         });
