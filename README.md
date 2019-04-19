@@ -29,3 +29,4 @@
  # Known Bugs/Oddities 
    - If at any point when you are running the tests you get a series of errors thrown saying "ClassNotFoundException" or "NoClassDefFoundError", go to File > Invalidate Caches/Restart... and select this option. Then, after the cache invalidation and restart process is done, attempt running the tests again.
    - Sometimes the nodes in the depth-first and breadth-first search visualizations have edges that overlap or nodes overlap on the screen. To fix this issue, simply click "Generate" until there is a suitable, clear graph. 
+   - If the automated tests get stuck for longer than three to five minutes, then simply rerun them. 
