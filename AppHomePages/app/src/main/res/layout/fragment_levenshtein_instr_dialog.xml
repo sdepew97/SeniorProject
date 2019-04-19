@@ -7,13 +7,13 @@
     android:padding="10dp">
 
     <Button
-        android:id="@+id/close_instructions_minedit"
+        android:id="@+id/close_instructions_levenshtein"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_close_instructions" />
 
     <ScrollView
-        android:id="@+id/scrollMinEditInstructions"
+        android:id="@+id/scrollLevenshteinInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/MinEditInstructions"
+            android:text="@string/LevenshteinInstructions"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@id/bottom_guideline4"
             app:layout_constraintLeft_toLeftOf="@id/left_guideline"

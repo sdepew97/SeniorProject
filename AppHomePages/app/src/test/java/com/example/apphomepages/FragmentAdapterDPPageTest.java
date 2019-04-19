@@ -1,7 +1,7 @@
 package com.example.apphomepages;
 
 import com.example.apphomepages.DynamicProgramming.FragmentAdapters.FragmentAdapterDPPage;
-import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
+import com.example.apphomepages.DynamicProgramming.Fragments.LevenshteinFragment;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,8 +29,8 @@ public class FragmentAdapterDPPageTest
         FragmentManager fm = Mockito.mock(FragmentManager.class);
         FragmentAdapterDPPage fragmentAdapterDPPage = new FragmentAdapterDPPage(fm);
 
-        Assert.assertEquals("Min Edit Distance", fragmentAdapterDPPage.getPageTitle(0));
-        Assert.assertEquals("Min Edit Distance", fragmentAdapterDPPage.getPageTitle(22));
+        Assert.assertEquals("Levenshtein Distance Algorithm", fragmentAdapterDPPage.getPageTitle(0));
+        Assert.assertEquals("Levenshtein Distance Algorithm", fragmentAdapterDPPage.getPageTitle(22));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class FragmentAdapterDPPageTest
         FragmentManager fm = Mockito.mock(FragmentManager.class);
         FragmentAdapterDPPage fragmentAdapterDPPage = new FragmentAdapterDPPage(fm);
 
-        Assert.assertThat(fragmentAdapterDPPage.getItem(0), instanceOf(MinEditFragment.class));
-        Assert.assertThat(fragmentAdapterDPPage.getItem(22), instanceOf(MinEditFragment.class));
+        Assert.assertThat(fragmentAdapterDPPage.getItem(0), instanceOf(LevenshteinFragment.class));
+        Assert.assertThat(fragmentAdapterDPPage.getItem(22), instanceOf(LevenshteinFragment.class));
     }
 }

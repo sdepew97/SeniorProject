@@ -1,13 +1,13 @@
 package com.example.apphomepages.General.DataTypes;
 
-public class MinEditReturnType
+public class LevenshteinReturnType
 {
     private int[][] board;
     private boolean minOperation;
     private int i;
     private int j;
 
-    public MinEditReturnType(int[][] board, boolean minOperation, int i, int j)
+    public LevenshteinReturnType(int[][] board, boolean minOperation, int i, int j)
     {
         this.board = board;
         this.minOperation = minOperation;

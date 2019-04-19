@@ -9,11 +9,11 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 
 import com.example.apphomepages.General.DataTypes.Color;
-import com.example.apphomepages.General.DataTypes.MinEditReturnType;
+import com.example.apphomepages.General.DataTypes.LevenshteinReturnType;
 
 import androidx.annotation.Nullable;
 
-public class MinEditDrawable extends Drawable implements Animatable
+public class LevenshteinDrawable extends Drawable implements Animatable
 {
     private final Paint mSquarePaint;
     private final Paint mCurrentPaint;
@@ -22,12 +22,12 @@ public class MinEditDrawable extends Drawable implements Animatable
     private final Paint mTextPaint;
     private final Paint mLinePaint;
 
-    private MinEditReturnType frameToAnimate;
+    private LevenshteinReturnType frameToAnimate;
     private String target;
     private String source;
     private boolean start;
 
-    public MinEditDrawable(MinEditReturnType frameToAnimate, String target, String source, boolean start)
+    public LevenshteinDrawable(LevenshteinReturnType frameToAnimate, String target, String source, boolean start)
     {
         // Set up color and text size
         mSquarePaint = new Paint();

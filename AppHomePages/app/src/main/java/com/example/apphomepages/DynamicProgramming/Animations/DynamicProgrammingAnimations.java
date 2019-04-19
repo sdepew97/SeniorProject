@@ -4,23 +4,23 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import com.example.apphomepages.DynamicProgramming.Drawable.MinEditDrawable;
-import com.example.apphomepages.General.DataTypes.MinEditReturnType;
+import com.example.apphomepages.DynamicProgramming.Drawable.LevenshteinDrawable;
+import com.example.apphomepages.General.DataTypes.LevenshteinReturnType;
 
 import java.util.ArrayList;
 
 public class DynamicProgrammingAnimations
 {
-    public static void generateMinEditDistance(ArrayList<MinEditReturnType> frames, String target, String source, MinEditDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
+    public static void generateLevenshteinDistance(ArrayList<LevenshteinReturnType> frames, String target, String source, LevenshteinDrawable[] stopMotionAnimation, ImageView image, AnimationDrawable animationDrawable)
     {
         //Duration
         int duration = 1500;
 
-        stopMotionAnimation[0] = new MinEditDrawable(frames.get(0), target, source, true); //start...so special case!
+        stopMotionAnimation[0] = new LevenshteinDrawable(frames.get(0), target, source, true); //start...so special case!
 
         for (int i = 1; i < stopMotionAnimation.length; i++)
         {
-            stopMotionAnimation[i] = new MinEditDrawable(frames.get(i), target, source, false);
+            stopMotionAnimation[i] = new LevenshteinDrawable(frames.get(i), target, source, false);
         }
 
         //Animate!

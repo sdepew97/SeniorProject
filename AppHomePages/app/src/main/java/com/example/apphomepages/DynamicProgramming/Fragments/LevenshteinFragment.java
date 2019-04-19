@@ -13,9 +13,9 @@ import android.widget.ImageView;
 
 import com.example.apphomepages.DynamicProgramming.Algorithms.DynamicProgrammingAlgorithms;
 import com.example.apphomepages.DynamicProgramming.Animations.DynamicProgrammingAnimations;
-import com.example.apphomepages.DynamicProgramming.DialogueFragments.MinEditDialogueFragment;
-import com.example.apphomepages.DynamicProgramming.Drawable.MinEditDrawable;
-import com.example.apphomepages.General.DataTypes.MinEditReturnType;
+import com.example.apphomepages.DynamicProgramming.DialogueFragments.LevenshteinDialogueFragment;
+import com.example.apphomepages.DynamicProgramming.Drawable.LevenshteinDrawable;
+import com.example.apphomepages.General.DataTypes.LevenshteinReturnType;
 import com.example.apphomepages.R;
 
 import java.util.ArrayList;
@@ -27,12 +27,12 @@ import androidx.fragment.app.FragmentManager;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MinEditFragment.OnFragmentInteractionListener} interface
+ * {@link LevenshteinFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MinEditFragment#newInstance} factory method to
+ * Use the {@link LevenshteinFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MinEditFragment extends Fragment
+public class LevenshteinFragment extends Fragment
 {
     private OnFragmentInteractionListener mListener;
 
@@ -44,7 +44,7 @@ public class MinEditFragment extends Fragment
     //The animation that will be played when the "next frame" button is clicked
     private AnimationDrawable animationDrawable = new AnimationDrawable();
 
-    public MinEditFragment()
+    public LevenshteinFragment()
     {
         // Required empty public constructor
     }
@@ -53,11 +53,11 @@ public class MinEditFragment extends Fragment
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment MinEditFragment.
+     * @return A new instance of fragment LevenshteinFragment.
      */
-    public static MinEditFragment newInstance()
+    public static LevenshteinFragment newInstance()
     {
-        MinEditFragment fragment = new MinEditFragment();
+        LevenshteinFragment fragment = new LevenshteinFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -88,15 +88,15 @@ public class MinEditFragment extends Fragment
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        final View viewGlobal = inflater.inflate(R.layout.fragment_minedit, container, false);
+        final View viewGlobal = inflater.inflate(R.layout.fragment_levenshtein, container, false);
 
         //Set up the buttons and clickable elements on the fragment
-        Button startButton = viewGlobal.findViewById(R.id.startButtonMinEdit);
-        Button stopButton = viewGlobal.findViewById(R.id.stopButtonMinEdit);
-        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonMinEdit);
-        Button proofButton = viewGlobal.findViewById(R.id.proofButtonMinEdit);
-        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonMinEdit);
-        Button generateButton = viewGlobal.findViewById(R.id.generateButtonMinEdit);
+        Button startButton = viewGlobal.findViewById(R.id.startButtonLevenshtein);
+        Button stopButton = viewGlobal.findViewById(R.id.stopButtonLevenshtein);
+        Button rewindButton = viewGlobal.findViewById(R.id.rewindButtonLevenshtein);
+        Button proofButton = viewGlobal.findViewById(R.id.proofButtonLevenshtein);
+        Button instructionsButton = viewGlobal.findViewById(R.id.instructionsButtonLevenshtein);
+        Button generateButton = viewGlobal.findViewById(R.id.generateButtonLevenshtein);
 
         //Get random initial index for the board size selection
         final Random r = new Random();
@@ -161,7 +161,7 @@ public class MinEditFragment extends Fragment
             public void onClick(View v)
             {
                 FragmentManager fm = getFragmentManager();
-                MinEditDialogueFragment dialogFragment = new MinEditDialogueFragment();
+                LevenshteinDialogueFragment dialogFragment = new LevenshteinDialogueFragment();
                 dialogFragment.show(fm, "Instructions Fragment");
             }
         });
@@ -172,7 +172,7 @@ public class MinEditFragment extends Fragment
     private void populateScreen(Random r, String[] words, View viewGlobal)
     {
         //Set up variables for the method
-        MinEditDrawable[] stopMotionAnimation;
+        LevenshteinDrawable[] stopMotionAnimation;
 
         //populate the location spinner according to graph type selection a.k.a get a value to seek in the graph during the execution of the algorithm
         int boardSizeIndex = r.nextInt(possibleBoardSizes.length);  //"index" into the array of board sizes
@@ -181,14 +181,14 @@ public class MinEditFragment extends Fragment
         String target = words[r.nextInt(words.length)];
         String source = words[r.nextInt(words.length)];
 
-        ArrayList<MinEditReturnType> frames = DynamicProgrammingAlgorithms.minEditDist(target, source);
+        ArrayList<LevenshteinReturnType> frames = DynamicProgrammingAlgorithms.levenshteinDist(target, source);
 
-        stopMotionAnimation = new MinEditDrawable[frames.size()];
+        stopMotionAnimation = new LevenshteinDrawable[frames.size()];
 
         animationDrawable = new AnimationDrawable();
-        image = viewGlobal.findViewById(R.id.imageViewMinEdit);
+        image = viewGlobal.findViewById(R.id.imageViewLevenshtein);
 
-        DynamicProgrammingAnimations.generateMinEditDistance(frames, target, source, stopMotionAnimation, image, animationDrawable);
+        DynamicProgrammingAnimations.generateLevenshteinDistance(frames, target, source, stopMotionAnimation, image, animationDrawable);
     }
 
     @Override

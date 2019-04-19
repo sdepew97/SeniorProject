@@ -1,6 +1,6 @@
 package com.example.apphomepages.DynamicProgramming.FragmentAdapters;
 
-import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
+import com.example.apphomepages.DynamicProgramming.Fragments.LevenshteinFragment;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,10 +27,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                result = "Min Edit Distance";
+                result = "Levenshtein Distance Algorithm";
                 break;
             default:
-                result = "Min Edit Distance";
+                result = "Levenshtein Distance Algorithm";
         }
 
         return result;
@@ -43,10 +43,10 @@ public class FragmentAdapterDPPage extends FragmentPagerAdapter
         switch (i)
         {
             case 0:
-                page = MinEditFragment.newInstance();
+                page = LevenshteinFragment.newInstance();
                 break;
             default:
-                page = MinEditFragment.newInstance(); //default fragment to return
+                page = LevenshteinFragment.newInstance(); //default fragment to return
                 break;
         }
 

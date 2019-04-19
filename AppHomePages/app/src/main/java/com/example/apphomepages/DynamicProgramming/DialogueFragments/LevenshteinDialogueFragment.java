@@ -10,15 +10,15 @@ import com.example.apphomepages.R;
 
 import androidx.fragment.app.DialogFragment;
 
-public class MinEditDialogueFragment extends DialogFragment
+public class LevenshteinDialogueFragment extends DialogFragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View rootView = inflater.inflate(R.layout.fragment_minedit_instr_dialog, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_levenshtein_instr_dialog, container, false);
         getDialog().setTitle("Instructions");
 
-        Button dismiss = rootView.findViewById(R.id.close_instructions_minedit);
+        Button dismiss = rootView.findViewById(R.id.close_instructions_levenshtein);
         dismiss.setOnClickListener(new View.OnClickListener()
         {
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DynamicProgramming.Fragments.MinEditFragment">
+    tools:context=".DynamicProgramming.Fragments.LevenshteinFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/left_guideline_alltheway"
@@ -104,7 +104,7 @@
         app:layout_constraintGuide_percent=".65" />
 
     <Button
-        android:id="@+id/instructionsButtonMinEdit"
+        android:id="@+id/instructionsButtonLevenshtein"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/instructions_button"
@@ -115,7 +115,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline" />
 
     <ImageView
-        android:id="@+id/imageViewMinEdit"
+        android:id="@+id/imageViewLevenshtein"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
@@ -127,7 +127,7 @@
         app:layout_constraintTop_toTopOf="@id/top_guideline2" />
 
     <Button
-        android:id="@+id/generateButtonMinEdit"
+        android:id="@+id/generateButtonLevenshtein"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
 
@@ -138,7 +138,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline" />
 
     <Button
-        android:id="@+id/startButtonMinEdit"
+        android:id="@+id/startButtonLevenshtein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button"
@@ -149,7 +149,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/stopButtonMinEdit"
+        android:id="@+id/stopButtonLevenshtein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stop_button"
@@ -160,7 +160,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <Button
-        android:id="@+id/rewindButtonMinEdit"
+        android:id="@+id/rewindButtonLevenshtein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rewind_button"
@@ -171,7 +171,7 @@
         app:layout_constraintTop_toTopOf="@id/bottom_guideline3" />
 
     <ScrollView
-        android:id="@+id/scrollProofMinEdit"
+        android:id="@+id/scrollProofLevenshtein"
         android:layout_width="0dp"
 
         android:layout_height="0dp"
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:text="@string/MinEditDescription"
+                android:text="@string/LevenshteinDescription"
                 android:textSize="17sp"
 
                 app:layout_constraintBottom_toBottomOf="@id/bottom_guideline2"
@@ -205,7 +205,7 @@
                 app:layout_constraintTop_toTopOf="@id/bottom_guideline4" />
 
             <Button
-                android:id="@+id/proofButtonMinEdit"
+                android:id="@+id/proofButtonLevenshtein"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/correctness_button" />

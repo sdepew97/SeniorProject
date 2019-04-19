@@ -5,7 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.example.apphomepages.DynamicProgramming.FragmentAdapters.FragmentAdapterDPPage;
-import com.example.apphomepages.DynamicProgramming.Fragments.MinEditFragment;
+import com.example.apphomepages.DynamicProgramming.Fragments.LevenshteinFragment;
 import com.example.apphomepages.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.viewpager.widget.ViewPager;
 
-public class DynamicProgrammingActivity extends AppCompatActivity implements MinEditFragment.OnFragmentInteractionListener
+public class DynamicProgrammingActivity extends AppCompatActivity implements LevenshteinFragment.OnFragmentInteractionListener
 {
     //These are the various portions of the main page for the application
     private ViewPager viewPager;

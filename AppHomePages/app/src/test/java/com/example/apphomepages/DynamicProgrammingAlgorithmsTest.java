@@ -1,7 +1,7 @@
 package com.example.apphomepages;
 
 import com.example.apphomepages.DynamicProgramming.Algorithms.DynamicProgrammingAlgorithms;
-import com.example.apphomepages.General.DataTypes.MinEditReturnType;
+import com.example.apphomepages.General.DataTypes.LevenshteinReturnType;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,9 +12,9 @@ public class DynamicProgrammingAlgorithmsTest
 {
     @Test
     //Used http://www.let.rug.nl/kleiweg/lev/ to check answer and for values to put into the expectedBoard 2-d array
-    public void minEditDist()
+    public void LevenshteinDist()
     {
-        ArrayList<MinEditReturnType> algorithmOutput = DynamicProgrammingAlgorithms.minEditDist("cart", "march");
+        ArrayList<LevenshteinReturnType> algorithmOutput = DynamicProgrammingAlgorithms.levenshteinDist("cart", "march");
         int[][] boardResult = algorithmOutput.get(algorithmOutput.size() - 1).getBoard();
         int[][] expectedBoard = {
                 {0, 1, 2, 3, 4, 5},
