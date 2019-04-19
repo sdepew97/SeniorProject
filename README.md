@@ -3,7 +3,7 @@
 Instructions on How to Set Up the Running Environment: 
   - Download and set up Android Studio: 
 	  * https://developer.android.com/studio/index.html
-  - Create a virtual device in Android Studio (I used the Nexus 6 and 5x) or purchase hardware (I used an LG Rebel 3): 
+  - Create a virtual device in Android Studio (I used the Nexus 6 and 5x) or obtain hardware (I used an LG Rebel 3): 
     * https://developer.android.com/studio/run/managing-avds
   - Fork/download the GitHub repo (please use the main branch for your interactions with the application)
     * https://github.com/sdepew97/SeniorProject   
