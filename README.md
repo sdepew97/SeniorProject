@@ -25,3 +25,6 @@
     * Select the Run 'Tests in 'com.exampl...' option  
     * Select the deployment target (hardware or virtual) 
     * Click on the "OK" button
+ 
+ # Known Bugs/Oddities 
+   - If at any point when you are running the tests you get a series of errors thrown saying "ClassNotFoundException" or "NoClassDefFoundError", go to File > Invalidate Caches/Restart... and select this option. Then, after the cache invalidation and restart process is done, attempt running the tests again.  
